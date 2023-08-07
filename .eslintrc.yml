@@ -46,6 +46,8 @@ rules:
   block-spacing: 
     - error
     - always
+  react/react-in-jsx-scope: 
+    - off
 
 # .eslintrc.yml code inspired by expressjs/express github repository
 # https://github.com/expressjs/express/blob/master/.eslintrc.yml
