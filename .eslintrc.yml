@@ -23,7 +23,7 @@ rules:
     - "always"
   func-style:
     - "error"
-    - "expression"
+    - "declaration"
     - { allowArrowFunctions: true }
   no-unused-vars:
     - "warn"
