@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "../pages/HomePage";
+import MainPage from "../pages/MainPage";
 import React from "react";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/home" element={<MainPage />} />
       </Routes>
     </BrowserRouter>
   );
