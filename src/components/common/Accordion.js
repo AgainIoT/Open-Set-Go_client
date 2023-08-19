@@ -1,12 +1,21 @@
-import * as React from "react";
+
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styled from "styled-components";
+import Input from "./Input";
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
 
-export default function BasicAccordion() {
+// const [state, setState] = useState({
+//   title:"",
+//   dueDate:"",
+//   description: 1,
+// });
+
+export default function BasicAccordion(placeHolder) {
   return (
     <div>
       <Accordion>
@@ -17,27 +26,22 @@ export default function BasicAccordion() {
         >
           <Typography>Accordion1</Typography>
         </AccordionSummary>
-        <AccordionDetailsContents>
-          <AccordionDetails>
-            <div>
-              <input className="title"></input>
-              <br></br>
-              <input className="dueDate"></input>
-              <br></br>
-              <input className="description"></input>
-            </div>
-          </AccordionDetails>
-        </AccordionDetailsContents>
+        <AccordionDetails>
+          <div>
+            <Input placeHolder="Title"/>
+            <br></br>
+            <Input placeHolder="Due date (optional)"/>
+            <br></br>
+            <TextField
+              sx={{ width: "150ch"}}
+              multiline
+              rows={8}
+              placeholder="Description"
+            />
+          </div>
+        </AccordionDetails>
       </Accordion>
     </div>
   );
 }
 
-const AccordionDetailsContents = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding
-  overflow-x: hidden;
-  width: 60vw;
-  height: 100%;
-`;
