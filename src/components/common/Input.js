@@ -9,7 +9,7 @@ export default function Input(props) {
   return (
     <FormContent >
       <Box component="form" noValidate autoComplete="off" >
-        <FormControl sx={{ width: "150ch"}}>
+        <FormControl sx={{ width: "40rem"}}>
           <OutlinedInput placeholder={props.placeHolder} height="300ch"/>
         </FormControl>
       </Box>
