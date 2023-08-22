@@ -5,12 +5,7 @@ import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Search = styled("div")(({ theme }) => ({
@@ -89,7 +84,7 @@ export default function TemplateModal() {
             }}
           />
           <Typography
-            component="h2"
+            component="h1"
             id="modal-title"
             level="h4"
             textColor="inherit"
@@ -103,7 +98,7 @@ export default function TemplateModal() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Search Template"
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
