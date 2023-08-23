@@ -1,25 +1,42 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
 import { Layout } from "../layout/Layout";
-import BasicAccordion from "../components/common/Accordion";
+import MilestoneItem from "../components/common/MilestoneItem";
+import { useState, useRef } from "react";
+
 function MilestonePage() {
+  const [data, setData] = useState([]);
+
+  const dataId = useRef(0);
+
+  const onCreate = (title, dueDate, description) => {
+    const newItem = {
+      title:"",
+      dueDate:"",
+      description:"",
+      id: dataId.current,
+    };
+
+    dataId.current += 1;
+    setData([newItem, ...data]);
+  };
+
+  const handleAdd = () => {
+    return;
+  };
+
   return (
-    <div>
+    <div className="MilestonePage">
+      <button onClick={onCreate}>new milestone</button>
       <div>
-        <Layout/>
+        {data.map((it)=> (
+          <MilestoneItem key={it.id} {...it}/>
+        ))}
       </div>
-      <MilestoneContainter>
-        <BasicAccordion/>
-      </MilestoneContainter>
     </div>
   );
 }
 
-const MilestoneContainter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-right: 20%;
-  padding: 1rem 2rem 1rem 2rem;
-`;
+
 
 export default MilestonePage;
