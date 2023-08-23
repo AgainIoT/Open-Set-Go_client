@@ -9,12 +9,12 @@ import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 
-function TestInputContainer({ labelText, fieldType }) {
+export const TextInputContainer = ({ labelText, fieldType }) => {
   return (
     <StInputContainer>
       <InputFormControl>
         <LabelContainer>
-          <InputLabelWrapper shrink variant="standard" htmlfor="test3">
+          <InputLabelWrapper shrink variant="standard" htmlFor="inputField">
             {labelText}
           </InputLabelWrapper>
           <TooltipContainer title="test" arrow placement="top">
@@ -24,24 +24,22 @@ function TestInputContainer({ labelText, fieldType }) {
           </TooltipContainer>
         </LabelContainer>
         {fieldType === 1 ? (
-          <InputField id="test3" variant="outlined" fieldSize={5} />
+          <InputField id="inputField" variant="outlined" fieldsize={5} />
         ) : (
           <InputField
-            id="test3"
+            id="inputField"
             multiline
             fullWidth
             rows={fieldType}
-            fieldSize={100}
+            fieldsize={100}
           />
         )}
       </InputFormControl>
     </StInputContainer>
   );
-}
+};
 
-TestInputContainer.PropTypes = { labelText: PropTypes.string.isRequired };
-
-export default TestInputContainer;
+TextInputContainer.propTypes = { labelText: PropTypes.string.isRequired };
 
 const StInputContainer = styled.div`
   display: flex;
