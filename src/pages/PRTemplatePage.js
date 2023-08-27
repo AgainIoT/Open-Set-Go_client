@@ -1,17 +1,19 @@
-import * as PropTypes from "prop-types";
-import MarkdownPreview from "../components/common/MarkdownPreview";
-import TemplateModal from "../components/common/TemplateModal";
+import TemplateList from "../components/common/template/TemplateList";
+import TemplateTitle from "../components/common/template/TemplateTitle";
+import TemplateBody from "../components/common/template/TemplateBody";
 
 function PRTemplatePage() {
 
   return (
-    <div>
-      <div>
-        <MarkdownPreview />
+    <div style = {{display: "flex", flexDirection: "row"}}>
+      {<TemplateList />}
+      <div style = {{display: "flex", flexDirection: "column"}}>
+        {<TemplateTitle />}
+        {<TemplateBody />}
       </div>
-      <TemplateModal />
     </div>
   );
 }
 
 export default PRTemplatePage;
+

@@ -7,6 +7,9 @@ import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -50,6 +53,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+
 export default function TemplateModal() {
   const [open, setOpen] = React.useState(false);
   return (
@@ -78,34 +89,45 @@ export default function TemplateModal() {
             sx={{
               top: "calc(-1/4 * var(--IconButton-size))",
               right: "calc(-1/4 * var(--IconButton-size))",
-              boxShadow: "0 2px 12px 0 rgba(0 0 0 / 0.2)",
+              boxShadow: "0 0.2rem 0.12 0 rgba(0 0 0 / 0.2)",
               borderRadius: "50%",
               bgcolor: "background.surface",
             }}
           />
-          <Typography
-            component="h1"
-            id="modal-title"
-            level="h4"
-            textColor="inherit"
-            fontWeight="lg"
-            mb={1}
-          >
-            PR Template
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search Template"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-          <Typography id="modal-desc" textColor="text.tertiary">
-            Make sure to use <code>aria-labelledby</code> on the modal dialog with an
-            optional <code>aria-describedby</code> attribute.
-          </Typography>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={2}>
+              <Grid container spacing={0}>
+                <Grid item xs={4}>
+                  <Item><Typography
+                    component="h1"
+                    id="modal-title"
+                    level="h4"
+                    textColor="inherit"
+                    fontWeight="lg"
+                    mb={1}
+                  >
+                    PR Template
+                  </Typography>
+                  <Search>
+                    <SearchIconWrapper>
+                      <SearchIcon />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                      placeholder="Search Template"
+                      inputProps={{ "aria-label": "search" }}
+                    />
+                  </Search>
+                  <Typography id="modal-desc" textColor="text.tertiary">
+                    Make sure to use <code>aria-labelledby</code> on the modal dialog with an
+                    optional <code>aria-describedby</code> attribute.
+                  </Typography></Item>
+                </Grid>
+                <Grid item xs={8}>
+                  <Item>xs=4</Item>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Box>
         </Sheet>
       </Modal>
     </React.Fragment>
