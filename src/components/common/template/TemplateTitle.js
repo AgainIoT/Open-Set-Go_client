@@ -1,6 +1,8 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
 const commonStyles = {
   bgcolor: "background.paper",
@@ -8,7 +10,7 @@ const commonStyles = {
   borderColor: "text.secondary",
   // 사이즈 나중에 수정해야 함
   width: "89rem",
-  height: "15rem",
+  height: "12rem",
 };
 
 export default function TemplateTitle() {
@@ -23,8 +25,14 @@ export default function TemplateTitle() {
     >
     Detailed description pull request template
     </Typography>
-    <Typography id="PR-desc" variant="h4" gutterBottom color="textSecondary" m={2}>
-    Mark
-    </Typography></Box>
+    <Stack spacing={85} direction="row" m={2}>
+      <Typography id="PR-desc" variant="h4" gutterBottom color="textSecondary">
+      Mark
+      </Typography>
+      <Button
+        variant="contained">
+                  Use Template
+      </Button>
+    </Stack></Box>
   );
 }
