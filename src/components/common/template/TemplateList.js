@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
-import Typography from "@mui/joy/Typography";
+import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Paper from "@mui/material/Paper";
@@ -60,7 +60,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 // 여기부터 스크롤뷰
-// 행 200개만 가능하므로 추천만 보여주고 사용자화 기능 추가되면  검색하면 보여주도록 구현해야 할 듯
+// 행 200개만 가능하므로 추천만 보여주고 사용자화 기능 추가되면 검색하면 보여주도록 구현해야 할 듯
 function renderRow(props) {
   const { index, style } = props;
 
@@ -74,18 +74,17 @@ function renderRow(props) {
   );
 }
 
-
 export default function TemplateList() {
   return (
     <Item><Typography
       component="h1"
       id="modal-title"
-      level="h4"
+      variant="h5"
       textColor="inherit"
       fontWeight="lg"
       mb={1}
     >
-    PR Template
+      <Box sx={{ fontWeight: "bold", m: 1 }}>PR Template</Box>
     </Typography>
     <Search>
       <SearchIconWrapper>
@@ -100,7 +99,7 @@ export default function TemplateList() {
       sx={{ width: "100%", height: 400, maxWidth: 360, bgcolor: "background.paper" }}
     >
       <FixedSizeList
-        height={620} // 높이 모달창 사이즈에 맞게 유동적으로 조절할 수 있도록 수정하기
+        height={610} // 높이 모달창 사이즈에 맞게 유동적으로 조절할 수 있도록 수정하기
         width={360}
         itemSize={46}
         itemCount={200}

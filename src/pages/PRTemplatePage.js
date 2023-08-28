@@ -16,4 +16,3 @@ function PRTemplatePage() {
 }
 
 export default PRTemplatePage;
-

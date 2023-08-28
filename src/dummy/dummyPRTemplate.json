@@ -1,0 +1,6 @@
+{
+    "dummyPRTemplate" : [
+    {"_id":{"$oid":"64ec441eddb7a81b81984a87"},"title":"preset1","repoName":"test","repoUrl":"https://github.com/bentshrimp/test","content":"yeah"},
+    {"_id":{"$oid":"64ec5445ad1cef842264f786"},"title":"preset2","repoName":"test2","repoUrl":"www.google.com","content":"yeahyeah"}
+]
+}
