@@ -26,21 +26,29 @@ export const AutocompleteInput = (props) => {
   });
 
   const [selectValue, setSelectValue] = useRecoilState(type);
-  const showData = useRecoilValue(selectFrameworkData);
+  // const showData = useRecoilValue(selectFrameworkData);
 
   const flatProps = {
-    options: props.useOption.map((option) => option.label),
+    options: props.useOption.map((option) => option.label) || "",
   };
+  // const [defalutValue, setDefaultValue] = useState(
+  //   flatProps.options.filter((it) => it === selectValue.value),
+  // );
+  // // const preValue = () => {
+  //   if (selectValue) {
+  //     var defalut = props.useOption.filter(
+  //       (it) => selectValue.value === it.label,
+  //     );
+  //     return defalut;
+  //   }
+  // };
   const handleSelect = (value) => {
     if (type === selectFrameworkData) {
       setSelectValue([{ type: "Framework", value: value }]);
-      console.log("type", typeof value);
-      console.log("what:", selectValue);
     } else {
       setSelectValue([{ type: "Language", value: value }]);
     }
   };
-  console.log("options:", flatProps);
 
   return (
     <StAutocompleteInput>
@@ -53,11 +61,12 @@ export const AutocompleteInput = (props) => {
         autoHighlight
         filterSelectedOptions
         openOnFocus
-        value={showData.value}
+        value={selectValue.value}
+        getOptionLabel={(option) =>
+          typeof option === "string" ? option : option.toString()
+        }
         onChange={(event, newValue) => {
           newValue ? handleSelect(newValue) : setSelectValue([]);
-          console.log("newValue:", newValue);
-          console.log("value", selectValue.value);
         }}
         filterOptions={filterOptions}
         forcePopupIcon={true}
@@ -76,10 +85,6 @@ export const AutocompleteInput = (props) => {
 
 export const ReadonlyAutocomplete = () => {
   const showData = useRecoilValue(selectFrameworkData);
-  console.log(
-    "data::",
-    showData.map((option) => option),
-  );
 
   return (
     <StReadonlyAutocomplete>
