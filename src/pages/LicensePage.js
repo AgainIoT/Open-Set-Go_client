@@ -14,10 +14,10 @@ export default LicensePage;
 
 const StLayout = styled.div`
   /* background-color: red; */
+  height: 100%; /* 흰 박스에 맞게 크기 조절 됨 */
   display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 90%;
-  height: 100%;
-  justify-content: center;
+  justify-self: center;
+  align-items: center;
+  margin: 0;
+  width: 100%;
 `;
