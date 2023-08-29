@@ -55,7 +55,7 @@ export const AutocompleteInput = (props) => {
         autoHighlight
         filterSelectedOptions
         openOnFocus
-        value={selectValue.value}
+        value={selectValue.map((option) => option.value)}
         getOptionLabel={(option) =>
           typeof option === "string" ? option : option.toString()
         }
