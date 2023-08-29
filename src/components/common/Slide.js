@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SlideContent from "./SlideContent";
 import dummyLicense from "../../dummy/dummyLicense.json";
+import styled from "styled-components";
 
 const Slide = () =>{
   const settings = {
@@ -25,7 +26,6 @@ const Slide = () =>{
           return(
             <div key={it.license}>
               <SlideContent data={it}/>
-              <button>Review and Submit</button>
             </div>
           );
         })
@@ -38,24 +38,13 @@ const Slide = () =>{
 export default Slide;
 
 const cssstyle = `
-.container {
-  margin: 0 auto;
-  padding: 0rem 0rem 4rem 4rem;
-  width: 90rem;
+
+.container{
+  width: 95%;
+  height: 100%;
 }
 
 .slick-next:before, .slick-prev:before {
-    color: #000;
-}
-.center .slick-center h3 {
-    color: #ff0000;
-    opacity: 1;
-    width: 35rem;
-    height: 40rem;
-    -ms-transform: scale(1.08);
-    transform: scale(1.08);
-}
-.center h3 {
-    transition: all .3s ease;
+    color: #555;
 }
 `;
