@@ -15,11 +15,16 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Stack from "@mui/material/Stack";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 import { configure } from "@testing-library/react";
+import { Box, Input, Paper, Popper } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
+import CheckIcon from "@mui/icons-material/Check";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import { lightBlue } from "@mui/material/colors";
 
 export const AutocompleteInput = (props) => {
   const type = props.recoilType;
   console.log("props.recoilType:", props.recoilType);
-  // console.log("getdata: %o", useOption);
   const filterOptions = createFilterOptions({
     matchFrom: "start",
     stringify: (option) => option,
@@ -31,17 +36,7 @@ export const AutocompleteInput = (props) => {
   const flatProps = {
     options: props.useOption.map((option) => option.label) || "",
   };
-  // const [defalutValue, setDefaultValue] = useState(
-  //   flatProps.options.filter((it) => it === selectValue.value),
-  // );
-  // // const preValue = () => {
-  //   if (selectValue) {
-  //     var defalut = props.useOption.filter(
-  //       (it) => selectValue.value === it.label,
-  //     );
-  //     return defalut;
-  //   }
-  // };
+
   const handleSelect = (value) => {
     if (type === selectFrameworkData) {
       setSelectValue([{ type: "Framework", value: value }]);
@@ -56,7 +51,6 @@ export const AutocompleteInput = (props) => {
         {...flatProps}
         id="readOnly"
         autoComplete
-        includeInputInList
         clearOnEscape
         autoHighlight
         filterSelectedOptions
@@ -105,6 +99,68 @@ export const ReadonlyAutocomplete = () => {
         )}
       />
     </StReadonlyAutocomplete>
+  );
+};
+
+export const SearchForm = (props) => {
+  const [selectValue, setSelectValue] = useRecoilState(props.type);
+  const handleChipChange = (target) => {
+    if (!selectValue.includes(target)) {
+      console.log(`${target}이 추가`);
+      setSelectValue([...selectValue, target]);
+    }
+  };
+  const flatProps = {
+    options: props.data.map((option) => option.label) || "",
+  };
+
+  const icon = <CheckIcon fontSize="small" color="gray" />;
+  const checkedIcon = <CheckIcon fontSize="small" />;
+
+  return (
+    <StSearchForm>
+      <SerachIconWrapper>
+        <SearchIcon />
+      </SerachIconWrapper>
+      <SearchAuto
+        {...flatProps}
+        value={""}
+        getOptionLabel={(option) => option}
+        renderOption={(props, option, { selected }) => (
+          <OptionListBox>
+            <OptionList
+              {...props}
+              bgColor={
+                selectValue.includes(option)
+                  ? COLOR.MAIN_HOVER
+                  : COLOR.MAIN_WHITE
+              }
+            >
+              <Checkbox
+                icon={icon}
+                checkedIcon={checkedIcon}
+                style={{ marginRight: 8 }}
+                checked={selectValue.includes(option)}
+              />
+              {option}
+            </OptionList>
+          </OptionListBox>
+        )}
+        renderInput={(params) => (
+          <SearchFormField ref={params.InputProps.ref}>
+            <SearchInput
+              type="text"
+              {...params.inputProps}
+              label=""
+              placeholder="Search..."
+            />
+          </SearchFormField>
+        )}
+        onChange={(event, newValue) => {
+          newValue ? handleChipChange(newValue) : () => {};
+        }}
+      />
+    </StSearchForm>
   );
 };
 
@@ -170,4 +226,94 @@ const ReadOnlyTextField = styled(TextField)`
   & .MuiChip-root {
     font-size: 1.2rem;
   }
+`;
+
+// SearchForm
+
+const SharedSearchStyle = `
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+`;
+
+const SharedPadding = `
+  padding-left: 3.3rem;
+`;
+
+const StSearchForm = styled.div`
+  margin: 2rem;
+  justify-content: center;
+`;
+
+const SearchAuto = styled(Autocomplete)`
+  & .MuiInput-input {
+    padding: 0.4rem 0.4rem 0.6rem 0;
+  }
+  & .MuiInputBase-root:hover {
+    border: none;
+  }
+
+  & .MuiInput-root {
+    padding-top: 0.2rem;
+    padding-bottom: 0.4rem;
+    border-radius: 20rem;
+    margin-bottom: 1rem;
+    border: none;
+  }
+  & .MuiInputBase-root::before {
+    height: 3rem;
+    border-radius: 20rem;
+    border: 0.1rem solid lightgray;
+  }
+  & .MuiInputBase-root::after {
+    height: 3rem;
+    border-radius: 20rem;
+    border: none;
+  }
+  & .MuiInput-root::after {
+    border-radius: 20rem;
+    border: none;
+    margin-top: 80px;
+  }
+  &
+    .css-q0jhri-MuiInputBase-root-MuiInput-root:hover:not(
+      .Mui-disabled,
+      .Mui-error
+    ):before {
+    height: 3rem;
+    border-radius: 20rem;
+    border: none;
+    box-shadow: 0.1rem 0.2rem 0.9rem lightgray;
+  }
+`;
+
+const OptionListBox = styled.div``;
+const OptionList = styled.li`
+  margin: 0.2rem;
+  border-radius: 1.5rem;
+  background: ${(props) => props.bgColor};
+`;
+
+const SearchFormField = styled.div``;
+
+const SerachIconWrapper = styled.div`
+  svg {
+    ${SharedSearchStyle}
+
+    width: 2rem;
+    height: 2rem;
+    color: grey;
+    margin-top: 0.4rem;
+    margin-left: 1rem;
+  }
+`;
+
+const SearchInput = styled(Input)`
+  ${SharedPadding}
+  width:100%;
 `;
