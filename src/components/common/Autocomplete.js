@@ -17,7 +17,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Stack from "@mui/material/Stack";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 import { configure } from "@testing-library/react";
-import { Box, Input, Paper, Popper } from "@mui/material";
+
 import Checkbox from "@mui/material/Checkbox";
 import CheckIcon from "@mui/icons-material/Check";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
@@ -122,10 +122,11 @@ export const SearchForm = (props) => {
         {...flatProps}
         value={""}
         getOptionLabel={(option) => option}
-        renderOption={(props, option, { selected }) => (
-          <OptionListBox>
+        filterSelectedOptions
+        isOptionEqualToValue={(option, value) => option === value}
+        renderOption={(props, option) => (
+          <OptionListBox key={option}>
             <OptionList
-              key={option}
               {...props}
               bgcolor={
                 selectValue.includes(option)
@@ -154,7 +155,7 @@ export const SearchForm = (props) => {
           </SearchFormField>
         )}
         onChange={(event, newValue) => {
-          newValue ? handleChipChange(newValue) : () => {};
+          newValue ? handleChipChange(newValue) : null;
         }}
       />
     </StSearchForm>
@@ -316,7 +317,22 @@ const SerachIconWrapper = styled.div`
   }
 `;
 
-const SearchInput = styled(Input)`
+const SearchInput = styled.input`
   ${SharedPadding}
   width:100%;
+  border: none;
+  padding-top: 0.2rem;
+  padding-bottom: 0.4rem;
+  border-radius: 20rem;
+  margin-bottom: 1rem;
+  height: 3rem;
+  border: 0.1rem solid lightgray;
+  transition: all 0.2s ease-out;
+
+  &:focus {
+    height: 3rem;
+    border-radius: 20rem;
+    box-shadow: 0.1rem 0.2rem 0.9rem lightgray;
+    outline: none;
+  }
 `;
