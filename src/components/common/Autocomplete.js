@@ -155,7 +155,7 @@ export const SearchForm = (props) => {
           </SearchFormField>
         )}
         onChange={(event, newValue) => {
-          newValue ? handleChipChange(newValue) : null;
+          newValue && handleChipChange(newValue);
         }}
       />
     </StSearchForm>
