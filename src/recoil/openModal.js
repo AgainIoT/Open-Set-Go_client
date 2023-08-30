@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom, atomFamily } from "recoil";
 
 export const gitignoreOpenState = atom({
   key: "gitignoreOpenState",
@@ -8,4 +8,9 @@ export const gitignoreOpenState = atom({
 export const issueTemplateState = atom({
   key: "issueTemplateState",
   defalut: false,
+});
+
+export const modalState = atomFamily({
+  key: "modalState",
+  default: false,
 });
