@@ -1,12 +1,34 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SlideContent from "./SlideContent";
 import dummyLicense from "../../dummy/dummyLicense.json";
 import styled from "styled-components";
+import axios from "axios";
 
 const Slide = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    let completed = false;
+
+    async function get() {
+      const result = await axios.get(
+        "http://ec2-54-180-138-136.ap-northeast-2.compute.amazonaws.com:8080/file/license"
+      );
+      if (!completed) {
+        setData(result.data);
+        console.log(result.data);
+      }
+    }
+    get();
+    return () => {
+      completed = true;
+    };
+
+  }, []);
+
   const settings = {
     dots: true,
     className: "center",
@@ -15,6 +37,7 @@ const Slide = () => {
     slidesToShow: 2,
     speed: 500,
   };
+
   return (
     <div className="container">
       <link
@@ -29,7 +52,7 @@ const Slide = () => {
       />
       <style>{cssstyle}</style>
       <StyledSlider {...settings}>
-        {dummyLicense.dummyLicense.map((it) => {
+        {data.map((it) => {
           return (
             <div key={it.license}>
               <SlideContent data={it} />
@@ -78,7 +101,6 @@ const StyledSlider = styled(Slider)`
     /* border: 5px solid black; */
   }
 
-  
   .slick-center {
     display: flex;
     justify-content: center;
@@ -92,12 +114,11 @@ const StyledSlider = styled(Slider)`
 
   .slick-slide {
     /* border: 1px solid red; */
-
   }
   .slick-next {
     right: 0;
   }
-  
+
   .slick-prev {
     left: 0;
   }
