@@ -9,6 +9,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
+import dummyPRTemplate from "../../../dummy/dummyPRTemplate.json";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -60,17 +61,21 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 // 여기부터 스크롤뷰
-// 행 200개만 가능하므로 추천만 보여주고 사용자화 기능 추가되면 검색하면 보여주도록 구현해야 할 듯
 function renderRow(props) {
   const { index, style } = props;
-
   return (
-    <ListItem style={style} key={index} component="div" disablePadding>
-      <ListItemButton>
-        {/* 진우 API 명세서 보고 이 부분 텍스트 맞춰서 넣기 */}
-        <ListItemText primary={`Item ${index + 1}`} />
-      </ListItemButton>
-    </ListItem>
+    <div>
+      {dummyPRTemplate.dummyPRTemplate.map((it)=>{
+        return(
+          <ListItem key = {it.content} tyle={style} component="div" disablePadding>
+            <ListItemButton>
+              <ListItemText primary={it.title} id="PR-desc" variant="h6" gutterBottom color="textSecondary" m={2}/>
+            </ListItemButton>
+          </ListItem>
+        );
+      })
+      }
+    </div>
   );
 }
 
@@ -102,7 +107,7 @@ export default function TemplateList() {
         height={610} // 높이 모달창 사이즈에 맞게 유동적으로 조절할 수 있도록 수정하기
         width={360}
         itemSize={46}
-        itemCount={200}
+        itemCount={1}
         overscanCount={5}
       >
         {renderRow}
