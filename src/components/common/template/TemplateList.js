@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { styled, alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
@@ -63,11 +64,27 @@ const Item = styled(Paper)(({ theme }) => ({
 // 여기부터 스크롤뷰
 function renderRow(props) {
   const { index, style } = props;
+  const [data, setData] = useState([]);
+  const url = "http://ec2-54-180-138-136.ap-northeast-2.compute.amazonaws.com:8080/file/pr";
+
+  useEffect(() => {
+    let completed = false;
+
+    async function get() {
+      const result = await axios.get(url);
+      if (!completed) setData(result.data);
+    }
+    get();
+    return() => {
+      completed = true;
+    };
+  }, []);
+
   return (
     <div>
-      {dummyPRTemplate.dummyPRTemplate.map((it)=>{
+      {data.map((it)=>{
         return(
-          <ListItem key = {it.content} tyle={style} component="div" disablePadding>
+          <ListItem key = {it._id} component="div" disablePadding>
             <ListItemButton>
               <ListItemText primary={it.title} id="PR-desc" variant="h6" gutterBottom color="textSecondary" m={2}/>
             </ListItemButton>
