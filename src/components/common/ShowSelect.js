@@ -36,12 +36,12 @@ export const FixedOptionShowSelect = (props) => {
               key={index}
               label={option}
               //   {...getTagProps({ option })}
-              bgColor={
+              bgcolor={
                 fixedOptions.includes(option)
                   ? COLOR.MAIN_HOVER
                   : COLOR.MAIN_BLUE
               }
-              labelColor={
+              labelcolor={
                 fixedOptions.includes(option)
                   ? COLOR.MAIN_BLUE
                   : COLOR.MAIN_WHITE
@@ -89,14 +89,14 @@ const ShowChipItme = styled(Chip)`
   padding: 0 0 0 0rem;
   height: 2.8rem;
   border-radius: 1rem;
-  background-color: ${(props) => props.bgColor};
+  background-color: ${(props) => props.bgcolor};
 
   & .MuiChip-root {
     padding: 0;
   }
   & .MuiChip-label {
     font-size: 1.1rem;
-    color: ${(props) => props.labelColor};
+    color: ${(props) => props.labelcolor};
   }
   & .MuiChip-deleteIcon {
     color: white;

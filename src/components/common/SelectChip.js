@@ -13,6 +13,10 @@ import { useEffect, useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import Checkbox from "@mui/material/Checkbox";
 
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import { Input, Paper, Popper } from "@mui/material";
+
 export const SelectChip = (props) => {
   const handleShowAllClick = () => {
     console.info("Show all");
@@ -114,11 +118,14 @@ const StSelectChip = styled(Box)`
   align-items: center;
   gap: 1rem;
   /* width: 50rem; */
+  & .css-1elwnq4-MuiPaper-root-MuiAccordion-root {
+    box-shadow: none;
+  }
 `;
 const ChipAccordian = styled(Accordion)`
   display: flex;
   flex-direction: column;
-  width: 40rem;
+  width: 100%;
   min-height: 10rem;
 
   & .MuiAccordionSummary-root {
@@ -181,3 +188,58 @@ const ChipBox = styled.div`
 const ChipWrapper = styled(Chip)`
   margin: 0.2rem;
 `;
+
+// Limit
+// const StReadonlyAutocomplete = styled.div``;
+// const ReadonlyAutocompleteContainer = styled(Autocomplete)`
+//   & .MuiInputBase-root {
+//     padding: 1.9rem 0 1rem 0.8rem;
+//     background-color: ${COLOR.MAIN_BACKGROUND};
+//     border: none;
+//   }
+//   & .MuiOutlinedInput-notchedOutline {
+//     border: none;
+//   }
+//   & .MuiFilledInput-root {
+//     padding: 0.7rem 0.5rem;
+//   }
+
+//   & .MuiFormLabel-root::after {
+//     line-height: 4.5rem;
+//   }
+// `;
+
+// const ReadOnlyTextField = styled(TextField)`
+//   font-size: 1.6rem;
+
+//   & .MuiInputLabel-root {
+//     display: flex;
+//     font-size: 1.4rem;
+//     line-height: 5rem;
+//   }
+
+//   & .MuiChip-root {
+//     font-size: 1.2rem;
+//   }
+// `;
+
+// const SharedSearchStyle = `
+//   position: absolute;
+//   z-index: 2;
+//   display: block;
+//   width: 2rem;
+//   height: 2rem;
+//   line-height: 2.375rem;
+//   text-align: center;
+//   pointer-events: none;
+// `;
+
+// const SharedPadding = `
+//   padding-left: 3.3rem;
+// `;
+// const SearchFormField = styled.div``;
+
+// const SearchInput = styled(Input)`
+//   ${SharedPadding}
+//   width:100%;
+// `;

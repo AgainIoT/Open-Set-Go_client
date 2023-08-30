@@ -10,6 +10,8 @@ import {
 import Chip from "@mui/material/Chip";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import useAutocomplete from "@mui/material/useAutocomplete";
+
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import Stack from "@mui/material/Stack";
@@ -85,18 +87,12 @@ export const ReadonlyAutocomplete = () => {
       <ReadonlyAutocompleteContainer
         readOnly
         multiple
-        limitTags={3}
+        limitTags={4}
         freeSolo
         id="tags-filled"
-        options={showData}
+        options={showData.map((option) => option.value)}
         value={showData.map((option) => option.value)}
-        renderInput={(params) => (
-          <ReadOnlyTextField
-            {...params}
-            label=".gitignore"
-            InputLabelProps={{ shrink: true }}
-          />
-        )}
+        renderInput={(params) => <ReadOnlyTextField {...params} label="" />}
       />
     </StReadonlyAutocomplete>
   );
@@ -129,8 +125,9 @@ export const SearchForm = (props) => {
         renderOption={(props, option, { selected }) => (
           <OptionListBox>
             <OptionList
+              key={option}
               {...props}
-              bgColor={
+              bgcolor={
                 selectValue.includes(option)
                   ? COLOR.MAIN_HOVER
                   : COLOR.MAIN_WHITE
@@ -166,7 +163,7 @@ export const SearchForm = (props) => {
 
 const StAutocompleteInput = styled.div``;
 const AutocompleteWrapper = styled(Autocomplete)`
-  width: 30rem;
+  width: 100%;
   height: 10rem;
   & .MuiInput-root {
     padding: 0.5rem 0rem 0.5rem 0.5rem;
@@ -198,8 +195,8 @@ const AutocompleteTextField = styled(TextField)`
 const StReadonlyAutocomplete = styled.div``;
 const ReadonlyAutocompleteContainer = styled(Autocomplete)`
   & .MuiInputBase-root {
-    padding: 1.9rem 0 1rem 0.8rem;
-    background-color: ${COLOR.MAIN_BACKGROUND};
+    padding: 1rem 0 1rem 0rem;
+    background-color: ${COLOR.MAIN_WHITE};
     border: none;
   }
   & .MuiOutlinedInput-notchedOutline {
@@ -211,6 +208,12 @@ const ReadonlyAutocompleteContainer = styled(Autocomplete)`
 
   & .MuiFormLabel-root::after {
     line-height: 4.5rem;
+  }
+  & .MuiChip-root {
+    border-radius: 1rem;
+  }
+  & .MuiChip-label {
+    font-size: 1.1rem;
   }
 `;
 
@@ -296,7 +299,7 @@ const OptionListBox = styled.div``;
 const OptionList = styled.li`
   margin: 0.2rem;
   border-radius: 1.5rem;
-  background: ${(props) => props.bgColor};
+  background: ${(props) => props.bgcolor};
 `;
 
 const SearchFormField = styled.div``;
