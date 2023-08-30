@@ -1,8 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "../pages/MainPage";
-// import TestPage from "../pages/TestPage";
 import { Layout } from "../layout/Layout";
-
+import CreateRepo from "../pages/CreateRepoPage";
 
 const Router = () => {
   return (
@@ -10,7 +9,7 @@ const Router = () => {
       <Routes>
         <Route path="/home" element={<MainPage />} />
         <Route element={<Layout />}>
-          {/* <Route path="/test" element={<TestPage />} /> */}
+          <Route path="/step1" element={<CreateRepo />} />
         </Route>
       </Routes>
     </BrowserRouter>
