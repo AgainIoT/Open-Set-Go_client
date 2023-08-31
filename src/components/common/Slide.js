@@ -15,7 +15,7 @@ const Slide = () => {
 
     async function get() {
       const result = await axios.get(
-        "http://ec2-54-180-138-136.ap-northeast-2.compute.amazonaws.com:8080/file/license"
+        "http://ec2-54-180-138-136.ap-northeast-2.compute.amazonaws.com:8080/file/license",
       );
       if (!completed) {
         setData(result.data);
@@ -26,13 +26,13 @@ const Slide = () => {
     return () => {
       completed = true;
     };
-
   }, []);
 
   const settings = {
     dots: true,
-    className: "center",
     infinite: true,
+    draggable: false,
+    className: "center",
     centerMode: true,
     slidesToShow: 2,
     speed: 500,
@@ -66,14 +66,6 @@ const Slide = () => {
 
 export default Slide;
 
-const ContentBox = styled.div`
-  /* background-color: coral; */
-  width: 50%;
-  height: 100%;
-  /* border: 5px solid blue; */
-  display: flex;
-`;
-
 const StyledSlider = styled(Slider)`
   /* background-color: green; */
   width: 100%;
@@ -98,7 +90,6 @@ const StyledSlider = styled(Slider)`
     align-items: center; */
     display: flex;
     /* background-color: pink; */
-    /* border: 5px solid black; */
   }
 
   .slick-center {
@@ -113,7 +104,6 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-slide {
-    /* border: 1px solid red; */
   }
   .slick-next {
     right: 0;

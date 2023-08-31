@@ -4,14 +4,14 @@ import { Button } from "@mui/material";
 
 export const SlideContent = (props) => {
   const pmsList = props.data.conditions.permissions.map((p) => (
-    <ConditionContent key={p}>
+    <PermissionContent key={p}>
       <li>{p}</li>
-    </ConditionContent>
+    </PermissionContent>
   ));
   const limList = props.data.conditions.limitations.map((p) => (
-    <ConditionContent key={p}>
+    <LimitationContent key={p}>
       <li>{p}</li>
-    </ConditionContent>
+    </LimitationContent>
   ));
   const conList = props.data.conditions.conditions.map((p) => (
     <ConditionContent key={p}>
@@ -100,7 +100,6 @@ const Content = styled.p`
 `;
 
 const ConditionBox = styled.div`
-  /* background-color: skyblue; */
   display: flex;
   flex-direction: row;
   /* margin: 1rem 1.8rem 1rem 1rem; */
@@ -117,18 +116,35 @@ const ConditionBox = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+//    list-style-image: url("https://ifh.cc/g/twayry.png");
+
   }
 `;
 
 const Condition = styled.h2`
   padding: 2rem 1rem 1rem 1.8rem;
   font-size: 1.2rem;
+  justify-items: center;
   font-weight: bold;
 `;
 
+const PermissionContent = styled.li `
+  display: block;
+  list-style-type: "✔️";
+  padding-inline-start: 5ch;
+`;
+
+const LimitationContent = styled.li `
+  display: block;
+  list-style-type: "❌";
+  padding-inline-start: 5ch;
+`;
+
 const ConditionContent = styled.li`
-  list-style: disc;
-  margin: 0rem 0rem 0rem 3rem;
+  display: block;
+  /* list-style: disc; */
+  list-style-type: "ℹ️";
+  padding-inline-start: 5ch;
 `;
 
 const BtnDiv = styled.div`
