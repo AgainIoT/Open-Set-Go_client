@@ -131,7 +131,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 |------|------|
 | Ubuntu OS | Ubuntu 22.04 LTS |
 | Windows OS | Windows 11 |
-| Node.js | 16.x |
+| Node.js | >= 18.x |
 | yarn | 1.22.19 |
 
 <br>
