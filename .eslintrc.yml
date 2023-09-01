@@ -48,6 +48,8 @@ rules:
     - always
   react/react-in-jsx-scope: 
     - off
+  react/prop-types:
+    - off
 
 # .eslintrc.yml code inspired by expressjs/express github repository
 # https://github.com/expressjs/express/blob/master/.eslintrc.yml
