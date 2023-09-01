@@ -10,7 +10,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
-import dummyPRTemplate from "../../../dummy/dummyPRTemplate.json";
+import TemplateTitle from "./TemplateTitle";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -82,15 +82,17 @@ function renderRow(props) {
 
   return (
     <div>
-      {data.map((it)=>{
-        return(
-          <ListItem key = {it._id} component="div" disablePadding>
-            <ListItemButton>
-              <ListItemText primary={it.title} id="PR-desc" variant="h6" gutterBottom color="textSecondary" m={2}/>
-            </ListItemButton>
-          </ListItem>
-        );
-      })
+      {data.map((it)=>(
+        <div>
+          <TemplateTitle value = {it.title}></TemplateTitle>
+        </div>
+        ,
+        <ListItem key={it._id} component="div" disablePadding onClick={() => console.log(it._id)}>
+          <ListItemButton>
+            <ListItemText primary={it.title} id="PR-desc" variant="h6" gutterBottom color="textSecondary" m={2} />
+          </ListItemButton>
+        </ListItem>
+      ))
       }
     </div>
   );
