@@ -85,16 +85,17 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-track {
-    height: 100%;
+    //height: 100%;
     /* justify-content: center;
     align-items: center; */
     display: flex;
     /* background-color: pink; */
   }
 
-  .slick-center {
+  div .slick-center .StSlideContent {
     display: flex;
     justify-content: center;
+    border: 2px solid #7da9db;
   }
 
   .slick-slide div {
@@ -103,8 +104,10 @@ const StyledSlider = styled(Slider)`
     height: 100%;
   }
 
-  .slick-slide {
+  .center div {
+    opacity: 0.5;
   }
+
   .slick-next {
     right: 0;
   }

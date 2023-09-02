@@ -1,8 +1,14 @@
 import styled from "styled-components";
 import { PropTypes } from "prop-types";
 import { Button } from "@mui/material";
+import { useState } from "react";
 
 export const SlideContent = (props) => {
+  const btnActive = () => {
+    const target = document.getElementById("SubmitBtn");
+    target.disabled = false;
+  };
+
   const pmsList = props.data.conditions.permissions.map((p) => (
     <PermissionContent key={p}>
       <li>{p}</li>
@@ -19,7 +25,7 @@ export const SlideContent = (props) => {
     </ConditionContent>
   ));
   return (
-    <StSlideContent>
+    <StSlideContent className="StSlideContent">
       <InformationBox>
         <Title>
           <h1>{props.data.license}</h1>
@@ -48,11 +54,19 @@ export const SlideContent = (props) => {
           <ul>{conList}</ul>
         </div>
       </ConditionBox>
-      <BtnDiv>
-        <SubmitBtn variant="contained" color="success">
-          Review and Submit
-        </SubmitBtn>
-      </BtnDiv>
+      <TmpDiv>
+        <LinkDiv>
+          <LinkText>This is not legal advice. </LinkText>
+          <LinkA href={props.data.url}>
+            Learn more about repository licenses.
+          </LinkA>
+        </LinkDiv>
+        <BtnDiv>
+          <SubmitBtn className="SubmitBtn" variant="contained" color="success">
+            Select
+          </SubmitBtn>
+        </BtnDiv>
+      </TmpDiv>
     </StSlideContent>
   );
 };
@@ -66,7 +80,6 @@ const StSlideContent = styled.div`
   border: 0.01rem outset #dedede;
   padding: 4rem 4rem 2rem 4rem;
   margin: 0 auto;
-  /* margin: 0rem 0rem 0rem 1rem; */
   white-space: pre-wrap;
   background-color: white;
   box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
@@ -102,63 +115,98 @@ const Content = styled.p`
 const ConditionBox = styled.div`
   display: flex;
   flex-direction: row;
-  /* margin: 1rem 1.8rem 1rem 1rem; */
   justify-content: space-between;
   width: 100%;
 
   div {
+    //permissions limitations conditions
+    display: flex;
     flex-direction: column;
     height: 100%;
-    gap: 1rem;
+    flex: 1;
+    gap: 0.5rem;
   }
 
   ul {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-//    list-style-image: url("https://ifh.cc/g/twayry.png");
-
+    //    list-style-image: url("https://ifh.cc/g/twayry.png");
   }
 `;
 
 const Condition = styled.h2`
-  padding: 2rem 1rem 1rem 1.8rem;
   font-size: 1.2rem;
   justify-items: center;
   font-weight: bold;
 `;
 
-const PermissionContent = styled.li `
-  display: block;
-  list-style-type: "✔️";
-  padding-inline-start: 5ch;
+const SharedContent = `
+display: block;
+padding-inline-start: 2ch;
+
+
 `;
 
-const LimitationContent = styled.li `
-  display: block;
+const PermissionContent = styled.li`
+  ${SharedContent}
+  list-style-type: "✔️";
+`;
+
+const LimitationContent = styled.li`
+  ${SharedContent}
   list-style-type: "❌";
-  padding-inline-start: 5ch;
 `;
 
 const ConditionContent = styled.li`
-  display: block;
+  ${SharedContent}
   /* list-style: disc; */
   list-style-type: "ℹ️";
-  padding-inline-start: 5ch;
 `;
 
+const TmpDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 6rem;
+  flex-direction: column;
+`;
+
+const LinkDiv = styled.div`
+  display: flex;
+  width: 100%;
+  height: 20%;
+  justify-content: left;
+`;
+
+const LinkText = styled.p`
+  display: flex;
+`;
+
+const LinkA = styled.a`
+  &:visited {
+    color: #4b80eb;
+  }
+  &:link {
+    color: #4b80eb;
+  }
+  &:hover {
+    color: #4b80eb;
+  }
+  &:active {
+    color: #4b80eb;
+  }
+`;
 const BtnDiv = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
-  padding: 0.8rem;
-  justify-content: right;
-  align-items: flex-end;
+  justify-content: end;
 `;
 
 const SubmitBtn = styled(Button)`
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   height: fit-content;
+  width: 25%;
   text-transform: none; //대문자 고정 취소
   white-space: nowrap;
   padding: 0.5rem 1rem 0.4rem 1rem;
