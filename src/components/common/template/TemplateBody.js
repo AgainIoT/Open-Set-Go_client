@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Typography from "@mui/material/Typography";
-import dummyPRTemplate from "../../../dummy/dummyPRTemplate.json";
+import { prTemplateState } from "../../../recoil/templateState";
+import { useRecoilState } from "recoil";
+import { styled } from "styled-components";
+
+const BodyBox = styled.div`
+  display: flex;
+  max-height: 52rem;
+  flex-direction: column;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+`;
 
 export default function TemplateBody() {
   const [data, setData] = useState([]);
   const url = "http://ec2-54-180-138-136.ap-northeast-2.compute.amazonaws.com:8080/file/pr/";
   const params = "64f175c218eed0c9b21a2f2e";
+  const [selectValue, setSelectValue] = useRecoilState(prTemplateState);
 
   useEffect(() => {
     let completed = false;
@@ -23,15 +35,8 @@ export default function TemplateBody() {
   }, []);
 
   return (
-    <div>
-      {dummyPRTemplate.dummyPRTemplate.map((it)=>{
-        return(
-          <div key = {it.content}>
-            <Typography id="PR-desc" variant="h4" gutterBottom color="textSecondary" m={2}>
-              {it.content}
-            </Typography>
-          </div>
-        );
-      })}</div>
+    <BodyBox><Typography id="PR-desc" variant="h4" gutterBottom color="textSecondary" m={2} >
+      {selectValue.content}
+    </Typography></BodyBox>
   );
 }

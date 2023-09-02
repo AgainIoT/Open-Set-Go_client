@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { PropTypes } from "prop-types";
 import { styled, alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
@@ -10,7 +11,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
+import { useRecoilState, useRecoilValue } from "recoil";
 import TemplateTitle from "./TemplateTitle";
+import { prTemplateState } from "../../../recoil/templateState";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,10 +65,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 // 여기부터 스크롤뷰
-function renderRow(props) {
-  const { index, style } = props;
+const renderRow = (props) => {
   const [data, setData] = useState([]);
   const url = "http://ec2-54-180-138-136.ap-northeast-2.compute.amazonaws.com:8080/file/pr";
+  const [selectValue, setSelectValue] = useRecoilState(prTemplateState);
 
   useEffect(() => {
     let completed = false;
@@ -83,22 +86,22 @@ function renderRow(props) {
   return (
     <div>
       {data.map((it)=>(
-        <div>
-          <TemplateTitle value = {it.title}></TemplateTitle>
+        <div key = {it._id}>
+          <ListItem component="div" disablePadding onClick={() => setSelectValue({_id:it._id, title: it.title, repoName: it.repoName, content:it.content})
+          }>
+            <ListItemButton>
+              <ListItemText primary={it.title} id="PR-desc" variant="h6" gutterBottom color="textSecondary" m={2} />
+            </ListItemButton>
+          </ListItem>
         </div>
-        ,
-        <ListItem key={it._id} component="div" disablePadding onClick={() => console.log(it._id)}>
-          <ListItemButton>
-            <ListItemText primary={it.title} id="PR-desc" variant="h6" gutterBottom color="textSecondary" m={2} />
-          </ListItemButton>
-        </ListItem>
+
       ))
       }
     </div>
   );
-}
+};
 
-export default function TemplateList() {
+export  function TemplateList(props) {
   return (
     <Item><Typography
       component="h1"
@@ -120,7 +123,7 @@ export default function TemplateList() {
       />
     </Search>
     <Box
-      sx={{ width: "100%", height: 400, maxWidth: 360, bgcolor: "background.paper" }}
+      sx={{ width: "100%", height: "100%", maxWidth: 360, bgcolor: "background.paper", maxHeight: 400 }}
     >
       <FixedSizeList
         height={610} // 높이 모달창 사이즈에 맞게 유동적으로 조절할 수 있도록 수정하기
