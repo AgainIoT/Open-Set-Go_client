@@ -9,9 +9,8 @@ const githubURL = `https://github.com/login/oauth/authorize?client_id=${CLIENT_I
 const handleLogin = () => {
   window.location.href = githubURL;
 };
-export default function Welcome() {
+export default function Welcome(auth) {
   const [cookies, setCookies] = useCookies();
-  console.log(cookies.Authentication);
   return (
     <>
       <Header />
@@ -30,13 +29,8 @@ export default function Welcome() {
           >
             learn more
           </Button>
-          {cookies.Authentication ? (
-            <Button
-              variant="outlined"
-              onClick={() => {
-                console.log(cookies.get("Authentication"));
-              }}
-            >
+          {auth ? (
+            <Button variant="outlined" onClick={handleLogin}>
               get started
             </Button>
           ) : (

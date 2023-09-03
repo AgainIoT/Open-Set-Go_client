@@ -4,11 +4,10 @@ import { css } from "../../src/loginpage.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 
 let cnt = 0;
 
-function LoginPage() {
+function LoginPage(setAuthState) {
   const navigate = useNavigate();
   const getAccessToken = async () => {
     if (!cnt++) {
@@ -22,6 +21,10 @@ function LoginPage() {
       );
       if (200 > res.status || res.status >= 300) {
         alert("login failed");
+      } else {
+        {
+          () => setAuthState();
+        }
       }
     }
   };

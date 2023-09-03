@@ -8,6 +8,7 @@ import css from "../../src/mainpage.css";
 import { useEffect } from "react";
 import axios from "axios";
 
+
 const getUser = async () => {
   const res = await axios.get(`${process.env.REACT_APP_LOCAL_SERVER_URL}/user`, "", {
     withCredentials: true,
@@ -15,13 +16,13 @@ const getUser = async () => {
   return res;
 };
 
-function MainPage() {
+function MainPage(auth) {
   useEffect(() => {
     // getUser();
   }, []);
   return (
     <>
-      <Welcome />
+      <Welcome auth={auth} />
       <Desc />
       <Steps />
       <Footer />
