@@ -19,7 +19,7 @@ const Slide = () => {
 
     async function get() {
       const result = await axios.get(
-        "http://ec2-54-180-138-136.ap-northeast-2.compute.amazonaws.com:8080/file/license",
+        process.env.REACT_APP_URL
       );
       if (!completed) {
         setData(result.data);
