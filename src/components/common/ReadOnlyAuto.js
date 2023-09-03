@@ -6,12 +6,12 @@ import { useRecoilValue } from "recoil";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-export const ReadonlyAutocomplete = (props) => {
+export const ReadonlyAuto = (props) => {
   const showData = useRecoilValue(props.data);
 
   return (
-    <StReadonlyAutocomplete>
-      <ReadonlyAutocompleteContainer
+    <StReadOnlyAuto>
+      <ReadOnlyAutoContainer
         readOnly
         multiple
         limitTags={4}
@@ -21,12 +21,12 @@ export const ReadonlyAutocomplete = (props) => {
         value={showData.map((option) => option.value)}
         renderInput={(params) => <ReadOnlyTextField {...params} label="" />}
       />
-    </StReadonlyAutocomplete>
+    </StReadOnlyAuto>
   );
 };
 
-const StReadonlyAutocomplete = styled.div``;
-const ReadonlyAutocompleteContainer = styled(Autocomplete)`
+const StReadOnlyAuto = styled.div``;
+const ReadOnlyAutoContainer = styled(Autocomplete)`
   & .MuiInputBase-root {
     padding: 1rem 0 1rem 0rem;
     background-color: ${COLOR.MAIN_WHITE};
