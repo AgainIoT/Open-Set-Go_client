@@ -1,15 +1,21 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-import { useEffect, useState } from "react";
 
-import useAutocomplete from "@mui/material/useAutocomplete";
 import { useRecoilState } from "recoil";
+import {
+  selectGitignoreData,
+  selectFrameworkData,
+} from "../../recoil/repoData";
 
+import Autocomplete from "@mui/material/Autocomplete";
+
+import { createFilterOptions } from "@mui/material/Autocomplete";
+
+import SearchIcon from "@mui/icons-material/Search";
 import Checkbox from "@mui/material/Checkbox";
 import CheckIcon from "@mui/icons-material/Check";
-import SearchIcon from "@mui/icons-material/Search";
 
-export const SearchAutoForm = (props) => {
+export const SearchForm = (props) => {
   const [selectValue, setSelectValue] = useRecoilState(props.type);
   const handleChipChange = (target) => {
     if (!selectValue.includes(target)) {
@@ -17,67 +23,63 @@ export const SearchAutoForm = (props) => {
       setSelectValue([...selectValue, target]);
     }
   };
-
-  const useOption = props.data.map((option) => option.label) || "";
-
-  const {
-    getRootProps,
-    getInputLabelProps,
-    getInputProps,
-    getListboxProps,
-    getOptionProps,
-    groupedOptions,
-  } = useAutocomplete({
-    id: "use-autocomplete-demo",
-    options: useOption,
-    getOptionLabel: (option) => option,
-  });
+  const flatProps = {
+    options: props.data.map((option) => option.label) || "",
+  };
 
   const icon = <CheckIcon fontSize="small" color="gray" />;
   const checkedIcon = <CheckIcon fontSize="small" />;
 
   return (
-    <StSearchAutoForm>
-      <div {...getRootProps()}>
-        <Label {...getInputLabelProps()}></Label>
-        <SerachIconWrapper>
-          <SearchIcon />
-        </SerachIconWrapper>
-        <Input {...getInputProps()} placeholder="Search..." />
-      </div>
-      {groupedOptions.length > 0 ? (
-        <Listbox {...getListboxProps()}>
-          {groupedOptions.map((option, index) => (
-            <li key={index} {...getOptionProps({ option, index })}>
+    <StSearchForm>
+      <SerachIconWrapper>
+        <SearchIcon />
+      </SerachIconWrapper>
+      <SearchAuto
+        {...flatProps}
+        value={""}
+        getOptionLabel={(option) => option}
+        filterSelectedOptions
+        isOptionEqualToValue={(option, value) => option === value}
+        renderOption={(props, option) => (
+          <OptionListBox key={option}>
+            <OptionList
+              {...props}
+              bgcolor={
+                selectValue.includes(option)
+                  ? COLOR.MAIN_HOVER
+                  : COLOR.MAIN_WHITE
+              }
+            >
               <Checkbox
                 icon={icon}
                 checkedIcon={checkedIcon}
                 style={{ marginRight: 8 }}
                 checked={selectValue.includes(option)}
               />
-              <span>{option}</span>
-            </li>
-          ))}
-        </Listbox>
-      ) : null}
-    </StSearchAutoForm>
+              {option}
+            </OptionList>
+          </OptionListBox>
+        )}
+        renderInput={(params) => (
+          <SearchFormField ref={params.InputProps.ref}>
+            <SearchInput
+              type="text"
+              {...params.inputProps}
+              label=""
+              placeholder="Search..."
+            />
+          </SearchFormField>
+        )}
+        onChange={(event, newValue) => {
+          newValue && handleChipChange(newValue);
+        }}
+      />
+    </StSearchForm>
   );
 };
 
-const StSearchAutoForm = styled.div``;
-
-const Label = styled.label``;
-const Input = styled.input``;
-const Listbox = styled.ul`
-  & li[aria-selected="true"] {
-    background-color: ${COLOR.MAIN_HOVER};
-    font-weight: 600;
-
-    & svg {
-      color: ${COLOR.MAIN_BLUE};
-    }
-  }
-`;
+// SearchForm
 
 const SharedSearchStyle = `
   position: absolute;
@@ -90,14 +92,94 @@ const SharedSearchStyle = `
   pointer-events: none;
 `;
 
+const SharedPadding = `
+  padding-left: 3.3rem;
+`;
+
+const StSearchForm = styled.div`
+  margin: 2rem;
+  justify-content: center;
+`;
+
+const SearchAuto = styled(Autocomplete)`
+  & .MuiInput-input {
+    padding: 0.4rem 0.4rem 0.6rem 0;
+  }
+  & .MuiInputBase-root:hover {
+    border: none;
+  }
+
+  & .MuiInput-root {
+    padding-top: 0.2rem;
+    padding-bottom: 0.4rem;
+    border-radius: 20rem;
+    margin-bottom: 1rem;
+    border: none;
+  }
+  & .MuiInputBase-root::before {
+    height: 3rem;
+    border-radius: 20rem;
+    border: 0.1rem solid lightgray;
+  }
+  & .MuiInputBase-root::after {
+    height: 3rem;
+    border-radius: 20rem;
+    border: none;
+  }
+  & .MuiInput-root::after {
+    border-radius: 20rem;
+    border: none;
+    margin-top: 80px;
+  }
+  &
+    .css-q0jhri-MuiInputBase-root-MuiInput-root:hover:not(
+      .Mui-disabled,
+      .Mui-error
+    ):before {
+    height: 3rem;
+    border-radius: 20rem;
+    border: none;
+    box-shadow: 0.1rem 0.2rem 0.9rem lightgray;
+  }
+`;
+
+const OptionListBox = styled.div``;
+const OptionList = styled.li`
+  margin: 0.2rem;
+  border-radius: 1.5rem;
+  background: ${(props) => props.bgcolor};
+`;
+
+const SearchFormField = styled.div``;
+
 const SerachIconWrapper = styled.div`
   svg {
-    /* ${SharedSearchStyle} */
+    ${SharedSearchStyle}
 
     width: 2rem;
     height: 2rem;
     color: grey;
     margin-top: 0.4rem;
     margin-left: 1rem;
+  }
+`;
+
+const SearchInput = styled.input`
+  ${SharedPadding}
+  width:100%;
+  border: none;
+  padding-top: 0.2rem;
+  padding-bottom: 0.4rem;
+  border-radius: 20rem;
+  margin-bottom: 1rem;
+  height: 3rem;
+  border: 0.1rem solid lightgray;
+  transition: all 0.2s ease-out;
+
+  &:focus {
+    height: 3rem;
+    border-radius: 20rem;
+    box-shadow: 0.1rem 0.2rem 0.9rem lightgray;
+    outline: none;
   }
 `;
