@@ -19,5 +19,6 @@ const StLayout = styled.div`
   justify-self: center;
   align-items: center;
   margin: 0;
+  padding: 3rem;
   width: 100%;
 `;

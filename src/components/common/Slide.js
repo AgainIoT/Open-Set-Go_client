@@ -3,13 +3,17 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SlideContent from "./SlideContent";
-import dummyLicense from "../../dummy/dummyLicense.json";
 import styled from "styled-components";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 const Slide = () => {
   const [data, setData] = useState([]);
+  const [pickLi, setPickLi] = useState("");
 
+  // const onClick = () => {
+  //   console.log("in Slide: ", pickLi);
+  // };
   useEffect(() => {
     let completed = false;
 
@@ -55,7 +59,7 @@ const Slide = () => {
         {data.map((it) => {
           return (
             <div key={it.license}>
-              <SlideContent data={it} />
+              <SlideContent data={it} pickLi={pickLi} setPickLi={setPickLi}/>
             </div>
           );
         })}
@@ -65,6 +69,11 @@ const Slide = () => {
 };
 
 export default Slide;
+
+export const MultiItem = styled.div`
+  opacity: 1;
+  transform: scale()(1.04);
+`;
 
 const StyledSlider = styled(Slider)`
   /* background-color: green; */
@@ -85,27 +94,25 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-track {
-    //height: 100%;
+    height: 90%;
     /* justify-content: center;
     align-items: center; */
     display: flex;
     /* background-color: pink; */
   }
 
-  div .slick-center .StSlideContent {
-    display: flex;
-    justify-content: center;
-    border: 2px solid #7da9db;
+  .slick-center {
+    div .StSlide {
+      border: 2px solid #7da9db;
+    }
   }
+  
+
 
   .slick-slide div {
     //슬라이더  컨텐츠(안에 있는 컨텐츠들 싹 다 바꿔 얘가 아주 절대적이야)
     /* display: flex; */
     height: 100%;
-  }
-
-  .center div {
-    opacity: 0.5;
   }
 
   .slick-next {
