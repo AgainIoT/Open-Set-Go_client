@@ -4,15 +4,12 @@ import { css } from "../../src/loginpage.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Cookies } from "react-cookie";
-
-const cookies = new Cookies();
+import { useCookies } from "react-cookie";
 
 let cnt = 0;
 
 function LoginPage() {
   const navigate = useNavigate();
-
   const getAccessToken = async () => {
     if (!cnt++) {
       const params = new URLSearchParams(location.search);
@@ -23,14 +20,14 @@ function LoginPage() {
         "",
         { withCredentials: true },
       );
-      if (200 <= res.status && res.status < 300) {
-        console.log(res);
+      if (200 > res.status || res.status >= 300) {
+        alert("login failed");
       }
-      // navigate("/home");
     }
   };
   useEffect(() => {
     getAccessToken();
+    navigate("/home");
   }, []);
   return (
     <div className="background">

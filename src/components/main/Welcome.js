@@ -1,9 +1,7 @@
 import { MainHeader as Header } from "../../layout/MainHeader";
 import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
-import { Cookies } from "react-cookie";
-
-const cookies = new Cookies();
+import { useCookies } from "react-cookie";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
@@ -12,6 +10,8 @@ const handleLogin = () => {
   window.location.href = githubURL;
 };
 export default function Welcome() {
+  const [cookies, setCookies] = useCookies();
+  console.log(cookies.Authentication);
   return (
     <>
       <Header />
@@ -22,6 +22,7 @@ export default function Welcome() {
           <Button
             variant="contained"
             onClick={() => {
+              console.log(localStorage.getItem("Authentication"));
               document
                 .querySelector(".steps")
                 .scrollIntoView({ behavior: "smooth" });
@@ -29,11 +30,11 @@ export default function Welcome() {
           >
             learn more
           </Button>
-          {cookies.get("Authentication") ? (
+          {cookies.Authentication ? (
             <Button
               variant="outlined"
               onClick={() => {
-                console.log("go");
+                console.log(cookies.get("Authentication"));
               }}
             >
               get started
