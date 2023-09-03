@@ -1,4 +1,4 @@
-import { MainHeader as Header } from "../../layout/Header";
+import { MainHeader as Header } from "../../layout/MainHeader";
 import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
 import { Cookies } from "react-cookie";
@@ -29,7 +29,16 @@ export default function Welcome() {
           >
             learn more
           </Button>
-          {cookies.get("Authentication") ? null : (
+          {cookies.get("Authentication") ? (
+            <Button
+              variant="outlined"
+              onClick={() => {
+                console.log("go");
+              }}
+            >
+              get started
+            </Button>
+          ) : (
             <Button variant="outlined" onClick={handleLogin}>
               login
             </Button>
