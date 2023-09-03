@@ -27,7 +27,7 @@ export const SlideContent = (props) => {
     </ConditionContent>
   ));
   return (
-    <StSlide className="StSlide">
+    <StSlideContent className="StSlide">
       <DivBox>
         <InformationBox className="InformationBox">
           <Title>
@@ -87,7 +87,7 @@ export const SlideContent = (props) => {
           )}
         </LinkBox>
       </DivBox>
-    </StSlide>
+    </StSlideContent>
   );
 };
 
@@ -97,7 +97,7 @@ SlideContent.propTypes = {
   setPickLi: PropTypes.node.isRequired,
 };
 
-const StSlide = styled.div`
+const StSlideContent = styled.div`
   display: flex;
   justify-content: center;
   border-radius: 0.5rem;
