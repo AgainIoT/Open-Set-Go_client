@@ -1,0 +1,23 @@
+export const FrameWorkOptions = [
+  { key: 0, label: "React" },
+  { key: 1, label: "Vue.js" },
+  { key: 2, label: "Angular" },
+  { key: 3, label: "Express.js" },
+  { key: 4, label: "Spring Boot" },
+  { key: 5, label: "Django" },
+  { key: 6, label: "Ruby on Rails" },
+  { key: 7, label: "Laravel" },
+  { key: 8, label: "Flask" },
+  { key: 9, label: "ASP.NET Core" },
+  { key: 10, label: "Ember.js" },
+  { key: 11, label: "Meteor" },
+  { key: 12, label: "Svelte" },
+  { key: 13, label: "Next.js" },
+  { key: 14, label: "NestJS" },
+  { key: 15, label: "Symfony" },
+  { key: 16, label: "Play Framework" },
+  { key: 17, label: "FastAPI" },
+  { key: 18, label: "Quasar Framework" },
+  { key: 19, label: "AdonisJS" },
+];
+export const LanguageOptions = [];
