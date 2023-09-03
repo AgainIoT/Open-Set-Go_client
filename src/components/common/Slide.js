@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 import SlideContent from "./SlideContent";
 import styled from "styled-components";
 import axios from "axios";
-import { Button } from "@mui/material";
 
 const Slide = () => {
   const [data, setData] = useState([]);
@@ -69,11 +68,6 @@ const Slide = () => {
 };
 
 export default Slide;
-
-export const MultiItem = styled.div`
-  opacity: 1;
-  transform: scale()(1.04);
-`;
 
 const StyledSlider = styled(Slider)`
   /* background-color: green; */
