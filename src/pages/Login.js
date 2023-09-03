@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
+import { css } from "../../src/loginpage.css";
 import axios from "axios";
 import { useEffect } from "react";
 import { Cookies } from "react-cookie";
@@ -17,7 +18,7 @@ const getAccessToken = async () => {
     "",
     { withCredentials: true },
   );
-  if (200 <= res.status && res.status < 300){
+  if (200 <= res.status && res.status < 300) {
     const auth = await cookies.get("Authentication");
     cookies.set("Authentication", auth);
   }
@@ -31,8 +32,8 @@ function LoginPage() {
     }
   }, []);
   return (
-    <div>
-      <p>깃허브 로그인</p>
+    <div className="background">
+      <h1 className="str">logging in</h1>
     </div>
   );
 }
