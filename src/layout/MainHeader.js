@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
+import { propTypes } from "prop-types";
 import { Outlet, useLocation } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
@@ -18,6 +18,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import axios from "axios";
+import { useSetRecoilState } from "recoil";
+import { authState } from "../recoils/atoms";
 
 const pages = ["About Us", "Description", "Contribute"];
 const settings = ["Logout"];
@@ -25,6 +27,7 @@ const settings = ["Logout"];
 export const MainHeader = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const logout = useSetRecoilState(authState);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -44,6 +47,7 @@ export const MainHeader = () => {
       { withCredentials: true },
     );
     console.log(res);
+    logout(false);
     setAnchorElUser(null);
   };
   return (

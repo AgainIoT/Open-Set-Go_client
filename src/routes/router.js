@@ -3,19 +3,13 @@ import MainPage from "../pages/MainPage";
 // import TestPage from "../pages/TestPage";
 import { Layout } from "../layout/Layout";
 import LoginPage from "../pages/Login";
-import { useEffect, useState } from "react";
 
 const Router = () => {
-  const [authState, setAuthState] = useState(false);
-  const login = () => {
-    setAuthState(true);
-  };
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/home" element={<MainPage auth={authState} />} />
-        <Route path="/login" element={<LoginPage setAuthState={login} />} />
+        <Route path="/home" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route element={<Layout />}>
           {/* <Route path="/test" element={<TestPage />} /> */}
         </Route>

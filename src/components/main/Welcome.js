@@ -1,7 +1,9 @@
 import { MainHeader as Header } from "../../layout/MainHeader";
 import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
-import { useCookies } from "react-cookie";
+import propTypes from "prop-types";
+import { useRecoilValue } from "recoil";
+import { authState } from "../../recoils/atoms";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
@@ -9,8 +11,8 @@ const githubURL = `https://github.com/login/oauth/authorize?client_id=${CLIENT_I
 const handleLogin = () => {
   window.location.href = githubURL;
 };
-export default function Welcome(auth) {
-  const [cookies, setCookies] = useCookies();
+export default function Welcome() {
+  const auth = useRecoilValue(authState);
   return (
     <>
       <Header />
@@ -43,3 +45,8 @@ export default function Welcome(auth) {
     </>
   );
 }
+
+Welcome.propTypes = {
+  auth: propTypes.bool,
+  logout: propTypes.func,
+};

@@ -7,27 +7,36 @@ import Steps from "../components/main/Steps";
 import css from "../../src/mainpage.css";
 import { useEffect } from "react";
 import axios from "axios";
-
+import propTypes from "prop-types";
 
 const getUser = async () => {
-  const res = await axios.get(`${process.env.REACT_APP_LOCAL_SERVER_URL}/user`, "", {
-    withCredentials: true,
-  });
+  const res = await axios.get(
+    `${process.env.REACT_APP_LOCAL_SERVER_URL}/user`,
+    "",
+    {
+      withCredentials: true,
+    },
+  );
   return res;
 };
 
-function MainPage(auth) {
-  useEffect(() => {
-    // getUser();
-  }, []);
+function MainPage() {
+  // useEffect(() => {
+  // getUser();
+  // }, []);
   return (
     <>
-      <Welcome auth={auth} />
+      <Welcome />
       <Desc />
       <Steps />
       <Footer />
     </>
   );
 }
+
+MainPage.propTypes = {
+  auth: propTypes.bool,
+  logout: propTypes.func,
+};
 
 export default MainPage;

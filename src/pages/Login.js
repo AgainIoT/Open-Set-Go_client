@@ -3,11 +3,15 @@ import { COLOR } from "../styles/color";
 import { css } from "../../src/loginpage.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
+import { authState } from "../recoils/atoms";
+import propTypes from "prop-types";
 
 let cnt = 0;
 
-function LoginPage(setAuthState) {
+function LoginPage() {
+  const login = useSetRecoilState(authState);
   const navigate = useNavigate();
   const getAccessToken = async () => {
     if (!cnt++) {
@@ -22,9 +26,7 @@ function LoginPage(setAuthState) {
       if (200 > res.status || res.status >= 300) {
         alert("login failed");
       } else {
-        {
-          () => setAuthState();
-        }
+        login(true);
       }
     }
   };
@@ -38,5 +40,10 @@ function LoginPage(setAuthState) {
     </div>
   );
 }
+
+LoginPage.propTypes = {
+  login: propTypes.func,
+  auth: propTypes.bool,
+};
 
 export default LoginPage;
