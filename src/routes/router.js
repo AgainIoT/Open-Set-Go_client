@@ -4,7 +4,7 @@ import PRTemplatePage from "../pages/PRTemplatePage";
 import { Layout } from "../layout/Layout";
 import CreateRepo from "../pages/CreateRepoPage";
 import LicensePage from "../pages/LicensePage";
-
+import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
 
 const Router = () => {
   return (
@@ -16,6 +16,7 @@ const Router = () => {
           <Route path="/PRTemplate" element={<PRTemplatePage />} />
           <Route path="/step1" element={<CreateRepo />} />
           <Route path="/license" element={<LicensePage />} />
+          <Route path="/readme" element={<ReadmeTemplatePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

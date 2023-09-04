@@ -19,7 +19,7 @@ const Slide = () => {
 
     async function get() {
       const result = await axios.get(
-        process.env.REACT_APP_URL
+        process.env.REACT_APP_SERVER_URL
       );
       if (!completed) {
         setData(result.data);

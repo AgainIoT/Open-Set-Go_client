@@ -67,7 +67,7 @@ const Item = styled(Paper)(({ theme }) => ({
 // 여기부터 스크롤뷰
 const renderRow = (props) => {
   const [data, setData] = useState([]);
-  const url = process.env.REACT_APP_URL+"/file/pr";
+  const url = process.env.REACT_APP_SERVER_URL+"/file/readme";
   const [selectValue, setSelectValue] = useRecoilState(prTemplateState);
 
   useEffect(() => {
