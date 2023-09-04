@@ -1,18 +1,30 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
+import Welcome from "../components/main/Welcome";
+import Desc from "../components/main/Desc";
+import Footer from "../components/main/Footer";
+import Steps from "../components/main/Steps";
+import css from "../../src/mainpage.css";
+import { useEffect } from "react";
+import axios from "axios";
+import propTypes from "prop-types";
+import { MainHeader } from "../layout/MainHeader";
 
 function MainPage() {
-  const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-  const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
-  const githubURL = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirectUrl}&scope=repo,write:org,read:user`;
-  const handleLogin = () => {
-    window.location.href = githubURL;
-  };
   return (
-    <div>
-      <button onClick={handleLogin}>깃허브 로그인</button>
-    </div>
+    <>
+      <MainHeader />
+      <Welcome />
+      <Desc />
+      <Steps />
+      <Footer />
+    </>
   );
 }
+
+MainPage.propTypes = {
+  auth: propTypes.bool,
+  logout: propTypes.func,
+};
 
 export default MainPage;
