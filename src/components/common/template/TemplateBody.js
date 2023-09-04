@@ -16,7 +16,7 @@ const BodyBox = styled.div`
 
 export default function TemplateBody() {
   const [data, setData] = useState([]);
-  const url = "http://ec2-54-180-138-136.ap-northeast-2.compute.amazonaws.com:8080/file/pr/";
+  const url = "${process.env.REACT_APP_URL}/file/pr/";
   const params = "64f175c218eed0c9b21a2f2e";
   const [selectValue, setSelectValue] = useRecoilState(prTemplateState);
 

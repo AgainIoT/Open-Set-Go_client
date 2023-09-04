@@ -67,7 +67,7 @@ const Item = styled(Paper)(({ theme }) => ({
 // 여기부터 스크롤뷰
 const renderRow = (props) => {
   const [data, setData] = useState([]);
-  const url = "http://ec2-54-180-138-136.ap-northeast-2.compute.amazonaws.com:8080/file/pr";
+  const url = "${process.env.REACT_APP_URL}/file/pr";
   const [selectValue, setSelectValue] = useRecoilState(prTemplateState);
 
   useEffect(() => {
