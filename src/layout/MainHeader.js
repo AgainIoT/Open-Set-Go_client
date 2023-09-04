@@ -42,7 +42,7 @@ export const MainHeader = () => {
 
   const handleCloseUserMenu = async () => {
     const res = await axios.post(
-      process.env.REACT_APP_LOCAL_SERVER_URL + "/auth/github-logout",
+      process.env.REACT_APP_SERVER_URL + "/auth/github-logout",
       "",
       { withCredentials: true },
     );

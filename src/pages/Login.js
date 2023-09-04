@@ -19,7 +19,7 @@ function LoginPage() {
       const authCode = params.get("code");
 
       const res = await axios.post(
-        `${process.env.REACT_APP_LOCAL_SERVER_URL}/auth/github-login?code=${authCode}`,
+        `${process.env.REACT_APP_SERVER_URL}/auth/github-login?code=${authCode}`,
         "",
         { withCredentials: true },
       );

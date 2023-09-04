@@ -11,7 +11,7 @@ import propTypes from "prop-types";
 
 const getUser = async () => {
   const res = await axios.get(
-    `${process.env.REACT_APP_LOCAL_SERVER_URL}/user`,
+    `${process.env.REACT_APP_SERVER_URL}/user`,
     "",
     {
       withCredentials: true,
