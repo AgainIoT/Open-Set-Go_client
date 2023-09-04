@@ -2,8 +2,9 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useRecoilState } from "recoil";
-import { prTemplateState } from "../../../recoil/templateState";
+import { prTemplateContent, prTemplateState } from "../../../recoil/templateState";
 import styled from "styled-components";
+import { prOpenState } from "../../../recoil/openModal";
 
 const commonStyles = {
   bgcolor: "background.paper",
@@ -15,6 +16,10 @@ const commonStyles = {
 
 export default function TemplateTitle(props) {
   const [selectValue, setSelectValue] = useRecoilState(prTemplateState);
+  const [content, setContent] = useRecoilState(prTemplateContent);
+  const [modalValue, setModalValue] = useRecoilState(prOpenState);
+
+  const handleClose = () => setModalValue(false);
 
   return (
     <box><Box sx={{ ...commonStyles, borderBottom: 1, height: "100%" }} >
@@ -33,13 +38,10 @@ export default function TemplateTitle(props) {
         {selectValue.repoName}
       </Typography>
       <Button
-        variant="contained" m={4}>
+        variant="contained" m={4} onClick={() => setContent(selectValue.content)
+        }>
                     Use Template
       </Button>
     </Box></box>
   );
 }
-
-const TitleTypo = styled.div`
-  // border: 1rem solid red;
-`;
