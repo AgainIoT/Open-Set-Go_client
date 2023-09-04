@@ -1,4 +1,4 @@
-.welcome{
+.WELCOME{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,11 +23,11 @@ Button{
     padding: 20px;
 }
 
-.desc{
+.DESC{
     padding: 30px;
 }
 
-.steps{
+.STEPS{
     background-color: #B0A8B9;
 }
 

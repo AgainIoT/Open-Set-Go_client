@@ -1,4 +1,3 @@
-import { MainHeader as Header } from "../../layout/MainHeader";
 import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
 import propTypes from "prop-types";
@@ -14,35 +13,32 @@ const handleLogin = () => {
 export default function Welcome() {
   const auth = useRecoilValue(authState);
   return (
-    <>
-      <Header />
-      <div className="welcome">
-        <h1 className="title">Open, Set, Go</h1>
-        <h1 className="subtitle">your project</h1>
-        <Stack spacing={2} direction="row">
-          <Button
-            variant="contained"
-            onClick={() => {
-              console.log(localStorage.getItem("Authentication"));
-              document
-                .querySelector(".steps")
-                .scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            learn more
+    <div className="WELCOME">
+      <h1 className="title">Open, Set, Go</h1>
+      <h1 className="subtitle">your project</h1>
+      <Stack spacing={2} direction="row">
+        <Button
+          variant="contained"
+          onClick={() => {
+            console.log(localStorage.getItem("Authentication"));
+            document
+              .querySelector(".STEPS")
+              .scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          learn more
+        </Button>
+        {auth ? (
+          <Button variant="outlined" onClick={handleLogin}>
+            get started
           </Button>
-          {auth ? (
-            <Button variant="outlined" onClick={handleLogin}>
-              get started
-            </Button>
-          ) : (
-            <Button variant="outlined" onClick={handleLogin}>
-              login
-            </Button>
-          )}
-        </Stack>
-      </div>
-    </>
+        ) : (
+          <Button variant="outlined" onClick={handleLogin}>
+            login
+          </Button>
+        )}
+      </Stack>
+    </div>
   );
 }
 

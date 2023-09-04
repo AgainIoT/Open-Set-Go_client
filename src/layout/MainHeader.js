@@ -15,16 +15,22 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import axios from "axios";
-import { useSetRecoilState } from "recoil";
-import { authState } from "../recoil/authorize";
+import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
+import { authState, id, avatar, name } from "../recoil/authorize";
 
-const pages = ["About Us", "Description", "Contribute"];
+const pages = ["WELCOME", "DESC", "STEPS"];
 const settings = ["Logout"];
 
 export const MainHeader = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const logout = useSetRecoilState(authState);
+  const setAuthState = useSetRecoilState(authState);
+  const setAvatar = useSetRecoilState(avatar);
+  const setId = useSetRecoilState(id);
+  const setName = useSetRecoilState(name);
+  const src = useRecoilValue(avatar);
+  const userId = useRecoilState(id);
+  const userName = useRecoilState(name);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,8 +39,17 @@ export const MainHeader = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (event) => {
     setAnchorElNav(null);
+    return event.currentTarget;
+  };
+
+  const onMenuClick = (event) => {
+    moveToPage(handleCloseNavMenu(event).innerText);
+  };
+
+  const moveToPage = (page) => {
+    document.querySelector("." + page).scrollIntoView({ behavior: "smooth" });
   };
 
   const handleCloseUserMenu = async () => {
@@ -44,15 +59,14 @@ export const MainHeader = () => {
       { withCredentials: true },
     );
     console.log(res);
-    logout(false);
+    setAuthState(false);
+    setId("guest");
+    setName();
+    setAvatar();
     setAnchorElUser(null);
   };
   return (
-    <StMainHeader
-      position="sticky"
-      style={{ background: COLOR.MAIN_WHITE }}
-      elevation={0}
-    >
+    <StMainHeader style={{ background: COLOR.MAIN_WHITE }} elevation={0}>
       {/* <Container maxWidth="xl"> */}
       <MainToolBar disableGutters>
         <AdbIcon
@@ -111,7 +125,7 @@ export const MainHeader = () => {
             }}
           >
             {pages.map((page) => (
-              <MenuItem key={page} onClick={handleCloseNavMenu}>
+              <MenuItem key={page} onClick={onMenuClick}>
                 <Typography textAlign="center">{page}</Typography>
               </MenuItem>
             ))}
@@ -139,7 +153,7 @@ export const MainHeader = () => {
         </Typography>
         <MenuBox sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
           {pages.map((page) => (
-            <MenuItemWrapper key={page} onClick={handleCloseNavMenu}>
+            <MenuItemWrapper key={page} onClick={onMenuClick}>
               {page}
             </MenuItemWrapper>
           ))}
@@ -148,9 +162,17 @@ export const MainHeader = () => {
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <Avatar alt={userName} src={src} />
             </IconButton>
           </Tooltip>
+          <Typography
+            variant="p"
+            component="div"
+            color={COLOR.MAIN_BLACK}
+            textAlign="center"
+          >
+            {userId}
+          </Typography>
           <Menu
             sx={{ mt: "45px" }}
             id="menu-appbar"
@@ -182,8 +204,8 @@ export const MainHeader = () => {
 
 const StMainHeader = styled(AppBar)`
   display: flex;
-  position: static;
-  //top: 0;
+  position: sticky;
+  // top: 0;
   background-color: ${COLOR.MAIN_WHITE};
   width: 100%;
   height: 8.1rem;
@@ -193,6 +215,7 @@ const StMainHeader = styled(AppBar)`
   font-family: "SUIT Variable";
   font-style: normal;
   font-weight: 700;
+  color : ${COLOR.MAIN_BLACK};
   font-size: 20px;
   line-height: 15px; */
   /* border: 0; */

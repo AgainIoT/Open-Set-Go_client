@@ -8,24 +8,12 @@ import css from "../../src/mainpage.css";
 import { useEffect } from "react";
 import axios from "axios";
 import propTypes from "prop-types";
-
-const getUser = async () => {
-  const res = await axios.get(
-    `${process.env.REACT_APP_SERVER_URL}/user`,
-    "",
-    {
-      withCredentials: true,
-    },
-  );
-  return res;
-};
+import { MainHeader } from "../layout/MainHeader";
 
 function MainPage() {
-  // useEffect(() => {
-  // getUser();
-  // }, []);
   return (
     <>
+      <MainHeader />
       <Welcome />
       <Desc />
       <Steps />
