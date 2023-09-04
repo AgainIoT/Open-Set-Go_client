@@ -16,7 +16,8 @@ import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Input, Paper, Popper } from "@mui/material";
-
+import { repoDataAtomFamily } from "../../recoil/repoData";
+//props-> data, type,
 export const SelectChip = (props) => {
   const handleShowAllClick = () => {
     console.info("Show all");
@@ -42,7 +43,7 @@ export const SelectChip = (props) => {
                   data={props.data}
                   chipLabel={props.chipLabel}
                   type={props.type}
-                  limit={8}
+                  limit={props.limit + 1}
                   top={true}
                 />
                 {isOpen && (
@@ -50,7 +51,7 @@ export const SelectChip = (props) => {
                     data={props.data}
                     chipLabel={props.chipLabel}
                     type={props.type}
-                    limit={7}
+                    limit={props.limit}
                   />
                 )}
                 <IconContainer onClick={handleShowAllClick}>
@@ -69,7 +70,7 @@ export const SelectChip = (props) => {
 
 export const ChipGroup = (props) => {
   const [selectValue, setSelectValue] = useRecoilState(props.type);
-
+  console.log("chipData:", props.data);
   const handleChipChange = (target) => {
     if (!selectValue.includes(target)) {
       console.log(`${target}이 추가`);
@@ -87,22 +88,25 @@ export const ChipGroup = (props) => {
         <ChipBox role="group" aria-labelledby={props.chipLabel}>
           {props.data
             .filter((it) =>
-              props.top ? it.key < props.limit : it.key > props.limit,
+              props.top ? it.id < props.limit : it.id > props.limit,
             )
             .map((it) => {
+              console.log("it", it.id);
               return (
                 <ChipWrapper
-                  key={it.key}
+                  key={it.option}
                   variant="outlined"
-                  color={selectValue.includes(it.label) ? "primary" : "default"}
-                  label={it.label}
+                  color={
+                    selectValue.includes(it.option) ? "primary" : "default"
+                  }
+                  label={it.option}
                   icon={
-                    selectValue.includes(it.label) ? (
+                    selectValue.includes(it.option) ? (
                       <CheckIcon sx={{ zIndex: 1, pointerEvents: "none" }} />
                     ) : undefined
                   }
                   onClick={(event) => {
-                    handleChipChange(it.label);
+                    handleChipChange(it.option);
                   }}
                 ></ChipWrapper>
               );

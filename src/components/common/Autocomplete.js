@@ -3,10 +3,7 @@ import { COLOR } from "../../styles/color";
 import { useEffect, useState } from "react";
 
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  selectGitignoreData,
-  selectFrameworkData,
-} from "../../recoil/repoData";
+import { repoDataAtomFamily } from "../../recoil/repoData";
 import Chip from "@mui/material/Chip";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -14,27 +11,37 @@ import Autocomplete from "@mui/material/Autocomplete";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import { createFilterOptions } from "@mui/material/Autocomplete";
+import { Box, Paper, Popper } from "@mui/material";
 
+// props -> type(lang/framework), options(for lang->langs/for framework->frameworkOptions), setIsSelectLang(setIsSelectLang), setDisableValue(setDisableValue), disableValue(false/disableValue)
 export const AutocompleteInput = (props) => {
-  const type = props.recoilType;
-  console.log("props.recoilType:", props.recoilType);
   const filterOptions = createFilterOptions({
     matchFrom: "start",
     stringify: (option) => option,
   });
 
-  const [selectValue, setSelectValue] = useRecoilState(type);
-  // const showData = useRecoilValue(selectFrameworkData);
+  const [selectValue, setSelectValue] = useRecoilState(
+    repoDataAtomFamily(props.type),
+  );
 
   const flatProps = {
-    options: props.useOption.map((option) => option.label) || "",
+    options: props.options || "",
   };
 
-  const handleSelect = (value) => {
-    if (type === selectFrameworkData) {
-      setSelectValue([{ type: "Framework", value: value }]);
-    } else {
-      setSelectValue([{ type: "Language", value: value }]);
+  const handleChange = (newValue) => {
+    setSelectValue(newValue);
+    if (props.type === "lang") {
+      props.setIsSelectLang(true);
+      props.setDisableValue(false);
+    }
+  };
+
+  const handleDelete = () => {
+    console.log("delete");
+    setSelectValue("");
+    if (props.type === "lang") {
+      props.setIsSelectLang(false);
+      props.setDisableValue(true);
     }
   };
 
@@ -42,29 +49,32 @@ export const AutocompleteInput = (props) => {
     <StAutocompleteInput>
       <AutocompleteWrapper
         {...flatProps}
-        id="readOnly"
         autoComplete
         clearOnEscape
         autoHighlight
         filterSelectedOptions
         openOnFocus
-        value={selectValue.map((option) => option.value)}
-        getOptionLabel={(option) =>
-          typeof option === "string" ? option : option.toString()
-        }
-        onChange={(event, newValue) => {
-          newValue ? handleSelect(newValue) : setSelectValue([]);
-        }}
         filterOptions={filterOptions}
+        readOnly={props.disableValue}
         forcePopupIcon={true}
         popupIcon={<SearchIcon />}
+        value={selectValue}
+        getOptionLabel={(option) => option}
+        isOptionEqualToValue={(option, value) => option === value}
+        PaperComponent={(props) => <PaperContainer elevation={1} {...props} />}
         renderInput={(params) => (
-          <AutocompleteTextField
-            {...params}
-            label={props.labelText}
-            variant="standard"
-          />
+          <InputFieldContainer>
+            <TagLabel>{props.label}</TagLabel>
+            <AutocompleteTextField
+              {...params}
+              variant="standard"
+              helperText={props.disableValue ? "First select Language" : " "}
+            />
+          </InputFieldContainer>
         )}
+        onChange={(event, newValue) => {
+          newValue ? handleChange(newValue) : handleDelete();
+        }}
       />
     </StAutocompleteInput>
   );
@@ -73,7 +83,6 @@ export const AutocompleteInput = (props) => {
 const StAutocompleteInput = styled.div``;
 const AutocompleteWrapper = styled(Autocomplete)`
   width: 100%;
-  height: 10rem;
   & .MuiInput-root {
     padding: 0.5rem 0rem 0.5rem 0.5rem;
   }
@@ -99,4 +108,21 @@ const AutocompleteTextField = styled(TextField)`
   & .MuiAutocomplete-input {
     font-size: 1.4rem;
   }
+`;
+
+const PopperContainer = styled(Popper)`
+  margin-top: 2rem;
+  background-color: red;
+`;
+
+const PaperContainer = styled(Paper)`
+  margin-top: 0.3rem;
+`;
+const InputFieldContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const TagLabel = styled.p`
+  color: ${COLOR.BORDER_GRAY};
 `;
