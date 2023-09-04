@@ -24,7 +24,7 @@ export const SearchForm = (props) => {
     }
   };
   const flatProps = {
-    options: props.data.map((option) => option.label) || "",
+    options: props.data.map((option) => option) || "",
   };
 
   const icon = <CheckIcon fontSize="small" color="gray" />;
