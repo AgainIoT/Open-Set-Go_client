@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
 import { useState } from "react";
-import { propTypes } from "prop-types";
-import { Outlet, useLocation } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -11,7 +9,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
@@ -19,7 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
-import { authState } from "../recoils/atoms";
+import { authState } from "../recoil/authorize";
 
 const pages = ["About Us", "Description", "Contribute"];
 const settings = ["Logout"];

@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { authState } from "../recoils/atoms";
+import { authState } from "../recoil/authorize";
 import propTypes from "prop-types";
 
 let cnt = 0;
