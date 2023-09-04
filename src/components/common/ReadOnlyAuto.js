@@ -5,9 +5,14 @@ import { useRecoilValue } from "recoil";
 
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { Chip } from "@mui/material";
 
 export const ReadonlyAuto = (props) => {
   const showData = useRecoilValue(props.data);
+
+  const flatProps = {
+    options: showData.map((option) => option) || "",
+  };
 
   return (
     <StReadOnlyAuto>
@@ -17,8 +22,28 @@ export const ReadonlyAuto = (props) => {
         limitTags={4}
         freeSolo
         id="tags-filled"
-        options={showData.map((option) => option.value)}
-        value={showData.map((option) => option.value)}
+        options={showData.filter((it) => it) || ""}
+        getOptionLabel={(option) => option}
+        value={showData.filter((it) => it)}
+        renderTags={(tagValue, getTagProps) =>
+          tagValue.map((option, index) => (
+            <ShowChipItme
+              key={index}
+              label={option}
+              //   {...getTagProps({ option })}
+              bgcolor={
+                props.fixedData.includes(option)
+                  ? COLOR.MAIN_HOVER
+                  : COLOR.MAIN_BLUE
+              }
+              labelcolor={
+                props.fixedData.includes(option)
+                  ? COLOR.MAIN_BLUE
+                  : COLOR.MAIN_WHITE
+              }
+            />
+          ))
+        }
         renderInput={(params) => <ReadOnlyTextField {...params} label="" />}
       />
     </StReadOnlyAuto>
@@ -61,5 +86,25 @@ const ReadOnlyTextField = styled(TextField)`
 
   & .MuiChip-root {
     font-size: 1.2rem;
+  }
+`;
+
+const ShowChipItme = styled(Chip)`
+  margin: 0.2rem;
+  padding: 0 0 0 0rem;
+  height: 2.8rem;
+  border-radius: 1rem;
+  background-color: ${(props) => props.bgcolor};
+
+  & .MuiChip-root {
+    padding: 0;
+  }
+  & .MuiChip-label {
+    font-size: 1.1rem;
+    color: ${(props) => props.labelcolor};
+  }
+  & .MuiChip-deleteIcon {
+    color: white;
+    font-size: 1.5rem;
   }
 `;
