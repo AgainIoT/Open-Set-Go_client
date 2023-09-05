@@ -1,12 +1,12 @@
 import { Typography } from "@mui/material";
 import propTypes from "prop-types";
 import styled from "styled-components";
-
+import DeskTop from "../../assets/images/desktop.svg";
 const Step1 = () => {
   return (
     <StStep1>
       <ImgDiv>
-        <img src="../../assets/images/Desktop.png" alt="haha"/>
+        <DesktopImg src={DeskTop} alt="haha"/>
       </ImgDiv>
       <TextDiv>
         <TitleTypo variant="h3">You can create Repository easily</TitleTypo>
@@ -27,34 +27,35 @@ const StStep1 = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 50%;
+  height: 100%;
   flex-direction: row;
-  border: 1px solid black;
 `;
 
 const ImgDiv = styled.div`
   width: 50%;
   height: 100%;
-  border: 1px solid red;
+  display: flex;
+  justify-content: right;
+  align-items: center;
 `;
 
 const DesktopImg = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   `;
 
 const TextDiv = styled.div`
   display: flex;
+  margin-left: 1rem;
   flex-direction: column;
   justify-content: center;
   width: 50%;
   height: 100%;
-  border: 1px solid green;
   gap: 1rem;
 `;
 
 const TitleTypo = styled(Typography)`
-  font-size: 4rem;
+  font-size: 3.2rem;
   font-family: "Inter", sans-serif;
   font-weight: 700;
   width: 100%;
