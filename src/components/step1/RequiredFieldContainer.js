@@ -11,9 +11,11 @@ import { repoDataAtomFamily } from "../../recoil/repoData";
 
 export const RequiredFieldContainer = () => {
   /* GET - user repo info */
-  const [userName, setUserName] = useRecoilState(
-    repoDataAtomFamily("userName"),
+  const [owner, setOwner] = useRecoilState(repoDataAtomFamily("owner"));
+  const [repoName, setRepoName] = useRecoilState(
+    repoDataAtomFamily("repoName"),
   );
+
   const [userRepoData, setUserRepoData] = useState([
     {
       id: "",
@@ -45,7 +47,7 @@ export const RequiredFieldContainer = () => {
         initUserData.push({ id: it.id, avatar: it.avatar });
       });
 
-      setUserName(response.data.id);
+      setOwner(response.data.id);
       console.log("initUserData: %o", initUserData);
       setUserRepoData(initUserData);
     } catch (e) {
@@ -59,27 +61,45 @@ export const RequiredFieldContainer = () => {
   }, []);
 
   /* POST - validate repo name */
-  const [validateCheck, setValidateCheck] = useState(false);
-  async function postRecordData() {
+  const [validateCheck, setValidateCheck] = useRecoilState(
+    repoDataAtomFamily("dupCheck"),
+  );
+  async function postCheckDupication() {
     // async, await을 사용하는 경우
+    setHelperText("checking");
     try {
       // GET 요청은 params에 실어 보냄
 
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/repo/checkRepo`,
+        `${process.env.REACT_APP_SERVER_URL}/repo/checkDuplication`,
         {
-          userName: "bentshrimp",
-          repoName: "test",
+          owner: owner,
+          repoName: repoName,
+        },
+        {
+          withCredentials: true,
         },
       );
       // 응답 결과(response)를 변수에 저장하거나.. 등 필요한 처리를 해 주면 된다.
-      setValidateCheck(response.data.returnValue);
+      setValidateCheck(response.data);
+      if (response.data) {
+        setHelperText("checked");
+      } else {
+        setHelperText("error");
+      }
     } catch (e) {
       // 실패 시 처리
       console.error(e);
       alert("기록 시작 실패. 재시도해주세요.");
     }
   }
+  useEffect(() => {
+    if (repoName !== "") {
+      postCheckDupication();
+    } else {
+      setHelperText("null");
+    }
+  }, [repoName]);
 
   const [helperText, setHelperText] = useState(" ");
 
@@ -92,11 +112,7 @@ export const RequiredFieldContainer = () => {
       </Grid>
 
       <Grid item xs={12} sm={2}>
-        <SelectAuto
-          labelText={"Owner*"}
-          type={"userName"}
-          data={userRepoData}
-        />
+        <SelectAuto labelText={"Owner*"} type={"owner"} data={userRepoData} />
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextInputContainer
@@ -104,17 +120,13 @@ export const RequiredFieldContainer = () => {
           fieldType={1}
           useHelperText={true}
           type={"repoName"}
+          helperText={helperText}
         />
       </Grid>
-
-      <Grid item xs={12}>
-        <p>Great repository names are short and memorable.</p>
-      </Grid>
-
       <Grid item xs={9}>
         <TextInputContainer
           labelText={"Description"}
-          fieldType={5}
+          fieldType={3}
           type={"desc"}
           option={"(optional)"}
         />

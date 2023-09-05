@@ -1,6 +1,6 @@
 import styled from "styled-components";
-//import { COLOR } from "../styles/color";
-//import { useEffect, useState } from "react";
+import { COLOR } from "../styles/color";
+import { useEffect, useState } from "react";
 
 import { Grid, Typography } from "@mui/material";
 
@@ -8,12 +8,23 @@ import { GitIgnoreContainer } from "../components/step1/gitignoreContainer";
 import { SelectContainer } from "../components/step1/SelectContainer";
 
 import { RequiredFieldContainer } from "../components/step1/RequiredFieldContainer";
-import { useRecoilState } from "recoil";
-import { activeState } from "../recoil/commonState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { activeState, eachStepState } from "../recoil/commonState";
+import { repoDataAtomFamily } from "../recoil/repoData";
 
 function CreateRepo() {
-  const [activeStep, setActiveState] = useRecoilState(activeState);
-  setActiveState(0);
+  const [activeStep, setActiveStep] = useRecoilState(activeState);
+  const [stepComplete, setStepComplted] = useRecoilState(eachStepState("1"));
+  const validateCheck = useRecoilValue(repoDataAtomFamily("dupCheck"));
+  const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
+
+  useEffect(() => {
+    if (validateCheck && repoName !== "") {
+      setStepComplted(true);
+    } else {
+      setStepComplted(false);
+    }
+  }, [validateCheck, repoName]);
   return (
     <>
       <StCreateRepo container>
