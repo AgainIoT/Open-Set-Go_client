@@ -5,7 +5,7 @@ const Step2 = () => {
   return (
     <StStep2>
       <ImgDiv>
-        <DesktopImg src={DeskTop} alt="haha"/>
+        <DesktopImg src={DeskTop}/>
       </ImgDiv>
       <TextDiv>
         <TitleTypo variant="h3">You can create Repository easily</TitleTypo>
@@ -21,6 +21,7 @@ const Step2 = () => {
 
 const StStep2 = styled.div`
   display: flex;
+  margin: 5rem 0rem 5rem 0rem ;
   justify-content: center;
   align-items: center;
   width: 100%;
