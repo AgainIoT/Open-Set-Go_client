@@ -22,7 +22,7 @@ export const Layout = () => {
             <Outlet />
           </StepContentsContainer>
         </StepContainer>
-        <BottomContianer>
+        <BottomContainer>
           <ButtonWrapper variant="contained" disableElevation>
             Contained
           </ButtonWrapper>
@@ -32,7 +32,7 @@ export const Layout = () => {
               Disabled
             </ButtonWrapper>
           </ButtonContainer>
-        </BottomContianer>
+        </BottomContainer>
       </ContentsContainer>
     </StLayout>
   );
@@ -82,7 +82,7 @@ const StepContentsContainer = styled.div`
   background-color: ${COLOR.MAIN_WHITE};
 `;
 
-const BottomContianer = styled.div`
+const BottomContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-left: 20%;
