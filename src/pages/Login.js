@@ -5,17 +5,21 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { authState, avatar, id, name } from "../recoil/authorize";
+import { authState, avatar, id, name, token } from "../recoil/authorize";
+import { Cookies } from "react-cookie";
 import propTypes from "prop-types";
 
 let cnt = 0;
 
 function LoginPage() {
-  const setAuthState = useSetRecoilState(authState);
   const setId = useSetRecoilState(id);
   const setName = useSetRecoilState(name);
   const setAvatar = useSetRecoilState(avatar);
+  // const setAuth = useSetRecoilState(authState);
   const navigate = useNavigate();
+
+  const cookies = new Cookies();
+  const setToken = useSetRecoilState(token);
 
   const login = async () => {
     if (!cnt++) {
@@ -27,7 +31,10 @@ function LoginPage() {
       setId(id);
       setName(name);
       setAvatar(avatar);
-      console.log(res);
+      localStorage.setItem("id", id);
+      localStorage.setItem("name", name);
+      localStorage.setItem("avatar", avatar);
+      console.log(localStorage);
     }
   };
 
@@ -55,10 +62,15 @@ function LoginPage() {
     if (200 > res.status || res.status >= 300) {
       alert("login failed");
     } else {
-      setAuthState(true);
+      const accessToken = cookies.get("Authentication");
+      setToken(accessToken);
     }
   };
+
   useEffect(() => {
+    const accessToken = cookies.get("Authentication");
+    setToken(accessToken);
+    console.log(accessToken);
     login();
     navigate("/home");
   }, []);
