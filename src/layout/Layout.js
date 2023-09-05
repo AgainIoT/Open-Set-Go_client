@@ -8,8 +8,10 @@ import StepInfo from "../components/common/StepInfo";
 import { MainHeader } from "./Header";
 import { Typography } from "@mui/material";
 import { PropTypes } from "prop-types";
-import { activeState, eachStepState } from "../recoil/commonState";
+import { activeState, eachStepState, modalState } from "../recoil/commonState";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { BaseModal } from "../components/common/modal/BaseModal";
+import { FinishModal } from "../components/common/modal/FinishModal";
 
 export const Layout = () => {
   const [activeStep, setActiveState] = useRecoilState(activeState);
@@ -27,6 +29,8 @@ export const Layout = () => {
     navigate(`/step${activeStep}`);
     setActiveState(activeStep - 1);
   };
+  const [modalValue, setModalValue] = useRecoilState(modalState("finishModal"));
+  const handleOpen = () => setModalValue(true);
 
   return (
     <StLayout>
@@ -58,13 +62,16 @@ export const Layout = () => {
             <ButtonWrapper
               variant="contained"
               disabled={!stepCompleted}
-              onClick={() => handleNext()}
+              onClick={() => (activeStep === 5 ? handleOpen() : handleNext())}
             >
               Disabled
             </ButtonWrapper>
           </ButtonContainer>
         </BottomContainer>
       </ContentsContainer>
+      <BaseModal type={"finishModal"}>
+        <FinishModal />
+      </BaseModal>
     </StLayout>
   );
 };
