@@ -1,37 +1,70 @@
-import styled from "styled-components";
-import { COLOR } from "../styles/color";
+import * as React from "react";
 import { useState } from "react";
-
+import { COLOR } from "../styles/color";
+import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
+import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import axios from "axios";
-import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
-import { authState, id, avatar, name } from "../recoil/authorize";
+import Container from "@mui/material/Container";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { authState, avatar, id, name, token } from "../recoil/authorize";
+import styled from "styled-components";
+import { Cookie } from "@mui/icons-material";
 
 const pages = ["WELCOME", "DESC", "STEPS"];
 const settings = ["Logout"];
 
-export const MainHeader = () => {
+function ElevationScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
+ElevationScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
+
+export default function ElevateAppBar(props) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const setAuthState = useSetRecoilState(authState);
-  const setAvatar = useSetRecoilState(avatar);
-  const setId = useSetRecoilState(id);
-  const setName = useSetRecoilState(name);
-  const src = useRecoilValue(avatar);
-  const userId = useRecoilState(id);
-  const userName = useRecoilState(name);
+  const [src, setSrc] = useRecoilState(avatar);
+  const [userId, setUserId] = useRecoilState(id);
+  const [userName, setUserName] = useRecoilState(name);
+  const setToken = useSetRecoilState(token);
 
+  React.useEffect(() => {
+    setSrc(localStorage.avatar);
+    setUserId(localStorage.id);
+    setUserName(localStorage.name);
+    console.log(localStorage);
+  }, []);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -59,183 +92,160 @@ export const MainHeader = () => {
       { withCredentials: true },
     );
     console.log(res);
-    setAuthState(false);
-    setId("guest");
-    setName();
-    setAvatar();
+    setToken("");
+    localStorage.setItem("id", "guest");
+    localStorage.setItem("name", "guest");
+    localStorage.setItem("avatar", "");
+    setUserId(localStorage.getItem("id"));
+    setUserName(localStorage.getItem("name"));
+    setSrc(localStorage.getItem("avatar"));
     setAnchorElUser(null);
   };
+
   return (
-    <StMainHeader style={{ background: COLOR.MAIN_WHITE }} elevation={0}>
-      {/* <Container maxWidth="xl"> */}
-      <MainToolBar disableGutters>
-        <AdbIcon
-          sx={{
-            display: { xs: "none", md: "flex" },
-            mr: 1,
-            ml: 1,
-            color: "black",
-          }}
-        />
-        <Typography
-          variant="h5"
-          noWrap
-          component="a"
-          href="/home"
-          sx={{
-            mr: 2,
-            display: { xs: "none", md: "flex" },
-            fontFamily: "monospace",
-            fontWeight: 700,
-            letterSpacing: ".3rem",
-            color: "inherit",
-            textDecoration: "none",
-          }}
+    <React.Fragment>
+      <CssBaseline />
+      <ElevationScroll {...props}>
+        <AppBar
+          style={{ background: COLOR.MAIN_WHITE, color: COLOR.MAIN_BLACK }}
         >
-          OpenSetGo
-        </Typography>
-        {/* 반응형 메뉴 */}
-        <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleOpenNavMenu}
-            color="black"
-          >
-            <MenuIcon fontSize="large" />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorElNav}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            open={Boolean(anchorElNav)}
-            onClose={handleCloseNavMenu}
-            sx={{
-              display: { xs: "block", md: "none" },
-            }}
-          >
-            {pages.map((page) => (
-              <MenuItem key={page} onClick={onMenuClick}>
-                <Typography textAlign="center">{page}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
-        {/* 반응형 로고 */}
-        <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-        <Typography
-          variant="h5"
-          noWrap
-          component="a"
-          href="/"
-          sx={{
-            mr: 2,
-            display: { xs: "flex", md: "none" },
-            flexGrow: 1,
-            fontFamily: "monospace",
-            fontWeight: 700,
-            letterSpacing: ".3rem",
-            color: "inherit",
-            textDecoration: "none",
-          }}
-        >
-          OpenSetGo2
-        </Typography>
-        <MenuBox sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-          {pages.map((page) => (
-            <MenuItemWrapper key={page} onClick={onMenuClick}>
-              {page}
-            </MenuItemWrapper>
-          ))}
-        </MenuBox>
-
-        <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt={userName} src={src} />
-            </IconButton>
-          </Tooltip>
-          <Typography
-            variant="p"
-            component="div"
-            color={COLOR.MAIN_BLACK}
-            textAlign="center"
-          >
-            {userId}
-          </Typography>
-          <Menu
-            sx={{ mt: "45px" }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
-      </MainToolBar>
-      {/* </Container> */}
-    </StMainHeader>
+          <Toolbar>
+            <AdbIcon
+              sx={{
+                display: { xs: "none", md: "flex" },
+                mr: 1,
+                ml: 1,
+                color: "black",
+              }}
+            />
+            <Typography
+              variant="h5"
+              href="/home"
+              component="a"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              OpenSetGo
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="black"
+              >
+                <MenuIcon fontSize="large" />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+              >
+                {pages.map((page) => (
+                  <MenuItem key={page} onClick={onMenuClick}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            {/* 반응형 로고 */}
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              OpenSetGo
+            </Typography>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+                justifyContent: "end",
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItemWrapper key={page} onClick={onMenuClick}>
+                  {page}
+                </MenuItemWrapper>
+              ))}
+            </Box>
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt={userId} src={src} />
+                </IconButton>
+              </Tooltip>
+              <Typography
+                variant="p"
+                component="div"
+                color={COLOR.MAIN_BLACK}
+                textAlign="center"
+              >
+                {userName}
+              </Typography>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
+      <Toolbar />
+    </React.Fragment>
   );
-};
-
-const StMainHeader = styled(AppBar)`
-  display: flex;
-  position: sticky;
-  // top: 0;
-  background-color: ${COLOR.MAIN_WHITE};
-  width: 100%;
-  height: 8.1rem;
-  /* padding-top: 1rem; */
-  padding: 1rem 3rem 0 3rem;
-  /* 
-  font-family: "SUIT Variable";
-  font-style: normal;
-  font-weight: 700;
-  color : ${COLOR.MAIN_BLACK};
-  font-size: 20px;
-  line-height: 15px; */
-  /* border: 0; */
-
-  /* display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: flex-start;
-  align-items: center;
-
-  z-index: 100; */
-`;
-
-const MainToolBar = styled(Toolbar)`
-  height: 100%;
-`;
-
-const MenuBox = styled(Box)`
-  justify-content: end;
-`;
+}
 
 const MenuItemWrapper = styled(Button)`
   display: block;

@@ -5,15 +5,26 @@ import Desc from "../components/main/Desc";
 import Footer from "../components/main/Footer";
 import Steps from "../components/main/Steps";
 import css from "../../src/mainpage.css";
-import { useEffect } from "react";
-import axios from "axios";
 import propTypes from "prop-types";
-import { MainHeader } from "../layout/MainHeader";
-
+import Header from "../layout/MainHeader";
+import { Cookies } from "react-cookie";
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
+import { token } from "../recoil/authorize";
 function MainPage() {
+  const cookies = new Cookies();
+  const setAccessToken = useSetRecoilState(token);
+  useEffect(() => {
+    const accessToken = cookies.get("Authentication");
+    if (accessToken) {
+      setAccessToken(accessToken);
+    } else {
+      setAccessToken(null);
+    }
+  }, []);
   return (
     <>
-      <MainHeader />
+      <Header />
       <Welcome />
       <Desc />
       <Steps />
