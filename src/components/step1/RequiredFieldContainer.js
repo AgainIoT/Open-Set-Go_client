@@ -84,51 +84,51 @@ export const RequiredFieldContainer = () => {
   const [helperText, setHelperText] = useState(" ");
 
   return (
-    <StRequiredFieldContainer>
-      <ExplainText>
-        Required fields are marked with an asterisk (*).
-      </ExplainText>
-      <RequiredContainer container>
-        <Grid item xs={12} sm={2}>
-          <SelectAuto
-            labelText={"Owner*"}
-            type={"userName"}
-            data={userRepoData}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextInputContainer
-            labelText={"Repository Name*"}
-            fieldType={1}
-            error={true}
-          />
-        </Grid>
-      </RequiredContainer>
+    <StRequiredFieldContainer container>
+      <Grid item xs={12}>
+        <ExplainText>
+          Required fields are marked with an asterisk (*).
+        </ExplainText>
+      </Grid>
 
-      <p>Great repository names are short and memorable.</p>
+      <Grid item xs={12} sm={2}>
+        <SelectAuto
+          labelText={"Owner*"}
+          type={"userName"}
+          data={userRepoData}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <TextInputContainer
+          labelText={"Repository Name*"}
+          fieldType={1}
+          useHelperText={true}
+          type={"repoName"}
+        />
+      </Grid>
 
-      <TextInputContainer
-        labelText={"Description"}
-        fieldType={5}
-        type={"desc"}
-        option={"(optional)"}
-      />
+      <Grid item xs={12}>
+        <p>Great repository names are short and memorable.</p>
+      </Grid>
+
+      <Grid item xs={9}>
+        <TextInputContainer
+          labelText={"Description"}
+          fieldType={5}
+          type={"desc"}
+          option={"(optional)"}
+        />
+      </Grid>
     </StRequiredFieldContainer>
   );
 };
 
-const StRequiredFieldContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 1rem;
-`;
-
-const RequiredContainer = styled(Grid)`
+const StRequiredFieldContainer = styled(Grid)`
   width: 100%;
   row-gap: 1rem;
-  column-gap: 2rem;
+  column-gap: 0rem;
 `;
+
 const ExplainText = styled.p`
   font-size: 1.1rem;
   font-weight: 300;

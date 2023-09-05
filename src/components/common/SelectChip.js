@@ -121,6 +121,7 @@ const StSelectChip = styled(Box)`
   display: flex;
   align-items: center;
   gap: 1rem;
+  width: 100%;
   /* width: 50rem; */
   & .css-1elwnq4-MuiPaper-root-MuiAccordion-root {
     box-shadow: none;

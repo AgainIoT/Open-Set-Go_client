@@ -64,7 +64,6 @@ export const AutocompleteInput = (props) => {
         PaperComponent={(props) => <PaperContainer elevation={1} {...props} />}
         renderInput={(params) => (
           <InputFieldContainer>
-            <TagLabel>{props.label}</TagLabel>
             <AutocompleteTextField
               {...params}
               variant="standard"
@@ -85,6 +84,10 @@ const AutocompleteWrapper = styled(Autocomplete)`
   width: 100%;
   & .MuiInput-root {
     padding: 0.5rem 0rem 0.5rem 0.5rem;
+
+    &::after {
+      border: none;
+    }
   }
   & .MuiInputBase-root {
     height: 4.8rem;

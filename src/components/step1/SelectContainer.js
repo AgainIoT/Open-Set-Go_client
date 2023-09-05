@@ -114,5 +114,6 @@ const StSelectContainer = styled(Grid)`
   column-gap: 5rem;
 `;
 const Subtitle = styled(Typography)`
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  font-weight: 600;
 `;
