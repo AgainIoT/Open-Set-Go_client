@@ -2,7 +2,9 @@ import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
 import propTypes from "prop-types";
 import { useRecoilValue } from "recoil";
-import { authState } from "../../recoil/authorize";
+import { authState, token } from "../../recoil/authorize";
+import { useEffect, useState } from "react";
+import { Cookies } from "react-cookie";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
@@ -11,7 +13,12 @@ const handleLogin = () => {
   window.location.href = githubURL;
 };
 export default function Welcome() {
-  const auth = useRecoilValue(authState);
+  const accessToken = useRecoilValue(token);
+  const [auth, setAuth] = useState(false);
+  useEffect(() => {
+    console.log(accessToken);
+  });
+
   return (
     <div className="WELCOME">
       <h1 className="title">Open, Set, Go</h1>
@@ -20,7 +27,6 @@ export default function Welcome() {
         <Button
           variant="contained"
           onClick={() => {
-            console.log(localStorage.getItem("Authentication"));
             document
               .querySelector(".STEPS")
               .scrollIntoView({ behavior: "smooth" });
@@ -28,7 +34,7 @@ export default function Welcome() {
         >
           learn more
         </Button>
-        {auth ? (
+        {accessToken ? (
           <Button variant="outlined" onClick={handleLogin}>
             get started
           </Button>

@@ -18,9 +18,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import axios from "axios";
 import Container from "@mui/material/Container";
-import { useRecoilState } from "recoil";
-import { authState, avatar, id, name } from "../recoil/authorize";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { authState, avatar, id, name, token } from "../recoil/authorize";
 import styled from "styled-components";
+import { Cookie } from "@mui/icons-material";
 
 const pages = ["WELCOME", "DESC", "STEPS"];
 const settings = ["Logout"];
@@ -53,11 +54,16 @@ ElevationScroll.propTypes = {
 export default function ElevateAppBar(props) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [auth, setAuth] = useRecoilState(authState);
   const [src, setSrc] = useRecoilState(avatar);
   const [userId, setUserId] = useRecoilState(id);
   const [userName, setUserName] = useRecoilState(name);
 
+  React.useEffect(() => {
+    setSrc(localStorage.avatar);
+    setUserId(localStorage.id);
+    setUserName(localStorage.name);
+    console.log(localStorage);
+  }, []);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -85,10 +91,12 @@ export default function ElevateAppBar(props) {
       { withCredentials: true },
     );
     console.log(res);
-    setAuth(false);
-    setUserId("guest");
-    setUserName();
-    setSrc();
+    localStorage.setItem("id", "guest");
+    localStorage.setItem("name", "guest");
+    localStorage.setItem("avatar", "");
+    setUserId(localStorage.getItem("id"));
+    setUserName(localStorage.getItem("name"));
+    setSrc(localStorage.getItem("avatar"));
     setAnchorElUser(null);
   };
 
