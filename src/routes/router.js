@@ -13,12 +13,9 @@ const Router = () => {
         <Route path="/home" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route element={<Layout />}>
-          <Route path="/license" element={<LicensePage />} />
+          <Route path="/step2" element={<LicensePage />} />
           <Route path="/step1" element={<CreateRepo />} />
         </Route>
-        {/* <Route element={<Layout num={1}/>}>
-          <Route path="/test" element={<TestPage />} />
-        </Route> */}
       </Routes>
     </BrowserRouter>
   );

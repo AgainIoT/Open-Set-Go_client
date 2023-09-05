@@ -1,8 +1,8 @@
-import { useState } from "react";
 import styled from "styled-components";
+import { useState } from "react";
+
 import { Typography } from "@mui/material";
 import StepData from "../../data/StepData.json";
-import { PropTypes } from "prop-types";
 import { activeState } from "../../recoil/commonState";
 import { useRecoilValue } from "recoil";
 
@@ -17,7 +17,9 @@ const StepInfo = () => {
           return (
             <div key={it.step}>
               <StStepInfo>
-                <TitleH1>{it.title}</TitleH1>
+                <TitleH1>
+                  Step{it.step}. {it.title}
+                </TitleH1>
                 <ContentP>{it.content}</ContentP>
               </StStepInfo>
             </div>
@@ -26,10 +28,6 @@ const StepInfo = () => {
       )}
     </div>
   );
-};
-
-StepInfo.propTypes = {
-  num: PropTypes.node.isRequired,
 };
 
 const StStepInfo = styled.div`

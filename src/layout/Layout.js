@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import LinearStepper from "../components/common/Stepper";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -8,10 +8,26 @@ import StepInfo from "../components/common/StepInfo";
 import { MainHeader } from "./Header";
 import { Typography } from "@mui/material";
 import { PropTypes } from "prop-types";
-import { activeState } from "../recoil/commonState";
-import { useRecoilValue } from "recoil";
+import { activeState, eachStepState } from "../recoil/commonState";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 export const Layout = () => {
+  const [activeStep, setActiveState] = useRecoilState(activeState);
+  const [stepCompleted, setStepComplted] = useRecoilState(
+    eachStepState(`${activeStep + 1}`),
+  );
+  const navigate = useNavigate();
+
+  const handleNext = () => {
+    console.log("next", `/step${activeStep + 2}`);
+    navigate(`/step${activeStep + 2}`);
+    setActiveState(activeStep + 1);
+  };
+  const handlePre = () => {
+    navigate(`/step${activeStep}`);
+    setActiveState(activeStep - 1);
+  };
+
   return (
     <StLayout>
       <MainHeader />
@@ -26,12 +42,24 @@ export const Layout = () => {
           </StepContentsContainer>
         </StepContainer>
         <BottomContainer>
-          <ButtonWrapper variant="contained" disableElevation>
-            Contained
-          </ButtonWrapper>
+          {activeStep > 0 ? (
+            <ButtonWrapper
+              variant="contained"
+              disableElevation
+              onClick={() => handlePre()}
+            >
+              Contained
+            </ButtonWrapper>
+          ) : (
+            <div></div>
+          )}
           <ButtonContainer>
-            <ButtonWrapper variant="outlined">Primary</ButtonWrapper>
-            <ButtonWrapper variant="contained" disabled>
+            {/* <ButtonWrapper variant="outlined">Primary</ButtonWrapper> */}
+            <ButtonWrapper
+              variant="contained"
+              disabled={!stepCompleted}
+              onClick={() => handleNext()}
+            >
               Disabled
             </ButtonWrapper>
           </ButtonContainer>
@@ -41,17 +69,14 @@ export const Layout = () => {
   );
 };
 
-Layout.propTypes = {
-  num: PropTypes.node.isRequired,
-};
-
 const StLayout = styled.div`
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   background-color: ${COLOR.MAIN_WHITE};
+  overflow-y: hidden;
 `;
 
 const ContentsContainer = styled.div`
@@ -59,6 +84,7 @@ const ContentsContainer = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+  justify-content: space-around;
   /* margin-top: 9.5rem; */
   margin-left: 2.6rem;
   padding: 2rem 3rem 0 2rem;
@@ -71,12 +97,13 @@ const StepContainer = styled.div`
   flex-direction: row;
   gap: 2.5rem;
   width: 100%;
-  height: 100%;
+  height: 76%;
 `;
 
 const ExplainWrapper = styled.div`
   display: flex;
   width: 20%;
+  height: 100%;
   justify-content: center;
 `;
 
@@ -84,18 +111,23 @@ const StepContentsContainer = styled.div`
   display: flex;
   overflow-y: scroll;
   width: 80%;
+  height: 100%;
+  padding: 3rem;
+  border-top-left-radius: 2rem;
   background-color: ${COLOR.MAIN_WHITE};
 `;
 
 const BottomContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 80%;
   margin-left: 20%;
   padding: 1rem 2rem 1rem 2rem;
 `;
 
 const ButtonContainer = styled(Box)`
   display: flex;
+  bottom: 0;
   gap: 1rem;
 `;
 

@@ -6,4 +6,7 @@ export const modalState = atomFamily({
 });
 
 export const activeState = atom({ key: "activeState", default: 0 });
-export const eachStepState = atomFamily({ key: "eachStepState", default: [] });
+export const eachStepState = atomFamily({
+  key: "eachStepState",
+  default: false,
+});

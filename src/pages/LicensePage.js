@@ -1,8 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import Slider from "react-slick";
 import Slide from "../components/common/Slide";
 import styled from "@emotion/styled";
+import { useRecoilState } from "recoil";
+import { eachStepState } from "../recoil/commonState";
 function LicensePage() {
+  const [stepComplete, setStepComplted] = useRecoilState(eachStepState("2"));
+  useEffect(() => {
+    setStepComplted(true);
+  }, []);
+
   return (
     <StLayout>
       <Slide />
