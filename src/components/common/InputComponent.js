@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import HelpIcon from "@mui/icons-material/Help";
 import FormControl from "@mui/material/FormControl";
@@ -12,55 +12,130 @@ import Tooltip from "@mui/material/Tooltip";
 
 import { TextField } from "@mui/material";
 import { COLOR } from "../../styles/color";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
+
+import axios from "axios";
+
 export const TextInputContainer = (props) => {
+  const textRef = useRef("");
   const [helperText, setHelperText] = useState(" ");
   const [inputValue, setInputValue] = useRecoilState(
     repoDataAtomFamily(props.type),
   );
-  const [checkValue, setCheckValue] = useRecoilState(
-    repoDataAtomFamily("checkRepoName"),
-  );
+  // const [checkValue, setCheckValue] = useRecoilState(
+  //   repoDataAtomFamily("checkRepoName"),
+  // );
+  const userName = useRecoilValue(repoDataAtomFamily("userName"));
+  // const [checkState, setCheckState] = useState({
+  //   loading: false,
+  //   check: false,
+  // });
+
+  /* GET - check repository is duplicate */
+  const [checkState, setCheckState] = useState(false);
+
+  async function getCheckDuplication() {
+    // async, await을 사용하는 경우
+    // setCheckState({ loading: true, check: false });
+    setHelperText("checking");
+    console.log("get??:", textRef.current.value);
+
+    try {
+      // GET 요청은 params에 실어 보냄
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/repo/checkDuplication`,
+        {
+          owner: userName,
+          repoName: textRef.current.value,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+
+      // 응답 결과(response)를 변수에 저장하거나.. 등 필요한 처리를 해 주면 된다.
+      // console.log("get?", repoName);
+      if (response.data) {
+        //setCheckState({ loading: false, check: true });
+        setHelperText("checked");
+      } else {
+        //setCheckState({ loading: false, check: false });
+        setHelperText("error");
+      }
+
+      console.log("getCheck: %o", response.data);
+    } catch (e) {
+      // 실패 시 처리
+      console.error(e);
+    }
+  }
 
   const handleOnChange = (e) => {
+    // setInputValue(e.target.value);
     setInputValue(e.target.value);
-    if (props.error) {
+
+    if (props.useHelperText) {
       console.log("e", e.target.value);
+      //setRepoName(e.target.value);
       //공백인 경우 defaultText로 바꾼다.
-      if (e.target.value === "") {
-        return setHelperText("defaultText");
-      } else if (props.validateCheck) {
-        return setHelperText("is available");
+      if (e.target.value !== "") {
+        console.log("eee:", e.target.value);
+        console.log("refee:", textRef.current.value);
+        console.log("currHelper:", helperText);
+        getCheckDuplication();
       } else {
-        return setHelperText("checking availably");
+        setHelperText("null");
       }
     }
   };
 
-  const HelperTextContainer = () => {
+  const HelperTextContainer = (props) => {
+    const checkIcon = <CheckCircleIcon fontSize="small" />;
+    const warningIcon = <WarningRoundedIcon fontSize="small" />;
+    console.log("asf:", props.currInput.current.value);
+    console.log("hhhhhh:", helperText);
+    const currInput = props.currInput.current.value;
+
     const textData = [
       {
-        type: "none",
+        type: "null",
         text: "New repository name must not be blank",
         textColor: COLOR.MAIN_BLUE,
+        icon: warningIcon,
       },
       {
         type: "checking",
-        text: "Checking availability",
+        text: "Checking availability...",
         textColor: COLOR.MAIN_BLACK,
+        icon: warningIcon,
       },
-      { type: "checked", text: "", textColor: COLOR.MAIN_BORDER },
       {
-        type: "exist",
-        text: "The repository blog already exists on this account.",
-        textColor: COLOR.MAIN_BLUE,
+        type: "checked",
+        text: `${props.currInput.current.value} is available`,
+        textColor: COLOR.MAIN_GREEN,
+        icon: checkIcon,
+      },
+      {
+        type: "error",
+        text: `The repository ${props.currInput.current.value} already exists on this account.`,
+        textColor: COLOR.MAIN_RED,
+        icon: warningIcon,
       },
     ];
+    const useStyle = textData.find((it) =>
+      currInput !== "" ? it.type === helperText : it.type === "null",
+    );
+    console.log("style:", useStyle?.text);
     return (
       <>
-        <FormHelperTextWrapper></FormHelperTextWrapper>
+        <FormHelperTextWrapper textcolor={useStyle?.textColor}>
+          {useStyle?.icon}
+          <>{useStyle?.text}</>
+        </FormHelperTextWrapper>
       </>
     );
   };
@@ -84,8 +159,7 @@ export const TextInputContainer = (props) => {
             id="inputField"
             variant="outlined"
             fieldsize={5}
-            error={props.error}
-            helperText={helperText}
+            inputRef={textRef}
             onInput={(e) => handleOnChange(e)}
           />
         ) : (
@@ -95,8 +169,11 @@ export const TextInputContainer = (props) => {
             fullWidth
             rows={props.fieldType}
             fieldsize={100}
+            inputRef={textRef}
           />
         )}
+
+        {props.useHelperText && <HelperTextContainer currInput={textRef} />}
       </InputFormControl>
     </StInputContainer>
   );
@@ -258,4 +335,13 @@ const InputField = styled(TextField)`
   }
 `;
 
-const FormHelperTextWrapper = styled(FormHelperText)``;
+const FormHelperTextWrapper = styled(FormHelperText)`
+  font-size: 1rem;
+  color: ${(props) => props.textcolor};
+  &.MuiFormHelperText-root {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-left: 0.5rem;
+  }
+`;
