@@ -4,11 +4,12 @@ import { Outlet, useLocation } from "react-router-dom";
 import LinearStepper from "../components/common/Stepper";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-
+import StepInfo from "../components/common/StepInfo";
 import { MainHeader } from "./Header";
 import { Typography } from "@mui/material";
+import { PropTypes } from "prop-types";
 
-export const Layout = () => {
+export const Layout = (props) => {
   return (
     <StLayout>
       <MainHeader />
@@ -16,7 +17,7 @@ export const Layout = () => {
         <LinearStepper />
         <StepContainer>
           <ExplainWrapper>
-            <Typography variant="h6" noWrap></Typography>
+            <StepInfo num={props.num}/>
           </ExplainWrapper>
           <StepContentsContainer>
             <Outlet />
@@ -38,6 +39,10 @@ export const Layout = () => {
   );
 };
 
+Layout.propTypes = {
+  num: PropTypes.node.isRequired,
+};
+
 const StLayout = styled.div`
   display: flex;
   flex-direction: column;
@@ -55,7 +60,6 @@ const ContentsContainer = styled.div`
   /* margin-top: 9.5rem; */
   margin-left: 2.6rem;
   padding: 2rem 3rem 0 2rem;
-
   border-top-left-radius: 2rem;
   background-color: ${COLOR.MAIN_BACKGROUND};
 `;
@@ -64,7 +68,6 @@ const StepContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 2.5rem;
-
   width: 100%;
   height: 100%;
 `;
@@ -72,12 +75,12 @@ const StepContainer = styled.div`
 const ExplainWrapper = styled.div`
   display: flex;
   width: 20%;
+  justify-content: center;
 `;
 
 const StepContentsContainer = styled.div`
   display: flex;
   overflow-y: scroll;
-
   width: 80%;
   background-color: ${COLOR.MAIN_WHITE};
 `;
