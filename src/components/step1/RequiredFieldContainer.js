@@ -1,18 +1,24 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-import {
-  SelectInputContainer,
-  TextInputContainer,
-} from "../common/InputComponent";
+import { TextInputContainer } from "../common/InputComponent";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { Grid } from "@mui/material";
+import { SelectAuto } from "../common/SelectAuto";
+import { useRecoilState } from "recoil";
+import { repoDataAtomFamily } from "../../recoil/repoData";
 
 export const RequiredFieldContainer = () => {
-  /* GET - Lang/Framework */
+  /* GET - user repo info */
+  const [userName, setUserName] = useRecoilState(
+    repoDataAtomFamily("userName"),
+  );
   const [userRepoData, setUserRepoData] = useState([
-    // { language: "", frameworks: {} },
+    {
+      id: "",
+      avatar: "",
+    },
   ]);
 
   async function getUserRepoData() {
@@ -28,15 +34,20 @@ export const RequiredFieldContainer = () => {
 
       // 응답 결과(response)를 변수에 저장하거나.. 등 필요한 처리를 해 주면 된다.
       console.log(response.data);
-      const initOptionData = response.data.map((it) => {
-        return {
-          id: it.id,
-          avatar: it.avatar,
-          org: it.org,
-        };
+
+      const initUserData = [
+        {
+          id: response.data.id,
+          avatar: response.data.avatar,
+        },
+      ];
+      response.data.org.forEach((it) => {
+        initUserData.push({ id: it.id, avatar: it.avatar });
       });
-      console.log("initOptionData: %o", initOptionData);
-      setUserRepoData(response.data);
+
+      setUserName(response.data.id);
+      console.log("initUserData: %o", initUserData);
+      setUserRepoData(initUserData);
     } catch (e) {
       // 실패 시 처리
       console.error(e);
@@ -78,11 +89,19 @@ export const RequiredFieldContainer = () => {
         Required fields are marked with an asterisk (*).
       </ExplainText>
       <RequiredContainer container>
-        <Grid item xs={12} sm={5}>
-          <SelectInputContainer labelText={"Owner*"} />
+        <Grid item xs={12} sm={2}>
+          <SelectAuto
+            labelText={"Owner*"}
+            type={"userName"}
+            data={userRepoData}
+          />
         </Grid>
-        <Grid item xs={6} sm={9}>
-          <TextInputContainer labelText={"Repository Name*"} fieldType={1} />
+        <Grid item xs={12} sm={6}>
+          <TextInputContainer
+            labelText={"Repository Name*"}
+            fieldType={1}
+            error={true}
+          />
         </Grid>
       </RequiredContainer>
 
@@ -101,12 +120,14 @@ export const RequiredFieldContainer = () => {
 const StRequiredFieldContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 1rem;
 `;
 
 const RequiredContainer = styled(Grid)`
   width: 100%;
-  gap: 2rem;
+  row-gap: 1rem;
+  column-gap: 2rem;
 `;
 const ExplainText = styled.p`
   font-size: 1.1rem;
