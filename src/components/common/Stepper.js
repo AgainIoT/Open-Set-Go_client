@@ -11,17 +11,6 @@ import { activeState } from "../../recoil/commonState";
 
 import StepData from "../../data/StepData.json";
 
-const steps = [
-  "Step1",
-  "Step2",
-  "Step3",
-  "Step4",
-  "Step5",
-  "Step6",
-  "Step7",
-  "Step8",
-];
-
 export default function LinearStepper() {
   const activeStep = useRecoilValue(activeState);
 
@@ -41,7 +30,7 @@ export default function LinearStepper() {
 const StStepperContainer = styled.div`
   display: flex;
   width: 100%;
-  padding: 2rem 0 2rem 0;
+  padding: 0rem 0 0rem 0;
 `;
 
 const StepperWraper = styled(Stepper)`
@@ -58,15 +47,21 @@ const StepLabelWrapper = styled(StepLabel)`
   width: 100%;
 
   span {
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
+  /* &.MuiStepLabel {
+    margin: 0;
+  } */
 
+  .MuiStepLabel-alternativeLabel {
+    margin-top: 0.5rem;
+  }
   .MuiStepLabel-iconContainer {
     .MuiSvgIcon-root {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
     }
     .MuiStepIcon-text {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
     }
   }
 `;
