@@ -1,10 +1,9 @@
 import { Typography } from "@mui/material";
-import propTypes from "prop-types";
 import styled from "styled-components";
 import DeskTop from "../../assets/images/desktop.svg";
-const Step1 = () => {
+const Step2 = () => {
   return (
-    <StStep1>
+    <StStep2>
       <ImgDiv>
         <DesktopImg src={DeskTop} alt="haha"/>
       </ImgDiv>
@@ -16,13 +15,11 @@ const Step1 = () => {
           etc.) for your project.
         </DescTypo>
       </TextDiv>
-    </StStep1>
+    </StStep2>
   );
 };
 
-Step1.propTypes = {};
-
-const StStep1 = styled.div`
+const StStep2 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,4 +69,4 @@ const DescTypo = styled(Typography)`
   font-family: "Inter", sans-serif;
 `;
 
-export default Step1;
+export default Step2;
