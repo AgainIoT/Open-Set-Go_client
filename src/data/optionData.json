@@ -1,0 +1,23 @@
+{
+  "IDE": [
+    { "id": 1, "option": "VisualStudioCode" },
+    { "id": 2, "option": "Eclipse" }
+  ],
+  "OS": [
+    { "id": 1, "option": "Linux" },
+    { "id": 2, "option": "macOS" },
+    { "id": 3, "option": "Windows" }
+  ],
+  "Etc.": [
+    { "id": 1, "option": "SonarQube" },
+    { "id": 2, "option": "ElasticBeanstalk" },
+    { "id": 3, "option": "OrCAD" },
+    { "id": 4, "option": "Maven" },
+    { "id": 5, "option": "MATLAB" },
+    { "id": 6, "option": "JupyterNotebooks" },
+    { "id": 7, "option": "WebStrom+all" },
+    { "id": 8, "option": "GoLand+all" },
+    { "id": 9, "option": "Intellij+all" },
+    { "id": 10, "option": "JetBrains+alll" }
+  ]
+}

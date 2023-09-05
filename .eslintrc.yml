@@ -12,9 +12,9 @@ plugins:
   - react
 rules:
   indent:
-    - "error"
+    - "warn"
     - 2
-    - { MemberExpression: "off", SwitchCase: 1 }
+    - { MemberExpression: "off", SwitchCase: 1, }
   quotes:
     - "error"
     - "double"

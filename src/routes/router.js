@@ -14,6 +14,7 @@ const Router = () => {
         <Route element={<Layout />}>
           {/* <Route path="/test" element={<TestPage/>}/> */}
           <Route path="/license" element={<LicensePage />} />
+          <Route path="/step1" element={<CreateRepo />} />
         </Route>
       </Routes>
     </BrowserRouter>
