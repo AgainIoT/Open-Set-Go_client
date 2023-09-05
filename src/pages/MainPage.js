@@ -1,18 +1,41 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-
+import Welcome from "../components/main/Welcome";
+import Desc from "../components/main/Desc";
+import Footer from "../components/main/Footer";
+import Steps from "../components/main/Steps";
+import css from "../../src/mainpage.css";
+import propTypes from "prop-types";
+import Header from "../layout/MainHeader";
+import { Cookies } from "react-cookie";
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
+import { token } from "../recoil/authorize";
 function MainPage() {
-  const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-  const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
-  const githubURL = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirectUrl}&scope=repo,write:org,read:user`;
-  const handleLogin = () => {
-    window.location.href = githubURL;
-  };
+  const cookies = new Cookies();
+  const setAccessToken = useSetRecoilState(token);
+  useEffect(() => {
+    const accessToken = cookies.get("Authentication");
+    if (accessToken) {
+      setAccessToken(accessToken);
+    } else {
+      setAccessToken(null);
+    }
+  }, []);
   return (
-    <div>
-      <button onClick={handleLogin}>깃허브 로그인</button>
-    </div>
+    <>
+      <Header />
+      <Welcome />
+      <Desc />
+      <Steps />
+      <Footer />
+    </>
   );
 }
+
+MainPage.propTypes = {
+  auth: propTypes.bool,
+  logout: propTypes.func,
+};
 
 export default MainPage;

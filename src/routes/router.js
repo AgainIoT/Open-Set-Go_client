@@ -14,6 +14,7 @@ const Router = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route element={<Layout num={2} />}>
           <Route path="/license" element={<LicensePage />} />
+          <Route path="/step1" element={<CreateRepo />} />
         </Route>
         {/* <Route element={<Layout num={1}/>}>
           <Route path="/test" element={<TestPage />} />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 import SlideContent from "./SlideContent";
 import styled from "styled-components";
 import axios from "axios";
@@ -57,7 +57,7 @@ const Slide = () => {
         {data.map((it) => {
           return (
             <div key={it.license}>
-              <SlideContent data={it} pickLi={pickLi} setPickLi={setPickLi}/>
+              <SlideContent data={it} pickLi={pickLi} setPickLi={setPickLi} />
             </div>
           );
         })}
