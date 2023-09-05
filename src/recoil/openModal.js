@@ -9,8 +9,3 @@ export const issueTemplateState = atom({
   key: "issueTemplateState",
   defalut: false,
 });
-
-export const modalState = atomFamily({
-  key: "modalState",
-  default: false,
-});
