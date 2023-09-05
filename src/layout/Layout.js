@@ -8,8 +8,10 @@ import StepInfo from "../components/common/StepInfo";
 import { MainHeader } from "./Header";
 import { Typography } from "@mui/material";
 import { PropTypes } from "prop-types";
+import { activeState } from "../recoil/commonState";
+import { useRecoilValue } from "recoil";
 
-export const Layout = (props) => {
+export const Layout = () => {
   return (
     <StLayout>
       <MainHeader />
@@ -17,7 +19,7 @@ export const Layout = (props) => {
         <LinearStepper />
         <StepContainer>
           <ExplainWrapper>
-            <StepInfo num={props.num}/>
+            <StepInfo />
           </ExplainWrapper>
           <StepContentsContainer>
             <Outlet />

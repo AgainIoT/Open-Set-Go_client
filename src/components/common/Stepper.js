@@ -9,6 +9,8 @@ import AddIcon from "@mui/icons-material/Add";
 import { useRecoilValue } from "recoil";
 import { activeState } from "../../recoil/commonState";
 
+import StepData from "../../data/StepData.json";
+
 const steps = [
   "Step1",
   "Step2",
@@ -26,12 +28,12 @@ export default function LinearStepper() {
   return (
     <StStepperContainer>
       <StepperWraper activeStep={activeStep} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabelWrapper>{label}</StepLabelWrapper>
+        {StepData.StepData.map((label) => (
+          <Step key={label.step}>
+            <StepLabelWrapper>{label.title}</StepLabelWrapper>
           </Step>
         ))}
-      </StepperWraper>{" "}
+      </StepperWraper>
     </StStepperContainer>
   );
 }
