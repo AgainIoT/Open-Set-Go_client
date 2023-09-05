@@ -18,7 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import axios from "axios";
 import Container from "@mui/material/Container";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { authState, avatar, id, name, token } from "../recoil/authorize";
 import styled from "styled-components";
 import { Cookie } from "@mui/icons-material";
@@ -57,6 +57,7 @@ export default function ElevateAppBar(props) {
   const [src, setSrc] = useRecoilState(avatar);
   const [userId, setUserId] = useRecoilState(id);
   const [userName, setUserName] = useRecoilState(name);
+  const setToken = useSetRecoilState(token);
 
   React.useEffect(() => {
     setSrc(localStorage.avatar);
@@ -91,6 +92,7 @@ export default function ElevateAppBar(props) {
       { withCredentials: true },
     );
     console.log(res);
+    setToken("");
     localStorage.setItem("id", "guest");
     localStorage.setItem("name", "guest");
     localStorage.setItem("avatar", "");

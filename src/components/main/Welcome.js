@@ -14,11 +14,6 @@ const handleLogin = () => {
 };
 export default function Welcome() {
   const accessToken = useRecoilValue(token);
-  const [auth, setAuth] = useState(false);
-  useEffect(() => {
-    console.log(accessToken);
-  });
-
   return (
     <div className="WELCOME">
       <h1 className="title">Open, Set, Go</h1>

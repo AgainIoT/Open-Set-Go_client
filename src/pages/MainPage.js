@@ -15,9 +15,9 @@ function MainPage() {
   const cookies = new Cookies();
   const setAccessToken = useSetRecoilState(token);
   useEffect(() => {
-    const token = cookies.Authentication;
-    if (token) {
-      setAccessToken(token);
+    const accessToken = cookies.get("Authentication");
+    if (accessToken) {
+      setAccessToken(accessToken);
     } else {
       setAccessToken(null);
     }

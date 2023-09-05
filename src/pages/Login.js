@@ -4,7 +4,7 @@ import { css } from "../../src/loginpage.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useResetRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { authState, avatar, id, name, token } from "../recoil/authorize";
 import { Cookies } from "react-cookie";
 import propTypes from "prop-types";
@@ -15,6 +15,7 @@ function LoginPage() {
   const setId = useSetRecoilState(id);
   const setName = useSetRecoilState(name);
   const setAvatar = useSetRecoilState(avatar);
+  // const setAuth = useSetRecoilState(authState);
   const navigate = useNavigate();
 
   const cookies = new Cookies();
@@ -60,8 +61,12 @@ function LoginPage() {
     );
     if (200 > res.status || res.status >= 300) {
       alert("login failed");
+    } else {
+      const accessToken = cookies.get("Authentication");
+      setToken(accessToken);
     }
   };
+
   useEffect(() => {
     const accessToken = cookies.get("Authentication");
     setToken(accessToken);
