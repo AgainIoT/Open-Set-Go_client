@@ -4,21 +4,13 @@ import { useEffect, useState } from "react";
 
 import HelpIcon from "@mui/icons-material/Help";
 import FormControl from "@mui/material/FormControl";
-import InputBase from "@mui/material/InputBase";
 import FormHelperText from "@mui/material/FormHelperText";
 
 import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-
-import Avatar from "@mui/material/Avatar";
-import FaceIcon from "@mui/icons-material/Face";
-import { ListItemText, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { COLOR } from "../../styles/color";
 import { useRecoilState } from "recoil";
 import { repoDataAtomFamily } from "../../recoil/repoData";
@@ -111,70 +103,6 @@ export const TextInputContainer = (props) => {
 };
 
 TextInputContainer.propTypes = { labelText: PropTypes.string.isRequired };
-
-const options = [
-  { value: "1", label: "AgainIoT", src: "/static/images/avatar/1.jpg" },
-  { value: "2", label: "AgainIoT2", src: "/static/images/avatar/2.jpg" },
-  { value: "3", label: "AgainIoT3", src: "/static/images/avatar/3.jpg" },
-];
-
-export const SelectInputContainer = (props) => {
-  const [owner, setOwner] = useState(
-    options.filter((it) => it.value === "1").map((it) => it.label),
-  );
-
-  const handleChange = (event) => {
-    console.log("pre:", owner);
-    setOwner(event.target.value);
-    console.log("after:", event.target.value);
-  };
-
-  return (
-    <StInputContainer>
-      <SelectInputFormControl>
-        <InputLabelWrapper
-          shrink
-          variant="standard"
-          htmlFor={props.labelText}
-          id={props.labelText}
-        >
-          {props.labelText}
-        </InputLabelWrapper>
-        <SelectContainer
-          labelId={props.labelText}
-          id={props.labelText}
-          value={owner}
-          onChange={handleChange}
-          autoWidth
-          renderValue={(selected) => (
-            <RenderOptionItem>
-              <ItmeAvatar sx={{ width: 24, height: 24 }}>
-                {/* <FaceIcon sx={{ fontSize: 30, border: 1 }} color="primary" /> */}
-              </ItmeAvatar>
-
-              <OPtionItemText id={selected.value} primary={selected} />
-            </RenderOptionItem>
-          )}
-        >
-          {options.map((option, index) => (
-            <MenuOptionItem
-              key={option.value}
-              value={option.label}
-              label={option.label}
-            >
-              <OptionItemAvatar>
-                <ItmeAvatar sx={{ width: 24, height: 24 }}>
-                  {/* <FaceIcon sx={{ fontSize: 30, border: 1 }} color="primary" /> */}
-                </ItmeAvatar>
-              </OptionItemAvatar>
-              <OPtionItemText id={option.value} primary={option.label} />
-            </MenuOptionItem>
-          ))}
-        </SelectContainer>
-      </SelectInputFormControl>
-    </StInputContainer>
-  );
-};
 
 const StInputContainer = styled.div`
   display: flex;
@@ -331,73 +259,3 @@ const InputField = styled(TextField)`
 `;
 
 const FormHelperTextWrapper = styled(FormHelperText)``;
-
-// SelectInputContainer
-const SelectInputFormControl = styled(FormControl)`
-  min-width: 8rem;
-  margin: 0.1rem;
-`;
-
-const SelectContainer = styled(Select)`
-  display: flex;
-
-  & .MuiSelect-select {
-    padding: 0.5rem 2rem;
-    width: 100%;
-    height: 4rem;
-  }
-  & .MuiInputBase-input {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  & .MuiList-root {
-    border-radius: 3rem;
-  }
-
-  & .css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
-    background-color: red;
-  }
-
-  & .MuiListItemText-root {
-    display: flex;
-    justify-content: left;
-    align-items: flex-end;
-  }
-  & .MuiTypography-root {
-    font-size: 1.4rem;
-  }
-
-  & .css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
-    border-radius: 3rem;
-  }
-`;
-
-const MenuOptionItem = styled(MenuItem)`
-  border-radius: 1rem;
-  padding: 1rem 2.5rem;
-`;
-
-const RenderOptionItem = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  min-width: 9rem;
-  width: 100%;
-  gap: 3rem;
-`;
-const OptionItemAvatar = styled(ListItemAvatar)`
-  display: flex;
-  width: 2.4rem;
-`;
-const ItmeAvatar = styled(Avatar)`
-  display: flex;
-  margin: 0;
-`;
-const OPtionItemText = styled(ListItemText)`
-  margin: 0;
-  width: 50%;
-  & .MuiTypography-root {
-    font-size: 1.3rem;
-  }
-`;
