@@ -74,16 +74,6 @@ export const MainHeader = () => {
         </Typography>
         {/* 반응형 메뉴 */}
         <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleOpenNavMenu}
-            color="black"
-          >
-            <MenuIcon fontSize="large" />
-          </IconButton>
           <Menu
             id="menu-appbar"
             anchorEl={anchorElNav}
@@ -102,11 +92,6 @@ export const MainHeader = () => {
               display: { xs: "block", md: "none" },
             }}
           >
-            {pages.map((page) => (
-              <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{page}</Typography>
-              </MenuItem>
-            ))}
           </Menu>
         </Box>
         {/* 반응형 로고 */}
@@ -130,11 +115,6 @@ export const MainHeader = () => {
           OpenSetGo2
         </Typography>
         <MenuBox sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-          {pages.map((page) => (
-            <MenuItemWrapper key={page} onClick={handleCloseNavMenu}>
-              {page}
-            </MenuItemWrapper>
-          ))}
         </MenuBox>
 
         <Box sx={{ flexGrow: 0 }}>
