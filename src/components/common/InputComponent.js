@@ -26,71 +26,15 @@ export const TextInputContainer = (props) => {
   const [inputValue, setInputValue] = useRecoilState(
     repoDataAtomFamily(props.type),
   );
-  // const [checkValue, setCheckValue] = useRecoilState(
-  //   repoDataAtomFamily("checkRepoName"),
-  // );
+
   const owner = useRecoilValue(repoDataAtomFamily("owner"));
-  // const [checkState, setCheckState] = useState({
-  //   loading: false,
-  //   check: false,
-  // });
 
   /* GET - check repository is duplicate */
   const [checkState, setCheckState] = useState(false);
 
-  // async function getCheckDuplication() {
-  //   // async, await을 사용하는 경우
-  //   // setCheckState({ loading: true, check: false });
-  //   setHelperText("checking");
-  //   console.log("get??:", textRef.current.value);
-
-  //   try {
-  //     // GET 요청은 params에 실어 보냄
-  //     const response = await axios.post(
-  //       `${process.env.REACT_APP_SERVER_URL}/repo/checkDuplication`,
-  //       {
-  //         owner: owner,
-  //         repoName: textRef.current.value,
-  //       },
-  //       {
-  //         withCredentials: true,
-  //       },
-  //     );
-
-  //     // 응답 결과(response)를 변수에 저장하거나.. 등 필요한 처리를 해 주면 된다.
-  //     // console.log("get?", repoName);
-  //     if (response.data) {
-  //       //setCheckState({ loading: false, check: true });
-  //       setHelperText("checked");
-  //     } else {
-  //       //setCheckState({ loading: false, check: false });
-  //       setHelperText("error");
-  //     }
-
-  //     console.log("getCheck: %o", response.data);
-  //   } catch (e) {
-  //     // 실패 시 처리
-  //     console.error(e);
-  //   }
-  // }
-
   const handleOnChange = (e) => {
     // setInputValue(e.target.value);
     setInputValue(e.target.value);
-
-    // if (props.useHelperText) {
-    //   console.log("e", e.target.value);
-    //   //setRepoName(e.target.value);
-    //   //공백인 경우 defaultText로 바꾼다.
-    //   if (e.target.value !== "") {
-    //     console.log("eee:", e.target.value);
-    //     console.log("refee:", textRef.current.value);
-    //     console.log("currHelper:", helperText);
-    //     getCheckDuplication();
-    //   } else {
-    //     setHelperText("null");
-    //   }
-    // }
   };
 
   const HelperTextContainer = (props) => {
@@ -161,6 +105,7 @@ export const TextInputContainer = (props) => {
             fieldsize={5}
             inputRef={textRef}
             onInput={(e) => handleOnChange(e)}
+            value={inputValue}
           />
         ) : (
           <InputField
@@ -169,7 +114,8 @@ export const TextInputContainer = (props) => {
             fullWidth
             rows={props.fieldType}
             fieldsize={100}
-            inputRef={textRef}
+            onInput={(e) => handleOnChange(e)}
+            value={inputValue}
           />
         )}
 
