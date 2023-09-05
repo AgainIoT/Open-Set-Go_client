@@ -8,12 +8,11 @@ import css from "../../src/mainpage.css";
 import { useEffect } from "react";
 import axios from "axios";
 import propTypes from "prop-types";
-import { MainHeader } from "../layout/MainHeader";
-
+import Header from "../layout/MainHeader";
 function MainPage() {
   return (
     <>
-      <MainHeader />
+      <Header />
       <Welcome />
       <Desc />
       <Steps />
