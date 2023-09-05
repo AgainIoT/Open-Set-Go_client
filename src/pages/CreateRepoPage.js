@@ -8,8 +8,12 @@ import { GitIgnoreContainer } from "../components/step1/gitignoreContainer";
 import { SelectContainer } from "../components/step1/SelectContainer";
 
 import { RequiredFieldContainer } from "../components/step1/RequiredFieldContainer";
+import { useRecoilState } from "recoil";
+import { activeState } from "../recoil/commonState";
 
 function CreateRepo() {
+  const [activeStep, setActiveState] = useRecoilState(activeState);
+  setActiveState(0);
   return (
     <>
       <StCreateRepo container>
