@@ -5,7 +5,6 @@ import Slider from "react-slick";
 import SlideContent from "./SlideContent";
 import styled from "styled-components";
 import axios from "axios";
-import { Button } from "@mui/material";
 
 const Slide = () => {
   const [data, setData] = useState([]);
@@ -18,10 +17,11 @@ const Slide = () => {
     let completed = false;
 
     async function get() {
-      const result = await axios.get(`${process.env.REACT_APP_SERVER_URL}/file/license`);
+      const result = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/file/license`
+      );
       if (!completed) {
         setData(result.data);
-        console.log(result.data);
       }
     }
     get();
@@ -68,13 +68,7 @@ const Slide = () => {
 
 export default Slide;
 
-export const MultiItem = styled.div`
-  opacity: 1;
-  transform: scale() (1.04);
-`;
-
 const StyledSlider = styled(Slider)`
-  /* background-color: green; */
   width: 100%;
   height: 100%;
   display: flex;
@@ -85,14 +79,13 @@ const StyledSlider = styled(Slider)`
     width: 90%;
     height: 100%;
     margin: 0 auto;
-    /* border: 1px solid black; */
     justify-content: center;
     align-items: center;
     display: flex;
   }
 
   .slick-track {
-    height: 90%;
+    height: 100%;
     /* justify-content: center;
     align-items: center; */
     display: flex;
@@ -125,7 +118,7 @@ const cssstyle = `
   justify-content:center;
   // background-color: blue;
   width: 100%;
-  height: 90%;
+  height: 100%;
 }
 
 .slick-next:before, .slick-prev:before {
