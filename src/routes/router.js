@@ -5,6 +5,7 @@ import { Layout } from "../layout/Layout";
 import CreateRepo from "../pages/CreateRepoPage";
 import LicensePage from "../pages/LicensePage";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
+import ContributingTemplatePage from "../pages/ContributingTemplatePage";
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
           <Route path="/step1" element={<CreateRepo />} />
           <Route path="/license" element={<LicensePage />} />
           <Route path="/readme" element={<ReadmeTemplatePage />} />
+          <Route path="/contributing" element={<ContributingTemplatePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

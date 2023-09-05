@@ -13,7 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import { useRecoilState, useRecoilValue } from "recoil";
 import TemplateTitle from "./TemplateTitle";
-import { prTemplateState } from "../../../recoil/templateState";
+import { templateState, templateToModal } from "../../../recoil/templateState";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -67,21 +67,23 @@ const Item = styled(Paper)(({ theme }) => ({
 // 여기부터 스크롤뷰
 const renderRow = (props) => {
   const [data, setData] = useState([]);
-  const url = process.env.REACT_APP_SERVER_URL+"/file/readme";
-  const [selectValue, setSelectValue] = useRecoilState(prTemplateState);
+  const [selectValue, setSelectValue] = useRecoilState(templateState);
+  const [modal, setModal] = useRecoilState(templateToModal);
+  const url = process.env.REACT_APP_SERVER_URL+"/file/"+modal.type;
+  // console.log(modal.type);
 
   useEffect(() => {
     let completed = false;
 
     async function get() {
-      const result = await axios.get(url);
+      const result = await axios.get(modal.type === undefined ? process.env.REACT_APP_SERVER_URL+"/file/pr" : url);
       if (!completed) setData(result.data);
     }
     get();
     return() => {
       completed = true;
     };
-  }, []);
+  }, [modal.type]);
 
   return (
     <div>
@@ -126,7 +128,7 @@ export  function TemplateList(props) {
       sx={{ width: "100%", height: "100%", maxWidth: 360, bgcolor: "background.paper", maxHeight: 400 }}
     >
       <FixedSizeList
-        height={610} // 높이 모달창 사이즈에 맞게 유동적으로 조절할 수 있도록 수정하기
+        height={610}
         width={360}
         itemSize={46}
         itemCount={1}

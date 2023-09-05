@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import PRTemplateModal from "../components/common/modal/PRTemplateModal";
+import TemplateModal from "../components/common/modal/templateModal";
 import MDEditor from "@uiw/react-md-editor";
 import Button from "@mui/material/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { prTemplateContent, prTemplateState } from "../recoil/templateState";
+import { templateContent, templateState } from "../recoil/templateState";
 import { gitignoreOpenState, prOpenState } from "../recoil/openModal";
 import { BaseModal } from "../components/common/modal/BaseModal";
 
-function ReadmeTemplatePage() {
+function ReadmeTemplatePage(props) {
   const [data, setData] = useState([]);
   const [modalValue, setModalValue] = useRecoilState(prOpenState);
-  const [content, setContent] = useRecoilState(prTemplateContent);
+  const [content, setContent] = useRecoilState(templateContent);
 
   const handlesave = ()=> {
     //value 고대로 저장해서 server로 보내야함. 이건 추후에 백엔드랑 회의 후 정해야할 듯
@@ -21,6 +21,9 @@ function ReadmeTemplatePage() {
 
   return(
     <div>
+      <BaseModal type={prOpenState}>
+        <TemplateModal type = "readme" />
+      </BaseModal>
       <MDEditor
         height={350}
         value={content}
@@ -38,9 +41,6 @@ function ReadmeTemplatePage() {
         color="success">
                 Modal
       </Button>
-      <BaseModal type={prOpenState}>
-        <PRTemplateModal />
-      </BaseModal>
     </div>
   );
 }

@@ -1,11 +1,16 @@
 import { atom } from "recoil";
 
-export const prTemplateState = atom({
-  key: "prTemplateState",
+export const templateState = atom({
+  key: "templateState",
   default: [],
 });
 
-export const prTemplateContent = atom({
-  key: "prTemplateContent",
+export const templateContent = atom({
+  key: "templateContent",
+  default: "",
+});
+
+export const templateToModal = atom({
+  key: "templateContent",
   default: "",
 });

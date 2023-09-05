@@ -2,7 +2,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useRecoilState } from "recoil";
-import { prTemplateContent, prTemplateState } from "../../../recoil/templateState";
+import { templateContent, templateState } from "../../../recoil/templateState";
 import styled from "styled-components";
 import { prOpenState } from "../../../recoil/openModal";
 
@@ -15,8 +15,8 @@ const commonStyles = {
 };
 
 export default function TemplateTitle(props) {
-  const [selectValue, setSelectValue] = useRecoilState(prTemplateState);
-  const [content, setContent] = useRecoilState(prTemplateContent);
+  const [selectValue, setSelectValue] = useRecoilState(templateState);
+  const [content, setContent] = useRecoilState(templateContent);
   const [modalValue, setModalValue] = useRecoilState(prOpenState);
 
   const handleClose = () => setModalValue(false);
