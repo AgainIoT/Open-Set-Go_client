@@ -2,11 +2,12 @@ import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
 import { useRecoilState } from "recoil";
 import Modal from "@mui/material/Modal";
+import { modalState } from "../../../recoil/commonState";
 
 export const BaseModal = (props) => {
   const handleClose = () => setModalValue(false);
 
-  const [modalValue, setModalValue] = useRecoilState(props.type);
+  const [modalValue, setModalValue] = useRecoilState(modalState(props.type));
 
   return (
     <StBaseModal

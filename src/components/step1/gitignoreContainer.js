@@ -19,9 +19,12 @@ import { gitignoreOpenState } from "../../recoil/openModal";
 import { SearchAutoForm } from "../common/SearchAuto";
 import { FrameWorkOptions } from "../../data/CreateRepoData";
 import { ReadonlyAuto } from "../common/ReadOnlyAuto";
+import { modalState } from "../../recoil/commonState";
 
 export const GitIgnoreContainer = () => {
-  const [modalValue, setModalValue] = useRecoilState(gitignoreOpenState);
+  const [modalValue, setModalValue] = useRecoilState(
+    modalState("gitignoreModal"),
+  );
   // const frameworkData = useRecoilValue(selectFrameworkData);
   const langData = useRecoilValue(repoDataAtomFamily("lang"));
   const frameworkData = useRecoilValue(repoDataAtomFamily("framework"));
@@ -42,7 +45,7 @@ export const GitIgnoreContainer = () => {
         fixedData={[langData, frameworkData]}
       />
       {/* <SearchAutoForm data={FrameWorkOptions} type={selectGitignoreData} /> */}
-      <BaseModal type={gitignoreOpenState}>
+      <BaseModal type={"gitignoreModal"}>
         <GitignoreModal />
       </BaseModal>
     </StGitIgnoreContainer>
@@ -53,7 +56,7 @@ const StGitIgnoreContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  gap: 1rem;
+  gap: 0.8rem;
   border: 0.1rem solid ${COLOR.BORDER_GRAY};
   border-radius: 2rem;
 `;
