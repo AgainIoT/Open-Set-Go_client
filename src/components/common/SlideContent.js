@@ -8,7 +8,6 @@ export const SlideContent = (props) => {
 
   const onSet = () => {
     props.setPickLi(props.data.license);
-    console.log("in SlideContent: ", props.pickLi);
   };
 
   const pmsList = props.data.conditions.permissions.map((p) => (
@@ -59,10 +58,12 @@ export const SlideContent = (props) => {
         </ConditionBox>
         <LinkBox className="LinkBox">
           <LinkDiv>
-            <LinkText>This is not legal advice. </LinkText>
-            <LinkA href={props.data.url}>
-              Learn more about repository licenses.
-            </LinkA>
+            <LinkText>
+              This is not legal advice.&nbsp;
+              <LinkA href={props.data.url}>
+                Learn more about repository licenses.
+              </LinkA>
+            </LinkText>
           </LinkDiv>
           {props.pickLi === props.data.license ? (
             <BtnDiv className="BtnDiv">
@@ -102,7 +103,7 @@ const StSlideContent = styled.div`
   justify-content: center;
   border-radius: 0.5rem;
   border: 0.01rem outset #dedede;
-  padding: 2rem 3rem 2rem 3rem;
+  padding: 2rem;
   margin: 0 auto;
   white-space: pre-wrap;
   background-color: white;
@@ -113,9 +114,6 @@ const StSlideContent = styled.div`
   align-items: center;
   width: 80%;
   height: 100%;
-  /* div {
-    border: 1px solid red;
-  } */
 `;
 
 const DivBox = styled.div`
@@ -127,7 +125,6 @@ const DivBox = styled.div`
 `;
 
 const InformationBox = styled.div`
-  /* background-color: pink; */
   margin: auto;
   width: 100%;
   display: flex;
@@ -136,12 +133,12 @@ const InformationBox = styled.div`
 
 const Title = styled.h1`
   padding: 1rem 1rem 1rem 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
 `;
 
 const Content = styled.p`
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.7rem;
   text-align: justify;
 `;
@@ -151,6 +148,7 @@ const ConditionBox = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  gap: 0.5rem;
 
   div {
     //permissions limitations conditions
@@ -158,19 +156,17 @@ const ConditionBox = styled.div`
     flex-direction: column;
     height: 100%;
     flex: 1;
-    gap: 0.5rem;
   }
 
   ul {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    //    list-style-image: url("https://ifh.cc/g/twayry.png");
   }
 `;
 
 const Condition = styled.h2`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   justify-items: center;
   font-weight: bold;
 `;
@@ -202,19 +198,18 @@ const LinkBox = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  gap: 3rem;
   flex-direction: column;
 `;
 
 const LinkDiv = styled.div`
   display: flex;
   width: 100%;
-  height: 20%;
+  height: fit-content;
   justify-content: left;
 `;
 
 const LinkText = styled.p`
-  display: flex;
+  height: fit-content;
 `;
 
 const LinkA = styled.a`
@@ -236,14 +231,9 @@ const BtnDiv = styled.div`
   display: flex;
   justify-content: end;
   align-items: end;
-  /* border: 1px solid red; */
   gap: 0.5rem;
 `;
-// const SelectP = styled.p`
-//   height: fit-content;
-//   /* border: 1px solid blue; */
-//   color: #004ecc;
-// `;
+
 const SharedBtn = `
   font-size: 1.1rem;
   height: fit-content;
@@ -269,7 +259,6 @@ const SelectedBtn = styled(Button)`
   &:active {
     background-color: green;
   }
-
 `;
 const SubmitBtn = styled(Button)`
   ${SharedBtn}
