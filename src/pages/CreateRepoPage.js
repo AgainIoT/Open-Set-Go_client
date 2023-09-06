@@ -1,19 +1,15 @@
 import styled from "styled-components";
-import { COLOR } from "../styles/color";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import { Grid, Typography } from "@mui/material";
-
+import { Grid } from "@mui/material";
 import { GitIgnoreContainer } from "../components/step1/gitignoreContainer";
 import { SelectContainer } from "../components/step1/SelectContainer";
-
 import { RequiredFieldContainer } from "../components/step1/RequiredFieldContainer";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { activeState, eachStepState } from "../recoil/commonState";
 import { repoDataAtomFamily } from "../recoil/repoData";
 
 function CreateRepo() {
-  const [activeStep, setActiveStep] = useRecoilState(activeState);
   const [stepComplete, setStepComplted] = useRecoilState(eachStepState("1"));
   const validateCheck = useRecoilValue(repoDataAtomFamily("dupCheck"));
   const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
@@ -47,5 +43,3 @@ const StCreateRepo = styled(Grid)`
   height: 100%;
   gap: 0.8rem;
 `;
-
-const Subtitle = styled(Typography)``;

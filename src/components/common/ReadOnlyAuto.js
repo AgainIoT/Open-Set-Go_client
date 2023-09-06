@@ -10,10 +10,6 @@ import { Chip } from "@mui/material";
 export const ReadonlyAuto = (props) => {
   const showData = useRecoilValue(props.data);
 
-  const flatProps = {
-    options: showData.map((option) => option) || "",
-  };
-
   return (
     <StReadOnlyAuto>
       <ReadOnlyAutoContainer
@@ -30,7 +26,6 @@ export const ReadonlyAuto = (props) => {
             <ShowChipItme
               key={index}
               label={option}
-              //   {...getTagProps({ option })}
               bgcolor={
                 props.fixedData.includes(option)
                   ? COLOR.MAIN_HOVER

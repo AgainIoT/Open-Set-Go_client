@@ -58,7 +58,6 @@ export const Layout = () => {
             <div></div>
           )}
           <ButtonContainer>
-            {/* <ButtonWrapper variant="outlined">Primary</ButtonWrapper> */}
             <ButtonWrapper
               variant="contained"
               disabled={!stepCompleted}

@@ -1,15 +1,10 @@
 import styled from "styled-components";
-import { COLOR } from "../../../styles/color";
-import { useEffect, useState } from "react";
-import { LimitShowSelectChip, SelectChip } from "../SelectChip";
-import { FrameWorkOptions } from "../../../data/CreateRepoData";
+
+import { SelectChip } from "../SelectChip";
 
 import optionData from "../../../data/optionData.json";
 
-import {
-  selectGitignoreData,
-  showAllGitignoreState,
-} from "../../../recoil/repoData";
+import { selectGitignoreData } from "../../../recoil/repoData";
 import { FixedOptionShowSelect } from "../ShowSelect";
 import { Grid } from "@mui/material";
 import { SearchForm } from "../SearchAuto";
@@ -25,10 +20,7 @@ export const GitignoreModal = () => {
     <StGitIgnoreModal container>
       <Grid item xs={6}>
         <SearchForm data={allOptions} type={selectGitignoreData} />
-        <FixedOptionShowSelect
-          fixedOption1={FrameWorkOptions}
-          type={selectGitignoreData}
-        />
+        <FixedOptionShowSelect type={selectGitignoreData} />
       </Grid>
       <Grid item xs={12} sm={6}></Grid>
       <Grid item xs={12} sm={6}>

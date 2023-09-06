@@ -1,20 +1,16 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 import Chip from "@mui/material/Chip";
 import { Autocomplete, TextField } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 
 export const FixedOptionShowSelect = (props) => {
-  const fixedOptions = ["React", "Python"];
-
   const [selectValue, setSelectValue] = useRecoilState(props.type);
-  console.log("dddd:", selectValue);
 
   const handleDelete = (target) => {
-    console.log(`${target}이 click`);
     const newChipList = selectValue.filter((it) => it !== target);
     setSelectValue(newChipList);
   };
@@ -35,25 +31,10 @@ export const FixedOptionShowSelect = (props) => {
             <ShowChipItme
               key={index}
               label={option}
-              //   {...getTagProps({ option })}
-              bgcolor={
-                fixedOptions.includes(option)
-                  ? COLOR.MAIN_HOVER
-                  : COLOR.MAIN_BLUE
-              }
-              labelcolor={
-                fixedOptions.includes(option)
-                  ? COLOR.MAIN_BLUE
-                  : COLOR.MAIN_WHITE
-              }
+              bgcolor={COLOR.MAIN_BLUE}
+              labelcolor={COLOR.MAIN_WHITE}
               deleteIcon={<ClearIcon />}
-              onDelete={
-                fixedOptions.includes(option)
-                  ? undefined
-                  : () => handleDelete(option)
-
-                // handleDelete(target)
-              }
+              onDelete={() => handleDelete(option)}
             />
           ))
         }

@@ -2,18 +2,11 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 
 import { useRecoilState } from "recoil";
-import {
-  selectGitignoreData,
-  selectFrameworkData,
-} from "../../recoil/repoData";
-
-import Autocomplete from "@mui/material/Autocomplete";
-
-import { createFilterOptions } from "@mui/material/Autocomplete";
 
 import SearchIcon from "@mui/icons-material/Search";
 import Checkbox from "@mui/material/Checkbox";
 import CheckIcon from "@mui/icons-material/Check";
+import { Autocomplete } from "@mui/material";
 
 export const SearchForm = (props) => {
   const [selectValue, setSelectValue] = useRecoilState(props.type);

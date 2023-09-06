@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import HelpIcon from "@mui/icons-material/Help";
 import FormControl from "@mui/material/FormControl";
@@ -18,8 +18,6 @@ import { repoDataAtomFamily } from "../../recoil/repoData";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 
-import axios from "axios";
-
 export const TextInputContainer = (props) => {
   const textRef = useRef("");
   const [helperText, setHelperText] = useState(" ");
@@ -27,13 +25,10 @@ export const TextInputContainer = (props) => {
     repoDataAtomFamily(props.type),
   );
 
-  const owner = useRecoilValue(repoDataAtomFamily("owner"));
-
   /* GET - check repository is duplicate */
   const [checkState, setCheckState] = useState(false);
 
   const handleOnChange = (e) => {
-    // setInputValue(e.target.value);
     setInputValue(e.target.value);
   };
 
@@ -132,7 +127,6 @@ TextInputContainer.propTypes = { labelText: PropTypes.string.isRequired };
 const StInputContainer = styled.div`
   display: flex;
   width: 100%;
-  /* min-width: 8rem; */
 `;
 
 const InputFormControl = styled(FormControl)`
@@ -244,21 +238,11 @@ const InputField = styled(TextField)`
     &.Mui-focused {
       box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.1);
     }
-
-    /* &:focus-within {
-      outline: none;
-    } */
   }
 
   &.Mui-focused {
     border: none;
   }
-  /* & .MuiInputBase-root::before {
-    height: 3rem;
-    border-radius: 20rem;
-    border: none;
-    //border: 0.1rem solid lightgray;
-  } */
 
   & .MuiInput-root {
     &:hover {
@@ -271,12 +255,6 @@ const InputField = styled(TextField)`
   &.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
     border: none;
   }
-
-  /* &.MuiInputBase-root
-    .MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before {
-    border: none;
-    box-shadow: 0.1rem 0.2rem 0.9rem lightgray;
-  } */
 
   &.Mui-error {
     border: 1px solid red;

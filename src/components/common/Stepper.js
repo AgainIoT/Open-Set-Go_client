@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import { COLOR } from "../../styles/color";
 
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import StepIcon from "@mui/material/StepIcon";
-import AddIcon from "@mui/icons-material/Add";
+
 import { useRecoilValue } from "recoil";
 import { activeState } from "../../recoil/commonState";
 
@@ -38,20 +36,12 @@ const StepperWraper = styled(Stepper)`
   font-size: 8rem;
 `;
 
-const StepWrapper = styled(Step)`
-  font-size: 8rem;
-  padding: 0.8rem;
-`;
-
 const StepLabelWrapper = styled(StepLabel)`
   width: 100%;
 
   span {
     font-size: 1rem;
   }
-  /* &.MuiStepLabel {
-    margin: 0;
-  } */
 
   .MuiStepLabel-alternativeLabel {
     margin-top: 0.5rem;
