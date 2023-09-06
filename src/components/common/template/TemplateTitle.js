@@ -35,14 +35,12 @@ export default function TemplateTitle(props) {
     <box>
       <Box sx={{ ...commonStyles, borderBottom: 1, height: "100%", maxWidth: 700 }}>
         <Typography
-          component="h1"
-          className="title"
           id="PR-title"
-          variant="h3"
-          gutterBottom
+          variant="h2"
           textColor="inherit"
           fontWeight="lg"
           m={2}
+
         >
           {showValue.title}
         </Typography>

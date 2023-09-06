@@ -23,7 +23,7 @@ export default function TemplateBody(props) {
         variant="h4"
         gutterBottom
         color="textSecondary"
-        m={2}
+        m={4}
       >
         <MarkdownPreview source={showValue.content} />
       </Typography>
