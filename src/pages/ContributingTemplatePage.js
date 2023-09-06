@@ -8,6 +8,7 @@ import { BaseModal } from "../components/common/modal/BaseModal";
 import { TemplateModal } from "../components/common/modal/templateModal";
 import { eachStepState, modalState } from "../recoil/commonState";
 import MarkdownPreview from "../components/common/MarkdownPreview";
+import { styled } from "styled-components";
 
 function ContributingTemplatePage(props) {
   const [data, setData] = useState([]);
@@ -28,7 +29,7 @@ function ContributingTemplatePage(props) {
   const handleOpen = () => setModalValue(true);
 
   return (
-    <div>
+    <StReadmeTemplatePage>
       <BaseModal type={"contributing"}>
         <TemplateModal type={"contributing"} />
       </BaseModal>
@@ -40,8 +41,13 @@ function ContributingTemplatePage(props) {
       <Button onClick={handleOpen} variant="contained" color="success">
         Modal
       </Button>
-    </div>
+    </StReadmeTemplatePage>
   );
 }
+
+const StReadmeTemplatePage = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export default ContributingTemplatePage;

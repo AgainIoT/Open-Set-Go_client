@@ -4,6 +4,7 @@ import MDEditor from "@uiw/react-md-editor";
 import Button from "@mui/material/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { templateContent, templateState } from "../../recoil/templateState";
+import { styled } from "styled-components";
 
 const MarkdownPreview = (props) => {
   const [contentValue, setContentValue] = useRecoilState(
@@ -11,10 +12,15 @@ const MarkdownPreview = (props) => {
   );
 
   return (
-    <div>
-      <MDEditor height={350} value={contentValue} onChange={setContentValue} />
-    </div>
+    <StMarkdownPreview>
+      <MDEditor height={"95%"} value={contentValue} onChange={setContentValue} />
+    </StMarkdownPreview>
   );
 };
+
+const StMarkdownPreview = styled.div`
+height: 100%;  
+width: 100%;
+`;
 
 export default MarkdownPreview;

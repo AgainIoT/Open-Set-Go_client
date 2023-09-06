@@ -7,6 +7,7 @@ import { BaseModal } from "../components/common/modal/BaseModal";
 import { eachStepState, modalState } from "../recoil/commonState";
 import MarkdownPreview from "../components/common/MarkdownPreview";
 import { TemplateModal } from "../components/common/modal/templateModal";
+import { styled } from "styled-components";
 
 function PRTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("pr"));
@@ -21,7 +22,7 @@ function PRTemplatePage() {
   const handleOpen = () => setModalValue(true);
 
   return (
-    <div>
+    <StReadmeTemplatePage>
       <BaseModal type={"pr"}>
         <TemplateModal type={"pr"} />
       </BaseModal>
@@ -30,8 +31,13 @@ function PRTemplatePage() {
       <Button onClick={handleOpen} variant="contained" color="success">
         Modal
       </Button>
-    </div>
+    </StReadmeTemplatePage>
   );
 }
+
+const StReadmeTemplatePage = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export default PRTemplatePage;
