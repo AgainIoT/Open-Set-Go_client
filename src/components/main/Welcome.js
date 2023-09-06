@@ -19,7 +19,7 @@ export const Welcome = () => {
     <StWelcome>
       <Title>Open, Set, Go</Title>
       <SubTitle>your project</SubTitle>
-      <Stack spacing={2} direction="row" style={{ padding: "2rem" }}>
+      <Stack spacing={2} direction="row">
         <Button
           variant="contained"
           onClick={() => {
@@ -79,4 +79,5 @@ export const Title = styled.h1`
 
 export const SubTitle = styled.h3`
   font-size: 4rem;
+  padding-bottom: 2rem;
 `;
