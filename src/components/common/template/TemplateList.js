@@ -74,7 +74,6 @@ const Item = styled(Paper)(({ theme }) => ({
 export function TemplateList(props) {
   const [data, setData] = useState([]);
   const url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;
-  // console.log(modal.type);
 
   const selectValue = useRecoilValue(templateSelectState(props.type));
   const [showValue, setShowValue] = useRecoilState(
@@ -95,7 +94,6 @@ export function TemplateList(props) {
 
     async function get() {
       const result = await axios.get(url);
-      console.log(props.type);
       if (!completed) {
         if (props.type === "contributing") {
           const list = [];

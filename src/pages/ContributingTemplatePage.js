@@ -23,7 +23,6 @@ function ContributingTemplatePage(props) {
 
   const handlesave = () => {
     //value 고대로 저장해서 server로 보내야함. 이건 추후에 백엔드랑 회의 후 정해야할 듯
-    console.log(data);
   };
 
   const handleOpen = () => setModalValue(true);

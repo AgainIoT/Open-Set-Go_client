@@ -68,7 +68,7 @@ export default function TemplateTitle(props) {
             handleSelect();
           }}
         >
-          c Use Template
+          Use Template
         </Button>
       </Box>
     </box>
