@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import { token } from "../../recoil/authorize";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { forwardRef } from "react";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
@@ -12,7 +13,7 @@ const githubURL = `https://github.com/login/oauth/authorize?client_id=${CLIENT_I
 const handleLogin = () => {
   window.location.href = githubURL;
 };
-export const Welcome = () => {
+export const Welcome = (ref) => {
   const accessToken = useRecoilValue(token);
   const navigate = new useNavigate();
   return (
