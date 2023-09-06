@@ -15,7 +15,7 @@ import Checkbox from "@mui/material/Checkbox";
 
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { Input, Paper, Popper } from "@mui/material";
+import { Input, Paper } from "@mui/material";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 //props-> data, type,
 export const SelectChip = (props) => {

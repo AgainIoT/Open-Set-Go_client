@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Typography from "@mui/material/Typography";
-import { templateState, templateToModal } from "../../../recoil/templateState";
-import { useRecoilState } from "recoil";
-import MarkdownPreview from "@uiw/react-markdown-preview";
+import {
+  templateContent,
+  templatePreviewState,
+  templateState,
+  templateToModal,
+} from "../../../recoil/templateState";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { WidthFull } from "@mui/icons-material";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 
 const BodyBox = styled.div`
   display: flex;
@@ -17,9 +22,7 @@ const BodyBox = styled.div`
 `;
 
 export default function TemplateBody(props) {
-  const [data, setData] = useState([]);
-  const [selectValue, setSelectValue] = useRecoilState(templateState);
-  const [modal, setModal] = useRecoilState(templateToModal);
+  const showValue = useRecoilValue(templatePreviewState(props.type));
 
   return (
     <BodyBox>
@@ -30,7 +33,7 @@ export default function TemplateBody(props) {
         color="textSecondary"
         m={2}
       >
-        <MarkdownPreview source={selectValue} />
+        <MarkdownPreview source={showValue.content} />
       </Typography>
     </BodyBox>
   );

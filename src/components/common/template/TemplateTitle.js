@@ -1,10 +1,14 @@
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { useRecoilState } from "recoil";
-import { templateContent, templateState } from "../../../recoil/templateState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  templateContent,
+  templatePreviewState,
+  templateSelectState,
+} from "../../../recoil/templateState";
 import styled from "styled-components";
-import { prOpenState } from "../../../recoil/openModal";
+import { modalState } from "../../../recoil/commonState";
 
 const commonStyles = {
   bgcolor: "background.paper",
@@ -15,16 +19,28 @@ const commonStyles = {
 };
 
 export default function TemplateTitle(props) {
-  const [selectValue, setSelectValue] = useRecoilState(templateState);
-  const [content, setContent] = useRecoilState(templateContent);
-  const [modalValue, setModalValue] = useRecoilState(prOpenState);
+  const [selectValue, setSelectValue] = useRecoilState(
+    templateSelectState(props.type),
+  );
+  const showValue = useRecoilValue(templatePreviewState(props.type));
+  const [content, setContent] = useRecoilState(templateContent(props.type));
+  const [modalValue, setModalValue] = useRecoilState(modalState(props.type));
 
+  const handleSelect = () => {
+    if (props.type === "contributing") {
+      setSelectValue(selectValue.concat({ _id: showValue._id }));
+      setContent(content + "\n" + showValue.content);
+    } else {
+      setSelectValue({ _id: showValue._id });
+      setContent(showValue.content);
+    }
+  };
   const handleClose = () => setModalValue(false);
 
   return (
     <box>
-      <Box sx={{ ...commonStyles, height: "100%" }}>
-        {/* <Typography
+      <Box sx={{ ...commonStyles, borderBottom: 1, height: "100%" }}>
+        <Typography
           component="h1"
           className="title"
           id="PR-title"
@@ -34,7 +50,7 @@ export default function TemplateTitle(props) {
           fontWeight="lg"
           m={2}
         >
-          {selectValue.title}
+          {showValue.title}
         </Typography>
         <Typography
           id="PR-desc"
@@ -43,16 +59,16 @@ export default function TemplateTitle(props) {
           color="textSecondary"
           m={2}
         >
-          {selectValue.repoName}
-        </Typography> */}
+          {showValue.repoName}
+        </Typography>
         <Button
           variant="contained"
           m={4}
           onClick={() => {
-            setContent(selectValue);
+            handleSelect();
           }}
         >
-          Use Template
+          c Use Template
         </Button>
       </Box>
     </box>

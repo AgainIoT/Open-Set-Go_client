@@ -5,10 +5,12 @@ import Slider from "react-slick";
 import SlideContent from "./SlideContent";
 import styled from "styled-components";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { repoDataAtomFamily } from "../../recoil/repoData";
 
 const Slide = () => {
   const [data, setData] = useState([]);
-  const [pickLi, setPickLi] = useState("");
+  // const [pickLi, setPickLi] = useRecoilState(repoDataAtomFamily("license"));
 
   // const onClick = () => {
   //   console.log("in Slide: ", pickLi);
@@ -18,7 +20,7 @@ const Slide = () => {
 
     async function get() {
       const result = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/file/license`
+        `${process.env.REACT_APP_SERVER_URL}/file/license`,
       );
       if (!completed) {
         setData(result.data);
@@ -57,7 +59,7 @@ const Slide = () => {
         {data.map((it) => {
           return (
             <div key={it.license}>
-              <SlideContent data={it} pickLi={pickLi} setPickLi={setPickLi} />
+              <SlideContent data={it} />
             </div>
           );
         })}

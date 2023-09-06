@@ -6,28 +6,23 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepIcon from "@mui/material/StepIcon";
 import AddIcon from "@mui/icons-material/Add";
+import { useRecoilValue } from "recoil";
+import { activeState } from "../../recoil/commonState";
 
-const steps = [
-  "Step1",
-  "Step2",
-  "Step3",
-  "Step4",
-  "Step5",
-  "Step6",
-  "Step7",
-  "Step8",
-];
+import StepData from "../../data/StepData.json";
 
 export default function LinearStepper() {
+  const activeStep = useRecoilValue(activeState);
+
   return (
     <StStepperContainer>
-      <StepperWraper activeStep={2} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabelWrapper>{label}</StepLabelWrapper>
+      <StepperWraper activeStep={activeStep} alternativeLabel>
+        {StepData.StepData.map((label) => (
+          <Step key={label.step}>
+            <StepLabelWrapper>{label.title}</StepLabelWrapper>
           </Step>
         ))}
-      </StepperWraper>{" "}
+      </StepperWraper>
     </StStepperContainer>
   );
 }
@@ -35,7 +30,7 @@ export default function LinearStepper() {
 const StStepperContainer = styled.div`
   display: flex;
   width: 100%;
-  padding: 2rem 0 2rem 0;
+  padding: 0rem 0 0rem 0;
 `;
 
 const StepperWraper = styled(Stepper)`
@@ -52,15 +47,21 @@ const StepLabelWrapper = styled(StepLabel)`
   width: 100%;
 
   span {
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
+  /* &.MuiStepLabel {
+    margin: 0;
+  } */
 
+  .MuiStepLabel-alternativeLabel {
+    margin-top: 0.5rem;
+  }
   .MuiStepLabel-iconContainer {
     .MuiSvgIcon-root {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
     }
     .MuiStepIcon-text {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
     }
   }
 `;

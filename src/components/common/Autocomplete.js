@@ -11,7 +11,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import { createFilterOptions } from "@mui/material/Autocomplete";
-import { Box, Paper, Popper } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 
 // props -> type(lang/framework), options(for lang->langs/for framework->frameworkOptions), setIsSelectLang(setIsSelectLang), setDisableValue(setDisableValue), disableValue(false/disableValue)
 export const AutocompleteInput = (props) => {
@@ -111,11 +111,6 @@ const AutocompleteTextField = styled(TextField)`
   & .MuiAutocomplete-input {
     font-size: 1.4rem;
   }
-`;
-
-const PopperContainer = styled(Popper)`
-  margin-top: 2rem;
-  background-color: red;
 `;
 
 const PaperContainer = styled(Paper)`

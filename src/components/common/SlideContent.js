@@ -2,12 +2,15 @@ import styled from "styled-components";
 import { PropTypes } from "prop-types";
 import { Button } from "@mui/material";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { repoDataAtomFamily } from "../../recoil/repoData";
 
 export const SlideContent = (props) => {
-  let [pickLi, setPickLi] = useState([...props.pickLi]);
+  // let [pickLi, setPickLi] = useState([...props.pickLi]);
+  const [pickLi, setPickLi] = useRecoilState(repoDataAtomFamily("license"));
 
   const onSet = () => {
-    props.setPickLi(props.data.license);
+    setPickLi(props.data.url);
   };
 
   const pmsList = props.data.conditions.permissions.map((p) => (
@@ -65,7 +68,7 @@ export const SlideContent = (props) => {
               </LinkA>
             </LinkText>
           </LinkDiv>
-          {props.pickLi === props.data.license ? (
+          {pickLi === props.data.url ? (
             <BtnDiv className="BtnDiv">
               <SelectedBtn
                 className="SubmitBtn"

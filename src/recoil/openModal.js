@@ -14,8 +14,3 @@ export const prOpenState = atom({
   key: "prOpenState",
   default: false,
 });
-
-export const modalState = atomFamily({
-  key: "modalState",
-  default: false,
-});

@@ -91,8 +91,7 @@ export const MainHeader = () => {
             sx={{
               display: { xs: "block", md: "none" },
             }}
-          >
-          </Menu>
+          ></Menu>
         </Box>
         {/* 반응형 로고 */}
         <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -114,8 +113,9 @@ export const MainHeader = () => {
         >
           OpenSetGo2
         </Typography>
-        <MenuBox sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-        </MenuBox>
+        <MenuBox
+          sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+        ></MenuBox>
 
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
@@ -158,9 +158,9 @@ const StMainHeader = styled(AppBar)`
   //top: 0;
   background-color: ${COLOR.MAIN_WHITE};
   width: 100%;
-  height: 8.1rem;
+  height: 6rem;
   /* padding-top: 1rem; */
-  padding: 1rem 3rem 0 3rem;
+  padding: 0rem 3rem 0 3rem;
   /* 
   font-family: "SUIT Variable";
   font-style: normal;

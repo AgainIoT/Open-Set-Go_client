@@ -53,7 +53,7 @@ export const ReadonlyAuto = (props) => {
 const StReadOnlyAuto = styled.div``;
 const ReadOnlyAutoContainer = styled(Autocomplete)`
   & .MuiInputBase-root {
-    padding: 1rem 0 1rem 0rem;
+    padding: 0;
     background-color: ${COLOR.MAIN_WHITE};
     border: none;
   }

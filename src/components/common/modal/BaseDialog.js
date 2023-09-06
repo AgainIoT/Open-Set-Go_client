@@ -1,32 +1,32 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
 import { useRecoilState } from "recoil";
-import Modal from "@mui/material/Modal";
 import { modalState } from "../../../recoil/commonState";
+import { Dialog } from "@mui/material";
 
-export const BaseModal = (props) => {
-  const handleClose = () => setModalValue(false);
+export const BaseDialog = (props) => {
+  const handleClose = () => setDialogValue(false);
 
-  const [modalValue, setModalValue] = useRecoilState(modalState(props.type));
+  const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
 
   return (
-    <StBaseModal
+    <StDialog
       keepMounted
-      open={modalValue}
+      open={dialogValue}
       onClose={handleClose}
       aria-labelledby="keep-mounted-modal-title"
       aria-describedby="keep-mounted-modal-description"
     >
-      <ModalContainer>{props.children}</ModalContainer>
-    </StBaseModal>
+      <DialogContainer>{props.children}</DialogContainer>
+    </StDialog>
   );
 };
 
-const StBaseModal = styled(Modal)``;
-const ModalContainer = styled.div`
+const StDialog = styled(Dialog)``;
+const DialogContainer = styled.div`
   display: flex;
-  width: 60%;
-  height: 70%;
+  width: 40%;
+  height: 50%;
   padding: 2rem;
   margin-top: 1rem;
   transform: translate(-50%, -50%);

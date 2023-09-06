@@ -1,16 +1,19 @@
-import { atom } from "recoil";
+import { atom, atomFamily } from "recoil";
 
-export const templateState = atom({
-  key: "templateState",
+//state for user select _id
+export const templateSelectState = atomFamily({
+  key: "templateSelectState",
   default: [],
 });
 
-export const templateContent = atom({
-  key: "templateContent",
-  default: "",
+// state to show  preview about user select from template modal(templateList)
+export const templatePreviewState = atomFamily({
+  key: "templatePreviewState",
+  default: [],
 });
 
-export const templateToModal = atom({
+// state to save template + user input
+export const templateContent = atomFamily({
   key: "templateContent",
   default: "",
 });

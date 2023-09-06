@@ -14,7 +14,11 @@ import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import { useRecoilState, useRecoilValue } from "recoil";
 import TemplateTitle from "./TemplateTitle";
-import { templateState, templateToModal } from "../../../recoil/templateState";
+import {
+  templateContent,
+  templatePreviewState,
+  templateSelectState,
+} from "../../../recoil/templateState";
 import { fontSize } from "@mui/system";
 
 const Search = styled("div")(({ theme }) => ({
@@ -66,12 +70,25 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+//props -> type
 export function TemplateList(props) {
   const [data, setData] = useState([]);
-  const [selectValue, setSelectValue] = useRecoilState(templateState);
-  const [modal, setModal] = useRecoilState(templateToModal);
   const url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;
   // console.log(modal.type);
+
+  const selectValue = useRecoilValue(templateSelectState(props.type));
+  const [showValue, setShowValue] = useRecoilState(
+    templatePreviewState(props.type),
+  );
+
+  const handleSelect = (value) => {
+    setShowValue({
+      _id: value._id,
+      title: value.title,
+      repoName: value.repoName,
+      content: value.content,
+    });
+  };
 
   useEffect(() => {
     let completed = false;
@@ -97,7 +114,7 @@ export function TemplateList(props) {
     return () => {
       completed = true;
     };
-  }, [modal.type]);
+  }, []);
 
   return (
     <Item>
@@ -146,32 +163,10 @@ export function TemplateList(props) {
                   component="div"
                   disablePadding
                   onClick={() => {
-                    if (props.type === "contributing") {
-                      // setSelectValue(
-                      //   selectValue +
-                      //     {
-                      //       _id: it._id,
-                      //       title: it.title,
-                      //       repoName: it.repoName,
-                      //       content: it.content,
-                      //     },
-                      // );
-                      setSelectValue(selectValue + "\n" + it.content);
-                    } else {
-                      setSelectValue(it.content);
-                      // setSelectValue({
-                      //   _id: it._id,
-                      //   title: it.title,
-                      //   repoName: it.repoName,
-                      //   content: it.content,
-                      // });
-                    }
+                    handleSelect(it);
                   }}
                 >
                   <ListItemButton>
-                    {it.type ? (
-                      <ListItemText primary={it.type.split(".")[1]} />
-                    ) : null}
                     <ListItemText
                       primary={it.title}
                       id="PR-desc"

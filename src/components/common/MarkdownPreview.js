@@ -3,31 +3,16 @@ import axios from "axios";
 import MDEditor from "@uiw/react-md-editor";
 import Button from "@mui/material/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { templateState } from "../../recoil/templateState";
+import { templateContent, templateState } from "../../recoil/templateState";
 
 const MarkdownPreview = (props) => {
-  const [value, setValue] = useState("");
-  const [data, setData] = useState([]);
-  const [selectValue, setSelectValue] = useRecoilState(templateState);
+  const [contentValue, setContentValue] = useRecoilState(
+    templateContent(props.type),
+  );
 
-  const handlesave = ()=> {
-    //value 고대로 저장해서 server로 보내야함. 이건 추후에 백엔드랑 회의 후 정해야할 듯
-    // console.log(value);
-  };
-
-  return(
+  return (
     <div>
-      <MDEditor
-        height={350}
-        value={value}
-        onChange={setValue}
-      />
-      <Button
-        onClick={handlesave}
-        variant="contained"
-        color="success">
-                저장
-      </Button>
+      <MDEditor height={350} value={contentValue} onChange={setContentValue} />
     </div>
   );
 };
