@@ -2,9 +2,7 @@ import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
 import propTypes from "prop-types";
 import { useRecoilValue } from "recoil";
-import { authState, token } from "../../recoil/authorize";
-import { useEffect, useState } from "react";
-import { Cookies } from "react-cookie";
+import { token } from "../../recoil/authorize";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
