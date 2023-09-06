@@ -1,14 +1,13 @@
 import styled from "styled-components";
-import { useState } from "react";
-
 import { Typography } from "@mui/material";
 import StepData from "../../data/StepData.json";
 import { activeState } from "../../recoil/commonState";
 import { useRecoilValue } from "recoil";
 
+//StepInfo: Component for description of each step (located on the left side of the screen)
 const StepInfo = () => {
+  //using recoil for matching step information and step
   const activeStep = useRecoilValue(activeState);
-  console.log("stepinfo:", activeStep);
 
   return (
     <div>

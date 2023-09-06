@@ -1,6 +1,8 @@
 import { Typography } from "@mui/material";
 import styled from "styled-components";
 import DeskTop from "../../assets/images/desktop.svg";
+
+//Step2: Component for description on the main page (a brief description of the project)
 const Step2 = () => {
   return (
     <StStep2>

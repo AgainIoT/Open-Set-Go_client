@@ -3,6 +3,7 @@ import styled from "styled-components";
 import MODAL from "../../assets/images/modal.svg";
 import MARKER from "../../assets/icons/li_mark.svg";
 
+//Step4: Components (used on the main page) that contain content related to the use of templates
 const Step4 = () => {
   return (
     <StStep4>

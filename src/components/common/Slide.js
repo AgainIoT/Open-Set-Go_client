@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 import SlideContent from "./SlideContent";
 import styled from "styled-components";
 import axios from "axios";
-import { useRecoilState } from "recoil";
-import { repoDataAtomFamily } from "../../recoil/repoData";
 
+//Slide: Component for Implementing the License Page using the React Slick
 const Slide = () => {
+  //using recoil to add slide content in Slide component
   const [data, setData] = useState([]);
-  // const [pickLi, setPickLi] = useRecoilState(repoDataAtomFamily("license"));
-
-  // const onClick = () => {
-  //   console.log("in Slide: ", pickLi);
-  // };
   useEffect(() => {
     let completed = false;
 
@@ -43,7 +36,7 @@ const Slide = () => {
   };
 
   return (
-    <div className="container">
+    <StSlide>
       <link
         rel="stylesheet"
         type="text/css"
@@ -54,7 +47,6 @@ const Slide = () => {
         type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
       />
-      <style>{cssstyle}</style>
       <StyledSlider {...settings}>
         {data.map((it) => {
           return (
@@ -64,11 +56,18 @@ const Slide = () => {
           );
         })}
       </StyledSlider>
-    </div>
+    </StSlide>
   );
 };
 
 export default Slide;
+
+const StSlide = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
 
 const StyledSlider = styled(Slider)`
   width: 100%;
@@ -88,10 +87,7 @@ const StyledSlider = styled(Slider)`
 
   .slick-track {
     height: 100%;
-    /* justify-content: center;
-    align-items: center; */
     display: flex;
-    /* background-color: pink; */
   }
 
   .slick-center {
@@ -101,8 +97,6 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-slide div {
-    //슬라이더  컨텐츠(안에 있는 컨텐츠들 싹 다 바꿔 얘가 아주 절대적이야)
-    /* display: flex; */
     height: 100%;
   }
 
@@ -113,17 +107,8 @@ const StyledSlider = styled(Slider)`
   .slick-prev {
     left: 0;
   }
-`;
-const cssstyle = `
-.container{
-  display:flex;
-  justify-content:center;
-  // background-color: blue;
-  width: 100%;
-  height: 100%;
-}
 
-.slick-next:before, .slick-prev:before {
+  .slick-next:before, .slick-prev:before {
     color: #888;
-}
+  }
 `;
