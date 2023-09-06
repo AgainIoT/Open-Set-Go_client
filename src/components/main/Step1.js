@@ -6,8 +6,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import PR from "../../assets/images/pullrequest.svg";
-import NEXT from "../../assets/images/next.svg";
+import PR from "../../assets/icons/pullrequest.svg";
+import NEXT from "../../assets/icons/next.svg";
 
 const Step1 = () => {
   const folderIcon = (

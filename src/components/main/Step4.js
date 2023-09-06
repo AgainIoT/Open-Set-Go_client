@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import styled from "styled-components";
 import MODAL from "../../assets/images/modal.svg";
-import MARKER from "../../assets/images/li_mark.svg";
+import MARKER from "../../assets/icons/li_mark.svg";
 
 const Step4 = () => {
   return (
