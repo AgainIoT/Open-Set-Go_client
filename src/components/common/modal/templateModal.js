@@ -18,7 +18,7 @@ function TemplateModal(props) {
     <div style={{ display: "flex", flexDirection: "row" }}>
       {<TemplateList type={props.type} />}
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {<TemplateTitle />}
+        {<TemplateTitle type={props.type} />}
         {<TemplateBody />}
       </div>
     </div>

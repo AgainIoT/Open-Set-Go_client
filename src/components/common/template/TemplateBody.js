@@ -20,8 +20,16 @@ export default function TemplateBody(props) {
   const [modal, setModal] = useRecoilState(templateToModal);
 
   return (
-    <BodyBox><Typography id="PR-desc" variant="h4" gutterBottom color="textSecondary" m={2} >
-      {selectValue.content}
-    </Typography></BodyBox>
+    <BodyBox>
+      <Typography
+        id="PR-desc"
+        variant="h4"
+        gutterBottom
+        color="textSecondary"
+        m={2}
+      >
+        {selectValue}
+      </Typography>
+    </BodyBox>
   );
 }

@@ -15,6 +15,7 @@ import { FixedSizeList } from "react-window";
 import { useRecoilState, useRecoilValue } from "recoil";
 import TemplateTitle from "./TemplateTitle";
 import { templateState, templateToModal } from "../../../recoil/templateState";
+import { fontSize } from "@mui/system";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -145,12 +146,26 @@ export function TemplateList(props) {
                   component="div"
                   disablePadding
                   onClick={() => {
-                    setSelectValue({
-                      _id: it._id,
-                      title: it.title,
-                      repoName: it.repoName,
-                      content: it.content,
-                    });
+                    if (props.type === "contributing") {
+                      // setSelectValue(
+                      //   selectValue +
+                      //     {
+                      //       _id: it._id,
+                      //       title: it.title,
+                      //       repoName: it.repoName,
+                      //       content: it.content,
+                      //     },
+                      // );
+                      setSelectValue(selectValue + "\n" + it.content);
+                    } else {
+                      setSelectValue(it.content);
+                      // setSelectValue({
+                      //   _id: it._id,
+                      //   title: it.title,
+                      //   repoName: it.repoName,
+                      //   content: it.content,
+                      // });
+                    }
                   }}
                 >
                   <ListItemButton>
@@ -164,6 +179,13 @@ export function TemplateList(props) {
                       gutterBottom
                       color="textSecondary"
                       m={2}
+                    />
+                    <ListItemText
+                      primary={it.repoName}
+                      id="PR-desc"
+                      variant="h6"
+                      gutterBottom
+                      color="textSecondary"
                     />
                   </ListItemButton>
                 </ListItem>

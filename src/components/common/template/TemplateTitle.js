@@ -24,7 +24,7 @@ export default function TemplateTitle(props) {
   return (
     <box>
       <Box sx={{ ...commonStyles, borderBottom: 1, height: "100%" }}>
-        <Typography
+        {/* <Typography
           component="h1"
           className="title"
           id="PR-title"
@@ -44,11 +44,13 @@ export default function TemplateTitle(props) {
           m={2}
         >
           {selectValue.repoName}
-        </Typography>
+        </Typography> */}
         <Button
           variant="contained"
           m={4}
-          onClick={() => setContent(selectValue.content)}
+          onClick={() => {
+            setContent(selectValue);
+          }}
         >
           Use Template
         </Button>
