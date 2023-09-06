@@ -26,7 +26,6 @@ function MainPage() {
     <>
       <Header />
       <Welcome />
-      <Desc />
       <Steps />
       <Footer />
     </>

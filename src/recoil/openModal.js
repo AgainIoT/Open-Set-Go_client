@@ -7,5 +7,10 @@ export const gitignoreOpenState = atom({
 
 export const issueTemplateState = atom({
   key: "issueTemplateState",
-  defalut: false,
+  default: false,
+});
+
+export const prOpenState = atom({
+  key: "prOpenState",
+  default: false,
 });
