@@ -23,7 +23,7 @@ export default function TemplateTitle(props) {
 
   return (
     <box>
-      <Box sx={{ ...commonStyles, borderBottom: 1, height: "100%" }}>
+      <Box sx={{ ...commonStyles, height: "100%" }}>
         {/* <Typography
           component="h1"
           className="title"

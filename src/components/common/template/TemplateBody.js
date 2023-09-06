@@ -5,6 +5,7 @@ import { templateState, templateToModal } from "../../../recoil/templateState";
 import { useRecoilState } from "recoil";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { styled } from "styled-components";
+import { WidthFull } from "@mui/icons-material";
 
 const BodyBox = styled.div`
   display: flex;

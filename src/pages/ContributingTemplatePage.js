@@ -6,6 +6,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { templateContent, templateState } from "../recoil/templateState";
 import { gitignoreOpenState, prOpenState } from "../recoil/openModal";
 import { BaseModal } from "../components/common/modal/BaseModal";
+import Stack from "@mui/material/Stack";
 
 function ContributingTemplatePage(props) {
   const [data, setData] = useState([]);
@@ -25,12 +26,14 @@ function ContributingTemplatePage(props) {
         <TemplateModal type="contributing" />
       </BaseModal>
       <MDEditor height={350} value={content} onChange={setContent} />
-      <Button onClick={handlesave} variant="contained" color="success">
-        저장
-      </Button>
-      <Button onClick={handleOpen} variant="contained" color="success">
-        Modal
-      </Button>
+      <Stack spacing={2} direction="row">
+        <Button onClick={handlesave} variant="contained" color="success">
+          저장
+        </Button>
+        <Button onClick={handleOpen} variant="contained" color="success">
+          Modal
+        </Button>
+      </Stack>
     </div>
   );
 }
