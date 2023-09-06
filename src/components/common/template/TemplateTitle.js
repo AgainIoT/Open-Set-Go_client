@@ -18,6 +18,7 @@ const commonStyles = {
   height: "25%",
 };
 
+// props -> type(pr, readme, contributing)
 export default function TemplateTitle(props) {
   const [selectValue, setSelectValue] = useRecoilState(
     templateSelectState(props.type),

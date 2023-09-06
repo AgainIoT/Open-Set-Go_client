@@ -27,7 +27,6 @@ function PRTemplatePage() {
         <TemplateModal type={"pr"} />
       </BaseModal>
       <MarkdownPreview type={"pr"} />
-      {/* <MDEditor height={350} value={content} onChange={setContent} /> */}
       <Button onClick={handleOpen} variant="contained" color="success">
         Modal
       </Button>

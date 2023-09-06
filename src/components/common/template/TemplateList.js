@@ -70,7 +70,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-//props -> type
+// props -> type(pr, readme, contributing)
 export function TemplateList(props) {
   const [data, setData] = useState([]);
   const url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;

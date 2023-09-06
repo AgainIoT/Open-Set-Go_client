@@ -22,6 +22,7 @@ const BodyBox = styled.div`
   overflow-y: auto;
 `;
 
+// props -> type(pr, readme, contributing)
 export default function TemplateBody(props) {
   const showValue = useRecoilValue(templatePreviewState(props.type));
 

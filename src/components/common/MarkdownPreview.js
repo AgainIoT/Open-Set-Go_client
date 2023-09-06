@@ -6,6 +6,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { templateContent, templateState } from "../../recoil/templateState";
 import { styled } from "styled-components";
 
+// props -> type(pr, readme, contributing)
 const MarkdownPreview = (props) => {
   const [contentValue, setContentValue] = useRecoilState(
     templateContent(props.type),

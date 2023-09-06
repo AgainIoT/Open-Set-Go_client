@@ -27,7 +27,6 @@ function ReadmeTemplatePage() {
       <BaseModal type={"readme"}>
         <TemplateModal type={"readme"} />
       </BaseModal>
-      {/* <MDEditor height={350} value={content} onChange={setContent} /> */}
       <MarkdownPreview type={"readme"} />
       <Button onClick={handleOpen} variant="contained" color="success">
         Modal
