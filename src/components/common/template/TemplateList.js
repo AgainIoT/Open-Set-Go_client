@@ -14,7 +14,11 @@ import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import { useRecoilState, useRecoilValue } from "recoil";
 import TemplateTitle from "./TemplateTitle";
-import { templateState, templateToModal } from "../../../recoil/templateState";
+import {
+  templateContent,
+  templatePreviewState,
+  templateSelectState,
+} from "../../../recoil/templateState";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -65,12 +69,25 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+//props -> type
 export function TemplateList(props) {
   const [data, setData] = useState([]);
-  const [selectValue, setSelectValue] = useRecoilState(templateState);
-  const [modal, setModal] = useRecoilState(templateToModal);
-  const url = process.env.REACT_APP_SERVER_URL+"/file/"+props.type;
+  const url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;
   // console.log(modal.type);
+
+  const selectValue = useRecoilValue(templateSelectState(props.type));
+  const [showValue, setShowValue] = useRecoilState(
+    templatePreviewState(props.type),
+  );
+
+  const handleSelect = (value) => {
+    setShowValue({
+      _id: value._id,
+      title: value.title,
+      repoName: value.repoName,
+      content: value.content,
+    });
+  };
 
   useEffect(() => {
     let completed = false;
@@ -81,55 +98,76 @@ export function TemplateList(props) {
       if (!completed) setData(result.data);
     }
     get();
-    return() => {
+    return () => {
       completed = true;
     };
-  }, [modal.type]);
+  }, []);
 
   return (
-    <Item><Typography
-      component="h1"
-      id="modal-title"
-      variant="h5"
-      textColor="inherit"
-      fontWeight="lg"
-      mb={1}
-    >
-      <Box sx={{ fontWeight: "bold", m: 1 }}>PR Template</Box>
-    </Typography>
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search Template"
-        inputProps={{ "aria-label": "search" }}
-      />
-    </Search>
-    <Box
-      sx={{ width: "100%", height: "100%", maxWidth: 360, bgcolor: "background.paper", maxHeight: 400 }}
-    >
-      <List
-        sx={{height: 610,
-          width:360,
-          itemSize:46,
-          itemCount:1,
-          overscanCount:5}}
+    <Item>
+      <Typography
+        component="h1"
+        id="modal-title"
+        variant="h5"
+        textColor="inherit"
+        fontWeight="lg"
+        mb={1}
       >
-        <div>
-          {data.map((it)=>(
-            <div key = {it._id}>
-              <ListItem component="div" disablePadding onClick={() => setSelectValue({_id:it._id, title: it.title, repoName: it.repoName, content:it.content})
-              }>
-                <ListItemButton>
-                  <ListItemText primary={it.title} id="PR-desc" variant="h6" gutterBottom color="textSecondary" m={2} />
-                </ListItemButton>
-              </ListItem>
-            </div>
-          ))
-          }
-        </div>
-      </List>
-    </Box></Item>
+        <Box sx={{ fontWeight: "bold", m: 1 }}>PR Template</Box>
+      </Typography>
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Search Template"
+          inputProps={{ "aria-label": "search" }}
+        />
+      </Search>
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          maxWidth: 360,
+          bgcolor: "background.paper",
+          maxHeight: 400,
+        }}
+      >
+        <List
+          sx={{
+            height: 610,
+            width: 360,
+            itemSize: 46,
+            itemCount: 1,
+            overscanCount: 5,
+          }}
+        >
+          <div>
+            {data.map((it) => (
+              <div key={it._id}>
+                <ListItem
+                  component="div"
+                  disablePadding
+                  onClick={() => {
+                    handleSelect(it);
+                  }}
+                >
+                  <ListItemButton>
+                    <ListItemText
+                      primary={it.title}
+                      id="PR-desc"
+                      variant="h6"
+                      gutterBottom
+                      color="textSecondary"
+                      m={2}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              </div>
+            ))}
+          </div>
+        </List>
+      </Box>
+    </Item>
   );
 }

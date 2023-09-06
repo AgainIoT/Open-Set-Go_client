@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Typography from "@mui/material/Typography";
-import { templateState, templateToModal } from "../../../recoil/templateState";
-import { useRecoilState } from "recoil";
+import {
+  templateContent,
+  templatePreviewState,
+  templateState,
+  templateToModal,
+} from "../../../recoil/templateState";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 
 const BodyBox = styled.div`
@@ -15,13 +20,19 @@ const BodyBox = styled.div`
 `;
 
 export default function TemplateBody(props) {
-  const [data, setData] = useState([]);
-  const [selectValue, setSelectValue] = useRecoilState(templateState);
-  const [modal, setModal] = useRecoilState(templateToModal);
+  const showValue = useRecoilValue(templatePreviewState(props.type));
 
   return (
-    <BodyBox><Typography id="PR-desc" variant="h4" gutterBottom color="textSecondary" m={2} >
-      {selectValue.content}
-    </Typography></BodyBox>
+    <BodyBox>
+      <Typography
+        id="PR-desc"
+        variant="h4"
+        gutterBottom
+        color="textSecondary"
+        m={2}
+      >
+        {showValue.content}
+      </Typography>
+    </BodyBox>
   );
 }

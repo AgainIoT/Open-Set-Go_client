@@ -1,44 +1,34 @@
 import React, { useState, useEffect } from "react";
-import TemplateModal from "../components/common/modal/templateModal";
 import MDEditor from "@uiw/react-md-editor";
 import Button from "@mui/material/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { templateContent, templateState } from "../recoil/templateState";
-import { gitignoreOpenState, prOpenState } from "../recoil/openModal";
+import { templateContent } from "../recoil/templateState";
 import { BaseModal } from "../components/common/modal/BaseModal";
+import { eachStepState, modalState } from "../recoil/commonState";
+import MarkdownPreview from "../components/common/MarkdownPreview";
+import { TemplateModal } from "../components/common/modal/templateModal";
 
-function PRTemplatePage(props) {
-  const [data, setData] = useState([]);
-  const [modalValue, setModalValue] = useRecoilState(prOpenState);
-  const [content, setContent] = useRecoilState(templateContent);
+function PRTemplatePage() {
+  const [modalValue, setModalValue] = useRecoilState(modalState("pr"));
+  const [content, setContent] = useRecoilState(templateContent("pr"));
 
-  const handlesave = ()=> {
-    console.log(data);
-  };
+  const [stepComplete, setStepComplted] = useRecoilState(eachStepState("3"));
+
+  useEffect(() => {
+    setStepComplted(true);
+  }, []);
 
   const handleOpen = () => setModalValue(true);
 
-  return(
+  return (
     <div>
-      <BaseModal type={prOpenState}>
-        <TemplateModal type = "pr" />
+      <BaseModal type={"pr"}>
+        <TemplateModal type={"pr"} />
       </BaseModal>
-      <MDEditor
-        height={350}
-        value={content}
-        onChange={setContent}
-      />
-      <Button
-        onClick={handlesave}
-        variant="contained"
-        color="success">
-                저장
-      </Button>
-      <Button
-        onClick={handleOpen}
-        variant="contained"
-        color="success">
-                Modal
+      <MarkdownPreview type={"pr"} />
+      {/* <MDEditor height={350} value={content} onChange={setContent} /> */}
+      <Button onClick={handleOpen} variant="contained" color="success">
+        Modal
       </Button>
     </div>
   );
