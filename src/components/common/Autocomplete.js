@@ -33,7 +33,6 @@ export const AutocompleteInput = (props) => {
   };
 
   const handleDelete = () => {
-    console.log("delete");
     setSelectValue("");
     if (props.type === "lang") {
       props.setIsSelectLang(false);

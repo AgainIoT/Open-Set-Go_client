@@ -21,7 +21,6 @@ export const Layout = () => {
   const navigate = useNavigate();
 
   const handleNext = () => {
-    console.log("next", `/step${activeStep + 2}`);
     navigate(`/step${activeStep + 2}`);
     setActiveState(activeStep + 1);
   };

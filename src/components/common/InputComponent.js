@@ -35,8 +35,6 @@ export const TextInputContainer = (props) => {
   const HelperTextContainer = (props) => {
     const checkIcon = <CheckCircleIcon fontSize="small" />;
     const warningIcon = <WarningRoundedIcon fontSize="small" />;
-    console.log("asf:", props.currInput.current.value);
-    console.log("hhhhhh:", helperText);
     const currInput = props.currInput.current.value;
 
     const textData = [
@@ -68,7 +66,6 @@ export const TextInputContainer = (props) => {
     const useStyle = textData.find((it) =>
       currInput !== "" ? it.type === props.type : it.type === "null",
     );
-    console.log("style:", useStyle?.text);
     return (
       <>
         <FormHelperTextWrapper textcolor={useStyle?.textColor}>

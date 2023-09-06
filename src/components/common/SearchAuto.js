@@ -12,7 +12,6 @@ export const SearchForm = (props) => {
   const [selectValue, setSelectValue] = useRecoilState(props.type);
   const handleChipChange = (target) => {
     if (!selectValue.includes(target)) {
-      console.log(`${target}이 추가`);
       setSelectValue([...selectValue, target]);
     }
   };

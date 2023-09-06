@@ -13,7 +13,6 @@ import CheckIcon from "@mui/icons-material/Check";
 //props-> data, type,
 export const SelectChip = (props) => {
   const handleShowAllClick = () => {
-    console.info("Show all");
     setIsOpen(!isOpen);
   };
 
@@ -63,13 +62,10 @@ export const SelectChip = (props) => {
 
 export const ChipGroup = (props) => {
   const [selectValue, setSelectValue] = useRecoilState(props.type);
-  console.log("chipData:", props.data);
   const handleChipChange = (target) => {
     if (!selectValue.includes(target)) {
-      console.log(`${target}이 추가`);
       setSelectValue([...selectValue, target]);
     } else {
-      console.log(`${target}이 삭제`);
       const newChipList = selectValue.filter((it) => it !== target);
       setSelectValue(newChipList);
     }
@@ -84,7 +80,6 @@ export const ChipGroup = (props) => {
               props.top ? it.id < props.limit : it.id > props.limit,
             )
             .map((it) => {
-              console.log("it", it.id);
               return (
                 <ChipWrapper
                   key={it.option}

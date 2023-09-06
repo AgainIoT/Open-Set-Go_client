@@ -20,9 +20,7 @@ export const SelectAuto = (props) => {
   );
 
   const handleChange = (event) => {
-    console.log("pre:", selectValue);
     setSelectValue(event.target.value);
-    console.log("after:", event.target.value);
   };
 
   return (
@@ -43,7 +41,6 @@ export const SelectAuto = (props) => {
           onChange={handleChange}
           autoWidth
           renderValue={(selected) => {
-            console.log("selected", selected);
             return (
               <RenderOptionItem>
                 <ItmeAvatar

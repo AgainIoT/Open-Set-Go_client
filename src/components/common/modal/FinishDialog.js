@@ -87,7 +87,6 @@ export const FinishDialog = () => {
           withCredentials: true,
         },
       );
-      console.log("state", response.status);
       if (response.status < 300) {
         navigate("/home");
       }
