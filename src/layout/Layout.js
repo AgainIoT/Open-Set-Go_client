@@ -10,8 +10,8 @@ import { Typography } from "@mui/material";
 import { PropTypes } from "prop-types";
 import { activeState, eachStepState, modalState } from "../recoil/commonState";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { BaseModal } from "../components/common/modal/BaseModal";
-import { FinishModal } from "../components/common/modal/FinishModal";
+import { FinishDialog } from "../components/common/modal/FinishDialog";
+import { BaseDialog } from "../components/common/modal/BaseDialog";
 
 export const Layout = () => {
   const [activeStep, setActiveState] = useRecoilState(activeState);
@@ -62,16 +62,16 @@ export const Layout = () => {
             <ButtonWrapper
               variant="contained"
               disabled={!stepCompleted}
-              onClick={() => (activeStep === 5 ? handleOpen() : handleNext())}
+              onClick={() => (activeStep === 4 ? handleOpen() : handleNext())}
             >
               Disabled
             </ButtonWrapper>
           </ButtonContainer>
         </BottomContainer>
       </ContentsContainer>
-      <BaseModal type={"finishModal"}>
-        <FinishModal />
-      </BaseModal>
+      <BaseDialog type={"finishModal"}>
+        <FinishDialog />
+      </BaseDialog>
     </StLayout>
   );
 };
