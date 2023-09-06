@@ -8,7 +8,6 @@ import LicensePage from "../pages/LicensePage";
 import FinishTestPage from "../pages/FinishTest";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
 import ContributingTemplatePage from "../pages/ContributingTemplatePage";
-import LoginPage from "../pages/Login";
 
 const Router = () => {
   return (

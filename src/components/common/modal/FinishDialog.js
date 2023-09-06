@@ -23,6 +23,7 @@ import { SearchForm } from "../SearchAuto";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
+import { templateContent } from "../../../recoil/templateState";
 
 export const FinishDialog = () => {
   const navigate = useNavigate();
@@ -33,6 +34,9 @@ export const FinishDialog = () => {
   const framework = useRecoilValue(repoDataAtomFamily("framework"));
   const gitignoreData = useRecoilValue(selectGitignoreData);
   const license = useRecoilValue(repoDataAtomFamily("license"));
+  const pr = useRecoilValue(templateContent("pr"));
+  const contributing = useRecoilValue(templateContent("contributing"));
+  const readme = useRecoilValue(templateContent("readme"));
 
   /* POST - info */
 
@@ -74,11 +78,11 @@ export const FinishDialog = () => {
         language: lang,
         framework: framework,
         gitignore: gitignoreData,
-        PRTemplate: "### markdown",
+        PRTemplate: pr,
         IssueTemplate: [], // empty array required now
-        contributingMd: "### contributing.md",
-        readmeMd: "### readme.md",
-        license: "https://www.gnu.org/licenses/gpl-3.0.txt",
+        contributingMd: contributing,
+        readmeMd: readme,
+        license: license,
       });
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/file`,
@@ -88,12 +92,34 @@ export const FinishDialog = () => {
           language: lang,
           framework: framework,
           gitignore: gitignoreData,
-          PRTemplate: "### markdown",
+          PRTemplate: pr,
           IssueTemplate: [], // empty array required now
-          contributingMd: "### contributing.md",
-          readmeMd: "### readme.md",
+          contributingMd: contributing,
+          readmeMd: readme,
           license: license,
         },
+        {
+          withCredentials: true,
+        },
+      );
+    } catch (e) {
+      // 실패 시 처리
+      console.error(e);
+      alert("기록 시작 실패. 재시도해주세요.");
+    }
+  }
+
+  /* POST - email */
+
+  async function postEmail() {
+    // async, await을 사용하는 경우
+
+    try {
+      // GET 요청은 params에 실어 보냄
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/mail`,
+        "",
         {
           withCredentials: true,
         },
@@ -102,7 +128,6 @@ export const FinishDialog = () => {
       if (response.status < 300) {
         navigate("/home");
       }
-      // 응답 결과(response)를 변수에 저장하거나.. 등 필요한 처리를 해 주면 된다.
     } catch (e) {
       // 실패 시 처리
       console.error(e);
@@ -113,6 +138,7 @@ export const FinishDialog = () => {
   const handlePost = async () => {
     await postCreatRepo();
     await postRepoData();
+    await postEmail();
   };
 
   const handleClose = () => {};
