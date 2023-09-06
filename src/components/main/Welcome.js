@@ -2,9 +2,8 @@ import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
 import propTypes from "prop-types";
 import { useRecoilValue } from "recoil";
-import { authState, token } from "../../recoil/authorize";
-import { useEffect, useState } from "react";
-import { Cookies } from "react-cookie";
+import { token } from "../../recoil/authorize";
+import { useNavigate } from "react-router-dom";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
@@ -14,6 +13,7 @@ const handleLogin = () => {
 };
 export default function Welcome() {
   const accessToken = useRecoilValue(token);
+  const navigate = new useNavigate();
   return (
     <div className="WELCOME">
       <h1 className="title">Open, Set, Go</h1>
@@ -30,7 +30,7 @@ export default function Welcome() {
           learn more
         </Button>
         {accessToken ? (
-          <Button variant="outlined" onClick={handleLogin}>
+          <Button variant="outlined" onClick={() => navigate("/step1")}>
             get started
           </Button>
         ) : (

@@ -3,7 +3,9 @@ import axios from "axios";
 import Typography from "@mui/material/Typography";
 import { templateState, templateToModal } from "../../../recoil/templateState";
 import { useRecoilState } from "recoil";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 import { styled } from "styled-components";
+import { WidthFull } from "@mui/icons-material";
 
 const BodyBox = styled.div`
   display: flex;
@@ -20,8 +22,16 @@ export default function TemplateBody(props) {
   const [modal, setModal] = useRecoilState(templateToModal);
 
   return (
-    <BodyBox><Typography id="PR-desc" variant="h4" gutterBottom color="textSecondary" m={2} >
-      {selectValue.content}
-    </Typography></BodyBox>
+    <BodyBox>
+      <Typography
+        id="PR-desc"
+        variant="h4"
+        gutterBottom
+        color="textSecondary"
+        m={2}
+      >
+        <MarkdownPreview source={selectValue} />
+      </Typography>
+    </BodyBox>
   );
 }
