@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 import SlideContent from "./SlideContent";
 import styled from "styled-components";
 import axios from "axios";
-import { useRecoilState } from "recoil";
-import { repoDataAtomFamily } from "../../recoil/repoData";
 
+//Slide: Component for Implementing the License Page using the React Slick
 const Slide = () => {
+  //using recoil to add slide content in Slide component
   const [data, setData] = useState([]);
-  // const [pickLi, setPickLi] = useRecoilState(repoDataAtomFamily("license"));
-
-  // const onClick = () => {
-  //   console.log("in Slide: ", pickLi);
-  // };
   useEffect(() => {
     let completed = false;
 
@@ -88,10 +81,7 @@ const StyledSlider = styled(Slider)`
 
   .slick-track {
     height: 100%;
-    /* justify-content: center;
-    align-items: center; */
     display: flex;
-    /* background-color: pink; */
   }
 
   .slick-center {
@@ -101,8 +91,6 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-slide div {
-    //슬라이더  컨텐츠(안에 있는 컨텐츠들 싹 다 바꿔 얘가 아주 절대적이야)
-    /* display: flex; */
     height: 100%;
   }
 
@@ -114,11 +102,11 @@ const StyledSlider = styled(Slider)`
     left: 0;
   }
 `;
+
 const cssstyle = `
 .container{
   display:flex;
   justify-content:center;
-  // background-color: blue;
   width: 100%;
   height: 100%;
 }

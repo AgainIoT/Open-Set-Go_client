@@ -1,11 +1,10 @@
-// import Step from "./Step";
 import { COLOR } from "../../styles/color.js";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
-// import Step3 from "./Step3";
-// import Step4 from "./Step4";
 import { styled } from "styled-components";
 import Step5 from "./Step5.js";
+
+//Steps: Component containing descriptions on the main page;
 export default function Steps() {
   return (
     <StSteps className="STEPS" style={{ backgroundColor: COLOR.MAIN_BACKGROUND }}>

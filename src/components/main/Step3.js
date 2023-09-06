@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import styled from "styled-components";
 import LICENSE from "../../assets/images/licenseEx.svg";
 
+//Step3: Component for the bottom description of the main page (license description)
 const Step3 = () => {
   return (
     <StStep3>
@@ -23,6 +24,7 @@ const SharedAttr = `
   justify-content: center;
   align-items: center;
 `;
+
 const StStep3 = styled.div`
   padding: 10rem 0rem 10rem 0rem;
   ${SharedAttr};
