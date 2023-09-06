@@ -7,6 +7,7 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -64,19 +65,19 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-// 여기부터 스크롤뷰
-const renderRow = (props) => {
+export function TemplateList(props) {
   const [data, setData] = useState([]);
   const [selectValue, setSelectValue] = useRecoilState(templateState);
   const [modal, setModal] = useRecoilState(templateToModal);
-  const url = process.env.REACT_APP_SERVER_URL+"/file/"+modal.type;
+  const url = process.env.REACT_APP_SERVER_URL+"/file/"+props.type;
   // console.log(modal.type);
 
   useEffect(() => {
     let completed = false;
 
     async function get() {
-      const result = await axios.get(modal.type === undefined ? process.env.REACT_APP_SERVER_URL+"/file/pr" : url);
+      const result = await axios.get(url);
+      console.log(props.type);
       if (!completed) setData(result.data);
     }
     get();
@@ -85,25 +86,6 @@ const renderRow = (props) => {
     };
   }, [modal.type]);
 
-  return (
-    <div>
-      {data.map((it)=>(
-        <div key = {it._id}>
-          <ListItem component="div" disablePadding onClick={() => setSelectValue({_id:it._id, title: it.title, repoName: it.repoName, content:it.content})
-          }>
-            <ListItemButton>
-              <ListItemText primary={it.title} id="PR-desc" variant="h6" gutterBottom color="textSecondary" m={2} />
-            </ListItemButton>
-          </ListItem>
-        </div>
-
-      ))
-      }
-    </div>
-  );
-};
-
-export  function TemplateList(props) {
   return (
     <Item><Typography
       component="h1"
@@ -127,15 +109,27 @@ export  function TemplateList(props) {
     <Box
       sx={{ width: "100%", height: "100%", maxWidth: 360, bgcolor: "background.paper", maxHeight: 400 }}
     >
-      <FixedSizeList
-        height={610}
-        width={360}
-        itemSize={46}
-        itemCount={1}
-        overscanCount={5}
+      <List
+        sx={{height: 610,
+          width:360,
+          itemSize:46,
+          itemCount:1,
+          overscanCount:5}}
       >
-        {renderRow}
-      </FixedSizeList>
+        <div>
+          {data.map((it)=>(
+            <div key = {it._id}>
+              <ListItem component="div" disablePadding onClick={() => setSelectValue({_id:it._id, title: it.title, repoName: it.repoName, content:it.content})
+              }>
+                <ListItemButton>
+                  <ListItemText primary={it.title} id="PR-desc" variant="h6" gutterBottom color="textSecondary" m={2} />
+                </ListItemButton>
+              </ListItem>
+            </div>
+          ))
+          }
+        </div>
+      </List>
     </Box></Item>
   );
 }

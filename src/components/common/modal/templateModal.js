@@ -12,14 +12,11 @@ function TemplateModal(props) {
 
   useEffect(() => {
     setModal({type:props.type});
-    console.log("dd");
   }, []);
-
-  // console.log(props.type);
 
   return (
     <div style = {{display: "flex", flexDirection: "row"}}>
-      {<TemplateList />}
+      {<TemplateList type = {props.type} />}
       <div style = {{display: "flex", flexDirection: "column"}}>
         {<TemplateTitle />}
         {<TemplateBody />}

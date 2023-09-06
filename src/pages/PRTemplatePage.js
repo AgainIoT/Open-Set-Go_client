@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PRTemplateModal from "../components/common/modal/templateModal";
+import TemplateModal from "../components/common/modal/templateModal";
 import MDEditor from "@uiw/react-md-editor";
 import Button from "@mui/material/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -21,7 +21,7 @@ function PRTemplatePage(props) {
   return(
     <div>
       <BaseModal type={prOpenState}>
-        <PRTemplateModal type = "pr" />
+        <TemplateModal type = "pr" />
       </BaseModal>
       <MDEditor
         height={350}
