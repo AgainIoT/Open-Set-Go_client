@@ -7,12 +7,13 @@ import LicensePage from "../pages/LicensePage";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
 import ContributingTemplatePage from "../pages/ContributingTemplatePage";
 
+
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/home" element={<MainPage />} />
-        {/* <Route path="/login" element={<LoginPage />} /> */}
+        <Route path="/login" element={<LoginPage />} />
         <Route element={<Layout />}>
           <Route path="/PRTemplate" element={<PRTemplatePage />} />
           <Route path="/step1" element={<CreateRepo />} />
@@ -20,6 +21,9 @@ const Router = () => {
           <Route path="/readme" element={<ReadmeTemplatePage />} />
           <Route path="/contributing" element={<ContributingTemplatePage />} />
         </Route>
+        {/* <Route element={<Layout num={1}/>}>
+          <Route path="/test" element={<TestPage />} />
+        </Route> */}
       </Routes>
     </BrowserRouter>
   );

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 import SlideContent from "./SlideContent";
 import styled from "styled-components";
 import axios from "axios";
-import { Button } from "@mui/material";
 
 const Slide = () => {
   const [data, setData] = useState([]);
@@ -19,11 +18,10 @@ const Slide = () => {
 
     async function get() {
       const result = await axios.get(
-        process.env.REACT_APP_SERVER_URL
+        `${process.env.REACT_APP_SERVER_URL}/file/license`
       );
       if (!completed) {
         setData(result.data);
-        console.log(result.data);
       }
     }
     get();
@@ -59,7 +57,7 @@ const Slide = () => {
         {data.map((it) => {
           return (
             <div key={it.license}>
-              <SlideContent data={it} pickLi={pickLi} setPickLi={setPickLi}/>
+              <SlideContent data={it} pickLi={pickLi} setPickLi={setPickLi} />
             </div>
           );
         })}
@@ -70,13 +68,7 @@ const Slide = () => {
 
 export default Slide;
 
-export const MultiItem = styled.div`
-  opacity: 1;
-  transform: scale()(1.04);
-`;
-
 const StyledSlider = styled(Slider)`
-  /* background-color: green; */
   width: 100%;
   height: 100%;
   display: flex;
@@ -87,14 +79,13 @@ const StyledSlider = styled(Slider)`
     width: 90%;
     height: 100%;
     margin: 0 auto;
-    /* border: 1px solid black; */
     justify-content: center;
     align-items: center;
     display: flex;
   }
 
   .slick-track {
-    height: 90%;
+    height: 100%;
     /* justify-content: center;
     align-items: center; */
     display: flex;
@@ -106,8 +97,6 @@ const StyledSlider = styled(Slider)`
       border: 2px solid #7da9db;
     }
   }
-  
-
 
   .slick-slide div {
     //슬라이더  컨텐츠(안에 있는 컨텐츠들 싹 다 바꿔 얘가 아주 절대적이야)
@@ -129,7 +118,7 @@ const cssstyle = `
   justify-content:center;
   // background-color: blue;
   width: 100%;
-  height: 90%;
+  height: 100%;
 }
 
 .slick-next:before, .slick-prev:before {
