@@ -22,26 +22,37 @@ export default function TemplateTitle(props) {
   const handleClose = () => setModalValue(false);
 
   return (
-    <box><Box sx={{ ...commonStyles, borderBottom: 1, height: "100%" }} >
-      <Typography
-        component="h1"
-        className="title"
-        id="PR-title"
-        variant="h3" gutterBottom
-        textColor="inherit"
-        fontWeight="lg"
-        m={2}
-      >
-        {selectValue.title}
-      </Typography>
-      <Typography id="PR-desc" variant="h5" gutterBottom color="textSecondary" m={2}>
-        {selectValue.repoName}
-      </Typography>
-      <Button
-        variant="contained" m={4} onClick={() => setContent(selectValue.content)
-        }>
-                    Use Template
-      </Button>
-    </Box></box>
+    <box>
+      <Box sx={{ ...commonStyles, borderBottom: 1, height: "100%" }}>
+        <Typography
+          component="h1"
+          className="title"
+          id="PR-title"
+          variant="h3"
+          gutterBottom
+          textColor="inherit"
+          fontWeight="lg"
+          m={2}
+        >
+          {selectValue.title}
+        </Typography>
+        <Typography
+          id="PR-desc"
+          variant="h5"
+          gutterBottom
+          color="textSecondary"
+          m={2}
+        >
+          {selectValue.repoName}
+        </Typography>
+        <Button
+          variant="contained"
+          m={4}
+          onClick={() => setContent(selectValue.content)}
+        >
+          Use Template
+        </Button>
+      </Box>
+    </box>
   );
 }
