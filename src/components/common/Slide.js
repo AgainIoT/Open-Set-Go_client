@@ -36,7 +36,7 @@ const Slide = () => {
   };
 
   return (
-    <div className="container">
+    <StSlide>
       <link
         rel="stylesheet"
         type="text/css"
@@ -47,7 +47,6 @@ const Slide = () => {
         type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
       />
-      <style>{cssstyle}</style>
       <StyledSlider {...settings}>
         {data.map((it) => {
           return (
@@ -57,11 +56,18 @@ const Slide = () => {
           );
         })}
       </StyledSlider>
-    </div>
+    </StSlide>
   );
 };
 
 export default Slide;
+
+const StSlide = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
 
 const StyledSlider = styled(Slider)`
   width: 100%;
@@ -101,17 +107,8 @@ const StyledSlider = styled(Slider)`
   .slick-prev {
     left: 0;
   }
-`;
 
-const cssstyle = `
-.container{
-  display:flex;
-  justify-content:center;
-  width: 100%;
-  height: 100%;
-}
-
-.slick-next:before, .slick-prev:before {
+  .slick-next:before, .slick-prev:before {
     color: #888;
-}
+  }
 `;
