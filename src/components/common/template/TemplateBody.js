@@ -15,6 +15,7 @@ import MarkdownPreview from "@uiw/react-markdown-preview";
 const BodyBox = styled.div`
   display: flex;
   max-height: 52rem;
+  max-width: 75rem;
   flex-direction: column;
   height: 100%;
   overflow-x: hidden;
