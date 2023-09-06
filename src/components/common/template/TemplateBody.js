@@ -9,6 +9,8 @@ import {
 } from "../../../recoil/templateState";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
+import { WidthFull } from "@mui/icons-material";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 
 const BodyBox = styled.div`
   display: flex;
@@ -31,7 +33,7 @@ export default function TemplateBody(props) {
         color="textSecondary"
         m={2}
       >
-        {showValue.content}
+        <MarkdownPreview source={showValue.content} />
       </Typography>
     </BodyBox>
   );

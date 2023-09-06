@@ -27,8 +27,13 @@ export default function TemplateTitle(props) {
   const [modalValue, setModalValue] = useRecoilState(modalState(props.type));
 
   const handleSelect = () => {
-    setSelectValue(showValue.title);
-    setContent(showValue.content);
+    if (props.type === "contributing") {
+      setSelectValue(selectValue.concat({ _id: showValue._id }));
+      setContent(content + "\n" + showValue.content);
+    } else {
+      setSelectValue({ _id: showValue._id });
+      setContent(showValue.content);
+    }
   };
   const handleClose = () => setModalValue(false);
 

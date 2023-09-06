@@ -19,6 +19,7 @@ import {
   templatePreviewState,
   templateSelectState,
 } from "../../../recoil/templateState";
+import { fontSize } from "@mui/system";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -95,7 +96,19 @@ export function TemplateList(props) {
     async function get() {
       const result = await axios.get(url);
       console.log(props.type);
-      if (!completed) setData(result.data);
+      if (!completed) {
+        if (props.type === "contributing") {
+          const list = [];
+          result.data.forEach((typeList) => {
+            typeList.map((it) => {
+              list.push(it);
+            });
+          });
+          setData(list);
+        } else {
+          setData(result.data);
+        }
+      }
     }
     get();
     return () => {
@@ -113,7 +126,7 @@ export function TemplateList(props) {
         fontWeight="lg"
         mb={1}
       >
-        <Box sx={{ fontWeight: "bold", m: 1 }}>PR Template</Box>
+        <Box sx={{ fontWeight: "bold", m: 1 }}>{props.type}</Box>
       </Typography>
       <Search>
         <SearchIconWrapper>
@@ -132,6 +145,7 @@ export function TemplateList(props) {
           bgcolor: "background.paper",
           maxHeight: 400,
         }}
+        style={{ overflowX: "hidden", overflowY: "auto" }}
       >
         <List
           sx={{
@@ -160,6 +174,13 @@ export function TemplateList(props) {
                       gutterBottom
                       color="textSecondary"
                       m={2}
+                    />
+                    <ListItemText
+                      primary={it.repoName}
+                      id="PR-desc"
+                      variant="h6"
+                      gutterBottom
+                      color="textSecondary"
                     />
                   </ListItemButton>
                 </ListItem>
