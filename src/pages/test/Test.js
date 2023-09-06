@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { COLOR } from "../styles/color";
+import { COLOR } from "../../styles/color";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import { languageFrameworks } from "../data/CreateRepoData";
-import { optionItemSelector, repoDataAtomFamily } from "../recoil/repoData";
+import { languageFrameworks } from "../../data/CreateRepoData";
+import { optionItemSelector, repoDataAtomFamily } from "../../recoil/repoData";
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import axios from "axios";
@@ -19,9 +19,9 @@ import { createFilterOptions } from "@mui/material/Autocomplete";
 /* */
 
 /* ChipAuto */
-import optionData from "../data/optionData.json";
+import optionData from "../../data/optionData.json";
 import { InputSelectAuto } from "../components/common/InputAuto";
-import { AutocompleteInput } from "../components/common/Autocomplete";
+import { AutocompleteInput } from "../../components/common/Autocomplete";
 
 export function TestPage() {
   //   const lang = Object.keys(languageFrameworks).map((entrie, idx) => {

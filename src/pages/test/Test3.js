@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { COLOR } from "../styles/color";
-import { eachStepState } from "../recoil/commonState";
+import { COLOR } from "../../styles/color";
+import { eachStepState } from "../../recoil/commonState";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 
