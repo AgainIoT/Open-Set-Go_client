@@ -1,12 +1,8 @@
-import styled from "styled-components";
-import { COLOR } from "../styles/color";
-import Welcome from "../components/main/Welcome";
-import Desc from "../components/main/Desc";
+import { Welcome } from "../components/main/Welcome";
 import Footer from "../components/main/Footer";
 import Steps from "../components/main/Steps";
-import css from "../../src/mainpage.css";
 import propTypes from "prop-types";
-import Header from "../layout/MainHeader";
+import { Header } from "../layout/MainHeader";
 import { Cookies } from "react-cookie";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
