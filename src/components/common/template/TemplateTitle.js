@@ -10,14 +10,6 @@ import {
 import styled from "styled-components";
 import { modalState } from "../../../recoil/commonState";
 
-const commonStyles = {
-  bgcolor: "background.paper",
-  m: 1,
-  borderColor: "text.secondary",
-  width: "100%",
-  height: "25%",
-};
-
 // props -> type(pr, readme, contributing)
 export default function TemplateTitle(props) {
   const [selectValue, setSelectValue] = useRecoilState(
@@ -75,3 +67,11 @@ export default function TemplateTitle(props) {
     </box>
   );
 }
+
+const commonStyles = {
+  bgcolor: "background.paper",
+  m: 1,
+  borderColor: "text.secondary",
+  width: "100%",
+  height: "25%",
+};
