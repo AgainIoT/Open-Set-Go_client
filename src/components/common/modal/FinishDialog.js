@@ -12,18 +12,27 @@ import {
   showAllGitignoreState,
 } from "../../../recoil/repoData";
 import { FixedOptionShowSelect } from "../ShowSelect";
-import { Button, Grid } from "@mui/material";
+import {
+  Button,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+} from "@mui/material";
 import { SearchForm } from "../SearchAuto";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
 
-export const FinishModal = () => {
+export const FinishDialog = () => {
+  const navigate = useNavigate();
   const owner = useRecoilValue(repoDataAtomFamily("owner"));
   const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
   const desc = useRecoilValue(repoDataAtomFamily("desc"));
   const lang = useRecoilValue(repoDataAtomFamily("lang"));
   const framework = useRecoilValue(repoDataAtomFamily("framework"));
   const gitignoreData = useRecoilValue(selectGitignoreData);
+  const license = useRecoilValue(repoDataAtomFamily("license"));
 
   /* POST - info */
 
@@ -83,12 +92,16 @@ export const FinishModal = () => {
           IssueTemplate: [], // empty array required now
           contributingMd: "### contributing.md",
           readmeMd: "### readme.md",
-          license: "https://www.gnu.org/licenses/gpl-3.0.txt",
+          license: license,
         },
         {
           withCredentials: true,
         },
       );
+      console.log("state", response.status);
+      if (response.status < 300) {
+        navigate("/home");
+      }
       // 응답 결과(response)를 변수에 저장하거나.. 등 필요한 처리를 해 주면 된다.
     } catch (e) {
       // 실패 시 처리
@@ -102,18 +115,25 @@ export const FinishModal = () => {
     await postRepoData();
   };
 
+  const handleClose = () => {};
+
   return (
-    <StGitIgnoreModal container>
-      <Grid item xs={6}>
-        <Button variant="text" onClick={() => handlePost()}>
+    <StFinishDialog>
+      <DialogTitle>Are you sure completed project settings?</DialogTitle>
+      <DialogContent>
+        asdfasdffasdfasdfasdfasdfasdfasdfasdfasdfasdf?
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Disagree</Button>
+        <Button onClick={() => handlePost()} autoFocus>
           Finish
         </Button>
-      </Grid>
-    </StGitIgnoreModal>
+      </DialogActions>
+    </StFinishDialog>
   );
 };
 
-const StGitIgnoreModal = styled(Grid)`
+const StFinishDialog = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: scroll;
