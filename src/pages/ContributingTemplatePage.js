@@ -34,7 +34,6 @@ function ContributingTemplatePage(props) {
         <TemplateModal type={"contributing"} />
       </BaseModal>
       <MarkdownPreview type={"contributing"} />
-      {/* <MDEditor height={350} value={content} onChange={setContent} /> */}
       <Button onClick={handlesave} variant="contained" color="success">
         저장
       </Button>

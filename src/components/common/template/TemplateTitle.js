@@ -9,6 +9,7 @@ import {
 } from "../../../recoil/templateState";
 import styled from "styled-components";
 import { modalState } from "../../../recoil/commonState";
+import LinkIcon from "@mui/icons-material/Link";
 
 // props -> type(pr, readme, contributing)
 export default function TemplateTitle(props) {
@@ -53,6 +54,9 @@ export default function TemplateTitle(props) {
           m={2}
         >
           {showValue.repoName}
+          <LinkIcon onClick={() => {
+            window.open(showValue.repoUrl);
+          }}></LinkIcon>
         </Typography>
         <Button
           variant="contained"

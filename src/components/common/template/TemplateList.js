@@ -36,6 +36,7 @@ export function TemplateList(props) {
       _id: value._id,
       title: value.title,
       repoName: value.repoName,
+      repoUrl: value.repoUrl,
       content: value.content,
     });
   };
