@@ -2767,7 +2767,7 @@
   resolved "https://registry.yarnpkg.com/@uiw/copy-to-clipboard/-/copy-to-clipboard-1.0.15.tgz#959cebbae64df353964647bb5b9d705176b2e613"
   integrity sha512-1bbGZ3T+SGmA07BoVPK4UCUDcowDN/moctviJGQexfOc9qL8TMLDQPr7mTPvDKhgJkgnlKkAQNFU8PiarIi9sQ==
 
-"@uiw/react-markdown-preview@^4.1.14":
+"@uiw/react-markdown-preview@^4.1.14", "@uiw/react-markdown-preview@^4.1.15":
   version "4.1.15"
   resolved "https://registry.yarnpkg.com/@uiw/react-markdown-preview/-/react-markdown-preview-4.1.15.tgz#82f7ca4d7dc0e9896856fd795b5aa063d1209d2a"
   integrity sha512-N9itShGvsK5Bh5NETMK5l1nPK8l3iYuN6ygUdIgEHoN0xXkyiAYHP9jC6o8x6JYNWg8z+e0jSbLGjHlyBFO0SA==

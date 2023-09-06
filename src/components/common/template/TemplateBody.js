@@ -3,6 +3,7 @@ import axios from "axios";
 import Typography from "@mui/material/Typography";
 import { templateState, templateToModal } from "../../../recoil/templateState";
 import { useRecoilState } from "recoil";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 import { styled } from "styled-components";
 
 const BodyBox = styled.div`
@@ -28,7 +29,7 @@ export default function TemplateBody(props) {
         color="textSecondary"
         m={2}
       >
-        {selectValue}
+        <MarkdownPreview source={selectValue} />
       </Typography>
     </BodyBox>
   );
