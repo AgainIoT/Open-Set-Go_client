@@ -41,9 +41,6 @@ function ContributingTemplatePage(props) {
         color="success">
                 Modal
       </Button>
-      {/* <BaseModal type={prOpenState}>
-        <TemplateModal type = "readme" params = "64f175c218eed0c9b21a2f2e"/>
-      </BaseModal> */}
     </div>
   );
 }
