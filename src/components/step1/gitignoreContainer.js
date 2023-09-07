@@ -10,7 +10,7 @@ import {
 
 import { Button, Typography } from "@mui/material";
 import { BaseModal } from "../common/modal/BaseModal";
-import { GitignoreModal } from "../common/modal/gitignoreModal";
+import { GitignoreModal } from "../common/modal/GitignoreModal";
 import { ReadonlyAuto } from "../common/ReadOnlyAuto";
 import { modalState } from "../../recoil/commonState";
 
