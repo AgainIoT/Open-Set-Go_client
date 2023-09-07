@@ -8,7 +8,6 @@ import {
 import { Box, Button, DialogContent, DialogTitle } from "@mui/material";
 import axios from "axios";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { useNavigate } from "react-router-dom";
 import { templateContent } from "../../../recoil/templateState";
 import { useState } from "react";
 import { LoadingCompleted } from "../LoadingCompleted";
