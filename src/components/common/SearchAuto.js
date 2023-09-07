@@ -8,7 +8,7 @@ import Checkbox from "@mui/material/Checkbox";
 import CheckIcon from "@mui/icons-material/Check";
 import { Autocomplete } from "@mui/material";
 
-export const SearchForm = (props) => {
+export const SearchAuto = (props) => {
   const [selectValue, setSelectValue] = useRecoilState(props.type);
   const handleChipChange = (target) => {
     if (!selectValue.includes(target)) {
@@ -23,11 +23,11 @@ export const SearchForm = (props) => {
   const checkedIcon = <CheckIcon fontSize="small" />;
 
   return (
-    <StSearchForm>
+    <StSearchAuto>
       <SerachIconWrapper>
         <SearchIcon />
       </SerachIconWrapper>
-      <SearchAuto
+      <SearchAutoForm
         {...flatProps}
         value={""}
         getOptionLabel={(option) => option}
@@ -67,7 +67,7 @@ export const SearchForm = (props) => {
           newValue && handleChipChange(newValue);
         }}
       />
-    </StSearchForm>
+    </StSearchAuto>
   );
 };
 
@@ -88,12 +88,12 @@ const SharedPadding = `
   padding-left: 3.3rem;
 `;
 
-const StSearchForm = styled.div`
+const StSearchAuto = styled.div`
   margin: 2rem;
   justify-content: center;
 `;
 
-const SearchAuto = styled(Autocomplete)`
+const SearchAutoForm = styled(Autocomplete)`
   & .MuiInput-input {
     padding: 0.4rem 0.4rem 0.6rem 0;
   }

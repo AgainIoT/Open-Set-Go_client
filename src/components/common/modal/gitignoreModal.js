@@ -7,7 +7,7 @@ import optionData from "../../../data/optionData.json";
 import { selectGitignoreData } from "../../../recoil/repoData";
 import { FixedOptionShowSelect } from "../ShowSelect";
 import { Grid } from "@mui/material";
-import { SearchForm } from "../SearchAuto";
+import { SearchAuto } from "../SearchAuto";
 
 export const GitignoreModal = () => {
   const osOptions = optionData["OS"];
@@ -19,7 +19,7 @@ export const GitignoreModal = () => {
   return (
     <StGitIgnoreModal container>
       <Grid item xs={6}>
-        <SearchForm data={allOptions} type={selectGitignoreData} />
+        <SearchAuto data={allOptions} type={selectGitignoreData} />
         <FixedOptionShowSelect type={selectGitignoreData} />
       </Grid>
       <Grid item xs={12} sm={6}></Grid>
