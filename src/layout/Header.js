@@ -15,12 +15,11 @@ import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
-import LOGO from "../../src/assets/images/Logo.svg";
+import LOGO from "../../src/assets/images/title.svg";
 import axios from "axios";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { avatar, id, name, token } from "../recoil/authorize";
 import styled from "styled-components";
-
 const ElevationScroll = (props) => {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -31,12 +30,10 @@ const ElevationScroll = (props) => {
     threshold: 0,
     target: window ? window() : undefined,
   });
-
   return React.cloneElement(children, {
     elevation: trigger ? 4 : 0,
   });
 };
-
 ElevationScroll.propTypes = {
   children: PropTypes.element.isRequired,
   /**
@@ -45,7 +42,6 @@ ElevationScroll.propTypes = {
    */
   window: PropTypes.func,
 };
-
 export const Header = (props) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -53,7 +49,6 @@ export const Header = (props) => {
   const [userId, setUserId] = useRecoilState(id);
   const [userName, setUserName] = useRecoilState(name);
   const setToken = useSetRecoilState(token);
-
   React.useEffect(() => {
     setSrc(localStorage.avatar);
     setUserId(localStorage.id);
@@ -65,20 +60,16 @@ export const Header = (props) => {
   const handleOpenUserMenu = (event) => {
     if (props.burger) setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = (event) => {
     setAnchorElNav(null);
     return event.currentTarget;
   };
-
   const onMenuClick = (event) => {
     moveToPage(handleCloseNavMenu(event).innerText);
   };
-
   const moveToPage = (page) => {
     document.querySelector("." + page).scrollIntoView({ behavior: "smooth" });
   };
-
   const handleCloseUserMenu = async () => {
     const res = await axios.post(
       process.env.REACT_APP_SERVER_URL + "/auth/github-logout",
@@ -94,11 +85,9 @@ export const Header = (props) => {
     setSrc(localStorage.getItem("avatar"));
     setAnchorElUser(null);
   };
-
   const handleOpenNewTab = (url) => {
     window.open(url, "_blank", "noopener, noreferrer");
   };
-
   return (
     <React.Fragment>
       <CssBaseline />
@@ -114,22 +103,6 @@ export const Header = (props) => {
               <LogoWrapper href="/">
                 <LogoImg src={LOGO} />
               </LogoWrapper>
-              <Typography
-                variant="h5"
-                href="/"
-                component="a"
-                gutterBottom
-                mt={2}
-                sx={{
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                OpenSetGo
-              </Typography>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               {props.burger ? (
@@ -184,26 +157,7 @@ export const Header = (props) => {
               <LogoWrapper href="/">
                 <LogoImg src={LOGO} />
               </LogoWrapper>
-              <Typography
-                variant="h5"
-                noWrap
-                component="a"
-                href="/"
-                mt={2}
-                sx={{
-                  display: { xs: "flex", md: "none" },
-                  flexGrow: 1,
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                OpenSetGo
-              </Typography>
             </Box>
-
             <Box
               sx={{
                 mr: 2,
@@ -272,19 +226,15 @@ export const Header = (props) => {
     </React.Fragment>
   );
 };
-
 const LogoWrapper = styled.a`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 1rem;
 `;
-
 const LogoImg = styled.img`
-  width: 3rem;
-  height: 3rem;
+  width: 10rem;
+  height: 10rem;
 `;
-
 const AvatarDiv = styled.div`
   flex-direction: column;
   display: flex;
