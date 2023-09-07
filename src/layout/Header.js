@@ -231,7 +231,7 @@ export const Header = (props) => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt={userId} src={src} />
+                  <Avatar alt={userName ? userName : userId} src={src} />
                 </IconButton>
               </Tooltip>
               <Typography
