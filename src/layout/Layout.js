@@ -52,7 +52,7 @@ export const Layout = () => {
               disableElevation
               onClick={() => handlePre()}
             >
-              Contained
+              Prev
             </ButtonWrapper>
           ) : (
             <div></div>
@@ -63,13 +63,13 @@ export const Layout = () => {
               disabled={!stepCompleted}
               onClick={() => (activeStep === 4 ? handleOpen() : handleNext())}
             >
-              Disabled
+              Next
             </ButtonWrapper>
           </ButtonContainer>
         </BottomContainer>
       </ContentsContainer>
       <BaseDialog type={"finishModal"}>
-        <FinishDialog />
+        <FinishDialog type={"finishModal"} />
       </BaseDialog>
     </StLayout>
   );
