@@ -2,24 +2,16 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 
 import { useRecoilState } from "recoil";
-import {
-  selectGitignoreData,
-  selectFrameworkData,
-} from "../../recoil/repoData";
-
-import Autocomplete from "@mui/material/Autocomplete";
-
-import { createFilterOptions } from "@mui/material/Autocomplete";
 
 import SearchIcon from "@mui/icons-material/Search";
 import Checkbox from "@mui/material/Checkbox";
 import CheckIcon from "@mui/icons-material/Check";
+import { Autocomplete } from "@mui/material";
 
-export const SearchForm = (props) => {
+export const SearchAuto = (props) => {
   const [selectValue, setSelectValue] = useRecoilState(props.type);
   const handleChipChange = (target) => {
     if (!selectValue.includes(target)) {
-      console.log(`${target}이 추가`);
       setSelectValue([...selectValue, target]);
     }
   };
@@ -31,11 +23,11 @@ export const SearchForm = (props) => {
   const checkedIcon = <CheckIcon fontSize="small" />;
 
   return (
-    <StSearchForm>
+    <StSearchAuto>
       <SerachIconWrapper>
         <SearchIcon />
       </SerachIconWrapper>
-      <SearchAuto
+      <SearchAutoForm
         {...flatProps}
         value={""}
         getOptionLabel={(option) => option}
@@ -75,7 +67,7 @@ export const SearchForm = (props) => {
           newValue && handleChipChange(newValue);
         }}
       />
-    </StSearchForm>
+    </StSearchAuto>
   );
 };
 
@@ -96,12 +88,12 @@ const SharedPadding = `
   padding-left: 3.3rem;
 `;
 
-const StSearchForm = styled.div`
+const StSearchAuto = styled.div`
   margin: 2rem;
   justify-content: center;
 `;
 
-const SearchAuto = styled(Autocomplete)`
+const SearchAutoForm = styled(Autocomplete)`
   & .MuiInput-input {
     padding: 0.4rem 0.4rem 0.6rem 0;
   }

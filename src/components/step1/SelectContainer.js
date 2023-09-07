@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { COLOR } from "../../styles/color";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -17,7 +16,6 @@ export const SelectContainer = () => {
   const [selectFramework, setSelectFramework] = useRecoilState(
     repoDataAtomFamily("framework"),
   );
-  const [langOptions, setLangOptions] = useState([]);
   const [frameworkOpions, setFrameworkOptions] = useState([]);
   const [isSelectLang, setIsSelectLang] = useState(false);
   const [disableValue, setDisableValue] = useState(true);
@@ -28,26 +26,13 @@ export const SelectContainer = () => {
   ]);
 
   async function getBaseOptionData() {
-    // async, await을 사용하는 경우
     try {
-      // GET 요청은 params에 실어 보냄
       const response = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}/file/supportedEnv`,
       );
 
-      // 응답 결과(response)를 변수에 저장하거나.. 등 필요한 처리를 해 주면 된다.
-      console.log(response.data);
-      const initOptionData = response.data.map((it) => {
-        console.log("asf", it.frameworks);
-        return {
-          language: it.language,
-          frameworks: it.frameworks,
-        };
-      });
-      console.log("initOptionData: %o", initOptionData);
       setBaseOption(response.data);
     } catch (e) {
-      // 실패 시 처리
       console.error(e);
     }
   }
@@ -57,6 +42,7 @@ export const SelectContainer = () => {
   }, []);
   const langs = baseOption.map((it) => it.language);
 
+  //Apply options based on the language of choice
   useEffect(() => {
     if (isSelectLang) {
       const selectedLanguageOption = baseOption.find(
@@ -69,7 +55,6 @@ export const SelectContainer = () => {
 
       setFrameworkOptions(selectedFrameworkNames);
     } else {
-      console.log("false");
       setSelectFramework("");
     }
   }, [selectLang]);

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 import HelpIcon from "@mui/icons-material/Help";
 import FormControl from "@mui/material/FormControl";
@@ -12,36 +12,27 @@ import Tooltip from "@mui/material/Tooltip";
 
 import { TextField } from "@mui/material";
 import { COLOR } from "../../styles/color";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 
-import axios from "axios";
-
 export const TextInputContainer = (props) => {
   const textRef = useRef("");
-  const [helperText, setHelperText] = useState(" ");
   const [inputValue, setInputValue] = useRecoilState(
     repoDataAtomFamily(props.type),
   );
 
-  const owner = useRecoilValue(repoDataAtomFamily("owner"));
-
   /* GET - check repository is duplicate */
-  const [checkState, setCheckState] = useState(false);
 
   const handleOnChange = (e) => {
-    // setInputValue(e.target.value);
     setInputValue(e.target.value);
   };
 
   const HelperTextContainer = (props) => {
     const checkIcon = <CheckCircleIcon fontSize="small" />;
     const warningIcon = <WarningRoundedIcon fontSize="small" />;
-    console.log("asf:", props.currInput.current.value);
-    console.log("hhhhhh:", helperText);
     const currInput = props.currInput.current.value;
 
     const textData = [
@@ -73,7 +64,6 @@ export const TextInputContainer = (props) => {
     const useStyle = textData.find((it) =>
       currInput !== "" ? it.type === props.type : it.type === "null",
     );
-    console.log("style:", useStyle?.text);
     return (
       <>
         <FormHelperTextWrapper textcolor={useStyle?.textColor}>
@@ -132,7 +122,6 @@ TextInputContainer.propTypes = { labelText: PropTypes.string.isRequired };
 const StInputContainer = styled.div`
   display: flex;
   width: 100%;
-  /* min-width: 8rem; */
 `;
 
 const InputFormControl = styled(FormControl)`
@@ -206,9 +195,7 @@ const InputField = styled(TextField)`
     &::before {
       border: 0.1rem solid ${COLOR.MAIN_BORDER};
     }
-    &::after {
-      border: 1px solid purple;
-    }
+
     &.Mui-focused {
       border: none;
       outline: none;
@@ -230,9 +217,6 @@ const InputField = styled(TextField)`
     &::before {
       border: 0.1rem solid ${COLOR.MAIN_BORDER};
     }
-    &::after {
-      border: 1px solid purple;
-    }
   }
 
   & .MuiOutlinedInput-root {
@@ -244,39 +228,23 @@ const InputField = styled(TextField)`
     &.Mui-focused {
       box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.1);
     }
-
-    /* &:focus-within {
-      outline: none;
-    } */
   }
 
   &.Mui-focused {
     border: none;
   }
-  /* & .MuiInputBase-root::before {
-    height: 3rem;
-    border-radius: 20rem;
-    border: none;
-    //border: 0.1rem solid lightgray;
-  } */
 
   & .MuiInput-root {
     &:hover {
       border-radius: 20rem;
       border: none;
-      margin-top: 80px;
+      margin-top: 8rem;
     }
   }
 
   &.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
     border: none;
   }
-
-  /* &.MuiInputBase-root
-    .MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before {
-    border: none;
-    box-shadow: 0.1rem 0.2rem 0.9rem lightgray;
-  } */
 
   &.Mui-error {
     border: 1px solid red;

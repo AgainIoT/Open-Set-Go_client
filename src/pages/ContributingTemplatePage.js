@@ -3,7 +3,6 @@ import MDEditor from "@uiw/react-md-editor";
 import Button from "@mui/material/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { templateContent, templateState } from "../recoil/templateState";
-import { gitignoreOpenState, prOpenState } from "../recoil/openModal";
 import { BaseModal } from "../components/common/modal/BaseModal";
 import { TemplateModal } from "../components/common/modal/templateModal";
 import { eachStepState, modalState } from "../recoil/commonState";

@@ -1,31 +1,23 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-import { useEffect, useState } from "react";
 
 import { useRecoilState, useRecoilValue } from "recoil";
-
 import {
   repoDataAtomFamily,
-  selectGitignoreData,
-  selectFrameworkData,
-  selectLanguageData,
   showAllGitignoreState,
 } from "../../recoil/repoData";
 
 import { Button, Typography } from "@mui/material";
 import { BaseModal } from "../common/modal/BaseModal";
-import { GitignoreModal } from "../common/modal/gitignoreModal";
-import { gitignoreOpenState } from "../../recoil/openModal";
-import { SearchAutoForm } from "../common/SearchAuto";
-import { FrameWorkOptions } from "../../data/CreateRepoData";
+import { GitignoreModal } from "../common/modal/GitignoreModal";
 import { ReadonlyAuto } from "../common/ReadOnlyAuto";
 import { modalState } from "../../recoil/commonState";
 
+/* for gitignore */
 export const GitIgnoreContainer = () => {
   const [modalValue, setModalValue] = useRecoilState(
     modalState("gitignoreModal"),
   );
-  // const frameworkData = useRecoilValue(selectFrameworkData);
   const langData = useRecoilValue(repoDataAtomFamily("lang"));
   const frameworkData = useRecoilValue(repoDataAtomFamily("framework"));
 
@@ -36,7 +28,6 @@ export const GitIgnoreContainer = () => {
         <TitleText>Setting .gitignore</TitleText>
         <Button onClick={handleOpen}>Edit .gitignore</Button>
       </Header>
-
       <BodyText variant="body1">
         Choose which files not to track from a list of templates.
       </BodyText>
@@ -44,7 +35,6 @@ export const GitIgnoreContainer = () => {
         data={showAllGitignoreState}
         fixedData={[langData, frameworkData]}
       />
-      {/* <SearchAutoForm data={FrameWorkOptions} type={selectGitignoreData} /> */}
       <BaseModal type={"gitignoreModal"}>
         <GitignoreModal />
       </BaseModal>

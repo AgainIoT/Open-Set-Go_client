@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-import { useState } from "react";
 
 import {
   Avatar,
@@ -14,12 +13,6 @@ import {
 import { useRecoilState } from "recoil";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 
-const options = [
-  { value: "1", label: "AgainIoT", src: "/static/images/avatar/1.jpg" },
-  { value: "2", label: "AgainIoT2", src: "/static/images/avatar/2.jpg" },
-  { value: "3", label: "AgainIoT3", src: "/static/images/avatar/3.jpg" },
-];
-
 // props -> type(userName) data(userRepoName) labelText(Owner*)
 export const SelectAuto = (props) => {
   const [selectValue, setSelectValue] = useRecoilState(
@@ -27,9 +20,7 @@ export const SelectAuto = (props) => {
   );
 
   const handleChange = (event) => {
-    console.log("pre:", selectValue);
     setSelectValue(event.target.value);
-    console.log("after:", event.target.value);
   };
 
   return (
@@ -50,7 +41,6 @@ export const SelectAuto = (props) => {
           onChange={handleChange}
           autoWidth
           renderValue={(selected) => {
-            console.log("selected", selected);
             return (
               <RenderOptionItem>
                 <ItmeAvatar
@@ -65,9 +55,7 @@ export const SelectAuto = (props) => {
           {props.data.map((option, index) => (
             <MenuOptionItem key={option.id} value={option.id} label={option.id}>
               <OptionItemAvatar>
-                <ItmeAvatar src={option.avatar}>
-                  {/* <FaceIcon sx={{ fontSize: 30, border: 1 }} color="primary" /> */}
-                </ItmeAvatar>
+                <ItmeAvatar src={option.avatar}></ItmeAvatar>
               </OptionItemAvatar>
               <OPtionItemText id={option.id} primary={option.id} />
             </MenuOptionItem>
@@ -78,11 +66,9 @@ export const SelectAuto = (props) => {
   );
 };
 
-// SelectInputContainer
 const StSelectAuto = styled.div`
   display: flex;
   width: 100%;
-  /* min-width: 8rem; */
 `;
 
 const SelectInputFormControl = styled(FormControl)`

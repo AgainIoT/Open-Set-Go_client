@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { COLOR } from "../../styles/color";
 import { TextInputContainer } from "../common/InputComponent";
 import { useState } from "react";
 import axios from "axios";
@@ -9,6 +8,7 @@ import { SelectAuto } from "../common/SelectAuto";
 import { useRecoilState } from "recoil";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 
+/* for Owner, RepoName, Description */
 export const RequiredFieldContainer = () => {
   /* GET - user repo info */
   const [owner, setOwner] = useRecoilState(repoDataAtomFamily("owner"));
@@ -24,18 +24,13 @@ export const RequiredFieldContainer = () => {
   ]);
 
   async function getUserRepoData() {
-    // async, await을 사용하는 경우
     try {
-      // GET 요청은 params에 실어 보냄
       const response = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}/user/grantedInfo`,
         {
           withCredentials: true,
         },
       );
-
-      // 응답 결과(response)를 변수에 저장하거나.. 등 필요한 처리를 해 주면 된다.
-      console.log(response.data);
 
       const initUserData = [
         {
@@ -48,10 +43,8 @@ export const RequiredFieldContainer = () => {
       });
 
       setOwner(response.data.id);
-      console.log("initUserData: %o", initUserData);
       setUserRepoData(initUserData);
     } catch (e) {
-      // 실패 시 처리
       console.error(e);
     }
   }
@@ -65,11 +58,8 @@ export const RequiredFieldContainer = () => {
     repoDataAtomFamily("dupCheck"),
   );
   async function postCheckDupication() {
-    // async, await을 사용하는 경우
     setHelperText("checking");
     try {
-      // GET 요청은 params에 실어 보냄
-
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/repo/checkDuplication`,
         {
@@ -80,7 +70,6 @@ export const RequiredFieldContainer = () => {
           withCredentials: true,
         },
       );
-      // 응답 결과(response)를 변수에 저장하거나.. 등 필요한 처리를 해 주면 된다.
       setValidateCheck(response.data);
       if (response.data) {
         setHelperText("checked");
@@ -88,7 +77,6 @@ export const RequiredFieldContainer = () => {
         setHelperText("error");
       }
     } catch (e) {
-      // 실패 시 처리
       console.error(e);
       alert("기록 시작 실패. 재시도해주세요.");
     }

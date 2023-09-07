@@ -1,17 +1,13 @@
 import styled from "styled-components";
-import { COLOR } from "../../styles/color";
-import { useEffect, useState } from "react";
 
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { repoDataAtomFamily } from "../../recoil/repoData";
-import Chip from "@mui/material/Chip";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
 import SearchIcon from "@mui/icons-material/Search";
-import InputAdornment from "@mui/material/InputAdornment";
 import { createFilterOptions } from "@mui/material/Autocomplete";
-import { Box, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 
 // props -> type(lang/framework), options(for lang->langs/for framework->frameworkOptions), setIsSelectLang(setIsSelectLang), setDisableValue(setDisableValue), disableValue(false/disableValue)
 export const AutocompleteInput = (props) => {
@@ -37,7 +33,6 @@ export const AutocompleteInput = (props) => {
   };
 
   const handleDelete = () => {
-    console.log("delete");
     setSelectValue("");
     if (props.type === "lang") {
       props.setIsSelectLang(false);
@@ -119,8 +114,4 @@ const PaperContainer = styled(Paper)`
 const InputFieldContainer = styled.div`
   display: flex;
   flex-direction: row;
-`;
-
-const TagLabel = styled.p`
-  color: ${COLOR.BORDER_GRAY};
 `;
