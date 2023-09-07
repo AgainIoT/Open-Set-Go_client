@@ -9,15 +9,9 @@ import {
 } from "../../../recoil/templateState";
 import styled from "styled-components";
 import { modalState } from "../../../recoil/commonState";
+import LinkIcon from "@mui/icons-material/Link";
 
-const commonStyles = {
-  bgcolor: "background.paper",
-  m: 1,
-  borderColor: "text.secondary",
-  width: "100%",
-  height: "25%",
-};
-
+// props -> type(pr, readme, contributing)
 export default function TemplateTitle(props) {
   const [selectValue, setSelectValue] = useRecoilState(
     templateSelectState(props.type),
@@ -39,16 +33,14 @@ export default function TemplateTitle(props) {
 
   return (
     <box>
-      <Box sx={{ ...commonStyles, borderBottom: 1, height: "100%" }}>
+      <Box sx={{ ...commonStyles, borderBottom: 1, height: "100%", maxWidth: 700 }}>
         <Typography
-          component="h1"
-          className="title"
           id="PR-title"
-          variant="h3"
-          gutterBottom
+          variant="h2"
           textColor="inherit"
           fontWeight="lg"
           m={2}
+
         >
           {showValue.title}
         </Typography>
@@ -60,6 +52,9 @@ export default function TemplateTitle(props) {
           m={2}
         >
           {showValue.repoName}
+          <LinkIcon onClick={() => {
+            window.open(showValue.repoUrl);
+          }}></LinkIcon>
         </Typography>
         <Button
           variant="contained"
@@ -68,9 +63,17 @@ export default function TemplateTitle(props) {
             handleSelect();
           }}
         >
-          c Use Template
+          Use Template
         </Button>
       </Box>
     </box>
   );
 }
+
+const commonStyles = {
+  bgcolor: "background.paper",
+  m: 1,
+  borderColor: "text.secondary",
+  width: "100%",
+  height: "25%",
+};

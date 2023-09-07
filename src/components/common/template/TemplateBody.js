@@ -12,15 +12,7 @@ import { styled } from "styled-components";
 import { WidthFull } from "@mui/icons-material";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
-const BodyBox = styled.div`
-  display: flex;
-  max-height: 52rem;
-  flex-direction: column;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-`;
-
+// props -> type(pr, readme, contributing)
 export default function TemplateBody(props) {
   const showValue = useRecoilValue(templatePreviewState(props.type));
 
@@ -31,10 +23,20 @@ export default function TemplateBody(props) {
         variant="h4"
         gutterBottom
         color="textSecondary"
-        m={2}
+        m={4}
       >
         <MarkdownPreview source={showValue.content} />
       </Typography>
     </BodyBox>
   );
 }
+
+const BodyBox = styled.div`
+  display: flex;
+  max-height: 52rem;
+  max-width: 75rem;
+  flex-direction: column;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+`;

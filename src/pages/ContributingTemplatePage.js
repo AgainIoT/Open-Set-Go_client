@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import Button from "@mui/material/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -7,9 +7,9 @@ import { BaseModal } from "../components/common/modal/BaseModal";
 import { TemplateModal } from "../components/common/modal/templateModal";
 import { eachStepState, modalState } from "../recoil/commonState";
 import MarkdownPreview from "../components/common/MarkdownPreview";
+import { styled } from "styled-components";
 
 function ContributingTemplatePage(props) {
-  const [data, setData] = useState([]);
   const [modalValue, setModalValue] = useRecoilState(
     modalState("contributing"),
   );
@@ -22,26 +22,29 @@ function ContributingTemplatePage(props) {
 
   const handlesave = () => {
     //value 고대로 저장해서 server로 보내야함. 이건 추후에 백엔드랑 회의 후 정해야할 듯
-    console.log(data);
   };
 
   const handleOpen = () => setModalValue(true);
 
   return (
-    <div>
+    <StReadmeTemplatePage>
       <BaseModal type={"contributing"}>
         <TemplateModal type={"contributing"} />
       </BaseModal>
       <MarkdownPreview type={"contributing"} />
-      {/* <MDEditor height={350} value={content} onChange={setContent} /> */}
       <Button onClick={handlesave} variant="contained" color="success">
         저장
       </Button>
       <Button onClick={handleOpen} variant="contained" color="success">
         Modal
       </Button>
-    </div>
+    </StReadmeTemplatePage>
   );
 }
+
+const StReadmeTemplatePage = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export default ContributingTemplatePage;

@@ -9,6 +9,8 @@ import { eachStepState, modalState } from "../recoil/commonState";
 import { TemplateModal } from "../components/common/modal/templateModal";
 import MarkdownPreview from "../components/common/MarkdownPreview";
 
+import { styled } from "styled-components";
+
 function ReadmeTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("readme"));
   const [content, setContent] = useRecoilState(templateContent("readme"));
@@ -21,17 +23,21 @@ function ReadmeTemplatePage() {
   const handleOpen = () => setModalValue(true);
 
   return (
-    <div>
+    <StReadmeTemplatePage>
       <BaseModal type={"readme"}>
         <TemplateModal type={"readme"} />
       </BaseModal>
-      {/* <MDEditor height={350} value={content} onChange={setContent} /> */}
       <MarkdownPreview type={"readme"} />
       <Button onClick={handleOpen} variant="contained" color="success">
         Modal
       </Button>
-    </div>
+    </StReadmeTemplatePage>
   );
 }
+
+const StReadmeTemplatePage = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export default ReadmeTemplatePage;
