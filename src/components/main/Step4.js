@@ -42,12 +42,16 @@ const StStep4 = styled.div`
   width: 100%;
   height: fit-content;
   flex-direction: row;
+  /* border: 2px solid red; */
 `;
 
 const ImageDiv = styled.div`
-  ${SharedAttr}
+  display: flex;
+  align-items: center;
+  justify-content: right;
   width: 50%;
   height: 100%;
+  /* border: 1px solid black; */
 `;
 
 const ModalImg = styled.img`
@@ -64,6 +68,8 @@ const TextDiv = styled.div`
   width: 50%;
   height: 100%;
   gap: 1.5rem;
+  /* border: 1px solid blue; */
+  padding-left: 5.5rem;
 `;
 
 const TitleTypo = styled(Typography)`

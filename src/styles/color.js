@@ -9,4 +9,5 @@ export const COLOR = {
   MAIN_HOVER: "#E3EEFA",
   MAIN_BORDER: "#C4C4CD",
   BORDER_GRAY: "#9696A3",
+  MAIN_PURPLE: "#3E1B6C",
 };

@@ -32,7 +32,6 @@ function LoginPage() {
       localStorage.setItem("id", id);
       localStorage.setItem("name", name);
       localStorage.setItem("avatar", avatar);
-      console.log(localStorage);
     }
   };
 
@@ -68,7 +67,6 @@ function LoginPage() {
   useEffect(() => {
     const accessToken = cookies.get("Authentication");
     setToken(accessToken);
-    console.log(accessToken);
     login();
     navigate("/");
   }, []);

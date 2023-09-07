@@ -58,7 +58,6 @@ export const Header = (props) => {
     setSrc(localStorage.avatar);
     setUserId(localStorage.id);
     setUserName(localStorage.name);
-    console.log(localStorage);
   }, []);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -86,7 +85,6 @@ export const Header = (props) => {
       "",
       { withCredentials: true },
     );
-    console.log(res);
     setToken("");
     localStorage.setItem("id", "guest");
     localStorage.setItem("name", "guest");
@@ -229,19 +227,21 @@ export const Header = (props) => {
               </MenuItemWrapper>
             </Box>
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt={userName ? userName : userId} src={src} />
-                </IconButton>
-              </Tooltip>
-              <Typography
-                variant="p"
-                component="div"
-                color={COLOR.MAIN_BLACK}
-                textAlign="center"
-              >
-                {userId}
-              </Typography>
+              <AvatarDiv>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt={userName ? userName : userId} src={src} />
+                  </IconButton>
+                </Tooltip>
+                <Typography
+                  variant="p"
+                  component="div"
+                  color={COLOR.MAIN_BLACK}
+                  textAlign="center"
+                >
+                  {userId}
+                </Typography>
+              </AvatarDiv>
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
@@ -285,6 +285,12 @@ const LogoImg = styled.img`
   height: 3rem;
 `;
 
+const AvatarDiv = styled.div`
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 const MenuItemWrapper = styled(Button)`
   display: block;
   margin: 1.6rem 0;
