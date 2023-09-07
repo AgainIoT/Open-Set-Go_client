@@ -15,7 +15,7 @@ import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
-import LOGO from "../../src/assets/images/title.svg";
+import LOGO from "../../src/assets/images/Logo.svg";
 import axios from "axios";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { avatar, id, name, token } from "../recoil/authorize";
@@ -103,6 +103,23 @@ export const Header = (props) => {
               <LogoWrapper href="/">
                 <LogoImg src={LOGO} />
               </LogoWrapper>
+              <Typography
+                variant="h5"
+                href="/"
+                component="a"
+                gutterBottom
+                color={COLOR.MAIN_BLACK}
+                mt={2}
+                sx={{
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                OpenSetGo
+              </Typography>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               {props.burger ? (
@@ -157,6 +174,25 @@ export const Header = (props) => {
               <LogoWrapper href="/">
                 <LogoImg src={LOGO} />
               </LogoWrapper>
+              <Typography
+                variant="h5"
+                noWrap
+                color={COLOR.MAIN_BLACK}
+                component="a"
+                href="/"
+                mt={2}
+                sx={{
+                  display: { xs: "flex", md: "none" },
+                  flexGrow: 1,
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                OpenSetGo
+              </Typography>
             </Box>
             <Box
               sx={{
@@ -230,10 +266,11 @@ const LogoWrapper = styled.a`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin: 1rem;
 `;
 const LogoImg = styled.img`
-  width: 10rem;
-  height: 10rem;
+  width: 3rem;
+  height: 3rem;
 `;
 const AvatarDiv = styled.div`
   flex-direction: column;
