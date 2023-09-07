@@ -58,7 +58,6 @@ export const Header = (props) => {
     setSrc(localStorage.avatar);
     setUserId(localStorage.id);
     setUserName(localStorage.name);
-    console.log(localStorage);
   }, []);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -86,7 +85,6 @@ export const Header = (props) => {
       "",
       { withCredentials: true },
     );
-    console.log(res);
     setToken("");
     localStorage.setItem("id", "guest");
     localStorage.setItem("name", "guest");
