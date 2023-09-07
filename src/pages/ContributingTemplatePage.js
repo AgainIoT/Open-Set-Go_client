@@ -11,7 +11,6 @@ import MarkdownPreview from "../components/common/MarkdownPreview";
 import { styled } from "styled-components";
 
 function ContributingTemplatePage(props) {
-  const [data, setData] = useState([]);
   const [modalValue, setModalValue] = useRecoilState(
     modalState("contributing"),
   );
