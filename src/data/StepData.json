@@ -21,23 +21,17 @@
       "type" : "pr",
       "content": "Pull-Request template (PR template) is a template of a PR body that is entered when pr is performed. This standardizes the description format so that the code can be easily understood and identifies the parts that need to be checked during PR. We provide you with PR templates of several famous open source projects. You can choose and edit the template that is appropriate for you."
     },
+
     {
       "id": 3,
       "step": 4,
-      "title": "Issue Templates",
-      "type" : "issue",
-      "content": "You can standardize the description by creating and using an issue template. We provides Issue Template references for several well-known open-source projects for different situations, making it easy for users to create an Issue Template."
-    },
-    {
-      "id": 4,
-      "step": 5,
       "title": "CONTRIBUTING.md",
       "type" : "contributing",
       "content": "CONTRIBUTING.md is a document that specifies information for contributors. This file can contain various information such as build requirements, development environment setting methods, and code writing guides. We provides references to CONTRIBUTING.md for several well-known open-source projects, while also making it easy to create CONTRIBUTING.md through markdown previewer."
     },
     {
-      "id": 5,
-      "step": 6,
+      "id": 4,
+      "step": 5,
       "title": "README.md",
       "type" : "readme",
       "content": "README.md is the first document you see in the repository and describes many of the projects. We provides references to README.md for several well-known open-source projects, while also making it easy to create README.md through markdown previewer."

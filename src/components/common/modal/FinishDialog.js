@@ -1,22 +1,21 @@
 import styled from "styled-components";
+import { COLOR } from "../../../styles/color";
 
 import {
   repoDataAtomFamily,
   selectGitignoreData,
 } from "../../../recoil/repoData";
-import {
-  Button,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@mui/material";
+import { Box, Button, DialogContent, DialogTitle } from "@mui/material";
 import axios from "axios";
-import { useRecoilValue } from "recoil";
-import { useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { templateContent } from "../../../recoil/templateState";
+import { useState } from "react";
+import { LoadingCompleted } from "../LoadingCompleted";
+import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
+import { modalState } from "../../../recoil/commonState";
 
-export const FinishDialog = () => {
-  const navigate = useNavigate();
+export const FinishDialog = (props) => {
+  const [loading, setLoading] = useState(false);
   const owner = useRecoilValue(repoDataAtomFamily("owner"));
   const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
   const desc = useRecoilValue(repoDataAtomFamily("desc"));
@@ -27,6 +26,8 @@ export const FinishDialog = () => {
   const pr = useRecoilValue(templateContent("pr"));
   const contributing = useRecoilValue(templateContent("contributing"));
   const readme = useRecoilValue(templateContent("readme"));
+
+  const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
 
   /* POST - repo info for create repository */
   async function postCreatRepo() {
@@ -86,7 +87,8 @@ export const FinishDialog = () => {
         },
       );
       if (response.status < 300) {
-        navigate("/home");
+        window.location.replace("/");
+        setLoading(false);
       }
     } catch (e) {
       console.error(e);
@@ -95,31 +97,84 @@ export const FinishDialog = () => {
   }
 
   const handlePost = async () => {
+    setLoading(true);
     await postCreatRepo();
     await postRepoData();
     await postEmail();
+    setDialogValue(false);
   };
 
-  const handleClose = () => {};
+  const handleClose = () => {
+    setDialogValue(false);
+  };
 
   return (
     <StFinishDialog>
-      <DialogTitle>Are you sure completed project settings?</DialogTitle>
-      <DialogContent>
-        asdfasdffasdfasdfasdfasdfasdfasdfasdfasdfasdf?
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>Disagree</Button>
-        <Button onClick={() => handlePost()} autoFocus>
-          Finish
-        </Button>
-      </DialogActions>
+      {loading ? <LoadingCompleted /> : null}
+      <Icon />
+      <DialogTitleText>Are you sure?</DialogTitleText>
+      <DialogContentText>completed project settings</DialogContentText>
+      <DialogBtnContainer>
+        <DialogBtn
+          variant="contained"
+          onClick={() => handlePost()}
+          autoFocus
+          disableElevation
+          bhcolor={COLOR.MAIN_BLUE}
+        >
+          complete!
+        </DialogBtn>
+        <DialogBtn
+          variant="outlined"
+          onClick={handleClose}
+          bhcolor={COLOR.MAIN_WHITE}
+        >
+          Cancel
+        </DialogBtn>
+      </DialogBtnContainer>
     </StFinishDialog>
   );
 };
 
 const StFinishDialog = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   overflow-y: scroll;
+`;
+
+const Icon = styled(TaskAltRoundedIcon)`
+  font-size: 7rem;
+  color: ${COLOR.MAIN_BLUE};
+`;
+
+const DialogTitleText = styled(DialogTitle)`
+  font-size: 2rem;
+  font-weight: 600;
+`;
+
+const DialogContentText = styled(DialogContent)`
+  font-size: 1.5rem;
+  color: ${COLOR.BORDER_GRAY};
+`;
+
+const DialogBtnContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  row-gap: 1rem;
+`;
+
+const DialogBtn = styled(Button)`
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+  background-color: ${(props) => props.bgcolor};
 `;

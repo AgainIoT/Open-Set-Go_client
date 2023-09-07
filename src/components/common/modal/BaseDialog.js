@@ -22,17 +22,20 @@ export const BaseDialog = (props) => {
   );
 };
 
-const StDialog = styled(Dialog)``;
+const StDialog = styled(Dialog)`
+  display: flex;
+
+  width: 100%;
+`;
 const DialogContainer = styled.div`
   display: flex;
-  width: 40%;
+  width: 20%;
   height: 50%;
-  padding: 2rem;
-  margin-top: 1rem;
+  padding: 3.5rem 2rem 2rem 2rem;
   transform: translate(-50%, -50%);
   position: fixed;
   top: 50%;
   left: 50%;
-  border-radius: 2rem;
+  border-radius: 1.5rem;
   background-color: ${COLOR.MAIN_WHITE};
 `;

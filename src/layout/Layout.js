@@ -6,8 +6,6 @@ import Box from "@mui/material/Box";
 import StepInfo from "../components/common/StepInfo";
 import { LinearStepper } from "./Stepper";
 import { Header } from "./Header";
-import { Typography } from "@mui/material";
-import { PropTypes } from "prop-types";
 
 import { activeState, eachStepState, modalState } from "../recoil/commonState";
 import { useRecoilState } from "recoil";
@@ -34,7 +32,7 @@ export const Layout = () => {
 
   return (
     <StLayout>
-      <Header main={false} pages={[]} settings={["Logout"]} />
+      <Header burger={true} pages={[]} settings={[]} />
       <ContentsContainer>
         <LinearStepper />
         <StepContainer>
@@ -52,7 +50,7 @@ export const Layout = () => {
               disableElevation
               onClick={() => handlePre()}
             >
-              Contained
+              Prev
             </ButtonWrapper>
           ) : (
             <div></div>
@@ -63,13 +61,13 @@ export const Layout = () => {
               disabled={!stepCompleted}
               onClick={() => (activeStep === 4 ? handleOpen() : handleNext())}
             >
-              Disabled
+              Next
             </ButtonWrapper>
           </ButtonContainer>
         </BottomContainer>
       </ContentsContainer>
       <BaseDialog type={"finishModal"}>
-        <FinishDialog />
+        <FinishDialog type={"finishModal"} />
       </BaseDialog>
     </StLayout>
   );
