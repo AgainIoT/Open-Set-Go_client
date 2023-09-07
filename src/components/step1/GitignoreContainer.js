@@ -47,7 +47,7 @@ const StGitIgnoreContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem 2rem 1rem 2rem;
-  gap: 0.8rem;
+  gap: 0.5rem;
   border: 0.1rem solid ${COLOR.BORDER_GRAY};
   border-radius: 2rem;
 `;
@@ -63,7 +63,7 @@ font-size:1.2rem;
 `;
 
 const TitleText = styled(Typography)`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
 `;
 const BodyText = styled(Typography)`
