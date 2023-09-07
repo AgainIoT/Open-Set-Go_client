@@ -17,16 +17,14 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import axios from "axios";
-import Container from "@mui/material/Container";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { authState, avatar, id, name, token } from "../recoil/authorize";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { avatar, id, name, token } from "../recoil/authorize";
 import styled from "styled-components";
-import { Cookie } from "@mui/icons-material";
 
 const pages = ["WELCOME", "DESC", "STEPS"];
 const settings = ["Logout"];
 
-function ElevationScroll(props) {
+const ElevationScroll = (props) => {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
   // will default to window.
@@ -40,7 +38,7 @@ function ElevationScroll(props) {
   return React.cloneElement(children, {
     elevation: trigger ? 4 : 0,
   });
-}
+};
 
 ElevationScroll.propTypes = {
   children: PropTypes.element.isRequired,
@@ -51,7 +49,7 @@ ElevationScroll.propTypes = {
   window: PropTypes.func,
 };
 
-export default function ElevateAppBar(props) {
+export const Header = (props) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [src, setSrc] = useRecoilState(avatar);
@@ -245,11 +243,10 @@ export default function ElevateAppBar(props) {
       <Toolbar />
     </React.Fragment>
   );
-}
+};
 
 const MenuItemWrapper = styled(Button)`
   display: block;
   margin: 1.6rem 0;
-
   color: ${COLOR.MAIN_BLACK};
 `;
