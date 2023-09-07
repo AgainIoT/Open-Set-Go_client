@@ -118,7 +118,7 @@ export function TemplateList(props) {
                 >
                   <ListItemButton>
                     <ListItemText
-                      primary={it.title}
+                      primary={props.type === "contributing" ? it.type : it.title}
                       id="PR-desc"
                       variant="h6"
                       gutterBottom
@@ -126,7 +126,7 @@ export function TemplateList(props) {
                       m={2}
                     />
                     <ListItemText
-                      primary={it.repoName}
+                      primary={props.type === "contributing" ? it.title : it.repoName}
                       id="PR-desc"
                       variant="h6"
                       gutterBottom
