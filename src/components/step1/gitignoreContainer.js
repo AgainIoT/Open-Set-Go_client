@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 
 import { useRecoilState, useRecoilValue } from "recoil";
-
 import {
   repoDataAtomFamily,
   showAllGitignoreState,

@@ -20,13 +20,11 @@ import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 
 export const TextInputContainer = (props) => {
   const textRef = useRef("");
-  const [helperText, setHelperText] = useState(" ");
   const [inputValue, setInputValue] = useRecoilState(
     repoDataAtomFamily(props.type),
   );
 
   /* GET - check repository is duplicate */
-  const [checkState, setCheckState] = useState(false);
 
   const handleOnChange = (e) => {
     setInputValue(e.target.value);
@@ -197,9 +195,7 @@ const InputField = styled(TextField)`
     &::before {
       border: 0.1rem solid ${COLOR.MAIN_BORDER};
     }
-    &::after {
-      border: 1px solid purple;
-    }
+
     &.Mui-focused {
       border: none;
       outline: none;
@@ -220,9 +216,6 @@ const InputField = styled(TextField)`
     }
     &::before {
       border: 0.1rem solid ${COLOR.MAIN_BORDER};
-    }
-    &::after {
-      border: 1px solid purple;
     }
   }
 
@@ -245,7 +238,7 @@ const InputField = styled(TextField)`
     &:hover {
       border-radius: 20rem;
       border: none;
-      margin-top: 80px;
+      margin-top: 8rem;
     }
   }
 

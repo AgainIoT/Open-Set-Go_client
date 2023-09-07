@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { COLOR } from "../../../styles/color";
 
 import {
   repoDataAtomFamily,
@@ -29,10 +28,9 @@ export const FinishDialog = () => {
   const contributing = useRecoilValue(templateContent("contributing"));
   const readme = useRecoilValue(templateContent("readme"));
 
-  /* POST - info */
+  /* POST - repo info for create repository */
   async function postCreatRepo() {
     try {
-      // GET 요청은 params에 실어 보냄
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/repo`,
         {
@@ -46,11 +44,11 @@ export const FinishDialog = () => {
       );
     } catch (e) {
       console.error(e);
-      alert("기록 시작 실패. 재시도해주세요.");
+      alert("Failed Repository info post ");
     }
   }
 
-  /* POST - file */
+  /* POST - file for settings */
   async function postRepoData() {
     try {
       const response = await axios.post(
@@ -73,7 +71,7 @@ export const FinishDialog = () => {
       );
     } catch (e) {
       console.error(e);
-      alert("기록 시작 실패. 재시도해주세요.");
+      alert("Failed File post");
     }
   }
 
@@ -92,7 +90,7 @@ export const FinishDialog = () => {
       }
     } catch (e) {
       console.error(e);
-      alert("기록 시작 실패. 재시도해주세요.");
+      alert("Failed to send email");
     }
   }
 
