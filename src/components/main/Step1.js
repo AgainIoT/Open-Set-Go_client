@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { Icon, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { COLOR } from "../../styles/color.js";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -9,6 +9,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import PR from "../../assets/icons/pullrequest.svg";
 import NEXT from "../../assets/icons/next.svg";
 
+//Step1: Component for description on main page (project step description)
 const Step1 = () => {
   const folderIcon = (
     <FolderOutlinedIcon style={{ color: COLOR.MAIN_NAVY, fontSize: "3.3rem" }}/>
@@ -176,11 +177,6 @@ const NextImg = styled.img`
   width: 2rem;
   height: 2rem;
   margin-bottom: 3rem;
-`;
-
-const SharedAttr = `
-  color: ${COLOR.MAIN_NAVY};
-  font-size: 3.3rem;
 `;
 
 const PRIcon = styled.img`

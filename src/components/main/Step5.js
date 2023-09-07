@@ -3,6 +3,8 @@ import Step4 from "./Step4";
 import { styled } from "styled-components";
 import { COLOR } from "../../styles/color.js";
 
+//Step5: Components located at the bottom of the description on the main page
+//It contains Step3 & Step4 for applying linear-gradient
 const Step5 = () => {
   return (<StStep5><Step3/><Step4/></StStep5>);
 };

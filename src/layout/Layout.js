@@ -5,7 +5,10 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import StepInfo from "../components/common/StepInfo";
 import { LinearStepper } from "./Stepper";
-import { MainHeader } from "./Header";
+import { Header } from "./Header";
+import { Typography } from "@mui/material";
+import { PropTypes } from "prop-types";
+
 import { activeState, eachStepState, modalState } from "../recoil/commonState";
 import { useRecoilState } from "recoil";
 import { FinishDialog } from "../components/common/modal/FinishDialog";
@@ -31,7 +34,7 @@ export const Layout = () => {
 
   return (
     <StLayout>
-      <MainHeader />
+      <Header main={false} pages={[]} settings={["Logout"]} />
       <ContentsContainer>
         <LinearStepper />
         <StepContainer>

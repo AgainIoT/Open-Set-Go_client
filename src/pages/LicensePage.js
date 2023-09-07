@@ -1,11 +1,12 @@
-import React, { Component, useEffect } from "react";
-import Slider from "react-slick";
+import React, { useEffect } from "react";
 import Slide from "../components/common/Slide";
 import styled from "@emotion/styled";
 import { useRecoilState } from "recoil";
 import { eachStepState } from "../recoil/commonState";
-import { repoDataAtomFamily } from "../recoil/repoData";
+
+//LicensePage: pages for license steps;
 function LicensePage() {
+  //using recoil for connecting stepper and step info;
   const [stepComplete, setStepComplted] = useRecoilState(eachStepState("2"));
 
   useEffect(() => {
@@ -13,17 +14,16 @@ function LicensePage() {
   }, []);
 
   return (
-    <StLayout>
+    <StLicensePage>
       <Slide />
-    </StLayout>
+    </StLicensePage>
   );
 }
 
 export default LicensePage;
 
-const StLayout = styled.div`
-  /* background-color: red; */
-  height: 100%; /* 흰 박스에 맞게 크기 조절 됨 */
+const StLicensePage = styled.div`
+  height: 100%;
   display: flex;
   justify-self: center;
   align-items: center;
