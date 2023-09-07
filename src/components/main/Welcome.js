@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import { token } from "../../recoil/authorize";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { COLOR } from "../../styles/color.js";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
@@ -18,9 +19,9 @@ export const Welcome = (ref) => {
   return (
     <StWelcome>
       <Title>Open, Set, Go</Title>
-      <SubTitle>your project</SubTitle>
+      <SubTitle>start a project easily, quickly and conveniently</SubTitle>
       <Stack spacing={2} direction="row">
-        <Button
+        <LearnmoreBtn
           variant="contained"
           onClick={() => {
             document
@@ -29,15 +30,15 @@ export const Welcome = (ref) => {
           }}
         >
           learn more
-        </Button>
+        </LearnmoreBtn>
         {accessToken ? (
-          <Button variant="outlined" onClick={() => navigate("/step1")}>
+          <LoginBtn variant="contained" onClick={() => navigate("/step1")}>
             get started
-          </Button>
+          </LoginBtn>
         ) : (
-          <Button variant="outlined" onClick={handleLogin}>
+          <LoginBtn variant="contained" onClick={handleLogin}>
             login
-          </Button>
+          </LoginBtn>
         )}
       </Stack>
     </StWelcome>
@@ -49,35 +50,38 @@ Welcome.propTypes = {
   logout: propTypes.func,
 };
 
-export const StWelcome = styled.div`
+const StWelcome = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   justify-content: center;
   height: 80vh;
-  background-image: linear-gradient(
-    45deg,
-    #d16ba5,
-    #c777b9,
-    #ba83ca,
-    #aa8fd8,
-    #9a9ae1,
-    #8aa7ec,
-    #79b3f4,
-    #69bff8,
-    #52cffe,
-    #41dfff,
-    #46eefa,
-    #5ffbf1
-  );
+  background: linear-gradient(to bottom, ${COLOR.MAIN_HOVER}, ${COLOR.MAIN_BACKGROUND});
 `;
 
 export const Title = styled.h1`
-  font-size: 7rem;
+  font-size: 6.5rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
 `;
 
 export const SubTitle = styled.h3`
-  font-size: 4rem;
+  font-size: 3rem;
   padding-bottom: 2rem;
+  font-weight: 00;
 `;
+
+const LearnmoreBtn = styled(Button)({
+  backgroundColor: `${COLOR.MAIN_PURPLE}`,
+  "&:hover": {
+    backgroundColor: `${COLOR.MAIN_PURPLE}`,
+  },
+});
+
+const LoginBtn = styled(Button)({
+  backgroundColor: "black",
+  "&:hover": {
+    backgroundColor: "black",
+  },
+});
