@@ -20,11 +20,7 @@ function MainPage() {
   }, []);
   return (
     <>
-      <Header
-        burger={true}
-        pages={["Welcome", "Steps"]}
-        settings={["Logout"]}
-      />
+      <Header burger={true} pages={["Steps"]} settings={["Logout"]} />
       <Welcome />
       <Steps />
       <Footer />
