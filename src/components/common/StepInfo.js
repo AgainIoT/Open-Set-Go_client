@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import StepData from "../../data/StepData.json";
 import Button from "@mui/material/Button";
 import { activeState } from "../../recoil/commonState";
@@ -10,8 +10,6 @@ import { eachStepState, modalState } from "../../recoil/commonState";
 const StepInfo = () => {
   //using recoil for matching step information and step
   const activeStep = useRecoilValue(activeState);
-  // const [modalValue, setModalValue] = useRecoilState(modalState());
-  // const handleOpen = () => setModalValue(true);
 
   return (
     <div>
@@ -21,23 +19,24 @@ const StepInfo = () => {
           const handleOpen = () => setModalValue(true);
           return (
             <div key={it.step}>
-              <StStepInfo>
+              <Box_><StStepInfo>
                 <TitleH1>
                   Step{it.step}. {it.title}
                 </TitleH1>
                 <ContentP>{it.content}</ContentP>
                 {activeStep > 1 ? (
                   <ButtonWrapper
-                    variant="contained"
+                    size="large"
+                    variant="text"
                     disableElevation
                     onClick={handleOpen}
                   >
-                    Find
+                    Find Template
                   </ButtonWrapper>
                 ) : (
                   <div></div>
                 )}
-              </StStepInfo>
+              </StStepInfo></Box_>
             </div>
           );
         },
@@ -68,6 +67,17 @@ const ContentP = styled.p`
 
 const ButtonWrapper = styled(Button)`
   padding: 0.8rem 1.6rem 0.8rem 1.6rem;
+  height: 100%;
+  margin-top: 50%;
+  font-size: 2rem;
+`;
+
+const Box_ = styled.div`
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 `;
 
 export default StepInfo;
