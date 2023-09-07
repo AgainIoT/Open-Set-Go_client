@@ -28,9 +28,6 @@ function ReadmeTemplatePage() {
         <TemplateModal type={"readme"} />
       </BaseModal>
       <MarkdownPreview type={"readme"} />
-      <Button onClick={handleOpen} variant="contained" color="success">
-        Modal
-      </Button>
     </StReadmeTemplatePage>
   );
 }
