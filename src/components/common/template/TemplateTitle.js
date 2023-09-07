@@ -33,7 +33,7 @@ export default function TemplateTitle(props) {
 
   return (
     <box>
-      <Box sx={{ ...commonStyles, borderBottom: 1, height: "100%", maxWidth: 700 }}>
+      <Box sx={{ ...commonStyles, borderBottom: 1, height: "100%", maxWidth: "80%" }}>
         <Typography
           id="PR-title"
           variant="h2"

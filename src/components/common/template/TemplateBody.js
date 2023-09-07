@@ -34,7 +34,7 @@ export default function TemplateBody(props) {
 const BodyBox = styled.div`
   display: flex;
   max-height: 52rem;
-  max-width: 75rem;
+  max-width: 65rem;
   flex-direction: column;
   height: 100%;
   overflow-x: hidden;
