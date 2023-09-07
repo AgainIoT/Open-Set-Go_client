@@ -12,7 +12,7 @@ const githubURL = `https://github.com/login/oauth/authorize?client_id=${CLIENT_I
 const handleLogin = () => {
   window.location.href = githubURL;
 };
-export const Welcome = () => {
+export const Welcome = (ref) => {
   const accessToken = useRecoilValue(token);
   const navigate = new useNavigate();
   return (

@@ -2,7 +2,7 @@ import { Welcome } from "../components/main/Welcome";
 import Footer from "../components/main/Footer";
 import Steps from "../components/main/Steps";
 import propTypes from "prop-types";
-import { Header } from "../layout/MainHeader";
+import { Header } from "../layout/Header";
 import { Cookies } from "react-cookie";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
@@ -20,7 +20,7 @@ function MainPage() {
   }, []);
   return (
     <>
-      <Header />
+      <Header main={true} pages={["Welcome", "Steps"]} settings={["Logout"]} />
       <Welcome />
       <Steps />
       <Footer />
