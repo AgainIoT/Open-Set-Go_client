@@ -5,11 +5,11 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 
 import { useRecoilValue } from "recoil";
-import { activeState } from "../../recoil/commonState";
+import { activeState } from "../recoil/commonState";
 
-import StepData from "../../data/StepData.json";
+import StepData from "../data/StepData.json";
 
-export default function LinearStepper() {
+export const LinearStepper = () => {
   const activeStep = useRecoilValue(activeState);
 
   return (
@@ -23,7 +23,7 @@ export default function LinearStepper() {
       </StepperWraper>
     </StStepperContainer>
   );
-}
+};
 
 const StStepperContainer = styled.div`
   display: flex;

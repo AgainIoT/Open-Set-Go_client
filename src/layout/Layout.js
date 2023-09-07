@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import LinearStepper from "../components/common/Stepper";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import StepInfo from "../components/common/StepInfo";
+import { LinearStepper } from "./Stepper";
 import { MainHeader } from "./Header";
 import { Typography } from "@mui/material";
 import { PropTypes } from "prop-types";
