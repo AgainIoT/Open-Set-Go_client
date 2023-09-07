@@ -93,13 +93,13 @@ export function TemplateList(props) {
           height: "100%",
           maxWidth: 360,
           bgcolor: "background.paper",
-          maxHeight: 400,
+          maxHeight: "90%",
         }}
         style={{ overflowX: "hidden", overflowY: "auto" }}
       >
         <List
           sx={{
-            height: 610,
+            height: "100%",
             width: 360,
             itemSize: 46,
             itemCount: 1,

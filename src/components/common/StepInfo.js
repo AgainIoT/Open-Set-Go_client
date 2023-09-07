@@ -1,18 +1,24 @@
 import styled from "styled-components";
 import { Typography } from "@mui/material";
 import StepData from "../../data/StepData.json";
+import Button from "@mui/material/Button";
 import { activeState } from "../../recoil/commonState";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { eachStepState, modalState } from "../../recoil/commonState";
 
 //StepInfo: Component for description of each step (located on the left side of the screen)
 const StepInfo = () => {
   //using recoil for matching step information and step
   const activeStep = useRecoilValue(activeState);
+  // const [modalValue, setModalValue] = useRecoilState(modalState());
+  // const handleOpen = () => setModalValue(true);
 
   return (
     <div>
       {StepData.StepData.filter((eachStep) => eachStep.id === activeStep).map(
         (it) => {
+          const [modalValue, setModalValue] = useRecoilState(modalState(it.type));
+          const handleOpen = () => setModalValue(true);
           return (
             <div key={it.step}>
               <StStepInfo>
@@ -20,6 +26,17 @@ const StepInfo = () => {
                   Step{it.step}. {it.title}
                 </TitleH1>
                 <ContentP>{it.content}</ContentP>
+                {activeStep > 1 ? (
+                  <ButtonWrapper
+                    variant="contained"
+                    disableElevation
+                    onClick={handleOpen}
+                  >
+                    Find
+                  </ButtonWrapper>
+                ) : (
+                  <div></div>
+                )}
               </StStepInfo>
             </div>
           );
@@ -47,6 +64,10 @@ const ContentP = styled.p`
   text-align: justify;
   font-size: 1.3rem;
   line-height: 2.2rem;
+`;
+
+const ButtonWrapper = styled(Button)`
+  padding: 0.8rem 1.6rem 0.8rem 1.6rem;
 `;
 
 export default StepInfo;
