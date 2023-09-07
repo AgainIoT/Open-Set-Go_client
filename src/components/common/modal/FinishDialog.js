@@ -5,13 +5,7 @@ import {
   repoDataAtomFamily,
   selectGitignoreData,
 } from "../../../recoil/repoData";
-import {
-  Box,
-  Button,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@mui/material";
+import { Box, Button, DialogContent, DialogTitle } from "@mui/material";
 import axios from "axios";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +16,6 @@ import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
 import { modalState } from "../../../recoil/commonState";
 
 export const FinishDialog = (props) => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const owner = useRecoilValue(repoDataAtomFamily("owner"));
   const repoName = useRecoilValue(repoDataAtomFamily("repoName"));

@@ -6,8 +6,6 @@ import Box from "@mui/material/Box";
 import StepInfo from "../components/common/StepInfo";
 import { LinearStepper } from "./Stepper";
 import { Header } from "./Header";
-import { Typography } from "@mui/material";
-import { PropTypes } from "prop-types";
 
 import { activeState, eachStepState, modalState } from "../recoil/commonState";
 import { useRecoilState } from "recoil";
