@@ -12,7 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 
 import { TextField } from "@mui/material";
 import { COLOR } from "../../styles/color";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
