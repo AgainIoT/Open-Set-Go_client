@@ -70,7 +70,7 @@ function LoginPage() {
     setToken(accessToken);
     console.log(accessToken);
     login();
-    navigate("/home");
+    navigate("/");
   }, []);
 
   return (
