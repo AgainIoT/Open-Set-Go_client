@@ -1,15 +1,13 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import StepInfo from "../components/common/StepInfo";
 import { LinearStepper } from "./Stepper";
 import { MainHeader } from "./Header";
-import { Typography } from "@mui/material";
-import { PropTypes } from "prop-types";
 import { activeState, eachStepState, modalState } from "../recoil/commonState";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { FinishDialog } from "../components/common/modal/FinishDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
 
@@ -90,7 +88,6 @@ const ContentsContainer = styled.div`
   width: 100%;
   height: 100%;
   justify-content: space-around;
-  /* margin-top: 9.5rem; */
   margin-left: 2.6rem;
   padding: 2rem 3rem 0 2rem;
   border-top-left-radius: 2rem;
