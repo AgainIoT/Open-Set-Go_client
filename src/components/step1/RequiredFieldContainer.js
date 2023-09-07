@@ -111,10 +111,10 @@ export const RequiredFieldContainer = () => {
           helperText={helperText}
         />
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={8}>
         <TextInputContainer
           labelText={"Description"}
-          fieldType={3}
+          fieldType={2}
           type={"desc"}
           option={"(optional)"}
         />

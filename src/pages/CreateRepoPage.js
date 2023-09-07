@@ -41,5 +41,5 @@ export default CreateRepo;
 const StCreateRepo = styled(Grid)`
   width: 100%;
   height: 100%;
-  gap: 0.8rem;
+  padding-left: 3rem;
 `;
