@@ -20,9 +20,11 @@ export const GitignoreModal = () => {
     <StGitIgnoreModal container>
       <Grid item xs={6}>
         <SearchAuto data={allOptions} type={selectGitignoreData} />
-        <FixedOptionShowSelect type={selectGitignoreData} />
+        <ShowContainer>
+          <FixedOptionShowSelect type={selectGitignoreData} />
+        </ShowContainer>
       </Grid>
-      <Grid item xs={12} sm={6}></Grid>
+
       <Grid item xs={12} sm={6}>
         <SelectChip
           data={ideOptions}
@@ -33,18 +35,18 @@ export const GitignoreModal = () => {
       </Grid>
       <Grid item xs={12} sm={6}>
         <SelectChip
-          data={osOptions}
-          chipLabel="OS"
-          type={selectGitignoreData}
-          limit={3}
-        />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <SelectChip
           data={etcOptions}
           chipLabel="Etc."
           type={selectGitignoreData}
           limit={5}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <SelectChip
+          data={osOptions}
+          chipLabel="OS"
+          type={selectGitignoreData}
+          limit={3}
         />
       </Grid>
     </StGitIgnoreModal>
@@ -52,7 +54,13 @@ export const GitignoreModal = () => {
 };
 
 const StGitIgnoreModal = styled(Grid)`
+  padding: 1rem;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
+  row-gap: 1rem;
+  overflow-y: hidden;
+`;
+
+const ShowContainer = styled.div`
+  padding-left: 1rem;
 `;

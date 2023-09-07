@@ -12,6 +12,7 @@ import { BaseModal } from "../common/modal/BaseModal";
 import { GitignoreModal } from "../common/modal/GitignoreModal";
 import { ReadonlyAuto } from "../common/ReadOnlyAuto";
 import { modalState } from "../../recoil/commonState";
+import { BaseModal2 } from "../common/modal/BaseModal2";
 
 /* for gitignore */
 export const GitIgnoreContainer = () => {
@@ -35,9 +36,9 @@ export const GitIgnoreContainer = () => {
         data={showAllGitignoreState}
         fixedData={[langData, frameworkData]}
       />
-      <BaseModal type={"gitignoreModal"}>
+      <BaseModal2 type={"gitignoreModal"}>
         <GitignoreModal />
-      </BaseModal>
+      </BaseModal2>
     </StGitIgnoreContainer>
   );
 };
@@ -45,7 +46,7 @@ export const GitIgnoreContainer = () => {
 const StGitIgnoreContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1rem 2rem 1rem 2rem;
   gap: 0.8rem;
   border: 0.1rem solid ${COLOR.BORDER_GRAY};
   border-radius: 2rem;
