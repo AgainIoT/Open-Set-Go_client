@@ -15,7 +15,7 @@ import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
-import AdbIcon from "@mui/icons-material/Adb";
+import LOGO from "../../src/assets/images/Logo.svg";
 import axios from "axios";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { avatar, id, name, token } from "../recoil/authorize";
@@ -64,7 +64,7 @@ export const Header = (props) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+    if (props.burger) setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = (event) => {
@@ -96,40 +96,45 @@ export const Header = (props) => {
     setSrc(localStorage.getItem("avatar"));
     setAnchorElUser(null);
   };
+
+  const handleOpenNewTab = (url) => {
+    window.open(url, "_blank", "noopener, noreferrer");
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
       <ElevationScroll {...props}>
-        <AppBar
-          style={{ background: COLOR.MAIN_WHITE, color: COLOR.MAIN_BLACK }}
-        >
+        <AppBar style={{ background: COLOR.MAIN_WHITE }}>
           <Toolbar>
-            <AdbIcon
-              sx={{
-                display: { xs: "none", md: "flex" },
-                mr: 1,
-                ml: 1,
-                color: "black",
-              }}
-            />
-            <Typography
-              variant="h5"
-              href="/home"
-              component="a"
+            <Box
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
               }}
             >
-              OpenSetGo
-            </Typography>
+              <LogoWrapper href="/home">
+                <LogoImg src={LOGO} />
+              </LogoWrapper>
+              <Typography
+                variant="h5"
+                href="/home"
+                component="a"
+                gutterBottom
+                mt={2}
+                sx={{
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                OpenSetGo
+              </Typography>
+            </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              {props.main ? (
+              {props.burger ? (
                 <IconButton
                   size="large"
                   aria-label="account of current user"
@@ -164,29 +169,46 @@ export const Header = (props) => {
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
+                <MenuItem
+                  key={"Docs"}
+                  onClick={() =>
+                    handleOpenNewTab("https://open-set-go.netlify.app/")
+                  }
+                >
+                  <Typography textAlign="center">Docs</Typography>
+                </MenuItem>
               </Menu>
             </Box>
             {/* 반응형 로고 */}
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
+            <Box
+              sx={{ flexGrow: 1, mr: 2, display: { xs: "flex", md: "none" } }}
             >
-              OpenSetGo
-            </Typography>
+              <LogoWrapper href="/home">
+                <LogoImg src={LOGO} />
+              </LogoWrapper>
+              <Typography
+                variant="h5"
+                noWrap
+                component="a"
+                href="/home"
+                mt={2}
+                sx={{
+                  display: { xs: "flex", md: "none" },
+                  flexGrow: 1,
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                OpenSetGo
+              </Typography>
+            </Box>
+
             <Box
               sx={{
+                mr: 2,
                 flexGrow: 1,
                 display: { xs: "none", md: "flex" },
                 justifyContent: "end",
@@ -197,11 +219,19 @@ export const Header = (props) => {
                   {page}
                 </MenuItemWrapper>
               ))}
+              <MenuItemWrapper
+                key="docs"
+                onClick={() =>
+                  handleOpenNewTab("https://open-set-go.netlify.app/")
+                }
+              >
+                Docs
+              </MenuItemWrapper>
             </Box>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt={userId} src={src} />
+                  <Avatar alt={userName ? userName : userId} src={src} />
                 </IconButton>
               </Tooltip>
               <Typography
@@ -210,7 +240,7 @@ export const Header = (props) => {
                 color={COLOR.MAIN_BLACK}
                 textAlign="center"
               >
-                {userName}
+                {userId}
               </Typography>
               <Menu
                 sx={{ mt: "45px" }}
@@ -242,6 +272,18 @@ export const Header = (props) => {
     </React.Fragment>
   );
 };
+
+const LogoWrapper = styled.a`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 1rem;
+`;
+
+const LogoImg = styled.img`
+  width: 3rem;
+  height: 3rem;
+`;
 
 const MenuItemWrapper = styled(Button)`
   display: block;
