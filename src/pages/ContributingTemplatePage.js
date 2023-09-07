@@ -32,12 +32,6 @@ function ContributingTemplatePage(props) {
         <TemplateModal type={"contributing"} />
       </BaseModal>
       <MarkdownPreview type={"contributing"} />
-      <Button onClick={handlesave} variant="contained" color="success">
-        저장
-      </Button>
-      <Button onClick={handleOpen} variant="contained" color="success">
-        Modal
-      </Button>
     </StReadmeTemplatePage>
   );
 }
