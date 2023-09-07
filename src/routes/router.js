@@ -5,10 +5,8 @@ import PRTemplatePage from "../pages/PRTemplatePage";
 import { Layout } from "../layout/Layout";
 import CreateRepo from "../pages/CreateRepoPage";
 import LicensePage from "../pages/LicensePage";
-import FinishTestPage from "../pages/FinishTest";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
 import ContributingTemplatePage from "../pages/ContributingTemplatePage";
-import TestPage from "../pages/test/Test";
 
 const Router = () => {
   return (
