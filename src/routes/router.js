@@ -8,12 +8,13 @@ import LicensePage from "../pages/LicensePage";
 import FinishTestPage from "../pages/FinishTest";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
 import ContributingTemplatePage from "../pages/ContributingTemplatePage";
+import TestPage from "../pages/test/Test";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/home" element={<MainPage />} />
+        <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route element={<Layout />}>
           <Route path="/step1" element={<CreateRepo />} />
@@ -21,7 +22,6 @@ const Router = () => {
           <Route path="/step3" element={<PRTemplatePage />} />
           <Route path="/step4" element={<ContributingTemplatePage />} />
           <Route path="/step5" element={<ReadmeTemplatePage />} />
-          <Route path="/step6" element={<FinishTestPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
