@@ -64,7 +64,7 @@ export const Header = (props) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+    if (props.main) setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = (event) => {
