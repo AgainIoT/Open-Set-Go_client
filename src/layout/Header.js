@@ -64,7 +64,7 @@ export const Header = (props) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    if (props.main) setAnchorElUser(event.currentTarget);
+    if (props.burger) setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = (event) => {
@@ -96,13 +96,16 @@ export const Header = (props) => {
     setSrc(localStorage.getItem("avatar"));
     setAnchorElUser(null);
   };
+
+  const handleOpenNewTab = (url) => {
+    window.open(url, "_blank", "noopener, noreferrer");
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
       <ElevationScroll {...props}>
-        <AppBar
-          style={{ background: COLOR.MAIN_WHITE, color: COLOR.MAIN_BLACK }}
-        >
+        <AppBar style={{ background: COLOR.MAIN_WHITE }}>
           <Toolbar>
             <Box
               sx={{
@@ -131,7 +134,7 @@ export const Header = (props) => {
               </Typography>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              {props.main ? (
+              {props.burger ? (
                 <IconButton
                   size="large"
                   aria-label="account of current user"
@@ -166,7 +169,12 @@ export const Header = (props) => {
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
-                <MenuItem key={"Docs"} onClick={() => console.log("docs")}>
+                <MenuItem
+                  key={"Docs"}
+                  onClick={() =>
+                    handleOpenNewTab("https://open-set-go.netlify.app/")
+                  }
+                >
                   <Typography textAlign="center">Docs</Typography>
                 </MenuItem>
               </Menu>
@@ -211,7 +219,12 @@ export const Header = (props) => {
                   {page}
                 </MenuItemWrapper>
               ))}
-              <MenuItemWrapper key="docs" onClick={() => console.log("docs")}>
+              <MenuItemWrapper
+                key="docs"
+                onClick={() =>
+                  handleOpenNewTab("https://open-set-go.netlify.app/")
+                }
+              >
                 Docs
               </MenuItemWrapper>
             </Box>
