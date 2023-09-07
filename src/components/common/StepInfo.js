@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import StepData from "../../data/StepData.json";
+import Button from "@mui/material/Button";
 import { activeState } from "../../recoil/commonState";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { eachStepState, modalState } from "../../recoil/commonState";
 
 //StepInfo: Component for description of each step (located on the left side of the screen)
 const StepInfo = () => {
@@ -13,14 +15,28 @@ const StepInfo = () => {
     <div>
       {StepData.StepData.filter((eachStep) => eachStep.id === activeStep).map(
         (it) => {
+          const [modalValue, setModalValue] = useRecoilState(modalState(it.type));
+          const handleOpen = () => setModalValue(true);
           return (
             <div key={it.step}>
-              <StStepInfo>
+              <Box_><StStepInfo>
                 <TitleH1>
                   Step{it.step}. {it.title}
                 </TitleH1>
                 <ContentP>{it.content}</ContentP>
-              </StStepInfo>
+                {activeStep > 1 ? (
+                  <ButtonWrapper
+                    size="large"
+                    variant="text"
+                    disableElevation
+                    onClick={handleOpen}
+                  >
+                    Find Template
+                  </ButtonWrapper>
+                ) : (
+                  <div></div>
+                )}
+              </StStepInfo></Box_>
             </div>
           );
         },
@@ -47,6 +63,21 @@ const ContentP = styled.p`
   text-align: justify;
   font-size: 1.3rem;
   line-height: 2.2rem;
+`;
+
+const ButtonWrapper = styled(Button)`
+  padding: 0.8rem 1.6rem 0.8rem 1.6rem;
+  height: 100%;
+  margin-top: 50%;
+  font-size: 2rem;
+`;
+
+const Box_ = styled.div`
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 `;
 
 export default StepInfo;
