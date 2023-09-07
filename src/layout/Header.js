@@ -111,12 +111,12 @@ export const Header = (props) => {
                 display: { xs: "none", md: "flex" },
               }}
             >
-              <LogoWrapper href="/home">
+              <LogoWrapper href="/">
                 <LogoImg src={LOGO} />
               </LogoWrapper>
               <Typography
                 variant="h5"
-                href="/home"
+                href="/"
                 component="a"
                 gutterBottom
                 mt={2}
@@ -181,14 +181,14 @@ export const Header = (props) => {
             <Box
               sx={{ flexGrow: 1, mr: 2, display: { xs: "flex", md: "none" } }}
             >
-              <LogoWrapper href="/home">
+              <LogoWrapper href="/">
                 <LogoImg src={LOGO} />
               </LogoWrapper>
               <Typography
                 variant="h5"
                 noWrap
                 component="a"
-                href="/home"
+                href="/"
                 mt={2}
                 sx={{
                   display: { xs: "flex", md: "none" },
