@@ -8,6 +8,7 @@ import { SelectAuto } from "../common/SelectAuto";
 import { useRecoilState } from "recoil";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 
+/* for Owner, RepoName, Description */
 export const RequiredFieldContainer = () => {
   /* GET - user repo info */
   const [owner, setOwner] = useRecoilState(repoDataAtomFamily("owner"));
@@ -44,7 +45,6 @@ export const RequiredFieldContainer = () => {
       setOwner(response.data.id);
       setUserRepoData(initUserData);
     } catch (e) {
-      // 실패 시 처리
       console.error(e);
     }
   }

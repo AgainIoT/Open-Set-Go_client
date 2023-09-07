@@ -13,6 +13,7 @@ import { GitignoreModal } from "../common/modal/GitignoreModal";
 import { ReadonlyAuto } from "../common/ReadOnlyAuto";
 import { modalState } from "../../recoil/commonState";
 
+/* for gitignore */
 export const GitIgnoreContainer = () => {
   const [modalValue, setModalValue] = useRecoilState(
     modalState("gitignoreModal"),
