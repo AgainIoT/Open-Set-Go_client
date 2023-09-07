@@ -86,8 +86,8 @@ const StLayout = styled.div`
 const ContentsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   justify-content: space-around;
   margin-left: 2.6rem;
   padding: 2rem 3rem 0 2rem;
@@ -99,14 +99,14 @@ const StepContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 2.5rem;
-  width: 100%;
-  height: 76%;
+  width: 100vw;
+  height: 76vh;
 `;
 
 const ExplainWrapper = styled.div`
   display: flex;
-  width: 20%;
-  height: 100%;
+  width: 20vw;
+  height: 100vh;
   justify-content: center;
 `;
 

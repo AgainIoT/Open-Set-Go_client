@@ -14,14 +14,19 @@ const MarkdownPreview = (props) => {
 
   return (
     <StMarkdownPreview>
-      <MDEditor height={"95%"} value={contentValue} onChange={setContentValue} />
+      <MDEditor
+        height={"95%"}
+        value={contentValue}
+        onChange={setContentValue}
+      />
     </StMarkdownPreview>
   );
 };
 
 const StMarkdownPreview = styled.div`
-height: 90%;  
-width: 100%;
+  poisition: fixed;
+  height: 90%;
+  width: 100%;
 `;
 
 export default MarkdownPreview;
