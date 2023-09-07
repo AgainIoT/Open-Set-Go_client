@@ -1,50 +1,97 @@
 import { COLOR } from "../../styles/color.js";
 import { styled } from "styled-components";
-import LOGO from "../../assets/images/Logo.svg";
+import LOGO from "../../assets/images/title.svg";
+import GitHubIcon from "@mui/icons-material/GitHub";
 export default function Footer() {
   return (
-    // <div className="footer" style={{ backgroundColor: COLOR.MAIN_WHITE }}>
-    //   {/* <InfoH1>license blabla</InfoH1> */}
-    //   <LogoImg src={LOGO}/>
-    // </div>
     <StFooter>
       <LogoDiv>
         <LogoImg src={LOGO} />
       </LogoDiv>
-      <Hr />
-      <InfoP>Copyright ⓒ AgainIoT All rights reserved.</InfoP>
+      <InfoDiv>
+        <InfoP>
+          <strong>Development</strong> | team AgainIoT<br></br>
+        </InfoP>
+        <InfoP>
+          <strong>Contact us</strong> | again.iot.contact@gmail.com<br></br>
+        </InfoP>
+        <InfoP>@2023 by AgainIoT All right reserved</InfoP>
+        <br></br>
+      </InfoDiv>
+      <VlineDiv />
+      <GithubDiv>
+        <a href="https://open-set-go.netlify.app/">
+          <DocsP>DOCS</DocsP>
+        </a>
+        <a href="https://github.com/AgainIoT/Open-Set-Go">
+          <GithubIcon style={{ color: COLOR.MAIN_BLACK, fontSize: "3.3rem" }} />
+        </a>
+      </GithubDiv>
     </StFooter>
   );
 }
 
 const StFooter = styled.div`
   height: 15rem;
-  padding: 3rem;
   background-color: ${COLOR.MAIN_WHITE};
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
 `;
 
 const LogoDiv = styled.div`
+  height: 100%;
+  width: 33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 1rem 0rem 1rem 0rem;
+  /* border: 1px solid green; */
 `;
 
 const LogoImg = styled.img`
-  width: 5rem;
-  height: 5rem;
+  width: 35%;
+  height: 35%;
 `;
 
-const Hr = styled.hr`
-  width: 80%;
-  text-align: center;
-  background-color: ${COLOR.MAIN_BACKGROUND};
+const InfoDiv = styled.div`
+  height: 100%;
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 1px solid red; */
+  padding-left: 5rem;
+  padding-top: 1rem;
 `;
 
 const InfoP = styled.p`
-  padding-top: 1rem;
-  font-size: 1rem;
+  /* border: 1px solid aqua; */
+  justify-content: center;
   align-content: center;
+  font-size: 1.2rem;
+`;
+
+const VlineDiv = styled.div`
+  border-left: thin solid #c9c9c9;
+  height: 10rem;
+`;
+const GithubDiv = styled.div`
+  height: 100%;
+  width: 33%;
+  /* border: 1px solid blue; */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+const DocsP = styled.p`
+  font-family: "Inter", sans-serif;
+`;
+
+const GithubIcon = styled(GitHubIcon)`
+  color: ${COLOR.MAIN_BLACK};
+  font-size: "3.3rem";
+  margin-left: 2rem;
 `;
