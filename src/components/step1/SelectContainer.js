@@ -33,7 +33,6 @@ export const SelectContainer = () => {
 
       setBaseOption(response.data);
     } catch (e) {
-      // 실패 시 처리
       console.error(e);
     }
   }
@@ -43,6 +42,7 @@ export const SelectContainer = () => {
   }, []);
   const langs = baseOption.map((it) => it.language);
 
+  //Apply options based on the language of choice
   useEffect(() => {
     if (isSelectLang) {
       const selectedLanguageOption = baseOption.find(
