@@ -5,7 +5,6 @@ import { useRecoilValue } from "recoil";
 import { token } from "../../recoil/authorize";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { forwardRef } from "react";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
