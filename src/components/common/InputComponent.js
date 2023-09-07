@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 import HelpIcon from "@mui/icons-material/Help";
 import FormControl from "@mui/material/FormControl";
