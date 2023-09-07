@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { PropTypes } from "prop-types";
 import { Button } from "@mui/material";
-import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 
+//SlideContent: Internal component in the slick to be used in the license page
+//using props to connect data to Slide
 export const SlideContent = (props) => {
-  // let [pickLi, setPickLi] = useState([...props.pickLi]);
+  //using recoil to send finally selected license url to the server
   const [pickLi, setPickLi] = useRecoilState(repoDataAtomFamily("license"));
 
   const onSet = () => {
@@ -111,9 +112,7 @@ const StSlideContent = styled.div`
   white-space: pre-wrap;
   background-color: white;
   box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
-  /* display: flex; */
   flex-direction: column;
-  /* justify-content: space-between; */
   align-items: center;
   width: 80%;
   height: 100%;
@@ -154,7 +153,7 @@ const ConditionBox = styled.div`
   gap: 0.5rem;
 
   div {
-    //permissions limitations conditions
+    //div for permissions limitations conditions
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -177,8 +176,6 @@ const Condition = styled.h2`
 const SharedContent = `
 display: block;
 padding-inline-start: 2ch;
-
-
 `;
 
 const PermissionContent = styled.li`
@@ -193,7 +190,6 @@ const LimitationContent = styled.li`
 
 const ConditionContent = styled.li`
   ${SharedContent}
-  /* list-style: disc; */
   list-style-type: "ℹ️";
 `;
 
@@ -263,6 +259,7 @@ const SelectedBtn = styled(Button)`
     background-color: green;
   }
 `;
+
 const SubmitBtn = styled(Button)`
   ${SharedBtn}
   background-color: gray;
