@@ -15,12 +15,13 @@
     "@mui/material": "^5.14.8",
     "@mui/styled-engine-sc": "^5.14.8",
     "@mui/x-data-grid": "^6.12.0",
-    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/jest-dom": "^6.1.3",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@uiw/react-markdown-preview": "^4.1.15",
     "@uiw/react-md-editor": "^3.23.5",
     "axios": "^1.5.0",
+    "env-cmd": "^10.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-cookie": "^6.1.0",
@@ -39,6 +40,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:dev": "env-cmd -f .env.development.local react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -71,5 +73,8 @@
     "eslint-plugin-react": "^7.33.1",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "3.0.1"
+  },
+  "resolutions": {
+    "nth-check": "^2.1.1"
   }
 }
