@@ -3,20 +3,33 @@ import Footer from "../components/main/Footer";
 import Steps from "../components/main/Steps";
 import propTypes from "prop-types";
 import { Header } from "../layout/Header";
-import { Cookies } from "react-cookie";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { token } from "../recoil/authorize";
+import { isLogin } from "../recoil/authorize";
+import axios from "axios";
+
+async function checkTokenValid() {
+  const isTokenValid = await axios.get(
+    `${process.env.REACT_APP_SERVER_URL}/auth/checkToken`,
+    {
+      validateStatus: (status) => {
+        return status < 500;
+      },
+      withCredentials: true,
+    },
+  );
+  if (isTokenValid.status >= 400) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function MainPage() {
-  const cookies = new Cookies();
-  const setAccessToken = useSetRecoilState(token);
+  const setIsLogin = useSetRecoilState(isLogin);
+
   useEffect(() => {
-    const accessToken = cookies.get("Authentication");
-    if (accessToken) {
-      setAccessToken(accessToken);
-    } else {
-      setAccessToken(null);
-    }
+    setIsLogin(checkTokenValid());
   }, []);
   return (
     <>
