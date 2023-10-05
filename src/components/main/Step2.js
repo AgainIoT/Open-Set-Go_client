@@ -1,5 +1,5 @@
-import { Typography } from "@mui/material";
 import styled from "styled-components";
+import { Typography } from "@mui/material";
 import DeskTop from "../../assets/images/desktop.svg";
 
 //Step2: Component for description on the main page (a brief description of the project)
@@ -23,20 +23,20 @@ const Step2 = () => {
 
 const StStep2 = styled.div`
   display: flex;
-  margin: 5rem 0rem 5rem 0rem ;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
   width: 100%;
   height: 100%;
-  flex-direction: row;
+  margin: 5rem 0rem 5rem 0rem ;
 `;
 
 const ImgDiv = styled.div`
-  width: 50%;
-  height: 100%;
   display: flex;
   justify-content: right;
   align-items: center;
+  width: 50%;
+  height: 100%;
 `;
 
 const DesktopImg = styled.img`
@@ -46,30 +46,30 @@ const DesktopImg = styled.img`
 
 const TextDiv = styled.div`
   display: flex;
-  margin-left: 1rem;
-  flex-direction: column;
   justify-content: center;
+  flex-direction: column;
   width: 50%;
   height: 100%;
+  margin-left: 1rem;
   gap: 1rem;
 `;
 
 const TitleTypo = styled(Typography)`
+  width: 100%;
+  height: fit-content;
   font-size: 3.2rem;
   font-family: "Inter", sans-serif;
   font-weight: 700;
-  width: 100%;
-  height: fit-content;
 `;
 
 const DescTypo = styled(Typography)`
-  text-align: justify;
-  height: fit-content;
   width: 100%;
+  height: fit-content;
   font-size: 2rem;
-  line-height: 2.2rem;
   font-weight: 200;
   font-family: "Inter", sans-serif;
+  text-align: justify;
+  line-height: 2.2rem;
 `;
 
 export default Step2;
