@@ -25,7 +25,13 @@ function MainPage() {
   const setIsLogin = useSetRecoilState(isLogin);
 
   const checkIsLogin = async () => {
-    setIsLogin(await checkTokenValid());
+    const loggedIn = await checkTokenValid();
+    if (loggedIn) {
+      localStorage.removeItem("id");
+      localStorage.removeItem("name");
+      localStorage.removeItem("avatar");
+    }
+    setIsLogin(loggedIn);
   };
 
   useEffect(() => {
