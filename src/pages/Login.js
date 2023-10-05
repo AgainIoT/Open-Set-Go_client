@@ -4,8 +4,7 @@ import { Title } from "../components/main/Welcome";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { avatar, id, name, token } from "../recoil/authorize";
-import { Cookies } from "react-cookie";
+import { avatar, id, isLogin, name } from "../recoil/authorize";
 import propTypes from "prop-types";
 
 let cnt = 0;
@@ -16,8 +15,7 @@ function LoginPage() {
   const setAvatar = useSetRecoilState(avatar);
   const navigate = useNavigate();
 
-  const cookies = new Cookies();
-  const setToken = useSetRecoilState(token);
+  const setIsLogin = useSetRecoilState(isLogin);
 
   const login = async () => {
     if (!cnt++) {
@@ -58,15 +56,13 @@ function LoginPage() {
     );
     if (200 > res.status || res.status >= 300) {
       alert("login failed");
+      setIsLogin(false);
     } else {
-      const accessToken = cookies.get("Authentication");
-      setToken(accessToken);
+      setIsLogin(true);
     }
   };
 
   useEffect(() => {
-    const accessToken = cookies.get("Authentication");
-    setToken(accessToken);
     login();
     navigate("/");
   }, []);
