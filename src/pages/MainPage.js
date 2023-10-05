@@ -28,8 +28,12 @@ async function checkTokenValid() {
 function MainPage() {
   const setIsLogin = useSetRecoilState(isLogin);
 
+  const checkIsLogin = async () => {
+    setIsLogin(await checkTokenValid());
+  };
+
   useEffect(() => {
-    setIsLogin(checkTokenValid());
+    checkIsLogin();
   }, []);
   return (
     <>
