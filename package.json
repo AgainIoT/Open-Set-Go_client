@@ -24,7 +24,6 @@
     "env-cmd": "^10.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-cookie": "^6.1.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
     "react-query": "^3.39.3",
@@ -39,7 +38,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HTTPS=true react-scripts start",
     "start:dev": "env-cmd -f .env.development.local react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -75,6 +74,7 @@
     "prettier": "3.0.1"
   },
   "resolutions": {
-    "nth-check": "^2.1.1"
+    "nth-check": "^2.1.1",
+    "postcss": "^8.4.31"
   }
 }

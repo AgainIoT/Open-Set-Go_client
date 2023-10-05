@@ -18,7 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LOGO from "../../src/assets/images/Logo.svg";
 import axios from "axios";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { avatar, id, name, token } from "../recoil/authorize";
+import { avatar, id, name, isLogin } from "../recoil/authorize";
 import styled from "styled-components";
 const ElevationScroll = (props) => {
   const { children, window } = props;
@@ -48,7 +48,7 @@ export const Header = (props) => {
   const [src, setSrc] = useRecoilState(avatar);
   const [userId, setUserId] = useRecoilState(id);
   const [userName, setUserName] = useRecoilState(name);
-  const setToken = useSetRecoilState(token);
+  const setIsLogin = useSetRecoilState(isLogin);
   React.useEffect(() => {
     setSrc(localStorage.avatar);
     setUserId(localStorage.id);
@@ -76,7 +76,7 @@ export const Header = (props) => {
       "",
       { withCredentials: true },
     );
-    setToken("");
+    setIsLogin(false);
     localStorage.setItem("id", "guest");
     localStorage.setItem("name", "guest");
     localStorage.setItem("avatar", "");
