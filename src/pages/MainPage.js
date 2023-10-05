@@ -18,11 +18,7 @@ async function checkTokenValid() {
       withCredentials: true,
     },
   );
-  if (isTokenValid.status >= 400) {
-    return false;
-  } else {
-    return true;
-  }
+  return isTokenValid.status < 400;
 }
 
 function MainPage() {
