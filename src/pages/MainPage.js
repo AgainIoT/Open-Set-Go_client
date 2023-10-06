@@ -26,7 +26,7 @@ function MainPage() {
 
   const checkIsLogin = async () => {
     const loggedIn = await checkTokenValid();
-    if (loggedIn) {
+    if (!loggedIn) {
       localStorage.removeItem("id");
       localStorage.removeItem("name");
       localStorage.removeItem("avatar");
