@@ -1,6 +1,6 @@
 # Welcome to Open-Set-Go contributing guide
 
-Thank you for investing your time in contributing to our Open-Set-Go project! Any contribution you make will be reflected on [Open-Set-Go.io](https://open-set-go.netlify.app/) & [README.md](https://github.com/AgainIoT/Open-Set-Go#contributors) ✨.
+Thank you for investing your time in contributing to our Open-Set-Go project! Any contribution you make will be reflected on [Open-Set-Go.io](https://docs.open-set-go.com) & [README.md](https://github.com/AgainIoT/Open-Set-Go#contributors) ✨.
 
 We are committed to fostering a contribution-friendly environment that encourages contributions and aims to evolve into an open-source community. Please have a lot of conversations on [our Discussion](https://github.com/AgainIoT/Open-Set-Go/discussions)!
 

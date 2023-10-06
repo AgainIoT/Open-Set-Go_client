@@ -1,11 +1,11 @@
 # Open-Set-Go_client
 
 <p align="center">
-<a href="https://open-set-go.netlify.app/" target="blank"><img src="https://github.com/AgainIoT/Open-Set-Go/raw/main/.github/images/Open-Set-Go.png" width="200" alt="Open-Set-Go Logo" /></a>
+<a href="https://docs.open-set-go.com/" target="blank"><img src="https://github.com/AgainIoT/Open-Set-Go/raw/main/.github/images/Open-Set-Go.png" width="200" alt="Open-Set-Go Logo" /></a>
 </p>
 
 <p align="center">
-  Start Open-Source Projects easily, quickly and conveniently with <a href="https://open-set-go.netlify.app/" target="blank">Open-Set-Go</a>!
+  Start Open-Source Projects easily, quickly and conveniently with <a href="https://docs.open-set-go.com/" target="blank">Open-Set-Go</a>!
 </p>
 
 <p align="center">
@@ -119,7 +119,7 @@ Open-Set-Go makes it easy, fast and simple to start an Open-Source project, whil
 
 We are conducting documentation at Open-Set-Go.io. Please refer to the following. _You can see our technical blog & showcase on Open-Set-Go.io_
 
-- <a href="https://open-set-go.netlify.app/">Open-Set-Go.io</a>
+- <a href="https://docs.open-set-go.com/">Open-Set-Go.io</a>
 
 ## Contributing
 
