@@ -188,7 +188,7 @@ export const Header = (props) => {
                 <MenuItem
                   key={"Docs"}
                   onClick={() =>
-                    handleOpenNewTab("https://open-set-go.netlify.app/")
+                    handleOpenNewTab("https://docs.open-set-go.com")
                   }
                 >
                   <Typography textAlign="center">Docs</Typography>
@@ -238,7 +238,7 @@ export const Header = (props) => {
               <MenuItemWrapper
                 key="docs"
                 onClick={() =>
-                  handleOpenNewTab("https://open-set-go.netlify.app/")
+                  handleOpenNewTab("https://docs.open-set-go.com")
                 }
               >
                 Docs
