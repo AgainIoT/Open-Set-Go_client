@@ -17,7 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import LOGO from "../../src/assets/images/Logo.svg";
 import axios from "axios";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { avatar, id, name, isLogin } from "../recoil/authorize";
 import styled from "styled-components";
 const ElevationScroll = (props) => {
