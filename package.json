@@ -38,7 +38,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "HTTPS=true react-scripts start",
+    "start": "react-scripts start",
+    "start:win": "set HTTPS=true&&react-scripts start",
+    "start:linux": "HTTPS=true react-scripts start",
     "start:dev": "env-cmd -f .env.development.local react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
