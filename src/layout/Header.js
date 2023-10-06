@@ -17,7 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import LOGO from "../../src/assets/images/Logo.svg";
 import axios from "axios";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { avatar, id, name, isLogin } from "../recoil/authorize";
 import styled from "styled-components";
 
@@ -63,7 +63,7 @@ export const Header = (props) => {
   const [src, setSrc] = useRecoilState(avatar);
   const [userId, setUserId] = useRecoilState(id);
   const [userName, setUserName] = useRecoilState(name);
-  const [login, setIsLogin] = useRecoilState(isLogin);
+  const setIsLogin = useSetRecoilState(isLogin);
 
   const checkIsLogin = async () => {
     const loggedIn = await checkTokenValid();
@@ -75,7 +75,6 @@ export const Header = (props) => {
       localStorage.removeItem("id");
       localStorage.removeItem("name");
       localStorage.removeItem("avatar");
-
     }
     setIsLogin(loggedIn);
   };
