@@ -17,7 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import LOGO from "../../src/assets/images/Logo.svg";
 import axios from "axios";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { avatar, id, name, isLogin } from "../recoil/authorize";
 import styled from "styled-components";
 const ElevationScroll = (props) => {
@@ -48,13 +48,11 @@ export const Header = (props) => {
   const [src, setSrc] = useRecoilState(avatar);
   const [userId, setUserId] = useRecoilState(id);
   const [userName, setUserName] = useRecoilState(name);
-  const [Login, setLogin] = useRecoilState(isLogin);
+  const setIsLogin = useSetRecoilState(isLogin);
   React.useEffect(() => {
-    if (Login) {
-      setSrc(localStorage.avatar);
-      setUserId(localStorage.id);
-      setUserName(localStorage.name);
-    }
+    setSrc(localStorage.avatar);
+    setUserId(localStorage.id);
+    setUserName(localStorage.name);
   }, []);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -78,7 +76,7 @@ export const Header = (props) => {
       "",
       { withCredentials: true },
     );
-    setLogin(false);
+    setIsLogin(false);
     localStorage.setItem("id", "guest");
     localStorage.setItem("name", "guest");
     localStorage.setItem("avatar", "");
