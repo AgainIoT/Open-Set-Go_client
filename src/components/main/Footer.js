@@ -20,7 +20,7 @@ export default function Footer() {
       </InfoDiv>
       <VlineDiv />
       <GithubDiv>
-        <a href="https://open-set-go.netlify.app/">
+        <a href="https://docs.open-set-go.com/">
           <DocsP>DOCS</DocsP>
         </a>
         <a href="https://github.com/AgainIoT/Open-Set-Go">
