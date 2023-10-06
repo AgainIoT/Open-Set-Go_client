@@ -20,6 +20,7 @@ import axios from "axios";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { avatar, id, name, isLogin } from "../recoil/authorize";
 import styled from "styled-components";
+
 const ElevationScroll = (props) => {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -42,6 +43,20 @@ ElevationScroll.propTypes = {
    */
   window: PropTypes.func,
 };
+
+async function checkTokenValid() {
+  const isTokenValid = await axios.get(
+    `${process.env.REACT_APP_SERVER_URL}/auth/checkToken`,
+    {
+      validateStatus: (status) => {
+        return status < 500;
+      },
+      withCredentials: true,
+    },
+  );
+  return isTokenValid.status < 400;
+}
+
 export const Header = (props) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -49,10 +64,23 @@ export const Header = (props) => {
   const [userId, setUserId] = useRecoilState(id);
   const [userName, setUserName] = useRecoilState(name);
   const setIsLogin = useSetRecoilState(isLogin);
+
+  const checkIsLogin = async () => {
+    const loggedIn = await checkTokenValid();
+    if (loggedIn) {
+      setSrc(localStorage.avatar);
+      setUserId(localStorage.id);
+      setUserName(localStorage.name);
+    } else {
+      localStorage.removeItem("id");
+      localStorage.removeItem("name");
+      localStorage.removeItem("avatar");
+    }
+    setIsLogin(loggedIn);
+  };
+
   React.useEffect(() => {
-    setSrc(localStorage.avatar);
-    setUserId(localStorage.id);
-    setUserName(localStorage.name);
+    checkIsLogin();
   }, []);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -160,7 +188,7 @@ export const Header = (props) => {
                 <MenuItem
                   key={"Docs"}
                   onClick={() =>
-                    handleOpenNewTab("https://docs.open-set-go.com")
+                    handleOpenNewTab("https://open-set-go.netlify.app/")
                   }
                 >
                   <Typography textAlign="center">Docs</Typography>
@@ -209,7 +237,9 @@ export const Header = (props) => {
               ))}
               <MenuItemWrapper
                 key="docs"
-                onClick={() => handleOpenNewTab("https://docs.open-set-go.com")}
+                onClick={() =>
+                  handleOpenNewTab("https://open-set-go.netlify.app/")
+                }
               >
                 Docs
               </MenuItemWrapper>
