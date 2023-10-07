@@ -1,8 +1,8 @@
 import { atom } from "recoil";
 
-export const token = atom({
-  key: "token",
-  default: null,
+export const isLogin = atom({
+  key: "isLogin",
+  default: false,
 });
 
 export const avatar = atom({

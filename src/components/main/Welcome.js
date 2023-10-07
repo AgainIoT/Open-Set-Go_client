@@ -2,7 +2,7 @@ import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
 import propTypes from "prop-types";
 import { useRecoilValue } from "recoil";
-import { token } from "../../recoil/authorize";
+import { isLogin } from "../../recoil/authorize";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { COLOR } from "../../styles/color.js";
@@ -14,7 +14,7 @@ const handleLogin = () => {
   window.location.href = githubURL;
 };
 export const Welcome = (ref) => {
-  const accessToken = useRecoilValue(token);
+  const Logined = useRecoilValue(isLogin);
   const navigate = new useNavigate();
   return (
     <StWelcome>
@@ -31,7 +31,7 @@ export const Welcome = (ref) => {
         >
           learn more
         </LearnmoreBtn>
-        {accessToken ? (
+        {Logined === true ? (
           <LoginBtn variant="contained" onClick={() => navigate("/step1")}>
             get started
           </LoginBtn>
@@ -57,7 +57,11 @@ const StWelcome = styled.div`
   text-align: center;
   justify-content: center;
   height: 80vh;
-  background: linear-gradient(to bottom, ${COLOR.MAIN_HOVER}, ${COLOR.MAIN_BACKGROUND});
+  background: linear-gradient(
+    to bottom,
+    ${COLOR.MAIN_HOVER},
+    ${COLOR.MAIN_BACKGROUND}
+  );
 `;
 
 export const Title = styled.h1`

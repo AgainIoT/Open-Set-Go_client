@@ -2,9 +2,14 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.0.x   | :white_check_mark: |
+| 0.0.x   | ❌ |
+| 1.0.0   | ❌ |
+| 1.0.1   | ☑️ |
+
+## Reporting a Vulnerability
+
+We strongly encourage you to report security vulnerabilities to
+our private security mailing list: yunminwo1211@gmail.com - first, before
+disclosing them in any public forums.
