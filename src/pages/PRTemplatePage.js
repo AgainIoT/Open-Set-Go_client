@@ -1,14 +1,11 @@
-import { styled } from "styled-components";
 import React, { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import Button from "@mui/material/Button";
 import { templateContent } from "../recoil/templateState";
-import { eachStepState, modalState } from "../recoil/commonState";
 import { BaseModal } from "../components/common/modal/BaseModal";
+import { eachStepState, modalState } from "../recoil/commonState";
 import MarkdownPreview from "../components/common/MarkdownPreview";
 import { TemplateModal } from "../components/common/modal/templateModal";
-import MDEditor from "@uiw/react-md-editor";
-
+import { styled } from "styled-components";
 
 function PRTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("pr"));

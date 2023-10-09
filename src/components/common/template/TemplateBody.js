@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 import React, { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Typography from "@mui/material/Typography";
-import { WidthFull } from "@mui/icons-material";
 import {
   templateContent,
   templatePreviewState,
@@ -10,7 +9,6 @@ import {
   templateToModal,
 } from "../../../recoil/templateState";
 import MarkdownPreview from "@uiw/react-markdown-preview";
-import axios from "axios";
 
 
 // props -> type(pr, readme, contributing)

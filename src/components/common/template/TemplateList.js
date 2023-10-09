@@ -10,16 +10,12 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { fontSize } from "@mui/system";
-import { FixedSizeList } from "react-window";
 import axios from "axios";
-import { PropTypes } from "prop-types";
 import {
   templateContent,
   templatePreviewState,
   templateSelectState,
 } from "../../../recoil/templateState";
-import TemplateTitle from "./TemplateTitle";
 
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {
