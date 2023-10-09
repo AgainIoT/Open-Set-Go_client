@@ -5,4 +5,3 @@ import { Button } from "@mui/material";
 import propTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { isLogin } from "../../recoil/authorize";
-
