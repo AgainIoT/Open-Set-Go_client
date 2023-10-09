@@ -32,7 +32,7 @@ export const Welcome = (ref) => {
           learn more
         </LearnmoreBtn>
         {Logined === true ? (
-          <LoginBtn variant="contained" onClick={() => navigate("/select")}>
+          <LoginBtn variant="contained" onClick={() => navigate("/step1")}>
             get started
           </LoginBtn>
         ) : (
