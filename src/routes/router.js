@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "../pages/MainPage";
 import LoginPage from "../pages/Login";
+import SelectTypePage from "../pages/SelectTypePage";
 import PRTemplatePage from "../pages/PRTemplatePage";
 import { Layout } from "../layout/Layout";
 import CreateRepo from "../pages/CreateRepoPage";
@@ -14,6 +15,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/select" element={<SelectTypePage />} />
         <Route element={<Layout />}>
           <Route path="/step1" element={<CreateRepo />} />
           <Route path="/step2" element={<LicensePage />} />
