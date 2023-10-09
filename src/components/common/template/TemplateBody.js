@@ -1,16 +1,17 @@
+import { styled } from "styled-components";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Typography from "@mui/material/Typography";
+import { WidthFull } from "@mui/icons-material";
 import {
   templateContent,
   templatePreviewState,
   templateState,
   templateToModal,
 } from "../../../recoil/templateState";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { styled } from "styled-components";
-import { WidthFull } from "@mui/icons-material";
 import MarkdownPreview from "@uiw/react-markdown-preview";
+import axios from "axios";
+
 
 // props -> type(pr, readme, contributing)
 export default function TemplateBody(props) {
@@ -33,9 +34,9 @@ export default function TemplateBody(props) {
 
 const BodyBox = styled.div`
   display: flex;
+  flex-direction: column;
   max-height: 52rem;
   max-width: 65rem;
-  flex-direction: column;
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
