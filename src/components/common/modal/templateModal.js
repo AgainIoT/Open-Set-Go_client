@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { TemplateList } from "../template/TemplateList";
 import TemplateTitle from "../template/TemplateTitle";
 import TemplateBody from "../template/TemplateBody";
-import { useRecoilState, useRecoilValue } from "recoil";
 
 // props -> type(pr, readme, contributing)
 export const TemplateModal = (props) => {
