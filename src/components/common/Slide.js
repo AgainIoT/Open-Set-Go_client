@@ -74,7 +74,7 @@ const StyledSlider = styled(Slider)`
   width: 100%;
   height: 100%;
   .slick-list {
-    //슬라이드 스크린
+    //slide screen
     display: flex;
     justify-content: center;
     align-items: center;
