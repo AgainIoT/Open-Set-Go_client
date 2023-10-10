@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { Box, Typography } from "@mui/material";
-import StepData from "../../data/StepData.json";
-import Button from "@mui/material/Button";
-import { activeState } from "../../recoil/commonState";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { Box, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import StepData from "../../data/StepData.json";
+import { activeState } from "../../recoil/commonState";
 import { eachStepState, modalState } from "../../recoil/commonState";
 
 //StepInfo: Component for description of each step (located on the left side of the screen)
@@ -47,9 +47,9 @@ const StepInfo = () => {
 
 const StStepInfo = styled.div`
   display: flex;
-  margin-top: 10%;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
+  margin-top: 10%;
   gap: 2rem;
 `;
 
@@ -60,24 +60,24 @@ const TitleH1 = styled(Typography)`
 
 const ContentP = styled.p`
   margin: 0rem 2rem 0rem 2rem;
-  text-align: justify;
   font-size: 1.3rem;
+  text-align: justify;
   line-height: 2.2rem;
 `;
 
 const ButtonWrapper = styled(Button)`
-  padding: 0.8rem 1.6rem 0.8rem 1.6rem;
   height: 100%;
+  padding: 0.8rem 1.6rem 0.8rem 1.6rem;
   margin-top: 50%;
   font-size: 2rem;
 `;
 
 const Box_ = styled.div`
-  gap: 2rem;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  flex-direction: column;
   height: 100%;
+  gap: 2rem;
 `;
 
 export default StepInfo;
