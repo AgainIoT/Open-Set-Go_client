@@ -238,7 +238,7 @@ const SharedBtn = `
   height: fit-content;
   padding: 0.5rem 1rem 0.4rem 1rem;
   font-size: 1.1rem;
-  text-transform: none; //대문자 고정 취소
+  text-transform: none; //Turn off uppercase default settings
   white-space: nowrap;
   box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
 `;
