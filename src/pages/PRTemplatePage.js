@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import MDEditor from "@uiw/react-md-editor";
-import Button from "@mui/material/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { templateContent } from "../recoil/templateState";
 import { BaseModal } from "../components/common/modal/BaseModal";
