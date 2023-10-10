@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-
 import { useRecoilState } from "recoil";
-
-import Chip from "@mui/material/Chip";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField, Chip } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 
 export const FixedOptionShowSelect = (props) => {
@@ -48,8 +45,8 @@ export const FixedOptionShowSelect = (props) => {
 
 const StFixedOptionShowSelect = styled.div`
   display: flex;
-  margin-top: 2rem;
   height: 100%;
+  margin-top: 2rem;
 `;
 
 const SelectContainer = styled(Autocomplete)`
@@ -66,9 +63,9 @@ const SelectContainer = styled(Autocomplete)`
 `;
 
 const ShowChipItme = styled(Chip)`
-  margin: 0.2rem;
-  padding: 0 0 0 0rem;
   height: 2.8rem;
+  padding: 0 0 0 0rem;
+  margin: 0.2rem;
   border-radius: 1rem;
   background-color: ${(props) => props.bgcolor};
 
@@ -76,8 +73,8 @@ const ShowChipItme = styled(Chip)`
     padding: 0;
   }
   & .MuiChip-label {
-    font-size: 1.1rem;
     color: ${(props) => props.labelcolor};
+    font-size: 1.1rem;
   }
   & .MuiChip-deleteIcon {
     color: white;

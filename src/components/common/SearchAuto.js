@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-
 import { useRecoilState } from "recoil";
-
+import { Autocomplete } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Checkbox from "@mui/material/Checkbox";
 import CheckIcon from "@mui/icons-material/Check";
-import { Autocomplete } from "@mui/material";
 
 export const SearchAuto = (props) => {
   const [selectValue, setSelectValue] = useRecoilState(props.type);
@@ -74,9 +72,9 @@ export const SearchAuto = (props) => {
 // SearchForm
 
 const SharedSearchStyle = `
+display: block;
   position: absolute;
   z-index: 2;
-  display: block;
   width: 2rem;
   height: 2rem;
   line-height: 2.375rem;
@@ -89,8 +87,8 @@ const SharedPadding = `
 `;
 
 const StSearchAuto = styled.div`
-  margin: 2rem;
   justify-content: center;
+  margin: 2rem;
 `;
 
 const SearchAutoForm = styled(Autocomplete)`
@@ -104,24 +102,24 @@ const SearchAutoForm = styled(Autocomplete)`
   & .MuiInput-root {
     padding-top: 0.2rem;
     padding-bottom: 0.4rem;
-    border-radius: 20rem;
     margin-bottom: 1rem;
     border: none;
+    border-radius: 20rem;
   }
   & .MuiInputBase-root::before {
     height: 3rem;
-    border-radius: 20rem;
     border: 0.1rem solid lightgray;
+    border-radius: 20rem;
   }
   & .MuiInputBase-root::after {
     height: 3rem;
-    border-radius: 20rem;
     border: none;
+    border-radius: 20rem;
   }
   & .MuiInput-root::after {
-    border-radius: 20rem;
-    border: none;
     margin-top: 80px;
+    border: none;
+    border-radius: 20rem;
   }
   &
     .css-q0jhri-MuiInputBase-root-MuiInput-root:hover:not(
@@ -129,8 +127,8 @@ const SearchAutoForm = styled(Autocomplete)`
       .Mui-error
     ):before {
     height: 3rem;
-    border-radius: 20rem;
     border: none;
+    border-radius: 20rem;
     box-shadow: 0.1rem 0.2rem 0.9rem lightgray;
   }
 `;
@@ -147,31 +145,29 @@ const SearchFormField = styled.div``;
 const SerachIconWrapper = styled.div`
   svg {
     ${SharedSearchStyle}
-
     width: 2rem;
     height: 2rem;
-    color: grey;
     margin-top: 0.4rem;
     margin-left: 1rem;
+    color: grey;
   }
 `;
 
 const SearchInput = styled.input`
   ${SharedPadding}
   width:100%;
-  border: none;
+  height: 3rem;
   padding-top: 0.2rem;
   padding-bottom: 0.4rem;
-  border-radius: 20rem;
   margin-bottom: 1rem;
-  height: 3rem;
   border: 0.1rem solid lightgray;
+  border-radius: 20rem;
   transition: all 0.2s ease-out;
 
   &:focus {
     height: 3rem;
+    outline: none;
     border-radius: 20rem;
     box-shadow: 0.1rem 0.2rem 0.9rem lightgray;
-    outline: none;
   }
 `;

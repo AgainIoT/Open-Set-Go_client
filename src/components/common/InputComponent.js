@@ -1,22 +1,18 @@
 import styled from "styled-components";
-import PropTypes from "prop-types";
+import { COLOR } from "../../styles/color";
 import { useRef } from "react";
-
+import { useRecoilState } from "recoil";
+import { TextField } from "@mui/material";
 import HelpIcon from "@mui/icons-material/Help";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
-
 import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-
-import { TextField } from "@mui/material";
-import { COLOR } from "../../styles/color";
-import { useRecoilState } from "recoil";
-import { repoDataAtomFamily } from "../../recoil/repoData";
-
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
+import { repoDataAtomFamily } from "../../recoil/repoData";
+import PropTypes from "prop-types";
 
 export const TextInputContainer = (props) => {
   const textRef = useRef("");
@@ -24,7 +20,7 @@ export const TextInputContainer = (props) => {
     repoDataAtomFamily(props.type),
   );
 
-  /* GET - check repository is duplicate */
+  // GET - check repository is duplicate
 
   const handleOnChange = (e) => {
     setInputValue(e.target.value);
@@ -130,28 +126,27 @@ const InputFormControl = styled(FormControl)`
 
 const LabelContainer = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: baseline;
+  flex-direction: row;
 `;
 
 const InputLabelWrapper = styled(InputLabel)`
   display: flex;
-  position: static;
-  height: 100%;
   align-items: center;
+  position: static;
   transform-origin: center left;
+  height: 100%;
   gap: 0.5rem;
-
+  color: ${COLOR.MAIN_BLACK};
   font-size: 1.8rem;
   font-weight: 500;
   text-align: center;
-  color: ${COLOR.MAIN_BLACK};
 
   & .MuiFormLabel-root {
-    transform-origin: center left;
-    align-items: center;
-    text-align: center;
     justify-content: center;
+    align-items: center;
+    transform-origin: center left;
+    text-align: center;
   }
 `;
 
@@ -186,8 +181,8 @@ const InputField = styled(TextField)`
 
     // shadow
     &:focus {
-      box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.1);
       outline: none;
+      box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.1);
     }
     &:hover {
       border: none;
@@ -205,12 +200,10 @@ const InputField = styled(TextField)`
   & .MuiInputBase-input {
     position: relative;
     height: 3rem;
-
-    border-radius: 0.4rem;
-
-    font-size: 1.4rem;
-    border: none;
     padding: 0;
+    border: none;
+    border-radius: 0.4rem;
+    font-size: 1.4rem;
     &:hover {
       outline: none;
     }
@@ -236,9 +229,9 @@ const InputField = styled(TextField)`
 
   & .MuiInput-root {
     &:hover {
-      border-radius: 20rem;
-      border: none;
       margin-top: 8rem;
+      border: none;
+      border-radius: 20rem;
     }
   }
 
@@ -252,12 +245,12 @@ const InputField = styled(TextField)`
 `;
 
 const FormHelperTextWrapper = styled(FormHelperText)`
-  font-size: 1rem;
   color: ${(props) => props.textcolor};
+  font-size: 1rem;
   &.MuiFormHelperText-root {
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
     margin-left: 0.3rem;
+    gap: 0.5rem;
   }
 `;

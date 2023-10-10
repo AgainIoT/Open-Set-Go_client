@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-
 import { useRecoilValue } from "recoil";
-
+import { Chip } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { Chip } from "@mui/material";
 
 export const ReadonlyAuto = (props) => {
   const showData = useRecoilValue(props.data);
@@ -49,8 +47,8 @@ const StReadOnlyAuto = styled.div``;
 const ReadOnlyAutoContainer = styled(Autocomplete)`
   & .MuiInputBase-root {
     padding: 0;
-    background-color: ${COLOR.MAIN_WHITE};
     border: none;
+    background-color: ${COLOR.MAIN_WHITE};
   }
   & .MuiOutlinedInput-notchedOutline {
     border: none;
@@ -75,8 +73,8 @@ const ReadOnlyTextField = styled(TextField)`
 
   & .MuiInputLabel-root {
     display: flex;
-    font-size: 1.4rem;
     line-height: 5rem;
+    font-size: 1.4rem;
   }
 
   & .MuiChip-root {
@@ -85,9 +83,9 @@ const ReadOnlyTextField = styled(TextField)`
 `;
 
 const ShowChipItme = styled(Chip)`
-  margin: 0.2rem;
-  padding: 0 0 0 0rem;
   height: 2.8rem;
+  padding: 0 0 0 0rem;
+  margin: 0.2rem;
   border-radius: 1rem;
   background-color: ${(props) => props.bgcolor};
 
@@ -95,8 +93,8 @@ const ShowChipItme = styled(Chip)`
     padding: 0;
   }
   & .MuiChip-label {
-    font-size: 1.1rem;
     color: ${(props) => props.labelcolor};
+    font-size: 1.1rem;
   }
   & .MuiChip-deleteIcon {
     color: white;
