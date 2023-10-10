@@ -10,15 +10,19 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
 import {
   templateContent,
   templatePreviewState,
   templateSelectState,
+  modalVer,
 } from "../../../recoil/templateState";
 
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {
+  // React state to track order of items
+  const [selectedData, setSelectedData] = useState([]);
   const [data, setData] = useState([]);
   const url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;
 
@@ -26,6 +30,7 @@ export function TemplateList(props) {
   const [showValue, setShowValue] = useRecoilState(
     templatePreviewState(props.type),
   );
+  const reorderable = useRecoilValue(modalVer);
 
   const handleSelect = (value) => {
     setShowValue({
@@ -35,6 +40,22 @@ export function TemplateList(props) {
       repoUrl: value.repoUrl,
       content: value.content,
     });
+    let tmp = selectedData;
+    tmp.push(value.title);
+    setSelectedData(tmp);
+    console.log(selectedData);
+  };
+
+  const handleDrop = (droppedItem) => {
+    // Ignore drop outside droppable container
+    if (!droppedItem.destination) return;
+    let updatedList = [...selectedData];
+    // Remove dragged item
+    const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
+    // Add dropped item
+    updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
+    // Update State
+    setSelectedData(updatedList);
   };
 
   useEffect(() => {
@@ -61,6 +82,10 @@ export function TemplateList(props) {
       completed = true;
     };
   }, []);
+
+  useEffect(() => {
+    console.log(selectedData);
+  }, [selectedData]);
 
   return (
     <Item>
@@ -102,6 +127,45 @@ export function TemplateList(props) {
             overscanCount: 5,
           }}
         >
+          {reorderable ? (
+            <DragDropContext onDragEnd={handleDrop}>
+              <Droppable droppableId="list-container">
+                {(provided) => (
+                  <div
+                    className="list-container"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {selectedData.map((item, index) => (
+                      <Draggable key={item} draggableId={item} index={index}>
+                        {(provided) => (
+                          <div
+                            className="item-container"
+                            ref={provided.innerRef}
+                            {...provided.dragHandleProps}
+                            {...provided.draggableProps}
+                          >
+                            <div className="left-item">{item}</div>
+                            <button
+                              className="right-item"
+                              onClick={() => {
+                                console.log(item);
+                              }}
+                            >
+                              remove
+                            </button>
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+          ) : (
+            <div></div>
+          )}
           <div>
             {data.map((it) => (
               <div key={it._id}>
@@ -114,7 +178,9 @@ export function TemplateList(props) {
                 >
                   <ListItemButton>
                     <ListItemText
-                      primary={props.type === "contributing" ? it.type : it.title}
+                      primary={
+                        props.type === "contributing" ? it.type : it.title
+                      }
                       id="PR-desc"
                       variant="h6"
                       gutterBottom
@@ -122,7 +188,9 @@ export function TemplateList(props) {
                       m={2}
                     />
                     <ListItemText
-                      primary={props.type === "contributing" ? it.title : it.repoName}
+                      primary={
+                        props.type === "contributing" ? it.title : it.repoName
+                      }
                       id="PR-desc"
                       variant="h6"
                       gutterBottom

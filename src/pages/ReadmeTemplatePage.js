@@ -11,15 +11,15 @@ import MDEditor from "@uiw/react-md-editor";
 
 
 function ReadmeTemplatePage() {
-  const [modalValue, setModalValue] = useRecoilState(modalState("readme"));
-  const [content, setContent] = useRecoilState(templateContent("readme"));
+  // const [modalValue, setModalValue] = useRecoilState(modalState("readme"));
+  // const [content, setContent] = useRecoilState(templateContent("readme"));
   const [stepComplete, setStepComplted] = useRecoilState(eachStepState("5"));
 
   useEffect(() => {
     setStepComplted(true);
   }, []);
 
-  const handleOpen = () => setModalValue(true);
+  // const handleOpen = () => setModalValue(true);
 
   return (
     <StReadmeTemplatePage>

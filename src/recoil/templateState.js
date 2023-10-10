@@ -17,3 +17,8 @@ export const templateContent = atomFamily({
   key: "templateContent",
   default: "",
 });
+
+export const modalVer = atom({
+  key: "reorderable",
+  default: false,
+});
