@@ -1,5 +1,5 @@
-import { Typography } from "@mui/material";
 import styled from "styled-components";
+import { Typography } from "@mui/material";
 import MODAL from "../../assets/images/modal.svg";
 import MARKER from "../../assets/icons/li_mark.svg";
 
@@ -37,21 +37,19 @@ const SharedAttr = `
 `;
 
 const StStep4 = styled.div`
-  padding: 10rem 0rem 10rem 0rem;
   ${SharedAttr}
+  flex-direction: row;
   width: 100%;
   height: fit-content;
-  flex-direction: row;
-  /* border: 2px solid red; */
+  padding: 10rem 0rem 10rem 0rem;
 `;
 
 const ImageDiv = styled.div`
   display: flex;
-  align-items: center;
   justify-content: right;
+  align-items: center;
   width: 50%;
   height: 100%;
-  /* border: 1px solid black; */
 `;
 
 const ModalImg = styled.img`
@@ -61,39 +59,38 @@ const ModalImg = styled.img`
 
 const TextDiv = styled.div`
   display: flex;
-  margin-left: 1rem;
-  flex-direction: column;
   justify-content: center;
   align-items: left;
+  flex-direction: column;
   width: 50%;
   height: 100%;
-  gap: 1.5rem;
-  /* border: 1px solid blue; */
   padding-left: 5.5rem;
+  margin-left: 1rem;
+  gap: 1.5rem;
 `;
 
 const TitleTypo = styled(Typography)`
+  width: 100%;
+  height: fit-content;
   font-size: 3.2rem;
   font-family: "Inter", sans-serif;
   font-weight: 700;
-  width: 100%;
-  height: fit-content;
 `;
 
 const DescTypo = styled(Typography)`
-  text-align: justify;
-  height: fit-content;
   width: 100%;
+  height: fit-content;
   font-size: 2rem;
-  line-height: 2rem;
   font-weight: 200;
   font-family: "Inter", sans-serif;
+  text-align: justify;
+  line-height: 2rem;
 `;
 
 const ExUl = styled.ul`
-  list-style-image: url(${MARKER});
   margin-left: 3rem;
   line-height: 2.4rem;
+  list-style-image: url(${MARKER});
 `;
 
 const ExLi = styled.li`
