@@ -12,7 +12,7 @@ import {
   showAllGitignoreState,
 } from "../../recoil/repoData";
 
-/* for gitignore */
+// for gitignore
 export const GitIgnoreContainer = () => {
   const [modalValue, setModalValue] = useRecoilState(
     modalState("gitignoreModal"),

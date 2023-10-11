@@ -28,7 +28,7 @@ export const FinishDialog = (props) => {
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
 
-  /* POST - repo info for create repository */
+  // POST - repo info for create repository
   async function postCreatRepo() {
     try {
       const response = await axios.post(
@@ -48,7 +48,7 @@ export const FinishDialog = (props) => {
     }
   }
 
-  /* POST - file for settings */
+  // POST - file for settings
   async function postRepoData() {
     try {
       const response = await axios.post(
@@ -75,7 +75,7 @@ export const FinishDialog = (props) => {
     }
   }
 
-  /* POST - email */
+  // POST - email
   async function postEmail() {
     try {
       const response = await axios.post(

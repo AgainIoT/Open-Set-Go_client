@@ -7,9 +7,9 @@ import { TextInputContainer } from "../common/InputComponent";
 import { SelectAuto } from "../common/SelectAuto";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 
-/* for Owner, RepoName, Description */
+// for Owner, RepoName, Description
 export const RequiredFieldContainer = () => {
-  /* GET - user repo info */
+  // GET - user repo info
   const [owner, setOwner] = useRecoilState(repoDataAtomFamily("owner"));
   const [repoName, setRepoName] = useRecoilState(
     repoDataAtomFamily("repoName"),
@@ -52,7 +52,7 @@ export const RequiredFieldContainer = () => {
     getUserRepoData();
   }, []);
 
-  /* POST - validate repo name */
+  // POST - validate repo name
   const [validateCheck, setValidateCheck] = useRecoilState(
     repoDataAtomFamily("dupCheck"),
   );

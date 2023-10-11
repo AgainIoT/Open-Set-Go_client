@@ -6,9 +6,9 @@ import axios from "axios";
 import { AutocompleteInput } from "../common/Autocomplete";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 
-/* for select Language & Framework  */
+// for select Language & Framework
 export const SelectContainer = () => {
-  /* lang/frame */
+  // lang/frame
   const [selectLang, setSelectLang] = useRecoilState(
     repoDataAtomFamily("lang"),
   );
@@ -19,7 +19,7 @@ export const SelectContainer = () => {
   const [isSelectLang, setIsSelectLang] = useState(false);
   const [disableValue, setDisableValue] = useState(true);
 
-  /* GET - Lang/Framework */
+  // GET - Lang/Framework
   const [baseOption, setBaseOption] = useState([
     { language: "", frameworks: {} },
   ]);
