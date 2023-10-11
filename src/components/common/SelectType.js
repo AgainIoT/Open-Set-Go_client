@@ -54,10 +54,10 @@ export const SelectType= () =>{
 
 const StSelectType = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
   text-align: center;
-  justify-content: center;
   height: 80vh;
   background: linear-gradient(
     to bottom,
