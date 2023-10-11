@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-
-import Spinner from "../../assets/images/spinnerEllipsis.gif";
 import { Typography } from "@mui/material";
+import Spinner from "../../assets/images/spinnerEllipsis.gif";
 
 export const LoadingCompleted = () => {
   return (
@@ -17,28 +16,28 @@ export const LoadingCompleted = () => {
 
 const Background = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  z-index: 999;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
   background: ${COLOR.MAIN_WHITE};
   opacity: 0.93;
-  z-index: 999;
 `;
 
 const LoadingText = styled.div`
+  color: ${COLOR.MAIN_BLACK};
   font-family: "SUIT Variable";
   font-style: normal;
   font-weight: 500;
   font-size: 1.5rem;
   line-height: 1.9rem;
   text-align: center;
-  color: ${COLOR.MAIN_BLACK};
 `;
 
 const LoadingTitle = styled(Typography)`

@@ -1,12 +1,9 @@
 import styled from "styled-components";
-
+import { useRecoilValue } from "recoil";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-
-import { useRecoilValue } from "recoil";
 import { activeState } from "../recoil/commonState";
-
 import StepData from "../data/StepData.json";
 
 export const LinearStepper = () => {
