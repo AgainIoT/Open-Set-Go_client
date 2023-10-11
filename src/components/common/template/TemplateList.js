@@ -41,9 +41,14 @@ export function TemplateList(props) {
       content: value.content,
     });
     let tmp = selectedData;
-    tmp.push(value.title);
+    tmp.push(value);
     setSelectedData(tmp);
     console.log(selectedData);
+  };
+
+  const handleRemove = (id) => {
+    const filteredData = selectedData.filter((item) => item._id !== id);
+    setSelectedData(filteredData);
   };
 
   const handleDrop = (droppedItem) => {
@@ -57,6 +62,10 @@ export function TemplateList(props) {
     // Update State
     setSelectedData(updatedList);
   };
+
+  useEffect(() => {
+    console.log(selectedData);
+  }, [selectedData]);
 
   useEffect(() => {
     let completed = false;
@@ -82,10 +91,6 @@ export function TemplateList(props) {
       completed = true;
     };
   }, []);
-
-  useEffect(() => {
-    console.log(selectedData);
-  }, [selectedData]);
 
   return (
     <Item>
@@ -129,37 +134,30 @@ export function TemplateList(props) {
         >
           {reorderable ? (
             <DragDropContext onDragEnd={handleDrop}>
-              <Droppable droppableId="list-container">
+              <Droppable droppableId="droppable">
                 {(provided) => (
-                  <div
-                    className="list-container"
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
+                  <ul {...provided.droppableProps} ref={provided.innerRef}>
                     {selectedData.map((item, index) => (
-                      <Draggable key={item} draggableId={item} index={index}>
+                      <Draggable
+                        key={item._id}
+                        draggableId={item._id}
+                        index={index}
+                      >
                         {(provided) => (
-                          <div
-                            className="item-container"
-                            ref={provided.innerRef}
-                            {...provided.dragHandleProps}
+                          <ListItem
                             {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
                           >
-                            <div className="left-item">{item}</div>
-                            <button
-                              className="right-item"
-                              onClick={() => {
-                                console.log(item);
-                              }}
-                            >
-                              remove
+                            {item.title}
+                            <button onClick={() => handleRemove(item._id)}>
+                              Remove
                             </button>
-                          </div>
+                          </ListItem>
                         )}
                       </Draggable>
                     ))}
-                    {provided.placeholder}
-                  </div>
+                  </ul>
                 )}
               </Droppable>
             </DragDropContext>
