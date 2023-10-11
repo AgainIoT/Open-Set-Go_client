@@ -11,20 +11,36 @@ export const SelectType= () =>{
     <StSelectType>
       <Stack spacing={20} direction="row">
         <CreateBox>
-          <Stack spacing={5} direction="column">
+          <Stack spacing={2} direction="column">
             <Stack spacing={1} direction="column">
               <Title>Create New</Title>
               <Title>Open-Source Repository</Title>
+            </Stack>
+            <Stack spacing={1} direction="column">
+              <SubTitle>Provides step-by-step help to create</SubTitle>
+              <SubTitle>Open-Source Repository from scratch</SubTitle>
+            </Stack>
+            <Stack spacing={1} direction="column">
+              <Explanation>Recommended for people who are new to</Explanation>
+              <Explanation>creating Open Source repositories</Explanation>
             </Stack>
             <CreateBtn variant="contained" onClick={() => navigate("/step1")}>
             Choose
             </CreateBtn></Stack>
         </CreateBox>
         <CheckBox>
-          <Stack spacing={5} direction="column">
+          <Stack spacing={2} direction="column">
             <Stack spacing={1} direction="column">
               <Title>Check existing</Title>
               <Title>Open-Source Repository</Title>
+            </Stack>
+            <Stack spacing={1} direction="column">
+              <SubTitle>Checks that the existing repository</SubTitle>
+              <SubTitle>is running well as Open-Source</SubTitle>
+            </Stack>
+            <Stack spacing={1} direction="column">
+              <Explanation>Recommended for those who already run</Explanation>
+              <Explanation>an open source repository</Explanation>
             </Stack>
             <CheckBtn variant="contained" onClick={() => navigate("/step1")}>
             Choose
@@ -82,37 +98,45 @@ text-align: center;
 `;
 
 const CreateBtn = styled(Button)({
-  width: "30%",
+  width: "100%",
+  minWidth: "20rem",
   height: "30%",
+  minHeight: "5rem",
+  borderRadius: "1rem",
   backgroundColor: `${COLOR.MAIN_PURPLE}`,
   "&:hover": {
     backgroundColor: `${COLOR.MAIN_PURPLE}`,
   },
+  fontSize: "1.5rem",
 });
 
 const CheckBtn = styled(Button)({
-  width: "30%",
+  width: "100%",
+  minWidth: "20rem",
   height: "30%",
-  backgroundColor: "black",
+  minHeight: "5rem",
+  backgroundColor: "white",
+  borderRadius: "1rem",
   "&:hover": {
-    backgroundColor: "black",
+    backgroundColor: "white",
   },
+  color: "black",
+  fontSize: "1.5rem",
 });
 
 export const Title = styled.h1`
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-family: "Inter", sans-serif;
   font-weight: 700;
 `;
 
 export const SubTitle = styled.h3`
-  font-size: 3rem;
-  padding-bottom: 2rem;
+  font-size: 2rem;
   font-weight: 00;
 `;
 
-export const Explanation = styled.h6`
-  font-size: 3rem;
-  padding-bottom: 2rem;
+export const Explanation = styled.h4`
+  font-size: 1.3rem;
   font-weight: 00;
+  color: ${COLOR.FONT_GRAY}
 `;
