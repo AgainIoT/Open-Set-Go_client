@@ -4,7 +4,7 @@ import { templateContent } from "../recoil/templateState";
 import { BaseModal } from "../components/common/modal/BaseModal";
 import { eachStepState, modalState } from "../recoil/commonState";
 import MarkdownPreview from "../components/common/MarkdownPreview";
-import { TemplateModal } from "../components/common/modal/templateModal";
+import { TemplateModal } from "../components/common/modal/TemplateModal";
 import { styled } from "styled-components";
 
 function PRTemplatePage() {
