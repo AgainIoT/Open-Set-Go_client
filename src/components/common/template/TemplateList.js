@@ -21,6 +21,7 @@ import {
 
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {
+  const viewportNode = document.getElementById("viewport");
   // React state to track order of items
   const [selectedData, setSelectedData] = useState([]);
   const [data, setData] = useState([]);
@@ -143,18 +144,34 @@ export function TemplateList(props) {
                         draggableId={item._id}
                         index={index}
                       >
-                        {(provided) => (
-                          <ListItem
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                          >
-                            {item.title}
-                            <button onClick={() => handleRemove(item._id)}>
-                              Remove
-                            </button>
-                          </ListItem>
-                        )}
+                        {(provided, snapshot) => {
+                          if (snapshot.isDragging) {
+                            provided.draggableProps.style.left =
+                              provided.draggableProps.style.offsetLeft;
+                            provided.draggableProps.style.top =
+                              provided.draggableProps.style.offsetTop;
+                          }
+                          return (
+                            <ListItem
+                              components="div"
+                              disablePadding
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              ref={provided.innerRef}
+                            >
+                              <ListItemText
+                                primary={item.title}
+                                id="PR-desc"
+                                variant="h6"
+                                gutterBottom
+                                color="textSecondary"
+                              />
+                              <button onClick={() => handleRemove(item._id)}>
+                                Remove
+                              </button>
+                            </ListItem>
+                          );
+                        }}
                       </Draggable>
                     ))}
                   </ul>
