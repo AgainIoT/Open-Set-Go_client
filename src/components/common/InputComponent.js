@@ -240,7 +240,7 @@ const InputField = styled(TextField)`
   }
 
   &.Mui-error {
-    border: 1px solid red;
+    border: 0.1rem solid red;
   }
 `;
 

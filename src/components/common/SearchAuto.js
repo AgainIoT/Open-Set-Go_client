@@ -117,7 +117,7 @@ const SearchAutoForm = styled(Autocomplete)`
     border-radius: 20rem;
   }
   & .MuiInput-root::after {
-    margin-top: 80px;
+    margin-top: 8rem;
     border: none;
     border-radius: 20rem;
   }
