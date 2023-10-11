@@ -18,7 +18,7 @@ export const templateContent = atomFamily({
   default: "",
 });
 
-export const modalVer = atom({
+export const templateMode = atom({
   key: "reorderable",
   default: false,
 });

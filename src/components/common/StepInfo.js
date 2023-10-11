@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import StepData from "../../data/StepData.json";
 import Button from "@mui/material/Button";
 import { activeState } from "../../recoil/commonState";
-import { modalVer } from "../../recoil/templateState";
+import { templateMode } from "../../recoil/templateState";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { eachStepState, modalState } from "../../recoil/commonState";
 
@@ -11,7 +11,7 @@ import { eachStepState, modalState } from "../../recoil/commonState";
 const StepInfo = () => {
   //using recoil for matching step information and step
   const activeStep = useRecoilValue(activeState);
-  const [reorderable, setReorderable] = useRecoilState(modalVer);
+  const [templateMod, setTemplateMod] = useRecoilState(templateMode);
 
   return (
     <div>
@@ -22,7 +22,7 @@ const StepInfo = () => {
           );
           const handleOpen = (toggle) => {
             setModalValue(true);
-            setReorderable(toggle);
+            setTemplateMod(toggle);
           };
           return (
             <div key={it.step}>
