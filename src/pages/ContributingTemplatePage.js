@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { templateContent, templateState } from "../recoil/templateState";
 import { eachStepState, modalState } from "../recoil/commonState";
 import { BaseModal } from "../components/common/modal/BaseModal";
-import { TemplateModal } from "../components/common/modal/templateModal";
+import { TemplateModal } from "../components/common/modal/TemplateModal";
 import MarkdownPreview from "../components/common/MarkdownPreview";
 
 function ContributingTemplatePage(props) {

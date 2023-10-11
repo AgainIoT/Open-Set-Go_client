@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import { templateContent, templateState } from "../recoil/templateState";
 import { eachStepState, modalState } from "../recoil/commonState";
 import { BaseModal } from "../components/common/modal/BaseModal";
-import { TemplateModal } from "../components/common/modal/templateModal";
+import { TemplateModal } from "../components/common/modal/TemplateModal";
 import MarkdownPreview from "../components/common/MarkdownPreview";
 import MDEditor from "@uiw/react-md-editor";
 
