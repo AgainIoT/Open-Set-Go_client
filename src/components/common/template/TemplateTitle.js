@@ -43,7 +43,7 @@ export default function TemplateTitle(props) {
           m={2}
 
         >
-          {showValue.title}
+          {showValue[0].title}
         </Typography>
         <Typography
           id="desc"
@@ -52,9 +52,9 @@ export default function TemplateTitle(props) {
           color="textSecondary"
           m={2}
         >
-          {showValue.repoName}
+          {showValue[0].repoName}
           <LinkIcon onClick={() => {
-            window.open(showValue.repoUrl);
+            window.open(showValue[0].repoUrl);
           }}></LinkIcon>
         </Typography>
         <Button

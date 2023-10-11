@@ -10,10 +10,13 @@ import {
 } from "../../../recoil/templateState";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
-
 // props -> type(pr, readme, contributing)
 export default function TemplateBody(props) {
-  const showValue = useRecoilValue(templatePreviewState(props.type));
+  const rawData = useRecoilValue(templatePreviewState(props.type));
+  const [previewData, setPreviewData] = useState("");
+  useEffect(() => {
+    setPreviewData(rawData.map((obj) => obj["content"]).join("\n"));
+  }, [rawData]);
 
   return (
     <BodyBox>
@@ -24,7 +27,7 @@ export default function TemplateBody(props) {
         color="textSecondary"
         m={4}
       >
-        <MarkdownPreview source={showValue.content} />
+        <MarkdownPreview source={previewData} />
       </Typography>
     </BodyBox>
   );

@@ -29,13 +29,15 @@ export function TemplateList(props) {
     templatePreviewState(props.type),
   );
   const handleSelect = (value) => {
-    setShowValue({
-      _id: value._id,
-      title: value.title,
-      repoName: value.repoName,
-      repoUrl: value.repoUrl,
-      content: value.content,
-    });
+    setShowValue([
+      {
+        _id: value._id,
+        title: value.title,
+        repoName: value.repoName,
+        repoUrl: value.repoUrl,
+        content: value.content,
+      },
+    ]);
   };
 
   useEffect(() => {
