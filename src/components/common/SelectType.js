@@ -57,13 +57,13 @@ const StSelectType = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  text-align: center;
   height: 80vh;
   background: linear-gradient(
     to bottom,
     ${COLOR.MAIN_HOVER},
     ${COLOR.MAIN_BACKGROUND}
 );
+  text-align: center;
 `;
 
 const CreateBox = styled.div`
