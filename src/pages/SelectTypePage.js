@@ -5,7 +5,7 @@ import Footer from "../components/main/Footer";
 
 function SelectTypePage(){
   return(
-    <><Header burger={true} pages={["Steps"]} settings={["Logout"]} />
+    <><Header burger={true} pages={[]} settings={["Logout"]} />
       <SelectType />
       <Footer /></>
   );
