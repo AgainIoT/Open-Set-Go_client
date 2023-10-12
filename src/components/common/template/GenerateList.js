@@ -4,6 +4,8 @@ import { styled, alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -18,6 +20,7 @@ import {
   templateSelectState,
   templateMode,
 } from "../../../recoil/templateState";
+import { Button } from "@mui/material";
 
 // props -> type(pr, readme, contributing)
 export function GenerateList(props) {
@@ -89,7 +92,7 @@ export function GenerateList(props) {
   }, []);
 
   return (
-    <Item>
+    <Item sx={{ bgcolor: "#F4F4FC", borderRadius: 2 }}>
       <Typography
         component="h1"
         id="modal-title"
@@ -116,12 +119,12 @@ export function GenerateList(props) {
           maxWidth: 360,
           bgcolor: "background.paper",
           maxHeight: "90%",
+          borderRadius: 2,
         }}
         style={{ overflowX: "hidden", overflowY: "auto" }}
       >
         <List
           sx={{
-            height: "100%",
             width: 360,
             itemSize: 46,
             itemCount: 1,
@@ -153,16 +156,21 @@ export function GenerateList(props) {
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}
                           >
-                            <ListItemText
-                              primary={item.title}
-                              id="PR-desc"
-                              variant="h6"
-                              gutterBottom
-                              color="textSecondary"
-                            />
-                            <button onClick={() => handleRemove(item._id)}>
-                              Remove
-                            </button>
+                            <ListItemButton>
+                              <ListItemText
+                                primary={item.title}
+                                id="PR-desc"
+                                variant="h6"
+                                gutterBottom
+                                color="textSecondary"
+                              />
+                              <IconButton
+                                aria-label="delete"
+                                onClick={() => handleRemove(item._id)}
+                              >
+                                <DeleteIcon fontSize="inherit" />
+                              </IconButton>
+                            </ListItemButton>
                           </ListItem>
                         );
                       }}
@@ -172,6 +180,15 @@ export function GenerateList(props) {
               )}
             </Droppable>
           </DragDropContext>
+        </List>
+        <List
+          sx={{
+            width: 360,
+            itemSize: 46,
+            itemCount: 1,
+            overscanCount: 5,
+          }}
+        >
           <div>
             {data.map((it) => (
               <div key={it._id}>
@@ -216,14 +233,13 @@ export function GenerateList(props) {
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   width: "100%",
-  marginLeft: 0,
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     width: "auto",
   },
 }));

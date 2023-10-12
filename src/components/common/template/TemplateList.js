@@ -65,7 +65,7 @@ export function TemplateList(props) {
   }, []);
 
   return (
-    <Item>
+    <Item sx={{ bgcolor: "#F4F4FC", borderRadius: 2 }}>
       <Typography
         component="h1"
         id="modal-title"
