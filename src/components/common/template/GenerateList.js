@@ -30,25 +30,24 @@ export function GenerateList(props) {
   const [showValue, setShowValue] = useRecoilState(
     templatePreviewState(props.type),
   );
-  const templateMod = useRecoilValue(templateMode);
 
   const handleSelect = (value) => {
-    setShowValue({
+    const selected = {
       _id: value._id,
       title: value.title,
       repoName: value.repoName,
       repoUrl: value.repoUrl,
       content: value.content,
-    });
-    let tmp = selectedData;
-    tmp.push(value);
-    setSelectedData(tmp);
-    console.log(selectedData);
+    };
+    const dataList = [...selectedData, selected];
+    setSelectedData(dataList);
+    setShowValue(dataList);
   };
 
   const handleRemove = (id) => {
     const filteredData = selectedData.filter((item) => item._id !== id);
     setSelectedData(filteredData);
+    setShowValue(filteredData);
   };
 
   const handleDrop = (droppedItem) => {
@@ -61,11 +60,8 @@ export function GenerateList(props) {
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
     // Update State
     setSelectedData(updatedList);
+    setShowValue(updatedList);
   };
-
-  useEffect(() => {
-    console.log(selectedData);
-  }, [selectedData]);
 
   useEffect(() => {
     let completed = false;

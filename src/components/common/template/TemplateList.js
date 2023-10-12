@@ -16,7 +16,6 @@ import {
   templateContent,
   templatePreviewState,
   templateSelectState,
-  templateMode,
 } from "../../../recoil/templateState";
 
 // props -> type(pr, readme, contributing)

@@ -15,7 +15,8 @@ export default function TemplateBody(props) {
   const rawData = useRecoilValue(templatePreviewState(props.type));
   const [previewData, setPreviewData] = useState("");
   useEffect(() => {
-    setPreviewData(rawData.map((obj) => obj["content"]).join("\n"));
+    const tmp = rawData.map((obj) => obj["content"]).join("\n");
+    setPreviewData(tmp);
   }, [rawData]);
 
   return (
@@ -27,7 +28,7 @@ export default function TemplateBody(props) {
         color="textSecondary"
         m={4}
       >
-        <MarkdownPreview source={previewData} />
+        <MarkdownPreview source={rawData.map((obj) => obj["content"]).join("\n")} />
       </Typography>
     </BodyBox>
   );

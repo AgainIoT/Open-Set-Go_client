@@ -8,9 +8,9 @@ import {
   templateContent,
   templatePreviewState,
   templateSelectState,
+  templateMode,
 } from "../../../recoil/templateState";
 import { modalState } from "../../../recoil/commonState";
-
 
 // props -> type(pr, readme, contributing)
 export default function TemplateTitle(props) {
@@ -20,42 +20,51 @@ export default function TemplateTitle(props) {
   const showValue = useRecoilValue(templatePreviewState(props.type));
   const [content, setContent] = useRecoilState(templateContent(props.type));
   const [modalValue, setModalValue] = useRecoilState(modalState(props.type));
+  const [templateMod, setTemplateMod] = useRecoilState(templateMode);
 
   const handleSelect = () => {
-    if (props.type === "contributing") {
-      setSelectValue(selectValue.concat({ _id: showValue._id }));
-      setContent(content + "\n" + showValue.content);
+    if (templateMod) {
+      // setSelectValue(selectValue.concat({ _id: showValue._id }));
+      setContent(showValue.map((obj) => obj["content"]).join("\n"));
     } else {
-      setSelectValue({ _id: showValue._id });
-      setContent(showValue.content);
+      setSelectValue({ _id: showValue[0]._id });
+      setContent(showValue[0].content);
     }
   };
   const handleClose = () => setModalValue(false);
 
   return (
     <box>
-      <Box sx={{ ...commonStyles, borderBottom: 1, height: "100%", maxWidth: "80%" }}>
+      <Box
+        sx={{
+          ...commonStyles,
+          borderBottom: 1,
+          height: "100%",
+          maxWidth: "80%",
+        }}
+      >
         <Typography
-          id="title"
+          id="PR-title"
           variant="h2"
           textColor="inherit"
           fontWeight="lg"
           m={2}
-
         >
-          {showValue[0].title}
+          {showValue.length ? showValue[0].title : ""}
         </Typography>
         <Typography
-          id="desc"
+          id="PR-desc"
           variant="h5"
           gutterBottom
           color="textSecondary"
           m={2}
         >
-          {showValue[0].repoName}
-          <LinkIcon onClick={() => {
-            window.open(showValue[0].repoUrl);
-          }}></LinkIcon>
+          {showValue.length ? showValue[0].repoName : ""}
+          <LinkIcon
+            onClick={() => {
+              window.open(showValue.length ? showValue[0].repoUrl : "");
+            }}
+          ></LinkIcon>
         </Typography>
         <Button
           variant="contained"
