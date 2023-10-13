@@ -4,7 +4,7 @@ import { SelectChip } from "../SelectChip";
 import { selectGitignoreData } from "../../../recoil/repoData";
 import { FixedOptionShowSelect } from "../ShowSelect";
 import { SearchAuto } from "../SearchAuto";
-import optionData from "../../../data/OptionData.json";
+import optionData from "../../../data/optionData.json";
 
 export const GitignoreModal = () => {
   const osOptions = optionData["OS"];
