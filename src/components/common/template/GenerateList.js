@@ -46,9 +46,11 @@ export function GenerateList(props) {
   };
 
   const handleRemove = (selected) => {
-    const filteredData = selectedData.filter((item) => item._id !== selected._id);
+    const filteredData = selectedData.filter(
+      (item) => item._id !== selected._id,
+    );
     setSelectedData(filteredData);
-    setData([...data, selected].sort((a, b) => a.index < b.index));
+    setData([...data, selected].sort((a, b) => a.index - b.index));
     setShowValue(filteredData);
   };
 
@@ -85,6 +87,7 @@ export function GenerateList(props) {
       data.map((value) => {
         const tmp = {
           _id: value._id,
+          index: value.index,
           title: value.type,
           subtitle: null,
           repoUrl: null,
@@ -92,7 +95,7 @@ export function GenerateList(props) {
         };
         ret.push(tmp);
       });
-      return ret;
+      return ret.sort((a, b) => a.index - b.index);
     }
     get();
     return () => {
