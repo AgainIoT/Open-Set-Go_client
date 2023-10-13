@@ -20,14 +20,19 @@ import {
   templateSelectState,
   templateMode,
 } from "../../../recoil/templateState";
-import { Button } from "@mui/material";
+import { repoDataAtomFamily } from "../../../recoil/repoData";
 
 // props -> type(pr, readme, contributing)
 export function GenerateList(props) {
+  const owner = useRecoilValue(repoDataAtomFamily("owner"));
+  const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
+  const desc = useRecoilValue(repoDataAtomFamily("desc"));
+  const license = useRecoilValue(repoDataAtomFamily("license"));
   // React state to track order of items
   const [selectedData, setSelectedData] = useState([]);
   const [data, setData] = useState([]);
-  const url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;
+  const url =
+    process.env.REACT_APP_SERVER_URL + "/file/" + props.type + "/generate";
 
   const selectValue = useRecoilValue(templateSelectState(props.type));
   const [showValue, setShowValue] = useRecoilState(
@@ -37,9 +42,7 @@ export function GenerateList(props) {
   const handleSelect = (value) => {
     const selected = {
       _id: value._id,
-      title: value.title,
-      repoName: value.repoName,
-      repoUrl: value.repoUrl,
+      type: value.type,
       content: value.content,
     };
     const dataList = [...selectedData, selected];
@@ -70,19 +73,14 @@ export function GenerateList(props) {
     let completed = false;
 
     async function get() {
-      const result = await axios.get(url);
+      const result = await axios.post(url, {
+        owner: owner,
+        repoName: repoName,
+        description: desc,
+        license: license,
+      });
       if (!completed) {
-        if (props.type === "contributing") {
-          const list = [];
-          result.data.forEach((typeList) => {
-            typeList.map((it) => {
-              list.push(it);
-            });
-          });
-          setData(list);
-        } else {
-          setData(result.data);
-        }
+        setData(result.data);
       }
     }
     get();
@@ -158,7 +156,7 @@ export function GenerateList(props) {
                           >
                             <ListItemButton>
                               <ListItemText
-                                primary={item.title}
+                                primary={item.type}
                                 id="PR-desc"
                                 variant="h6"
                                 gutterBottom
@@ -201,23 +199,12 @@ export function GenerateList(props) {
                 >
                   <ListItemButton>
                     <ListItemText
-                      primary={
-                        props.type === "contributing" ? it.type : it.title
-                      }
+                      primary={it.type}
                       id="PR-desc"
                       variant="h6"
                       gutterBottom
                       color="textSecondary"
                       m={2}
-                    />
-                    <ListItemText
-                      primary={
-                        props.type === "contributing" ? it.title : it.repoName
-                      }
-                      id="PR-desc"
-                      variant="h6"
-                      gutterBottom
-                      color="textSecondary"
                     />
                   </ListItemButton>
                 </ListItem>

@@ -21,41 +21,47 @@ import {
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {
   const [data, setData] = useState([]);
-  const url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;
+  let url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;
 
   const selectValue = useRecoilValue(templateSelectState(props.type));
   const [showValue, setShowValue] = useRecoilState(
     templatePreviewState(props.type),
   );
-  const handleSelect = (value) => {
-    setShowValue([
-      {
-        _id: value._id,
-        title: value.title,
-        repoName: value.repoName,
-        repoUrl: value.repoUrl,
-        content: value.content,
-      },
-    ]);
+  const handleSelect = async (value) => {
+    if (props.type === "pr") {
+      setShowValue([
+        {
+          _id: value._id,
+          title: value.title,
+          repoName: value.repoName,
+          repoUrl: value.repoUrl,
+          content: value.content,
+        },
+      ]);
+    } else {
+      const content = await axios.get(url + "/" + value._id);
+      setShowValue([
+        {
+          _id: value._id,
+          title: value.repoName,
+          repoName: value.repoName,
+          content: content.data.content,
+        },
+      ]);
+    }
   };
 
   useEffect(() => {
     let completed = false;
 
     async function get() {
-      const result = await axios.get(url);
       if (!completed) {
-        if (props.type === "contributing") {
-          const list = [];
-          result.data.forEach((typeList) => {
-            typeList.map((it) => {
-              list.push(it);
-            });
-          });
-          setData(list);
-        } else {
-          setData(result.data);
+        // page query for only contributing and readme for now.
+        if (props.type === "contributing" || props.type === "readme") {
+          url += "?page=1";
         }
+        const result = await axios.get(url);
+        setData(result.data);
       }
     }
     get();
@@ -117,7 +123,9 @@ export function TemplateList(props) {
                   <ListItemButton>
                     <ListItemText
                       primary={
-                        props.type === "contributing" ? it.type : it.title
+                        props.type === "contributing" || props.type === "readme"
+                          ? it.repoName
+                          : it.title
                       }
                       id="PR-desc"
                       variant="h6"
@@ -127,7 +135,9 @@ export function TemplateList(props) {
                     />
                     <ListItemText
                       primary={
-                        props.type === "contributing" ? it.title : it.repoName
+                        props.type === "contributing" || props.type === "readme"
+                          ? it.star
+                          : null
                       }
                       id="PR-desc"
                       variant="h6"
