@@ -25,7 +25,7 @@ export function GenerateList(props) {
   const owner = useRecoilValue(repoDataAtomFamily("owner"));
   const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
   const desc = useRecoilValue(repoDataAtomFamily("desc"));
-  const license = useRecoilValue(repoDataAtomFamily("license"));
+  const license = useRecoilValue(repoDataAtomFamily("licenseName"));
   // React state to track order of items
   const [selectedData, setSelectedData] = useState([]);
   const [data, setData] = useState([]);
@@ -72,10 +72,10 @@ export function GenerateList(props) {
 
     async function get() {
       const result = await axios.post(url, {
-        owner: owner,
-        repoName: repoName,
-        description: desc,
-        license: license,
+        owner,
+        repoName,
+        desc,
+        license,
       });
       if (!completed) {
         setData(refine(result.data));
