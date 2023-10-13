@@ -158,14 +158,13 @@ export function TemplateList(props) {
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   width: "100%",
-  marginLeft: 0,
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     width: "auto",
   },
 }));

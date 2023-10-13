@@ -11,13 +11,13 @@ export const TemplateModal = (props) => {
   const templateMod = useRecoilValue(templateMode);
 
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
+    <div style={{ display: "flex", width:"100%", flexDirection: "row"}}>
       {templateMod ? (
         <GenerateList type={props.type} />
       ) : (
         <TemplateList type={props.type} />
       )}
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", width: "100%", flexDirection: "column"}}>
         <TemplateTitle type={props.type} />
         <TemplateBody type={props.type} />
       </div>
