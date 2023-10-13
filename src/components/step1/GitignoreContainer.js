@@ -2,19 +2,17 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 
 import { useRecoilState, useRecoilValue } from "recoil";
+import { Button, Typography } from "@mui/material";
+import { GitignoreModal } from "../common/modal/GitignoreModal";
+import { ReadonlyAuto } from "../common/ReadOnlyAuto";
+import { modalState } from "../../recoil/commonState";
+import { BaseModal2 } from "../common/modal/BaseModal2";
 import {
   repoDataAtomFamily,
   showAllGitignoreState,
 } from "../../recoil/repoData";
 
-import { Button, Typography } from "@mui/material";
-import { BaseModal } from "../common/modal/BaseModal";
-import { GitignoreModal } from "../common/modal/GitignoreModal";
-import { ReadonlyAuto } from "../common/ReadOnlyAuto";
-import { modalState } from "../../recoil/commonState";
-import { BaseModal2 } from "../common/modal/BaseModal2";
-
-/* for gitignore */
+// for gitignore
 export const GitIgnoreContainer = () => {
   const [modalValue, setModalValue] = useRecoilState(
     modalState("gitignoreModal"),
@@ -54,8 +52,8 @@ const StGitIgnoreContainer = styled.div`
 
 const Header = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  flex-direction: row;
 `;
 
 const SharedTextStyle = `

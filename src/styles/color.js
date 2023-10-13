@@ -10,4 +10,5 @@ export const COLOR = {
   MAIN_BORDER: "#C4C4CD",
   BORDER_GRAY: "#9696A3",
   MAIN_PURPLE: "#3E1B6C",
+  FONT_GRAY: "#9A9A9A",
 };

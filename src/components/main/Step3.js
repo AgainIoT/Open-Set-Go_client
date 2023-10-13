@@ -1,5 +1,5 @@
-import { Typography } from "@mui/material";
 import styled from "styled-components";
+import { Typography } from "@mui/material";
 import LICENSE from "../../assets/images/licenseEx.svg";
 
 //Step3: Component for the bottom description of the main page (license description)
@@ -26,44 +26,44 @@ const SharedAttr = `
 `;
 
 const StStep3 = styled.div`
-  padding: 10rem 0rem 10rem 0rem;
   ${SharedAttr};
+  flex-direction: row;
   width: 100%;
   height: 100%;
-  flex-direction: row;
+  padding: 10rem 0rem 10rem 0rem;
 `;
 
 const TextDiv = styled.div`
   ${SharedAttr};
-  margin-left: 1rem;
   flex-direction: column;
   width: 40%;
   height: 100%;
+  margin-left: 1rem;
   gap: 1rem;
 `;
 
 const TitleTypo = styled(Typography)`
+  width: fit-content;
+  height: fit-content;
   font-size: 3.2rem;
   font-family: "Inter", sans-serif;
   font-weight: 700;
-  width: fit-content;
-  height: fit-content;
 `;
 
 const DescTypo = styled(Typography)`
-  text-align: justify;
-  height: fit-content;
   width: fit-content;
+  height: fit-content;
   font-size: 2rem;
-  line-height: 2.2rem;
   font-weight: 200;
   font-family: "Inter", sans-serif;
+  text-align: justify;
+  line-height: 2.2rem;
 `;
 
 const ImgDiv = styled.div`
+  ${SharedAttr};
   width: 60%;
   height: 100%;
-  ${SharedAttr};
 `;
 
 const LicenseImg = styled.img`

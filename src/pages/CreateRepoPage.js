@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { useEffect } from "react";
-
+import { useRecoilState, useRecoilValue } from "recoil";
 import { Grid } from "@mui/material";
 import { GitIgnoreContainer } from "../components/step1/GitignoreContainer";
 import { SelectContainer } from "../components/step1/SelectContainer";
 import { RequiredFieldContainer } from "../components/step1/RequiredFieldContainer";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { eachStepState } from "../recoil/commonState";
 import { repoDataAtomFamily } from "../recoil/repoData";
 

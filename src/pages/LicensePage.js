@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import Slide from "../components/common/Slide";
-import styled from "@emotion/styled";
+import styled from "styled-components";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { eachStepState } from "../recoil/commonState";
+import Slide from "../components/common/Slide";
 
 //LicensePage: pages for license steps;
 function LicensePage() {
@@ -23,11 +23,11 @@ function LicensePage() {
 export default LicensePage;
 
 const StLicensePage = styled.div`
-  height: 100%;
   display: flex;
   justify-self: center;
   align-items: center;
-  margin: 0;
-  padding: 3rem;
   width: 100%;
+  height: 100%;
+  padding: 3rem;
+  margin: 0;
 `;

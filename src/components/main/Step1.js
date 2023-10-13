@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import { Typography } from "@mui/material";
 import { COLOR } from "../../styles/color.js";
+import { Typography } from "@mui/material";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
@@ -82,67 +82,67 @@ const Step1 = () => {
 };
 
 const StStep1 = styled.div`
-  background-color: ${COLOR.MAIN_WHITE};
-  margin: 2rem 0rem 2rem 0rem;
-  padding: 2rem 0rem 6rem 0rem;
-  width: 100%;
-  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 2rem 0rem 6rem 0rem;
+  margin: 2rem 0rem 2rem 0rem;
+  background-color: ${COLOR.MAIN_WHITE};
   gap: 4rem;
 `;
 
 const IntroDiv = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `;
 
 const TitleTypo = styled(Typography)`
-  text-align: center;
   font-family: "Inter", sans-serif;
   font-size: 3rem;
   font-style: normal;
   font-weight: 900;
+  text-align: center;
   line-height: normal;
 `;
 
 const InfoDiv = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
   width: 100%;
   height: 100%;
-  justify-content: center;
-  align-items: center;
 `;
 
 const DescTypo = styled(Typography)`
-  text-align: center;
   font-family: "Inter", sans-serif;
   font-size: 2.2rem;
   font-style: normal;
   font-weight: 300;
+  text-align: center;
   line-height: normal;
 `;
 
 const HighlightTypo = styled(Typography)`
-  font-family: "Inter", sans-serif;
   color: ${COLOR.MAIN_BLUE};
+  font-family: "Inter", sans-serif;
   font-size: 2.2rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
 `;
 const StepDiv = styled.div`
-  height: 100%;
-  width: 100%;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
   gap: 3rem;
 `;
 
@@ -155,24 +155,25 @@ const SetDiv = styled.div`
 
 const EachStepDiv = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   gap: 1rem;
 `;
 const Circle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 7.5rem;
   height: 7.5rem;
   border-radius: 50%;
   background-color: ${COLOR.MAIN_BACKGROUND};
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const StepNameP = styled.p`
   font-size: 1.2rem;
 `;
+
 const NextImg = styled.img`
   width: 2rem;
   height: 2rem;
@@ -180,9 +181,9 @@ const NextImg = styled.img`
 `;
 
 const PRIcon = styled.img`
-  color: ${COLOR.MAIN_NAVY};
   width: 3rem;
   height: 3rem;
+  color: ${COLOR.MAIN_NAVY};
 `;
 
 export default Step1;

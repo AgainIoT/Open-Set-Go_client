@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
 import { useRecoilState } from "recoil";
-import { modalState } from "../../../recoil/commonState";
 import { Dialog } from "@mui/material";
+import { modalState } from "../../../recoil/commonState";
 
 export const BaseDialog = (props) => {
   const handleClose = () => setDialogValue(false);
@@ -29,13 +29,13 @@ const StDialog = styled(Dialog)`
 `;
 const DialogContainer = styled.div`
   display: flex;
-  width: 20%;
-  height: 50%;
-  padding: 3.5rem 2rem 2rem 2rem;
-  transform: translate(-50%, -50%);
   position: fixed;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20%;
+  height: 50%;
+  padding: 3.5rem 2rem 2rem 2rem;
   border-radius: 1.5rem;
   background-color: ${COLOR.MAIN_WHITE};
 `;

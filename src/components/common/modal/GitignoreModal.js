@@ -1,13 +1,10 @@
 import styled from "styled-components";
-
+import { Grid } from "@mui/material";
 import { SelectChip } from "../SelectChip";
-
-import optionData from "../../../data/optionData.json";
-
 import { selectGitignoreData } from "../../../recoil/repoData";
 import { FixedOptionShowSelect } from "../ShowSelect";
-import { Grid } from "@mui/material";
 import { SearchAuto } from "../SearchAuto";
+import optionData from "../../../data/optionData.json";
 
 export const GitignoreModal = () => {
   const osOptions = optionData["OS"];
@@ -54,9 +51,9 @@ export const GitignoreModal = () => {
 };
 
 const StGitIgnoreModal = styled(Grid)`
-  padding: 1rem;
   width: 100%;
   height: 100%;
+  padding: 1rem;
   row-gap: 1rem;
   overflow-y: hidden;
 `;

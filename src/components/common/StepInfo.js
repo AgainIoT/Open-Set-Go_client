@@ -1,11 +1,14 @@
 import styled from "styled-components";
-import { activeState } from "../../recoil/commonState";
 import { templateMode } from "../../recoil/templateState";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { eachStepState, modalState } from "../../recoil/commonState";
-import { Typography } from "@mui/material";
-import StepData from "../../data/StepData.json";
+import {
+  eachStepState,
+  modalState,
+  activeState,
+} from "../../recoil/commonState";
+import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
+import StepData from "../../data/StepData.json";
 
 //StepInfo: Component for description of each step (located on the left side of the screen)
 const StepInfo = () => {
