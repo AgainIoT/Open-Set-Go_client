@@ -59,12 +59,14 @@ export default function TemplateTitle(props) {
           color="textSecondary"
           m={2}
         >
-          {showValue.length ? showValue[0].repoName : ""}
-          <LinkIcon
-            onClick={() => {
-              window.open(showValue.length ? showValue[0].repoUrl : "");
-            }}
-          ></LinkIcon>
+          {showValue.length ? showValue[0].subtitle : ""}
+          {showValue.length && showValue[0].repoUrl ? (
+            <LinkIcon
+              onClick={() => {
+                window.open(showValue[0].repoUrl);
+              }}
+            ></LinkIcon>
+          ) : null}
         </Typography>
         <Button
           variant="contained"

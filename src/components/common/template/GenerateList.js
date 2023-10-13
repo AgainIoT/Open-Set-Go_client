@@ -39,18 +39,19 @@ export function GenerateList(props) {
     templatePreviewState(props.type),
   );
 
-  const handleSelect = (value) => {
-    const dataList = [...selectedData, value];
+  const handleSelect = (selected) => {
+    console.log(selected);
+    const dataList = [...selectedData, selected];
     setSelectedData(dataList);
-    const filteredData = data.filter((item) => item._id !== value._id);
+    const filteredData = data.filter((item) => item._id !== selected._id);
     setData(filteredData);
     setShowValue(dataList);
   };
 
-  const handleRemove = (value) => {
-    const filteredData = selectedData.filter((item) => item._id !== value._id);
+  const handleRemove = (selected) => {
+    const filteredData = selectedData.filter((item) => item._id !== selected._id);
     setSelectedData(filteredData);
-    setData([...data, value].sort((a, b) => a.index < b.index));
+    setData([...data, selected].sort((a, b) => a.index < b.index));
     setShowValue(filteredData);
   };
 
@@ -78,8 +79,23 @@ export function GenerateList(props) {
         license: license,
       });
       if (!completed) {
-        setData(result.data);
+        setData(refine(result.data));
       }
+    }
+
+    function refine(data) {
+      const ret = [];
+      data.map((value) => {
+        const tmp = {
+          _id: value._id,
+          title: value.type,
+          subtitle: null,
+          repoUrl: null,
+          content: value.content,
+        };
+        ret.push(tmp);
+      });
+      return ret;
     }
     get();
     return () => {
@@ -154,7 +170,7 @@ export function GenerateList(props) {
                           >
                             <ListItemButton>
                               <ListItemText
-                                primary={item.type}
+                                primary={item.title}
                                 id="PR-desc"
                                 variant="h6"
                                 gutterBottom
@@ -197,7 +213,7 @@ export function GenerateList(props) {
                 >
                   <ListItemButton>
                     <ListItemText
-                      primary={it.type}
+                      primary={it.title}
                       id="PR-desc"
                       variant="h6"
                       gutterBottom

@@ -33,7 +33,7 @@ export function TemplateList(props) {
         {
           _id: value._id,
           title: value.title,
-          repoName: value.repoName,
+          subtitle: value.repoName,
           repoUrl: value.repoUrl,
           content: value.content,
         },
@@ -44,7 +44,8 @@ export function TemplateList(props) {
         {
           _id: value._id,
           title: value.repoName,
-          repoName: value.repoName,
+          subtitle: value.repoName,
+          repoUrl: null,
           content: content.data.content,
         },
       ]);
