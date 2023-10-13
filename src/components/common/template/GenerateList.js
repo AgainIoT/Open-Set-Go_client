@@ -40,19 +40,17 @@ export function GenerateList(props) {
   );
 
   const handleSelect = (value) => {
-    const selected = {
-      _id: value._id,
-      type: value.type,
-      content: value.content,
-    };
-    const dataList = [...selectedData, selected];
+    const dataList = [...selectedData, value];
     setSelectedData(dataList);
+    const filteredData = data.filter((item) => item._id !== value._id);
+    setData(filteredData);
     setShowValue(dataList);
   };
 
-  const handleRemove = (id) => {
-    const filteredData = selectedData.filter((item) => item._id !== id);
+  const handleRemove = (value) => {
+    const filteredData = selectedData.filter((item) => item._id !== value._id);
     setSelectedData(filteredData);
+    setData([...data, value].sort((a, b) => a.index < b.index));
     setShowValue(filteredData);
   };
 
@@ -164,7 +162,7 @@ export function GenerateList(props) {
                               />
                               <IconButton
                                 aria-label="delete"
-                                onClick={() => handleRemove(item._id)}
+                                onClick={() => handleRemove(item)}
                               >
                                 <DeleteIcon fontSize="inherit" />
                               </IconButton>
