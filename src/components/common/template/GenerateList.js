@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  templatePreviewState,
+  templateSelectState,
+} from "../../../recoil/templateState";
+import { repoDataAtomFamily } from "../../../recoil/repoData";
 import { styled, alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
@@ -14,13 +19,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
-import {
-  templateContent,
-  templatePreviewState,
-  templateSelectState,
-  templateMode,
-} from "../../../recoil/templateState";
-import { repoDataAtomFamily } from "../../../recoil/repoData";
 
 // props -> type(pr, readme, contributing)
 export function GenerateList(props) {
@@ -40,7 +38,6 @@ export function GenerateList(props) {
   );
 
   const handleSelect = (selected) => {
-    console.log(selected);
     const dataList = [...selectedData, selected];
     setSelectedData(dataList);
     const filteredData = data.filter((item) => item._id !== selected._id);

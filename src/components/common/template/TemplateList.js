@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  templatePreviewState,
+  templateSelectState,
+} from "../../../recoil/templateState";
 import { styled, alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
@@ -10,13 +14,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
-import {
-  templateContent,
-  templatePreviewState,
-  templateSelectState,
-} from "../../../recoil/templateState";
 
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {

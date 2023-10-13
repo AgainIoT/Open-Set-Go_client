@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import LinkIcon from "@mui/icons-material/Link";
+import { modalState } from "../../../recoil/commonState";
 import {
   templateContent,
   templatePreviewState,
   templateSelectState,
   templateMode,
 } from "../../../recoil/templateState";
-import { modalState } from "../../../recoil/commonState";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import LinkIcon from "@mui/icons-material/Link";
 
 // props -> type(pr, readme, contributing)
 export default function TemplateTitle(props) {
