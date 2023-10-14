@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-
+import { useRecoilState } from "recoil";
 import {
   Avatar,
   FormControl,
@@ -10,7 +10,6 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import { useRecoilState } from "recoil";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 
 // props -> type(userName) data(userRepoName) labelText(Owner*)
@@ -78,22 +77,21 @@ const SelectInputFormControl = styled(FormControl)`
 
 const SelectLabelWrapper = styled(InputLabel)`
   display: flex;
-  position: static;
-  height: 100%;
   align-items: center;
   transform-origin: center left;
+  position: static;
+  height: 100%;
   gap: 0.5rem;
-
+  color: ${COLOR.MAIN_BLACK};
   font-size: 1.8rem;
   font-weight: 500;
   text-align: center;
-  color: ${COLOR.MAIN_BLACK};
 
   & .MuiFormLabel-root {
-    transform-origin: center left;
-    align-items: center;
-    text-align: center;
     justify-content: center;
+    align-items: center;
+    transform-origin: center left;
+    text-align: center;
   }
 `;
 
@@ -101,14 +99,14 @@ const SelectContainer = styled(Select)`
   display: flex;
 
   & .MuiSelect-select {
-    padding: 0.5rem 2rem;
     width: 100%;
     height: 4rem;
+    padding: 0.5rem 2rem;
   }
   & .MuiInputBase-input {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
   }
   & .MuiList-root {
     border-radius: 3rem;
@@ -133,16 +131,16 @@ const SelectContainer = styled(Select)`
 `;
 
 const MenuOptionItem = styled(MenuItem)`
-  border-radius: 1rem;
   padding: 1rem 2.5rem;
+  border-radius: 1rem;
 `;
 
 const RenderOptionItem = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  min-width: 9rem;
+  flex-direction: row;
   width: 100%;
+  min-width: 9rem;
   gap: 3rem;
 `;
 const OptionItemAvatar = styled(ListItemAvatar)`
@@ -158,8 +156,8 @@ const ItmeAvatar = styled(Avatar)`
   }
 `;
 const OPtionItemText = styled(ListItemText)`
-  margin: 0;
   width: 50%;
+  margin: 0;
   & .MuiTypography-root {
     font-size: 1.3rem;
   }

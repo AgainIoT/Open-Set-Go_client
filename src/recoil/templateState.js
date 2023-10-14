@@ -9,11 +9,16 @@ export const templateSelectState = atomFamily({
 // state to show  preview about user select from template modal(templateList)
 export const templatePreviewState = atomFamily({
   key: "templatePreviewState",
-  default: [],
+  default: [{}],
 });
 
 // state to save template + user input
 export const templateContent = atomFamily({
   key: "templateContent",
   default: "",
+});
+
+export const templateMode = atom({
+  key: "reorderable",
+  default: false,
 });
