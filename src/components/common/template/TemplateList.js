@@ -16,7 +16,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
-import { Icon } from "@mui/material";
+import { ListItemData } from "../../../data/ListItemData";
 
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {
@@ -28,28 +28,10 @@ export function TemplateList(props) {
     templatePreviewState(props.type),
   );
   const handleSelect = async (value) => {
-    if (props.type === "pr") {
-      setShowValue([
-        {
-          _id: value._id,
-          title: value.title,
-          subtitle: value.repoName,
-          repoUrl: value.repoUrl,
-          content: value.content,
-        },
-      ]);
-    } else {
-      const content = await axios.get(url + "/" + value._id);
-      setShowValue([
-        {
-          _id: value._id,
-          title: value.repoName,
-          subtitle: value.repoName,
-          repoUrl: null,
-          content: content.data.content,
-        },
-      ]);
-    }
+    const content = await axios.get(url + "/" + value.id);
+    const tmp = JSON.parse(JSON.stringify(value));
+    tmp.content = content.data;
+    setShowValue([tmp]);
   };
 
   useEffect(() => {
@@ -58,14 +40,28 @@ export function TemplateList(props) {
     async function get() {
       if (!completed) {
         // page query for only contributing and readme for now.
-        if (props.type === "contributing" || props.type === "readme") {
-          url += "?page=1";
-        }
+        url += "?page=1";
         const result = await axios.get(url);
-        setData(result.data);
+        setData(refine(result.data));
       }
     }
     get();
+
+    function refine(data) {
+      const dataList = data.map((value) => {
+        const id = value._id;
+        const subtitle = value.repoName;
+        const star = value.star;
+        let title = "";
+        if (props.type === "pr") {
+          title = value.title;
+        } else {
+          title = value.repoName;
+        }
+        return new ListItemData(id, title, subtitle, star);
+      });
+      return dataList;
+    }
     return () => {
       completed = true;
     };
@@ -113,7 +109,7 @@ export function TemplateList(props) {
         >
           <div>
             {data.map((it) => (
-              <div key={it._id}>
+              <div key={it.id}>
                 <ListItem
                   component="div"
                   disablePadding
@@ -123,11 +119,7 @@ export function TemplateList(props) {
                 >
                   <ListItemButton>
                     <ListItemText
-                      primary={
-                        props.type === "contributing" || props.type === "readme"
-                          ? it.repoName
-                          : it.title
-                      }
+                      primary={it.title}
                       id="PR-desc"
                       variant="h6"
                       gutterBottom
@@ -142,9 +134,7 @@ export function TemplateList(props) {
                       disablePadding
                       color="textSecondary"
                     >
-                      {props.type === "contributing" || props.type === "readme"
-                        ? it.star
-                        : null}
+                      {it.star}
                     </Typography>
                   </ListItemButton>
                 </ListItem>

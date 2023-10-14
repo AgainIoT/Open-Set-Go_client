@@ -19,6 +19,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
+import { DraggableListItemData } from "../../../data/ListItemData";
 
 // props -> type(pr, readme, contributing)
 export function GenerateList(props) {
@@ -40,15 +41,13 @@ export function GenerateList(props) {
   const handleSelect = (selected) => {
     const dataList = [...selectedData, selected];
     setSelectedData(dataList);
-    const filteredData = data.filter((item) => item._id !== selected._id);
+    const filteredData = data.filter((item) => item.id !== selected.id);
     setData(filteredData);
     setShowValue(dataList);
   };
 
   const handleRemove = (selected) => {
-    const filteredData = selectedData.filter(
-      (item) => item._id !== selected._id,
-    );
+    const filteredData = selectedData.filter((item) => item.id !== selected.id);
     setSelectedData(filteredData);
     setData([...data, selected].sort((a, b) => a.index - b.index));
     setShowValue(filteredData);
@@ -83,19 +82,14 @@ export function GenerateList(props) {
     }
 
     function refine(data) {
-      const ret = [];
-      data.map((value) => {
-        const tmp = {
-          _id: value._id,
-          index: value.index,
-          title: value.type,
-          subtitle: null,
-          repoUrl: null,
-          content: value.content,
-        };
-        ret.push(tmp);
+      const dataList = data.map((value) => {
+        const id = value._id;
+        const index = value.index;
+        const title = value.type;
+        const content = value.content;
+        return new DraggableListItemData(id, title, index, content);
       });
-      return ret.sort((a, b) => a.index - b.index);
+      return dataList.sort((a, b) => a.index - b.index);
     }
     get();
     return () => {
@@ -149,8 +143,8 @@ export function GenerateList(props) {
                 <ul {...provided.droppableProps} ref={provided.innerRef}>
                   {selectedData.map((item, index) => (
                     <Draggable
-                      key={item._id}
-                      draggableId={item._id}
+                      key={item.id}
+                      draggableId={item.id}
                       index={index}
                     >
                       {(provided, snapshot) => {
@@ -203,7 +197,7 @@ export function GenerateList(props) {
         >
           <div>
             {data.map((it) => (
-              <div key={it._id}>
+              <div key={it.id}>
                 <ListItem
                   component="div"
                   disablePadding
