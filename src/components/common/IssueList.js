@@ -17,18 +17,45 @@ import {
   templatePreviewState,
   templateSelectState,
 } from "../../recoil/templateState";
-import { style } from "@mui/system";
+import { eachStepState, modalState } from "../../recoil/commonState";
+// import { style } from "@mui/system";
 
 const IssueList = (props) => {
   const [data, setData] = useState([]);
-  const handleCheck = (temTitle) => {
-    // if (window.confirm(`${temTitle}`)) {
-    //   console.log("확인");
-    // } else {
-    //   console.log("취소");
-    // }
-    setData(`${temTitle}`);
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    let completed = false;
+
+    async function get() {
+      const result = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/file/issue`,
+      );
+      if (!completed) {
+        const list = [];
+        // console.log(result.data); //이건 잘 됨
+        result.data.map((it) => {
+          const tmp = Object.entries(it);
+          list.push(tmp);
+        });
+        setData(list);
+        console.log(data);
+      }
+    }
+    get();
+    return () => {
+      completed = true;
+    };
+  }, []);
+
+  const handleCheck = (temTitle, temId) => {
+    setContent(`${temTitle}`);
+    // const preview = await axios.get(
+    //   `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
+    // );
   };
+
+  const handleOpen = () => {};
 
   return (
     <StIssueList>
@@ -51,7 +78,7 @@ const IssueList = (props) => {
             overscanCount: 5,
           }}
         >
-          {dummy.dummyIssueTemplate.map((it) => (
+          {/* {data.map((it) => (
             <li key={it.type}>
               <ul>
                 <ListSubheader>{`${it.type}`}</ListSubheader>
@@ -70,14 +97,36 @@ const IssueList = (props) => {
                 ))}
               </ul>
             </li>
+          ))} */}
+          {data.map((it) => (
+            <li key={it[0][1]}>
+              <ul>
+                <ListSubheader>{`${it[0][1]}`}</ListSubheader>
+                {it[1][1].map((item) => (
+                  <ListItem
+                    components="div"
+                    onClick={() => {
+                      handleCheck(item.title, item.id);
+                    }}
+                    key={item.title}
+                  >
+                    <ListItemButton>
+                      <ItemTxt primary={`${item.title}`} />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </ul>
+            </li>
           ))}
         </List>
       </ListBox>
       <ContentBtnDiv>
         <ContentP>
-          <p>{data}</p>
+          <p>{content}</p>
         </ContentP>
-        <UseBtn variant="contained">Use</UseBtn>
+        <UseBtn variant="contained" onClick={handleOpen}>
+          Use
+        </UseBtn>
       </ContentBtnDiv>
     </StIssueList>
   );
@@ -123,5 +172,5 @@ const ContentP = styled.div`
 `;
 
 const UseBtn = styled(Button)`
-  width: 10%;  
+  width: 10%;
 `;
