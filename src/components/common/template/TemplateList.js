@@ -16,6 +16,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
+import { ListItemData } from "../../../data/ListItem";
 
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {
@@ -27,18 +28,9 @@ export function TemplateList(props) {
     templatePreviewState(props.type),
   );
   const handleSelect = async (value) => {
-    const content = await axios.get(url + "/" + value._id);
-    console.log(content);
-    setShowValue([
-      {
-        _id: value._id,
-        title: value.title,
-        subtitle: value.subtitle,
-        repoUrl: value.repoUrl,
-        content: content.data,
-        star: value.star,
-      },
-    ]);
+    const content = await axios.get(url + "/" + value.id);
+    value.content = content.data;
+    setShowValue([value]);
   };
 
   useEffect(() => {
@@ -58,25 +50,16 @@ export function TemplateList(props) {
     function refine(data) {
       const ret = [];
       data.map((value) => {
+        const id = value._id;
+        const subtitle = value.repoName;
+        const star = value.star;
+        let title;
         if (props.type === "pr") {
-          const tmp = {
-            _id: value._id,
-            title: value.title,
-            subtitle: value.repoName,
-            repoUrl: "https://github.com/" + value.repoName,
-            star: value.star,
-          };
-          ret.push(tmp);
+          title = value.title;
         } else {
-          const tmp = {
-            _id: value._id,
-            title: value.repoName,
-            subtitle: value.repoName,
-            repoUrl: "https://github.com/" + value.repoName,
-            star: value.star,
-          };
-          ret.push(tmp);
+          title = value.repoName;
         }
+        ret.push(new ListItemData(id, title, subtitle, star));
       });
       console.log(ret);
       return ret;
