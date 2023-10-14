@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { selectedState } from "../../recoil/issueState";
 import styled from "styled-components";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -12,7 +13,7 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { alpha } from "@mui/material/styles";
 // import dummy from "../../dummy/dummyIssueTemplate.json";
-// import IssueChip from "./IssueChip";
+import IssueChip from "./IssueChip";
 import {
   templateContent,
   templatePreviewState,
@@ -20,13 +21,13 @@ import {
 } from "../../recoil/templateState";
 import { eachStepState, modalState } from "../../recoil/commonState";
 import { COLOR } from "../../styles/color";
-// import { style } from "@mui/system";
 
 const IssueList = (props) => {
   const [data, setData] = useState([]);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState(" ");
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
+  const [selectedTitle, setSelectedTitle] = useRecoilState(selectedState);
 
   useEffect(() => {
     let completed = false;
@@ -57,12 +58,15 @@ const IssueList = (props) => {
       `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
     );
     setContent(content.data);
-    console.log(typeof(content.data));
+    console.log(typeof content.data);
     setTitle(temTitle);
   };
 
   const handleOpen = () => setModalValue(true);
-
+  const handleUse = (title) => {
+    handleOpen;
+    setSelectedTitle([...selectedState, title]);
+  };
   return (
     <StIssueList>
       <ListBox
@@ -107,6 +111,10 @@ const IssueList = (props) => {
         </List>
       </ListBox>
       <ContentDiv>
+        <ChipWrapper>
+          <ChipP>selected template</ChipP>
+          <IssueChip />
+        </ChipWrapper>
         <TitleWrapper>
           <TitleP
             id="PR-title"
@@ -122,7 +130,7 @@ const IssueList = (props) => {
           <p>{content}</p>
         </PreviewWrapper>
         <BtnWrapper>
-          <UseBtn variant="contained" onClick={handleOpen}>
+          <UseBtn variant="contained" onClick={handleUse(title)}>
             Use template
           </UseBtn>
         </BtnWrapper>
@@ -160,7 +168,17 @@ const ContentDiv = styled.div`
   border-left: 0.2rem solid ${COLOR.MAIN_HOVER};
 `;
 
-const SelectedTemWrapper = styled.div`
+const ChipWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 100%;
+`;
+
+const ChipP = styled.p`
+  width: 100%;
+  font-size: 1.3rem;
+  padding: 1rem 0rem 0rem 1rem;
 `;
 
 const TitleWrapper = styled.div`
@@ -174,7 +192,6 @@ const TitleP = styled(Typography)`
   font-size: 2rem;
   font-weight: bold;
 `;
-
 
 const PreviewWrapper = styled.div`
   width: 100%;

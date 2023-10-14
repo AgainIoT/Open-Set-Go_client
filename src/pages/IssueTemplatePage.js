@@ -7,16 +7,14 @@ import { BaseModal3 } from "../components/common/modal/BaseModal3";
 import { eachStepState, modalState } from "../recoil/commonState";
 import IssueList from "../components/common/IssueList";
 import IssueModal from "../components/common/modal/IssueModal";
-
 function IssueTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
   const [content, setContent] = useRecoilState(templateContent("issue"));
 
-  const handleOpen = () => setModalValue(true);
   return (
     <StIssueTemplatePage>
       <BaseModal3 type={"issue"}>
-        <IssueModal type={"issue"} />
+        <IssueModal />
       </BaseModal3>
       <IssueList />
     </StIssueTemplatePage>
