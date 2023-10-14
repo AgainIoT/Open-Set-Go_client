@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import List from "@mui/material/List";
@@ -6,24 +6,26 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { alpha } from "@mui/material/styles";
-import dummy from "../../dummy/dummyIssueTemplate.json";
+// import dummy from "../../dummy/dummyIssueTemplate.json";
+// import IssueChip from "./IssueChip";
 import {
   templateContent,
   templatePreviewState,
   templateSelectState,
 } from "../../recoil/templateState";
 import { eachStepState, modalState } from "../../recoil/commonState";
+import { COLOR } from "../../styles/color";
 // import { style } from "@mui/system";
 
 const IssueList = (props) => {
   const [data, setData] = useState([]);
   const [content, setContent] = useState("");
-
+  const [title, setTitle] = useState(" ");
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
 
   useEffect(() => {
@@ -50,11 +52,13 @@ const IssueList = (props) => {
     };
   }, []);
 
-  const handleCheck = (temTitle, temId) => {
-    setContent(`${temTitle}`);
-    // const preview = await axios.get(
-    //   `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
-    // );
+  const handleCheck = async (temTitle, temId) => {
+    const content = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
+    );
+    setContent(content.data);
+    console.log(typeof(content.data));
+    setTitle(temTitle);
   };
 
   const handleOpen = () => setModalValue(true);
@@ -102,14 +106,27 @@ const IssueList = (props) => {
           ))}
         </List>
       </ListBox>
-      <ContentBtnDiv>
-        <ContentP>
+      <ContentDiv>
+        <TitleWrapper>
+          <TitleP
+            id="PR-title"
+            variant="h2"
+            textColor="inherit"
+            fontWeight="lg"
+            m={2}
+          >
+            {title}
+          </TitleP>
+        </TitleWrapper>
+        <PreviewWrapper>
           <p>{content}</p>
-        </ContentP>
-        <UseBtn variant="contained" onClick={handleOpen}>
-          Use
-        </UseBtn>
-      </ContentBtnDiv>
+        </PreviewWrapper>
+        <BtnWrapper>
+          <UseBtn variant="contained" onClick={handleOpen}>
+            Use template
+          </UseBtn>
+        </BtnWrapper>
+      </ContentDiv>
     </StIssueList>
   );
 };
@@ -118,41 +135,60 @@ export default IssueList;
 
 const StIssueList = styled.div`
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
   flex-direction: row;
   width: 100%;
   height: 100%;
-  border: 1px solid blue;
-  background-color: aqua;
 `;
 
 const ListBox = styled(Box)`
-  border: 1px solid green;
-  height: 100%;
+  height: 110%;
   width: 25%;
 `;
 
 const ItemTxt = styled(ListItemText)`
   font-size: 20rem;
 `;
-
-const ContentBtnDiv = styled.div`
+const ContentDiv = styled.div`
   height: 100%;
   width: 75%;
   display: flex;
   justify-content: space-between;
   align-items: end;
   flex-direction: column;
+  border-left: 0.2rem solid ${COLOR.MAIN_HOVER};
 `;
 
-const ContentP = styled.div`
+const SelectedTemWrapper = styled.div`
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  align-items: left;
+  width: 100%;
+  border-bottom: 0.2rem solid ${COLOR.MAIN_HOVER};
+`;
+
+const TitleP = styled(Typography)`
+  font-size: 2rem;
+  font-weight: bold;
+`;
+
+
+const PreviewWrapper = styled.div`
   width: 100%;
   height: 100%;
-  font-size: 5rem;
-  background-color: green;
+  font-size: 2rem;
+  text-align: justify;
+  line-height: 2rem;
+  padding: 2rem;
 `;
+const BtnWrapper = styled.div``;
 
 const UseBtn = styled(Button)`
-  width: 10%;
+  width: 17rem;
+  height: 4.5rem;
+  font-size: 1.5rem;
+  border-radius: 0.8rem;
 `;
