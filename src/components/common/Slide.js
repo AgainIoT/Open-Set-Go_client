@@ -14,6 +14,7 @@ const Slide = () => {
     async function get() {
       const result = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}/file/license`,
+        { withCredentials: true },
       );
       if (!completed) {
         setData(result.data);
@@ -106,7 +107,8 @@ const StyledSlider = styled(Slider)`
     left: 0;
   }
 
-  .slick-next:before, .slick-prev:before {
+  .slick-next:before,
+  .slick-prev:before {
     color: #888;
   }
 `;
