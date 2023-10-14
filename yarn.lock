@@ -5361,6 +5361,13 @@ get-symbol-description@^1.0.0:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
+github-formschema-converter@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/github-formschema-converter/-/github-formschema-converter-0.0.2.tgz#f9f89324fdc50e5fd7f58e4a574fc9a6da9ed2ae"
+  integrity sha512-qMwN5aOKpOZ+52lNIKY6d5+z4nWsnTBzAk+qLwp2e4D0Koz/hvg1v9hm5OSYpuwZOZ59s3I8PSTytX3acjaZbA==
+  dependencies:
+    js-yaml "^4.1.0"
+
 github-slugger@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/github-slugger/-/github-slugger-2.0.0.tgz#52cf2f9279a21eb6c59dd385b410f0c0adda8f1a"
