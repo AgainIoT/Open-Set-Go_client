@@ -5,14 +5,14 @@ export class ListItemData {
     this.subtitle = subtitle;
     this.repoUrl = subtitle ? "https://github.com/" + subtitle : null;
     this.star = star;
-    this.content;
+    this._content = null;
   }
   get content() {
     return this._content;
   }
 
-  set content(content) {
-    this._content = content;
+  set content(value) {
+    this._content = value;
   }
 }
 

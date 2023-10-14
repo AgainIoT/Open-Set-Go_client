@@ -19,7 +19,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
-import { DraggableListItemData } from "../../../data/ListItem";
+import { DraggableListItemData } from "../../../data/ListItemData";
 
 // props -> type(pr, readme, contributing)
 export function GenerateList(props) {
@@ -47,9 +47,7 @@ export function GenerateList(props) {
   };
 
   const handleRemove = (selected) => {
-    const filteredData = selectedData.filter(
-      (item) => item.id !== selected.id,
-    );
+    const filteredData = selectedData.filter((item) => item.id !== selected.id);
     setSelectedData(filteredData);
     setData([...data, selected].sort((a, b) => a.index - b.index));
     setShowValue(filteredData);
@@ -84,15 +82,14 @@ export function GenerateList(props) {
     }
 
     function refine(data) {
-      const ret = [];
-      data.map((value) => {
+      const dataList = data.map((value) => {
         const id = value._id;
         const index = value.index;
         const title = value.type;
         const content = value.content;
-        ret.push(new DraggableListItemData(id, title, index, content));
+        new DraggableListItemData(id, title, index, content);
       });
-      return ret.sort((a, b) => a.index - b.index);
+      return dataList.sort((a, b) => a.index - b.index);
     }
     get();
     return () => {

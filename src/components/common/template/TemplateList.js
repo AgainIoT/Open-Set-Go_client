@@ -16,7 +16,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
-import { ListItemData } from "../../../data/ListItem";
+import { ListItemData } from "../../../data/ListItemData";
 
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {
@@ -29,8 +29,9 @@ export function TemplateList(props) {
   );
   const handleSelect = async (value) => {
     const content = await axios.get(url + "/" + value.id);
-    value.content = content.data;
-    setShowValue([value]);
+    const tmp = JSON.parse(JSON.stringify(value));
+    tmp.content = content.data;
+    setShowValue([tmp]);
   };
 
   useEffect(() => {
@@ -41,28 +42,25 @@ export function TemplateList(props) {
         // page query for only contributing and readme for now.
         url += "?page=1";
         const result = await axios.get(url);
-        console.log(result);
         setData(refine(result.data));
       }
     }
     get();
 
     function refine(data) {
-      const ret = [];
-      data.map((value) => {
+      const dataList = data.map((value) => {
         const id = value._id;
         const subtitle = value.repoName;
         const star = value.star;
-        let title;
+        let title = "";
         if (props.type === "pr") {
           title = value.title;
         } else {
           title = value.repoName;
         }
-        ret.push(new ListItemData(id, title, subtitle, star));
+        return new ListItemData(id, title, subtitle, star);
       });
-      console.log(ret);
-      return ret;
+      return dataList;
     }
     return () => {
       completed = true;
