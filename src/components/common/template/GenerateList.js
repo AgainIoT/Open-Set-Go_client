@@ -87,7 +87,7 @@ export function GenerateList(props) {
         const index = value.index;
         const title = value.type;
         const content = value.content;
-        new DraggableListItemData(id, title, index, content);
+        return new DraggableListItemData(id, title, index, content);
       });
       return dataList.sort((a, b) => a.index - b.index);
     }
