@@ -16,7 +16,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
-import { Icon } from "@mui/material";
 
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {
@@ -28,28 +27,18 @@ export function TemplateList(props) {
     templatePreviewState(props.type),
   );
   const handleSelect = async (value) => {
-    if (props.type === "pr") {
-      setShowValue([
-        {
-          _id: value._id,
-          title: value.title,
-          subtitle: value.repoName,
-          repoUrl: value.repoUrl,
-          content: value.content,
-        },
-      ]);
-    } else {
-      const content = await axios.get(url + "/" + value._id);
-      setShowValue([
-        {
-          _id: value._id,
-          title: value.repoName,
-          subtitle: value.repoName,
-          repoUrl: null,
-          content: content.data.content,
-        },
-      ]);
-    }
+    const content = await axios.get(url + "/" + value._id);
+    console.log(content);
+    setShowValue([
+      {
+        _id: value._id,
+        title: value.title,
+        subtitle: value.subtitle,
+        repoUrl: value.repoUrl,
+        content: content.data,
+        star: value.star,
+      },
+    ]);
   };
 
   useEffect(() => {
@@ -58,14 +47,40 @@ export function TemplateList(props) {
     async function get() {
       if (!completed) {
         // page query for only contributing and readme for now.
-        if (props.type === "contributing" || props.type === "readme") {
-          url += "?page=1";
-        }
+        url += "?page=1";
         const result = await axios.get(url);
-        setData(result.data);
+        console.log(result);
+        setData(refine(result.data));
       }
     }
     get();
+
+    function refine(data) {
+      const ret = [];
+      data.map((value) => {
+        if (props.type === "pr") {
+          const tmp = {
+            _id: value._id,
+            title: value.title,
+            subtitle: value.repoName,
+            repoUrl: "https://github.com/" + value.repoName,
+            star: value.star,
+          };
+          ret.push(tmp);
+        } else {
+          const tmp = {
+            _id: value._id,
+            title: value.repoName,
+            subtitle: value.repoName,
+            repoUrl: "https://github.com/" + value.repoName,
+            star: value.star,
+          };
+          ret.push(tmp);
+        }
+      });
+      console.log(ret);
+      return ret;
+    }
     return () => {
       completed = true;
     };
@@ -123,11 +138,7 @@ export function TemplateList(props) {
                 >
                   <ListItemButton>
                     <ListItemText
-                      primary={
-                        props.type === "contributing" || props.type === "readme"
-                          ? it.repoName
-                          : it.title
-                      }
+                      primary={it.title}
                       id="PR-desc"
                       variant="h6"
                       gutterBottom
@@ -142,9 +153,7 @@ export function TemplateList(props) {
                       disablePadding
                       color="textSecondary"
                     >
-                      {props.type === "contributing" || props.type === "readme"
-                        ? it.star
-                        : null}
+                      {it.star}
                     </Typography>
                   </ListItemButton>
                 </ListItem>
