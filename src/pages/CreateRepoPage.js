@@ -24,12 +24,8 @@ function CreateRepo() {
     <>
       <StCreateRepo container>
         <RequiredFieldContainer />
-        {/* <Grid item xs={12}> */}
         <SelectContainer />
-        {/* </Grid> */}
-        {/* <Grid item xs={8}> */}
         <GitIgnoreContainer />
-        {/* </Grid> */}
       </StCreateRepo>
     </>
   );
