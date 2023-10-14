@@ -14,7 +14,9 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
+import { Icon } from "@mui/material";
 
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {
@@ -132,17 +134,18 @@ export function TemplateList(props) {
                       color="textSecondary"
                       m={2}
                     />
-                    <ListItemText
-                      primary={
-                        props.type === "contributing" || props.type === "readme"
-                          ? it.star
-                          : null
-                      }
+                    <StarIcon m={2} />
+                    <Typography
                       id="PR-desc"
                       variant="h6"
-                      gutterBottom
+                      paddingLeft={0.5}
+                      disablePadding
                       color="textSecondary"
-                    />
+                    >
+                      {props.type === "contributing" || props.type === "readme"
+                        ? it.star
+                        : null}
+                    </Typography>
                   </ListItemButton>
                 </ListItem>
               </div>
