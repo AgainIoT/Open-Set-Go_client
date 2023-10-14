@@ -29,8 +29,8 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 40%;
-  height: 75%;
-  padding: 2rem;
+  height: 65%;
+  padding: 1.5rem;
   margin-top: 1rem;
   transform: translate(-50%, -50%);
   position: fixed;

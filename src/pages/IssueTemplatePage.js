@@ -12,7 +12,6 @@ function IssueTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
   const [content, setContent] = useRecoilState(templateContent("issue"));
 
-
   const handleOpen = () => setModalValue(true);
   return (
     <StIssueTemplatePage>
@@ -25,9 +24,11 @@ function IssueTemplatePage() {
 }
 
 const StIssueTemplatePage = styled.div`
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
   height: 100%;
-  border: 1px solid red;
 `;
 
 export default IssueTemplatePage;
