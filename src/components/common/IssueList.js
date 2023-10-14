@@ -24,6 +24,8 @@ const IssueList = (props) => {
   const [data, setData] = useState([]);
   const [content, setContent] = useState("");
 
+  const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
+
   useEffect(() => {
     let completed = false;
 
@@ -55,7 +57,7 @@ const IssueList = (props) => {
     // );
   };
 
-  const handleOpen = () => {};
+  const handleOpen = () => setModalValue(true);
 
   return (
     <StIssueList>
@@ -78,26 +80,6 @@ const IssueList = (props) => {
             overscanCount: 5,
           }}
         >
-          {/* {data.map((it) => (
-            <li key={it.type}>
-              <ul>
-                <ListSubheader>{`${it.type}`}</ListSubheader>
-                {it.templates.map((item) => (
-                  <ListItem
-                    components="div"
-                    onClick={() => {
-                      handleCheck(item.title);
-                    }}
-                    key={item.title}
-                  >
-                    <ListItemButton>
-                      <ItemTxt primary={`${item.title}`} />
-                    </ListItemButton>
-                  </ListItem>
-                ))}
-              </ul>
-            </li>
-          ))} */}
           {data.map((it) => (
             <li key={it[0][1]}>
               <ul>
