@@ -146,8 +146,8 @@ export function GenerateList(props) {
                 <ul {...provided.droppableProps} ref={provided.innerRef}>
                   {selectedData.map((item, index) => (
                     <Draggable
-                      key={item._id}
-                      draggableId={item._id}
+                      key={item.id}
+                      draggableId={item.id}
                       index={index}
                     >
                       {(provided, snapshot) => {
@@ -200,7 +200,7 @@ export function GenerateList(props) {
         >
           <div>
             {data.map((it) => (
-              <div key={it._id}>
+              <div key={it.id}>
                 <ListItem
                   component="div"
                   disablePadding

@@ -111,7 +111,7 @@ export function TemplateList(props) {
         >
           <div>
             {data.map((it) => (
-              <div key={it._id}>
+              <div key={it.id}>
                 <ListItem
                   component="div"
                   disablePadding
