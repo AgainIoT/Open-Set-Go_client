@@ -5,6 +5,7 @@ import { Grid, Typography } from "@mui/material";
 import axios from "axios";
 import { AutocompleteInput } from "../common/Autocomplete";
 import { repoDataAtomFamily } from "../../recoil/repoData";
+import { COLOR } from "../../styles/color";
 
 // for select Language & Framework
 export const SelectContainer = () => {
@@ -67,7 +68,7 @@ export const SelectContainer = () => {
       <Grid item xs={12}>
         <Subtitle>Select your project Language/Framework</Subtitle>
       </Grid>
-      <Grid item xs={12} sm={3.5}>
+      <Grid item xs={12} sm={5}>
         <AutocompleteInput
           type={"lang"}
           options={langs}
@@ -77,7 +78,7 @@ export const SelectContainer = () => {
           label={"Language"}
         />
       </Grid>
-      <Grid item xs={12} sm={3.5}>
+      <Grid item xs={12} sm={5}>
         <AutocompleteInput
           type={"framework"}
           options={frameworkOpions}
@@ -92,9 +93,13 @@ export const SelectContainer = () => {
 };
 
 const StSelectContainer = styled(Grid)`
-  width: 100%;
-  height: 100%;
+  background-color: ${COLOR.MAIN_HOVER};
+  height: 25%;
+  width: 80%;
   column-gap: 5rem;
+  padding: 2rem 4rem 2rem 4rem;
+  border: 0.1rem solid ${COLOR.BORDER_GRAY};
+  border-radius: 2rem;
 `;
 const Subtitle = styled(Typography)`
   font-size: 1.2rem;

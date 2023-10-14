@@ -44,8 +44,10 @@ export const GitIgnoreContainer = () => {
 const StGitIgnoreContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem 1rem 2rem;
+  width: 80%;
+  padding: 2rem 4rem 2rem 4rem;
   gap: 0.5rem;
+  background-color: ${COLOR.MAIN_HOVER};
   border: 0.1rem solid ${COLOR.BORDER_GRAY};
   border-radius: 2rem;
 `;
