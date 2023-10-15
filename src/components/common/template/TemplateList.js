@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -18,16 +17,27 @@ import ListItemText from "@mui/material/ListItemText";
 import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
 import { ListItemData } from "../../../data/ListItemData";
+import { Pagination } from "@mui/material";
+
+const DATAPERPAGE = 20;
 
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {
   const [data, setData] = useState([]);
+  const [pageRange, setPageRange] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   let url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;
 
   const selectValue = useRecoilValue(templateSelectState(props.type));
   const [showValue, setShowValue] = useRecoilState(
     templatePreviewState(props.type),
   );
+
+  const handlePageSelect = async (event, page) => {
+    setCurrentPage(page);
+    getData(false, page);
+  };
+
   const handleSelect = async (value) => {
     const content = await axios.get(url + "/" + value.id);
     const tmp = JSON.parse(JSON.stringify(value));
@@ -35,34 +45,41 @@ export function TemplateList(props) {
     setShowValue([tmp]);
   };
 
+  function refine(data) {
+    const dataList = data.map((value) => {
+      const id = value._id;
+      const subtitle = value.repoName;
+      const star = value.star;
+      let title = "";
+      if (props.type === "pr") {
+        title = value.title;
+      } else {
+        title = value.repoName;
+      }
+      return new ListItemData(id, title, subtitle, star);
+    });
+    return dataList;
+  }
+
+  async function getData(validate, page) {
+    if (!validate) {
+      // page query for only contributing and readme for now.
+      const result = await axios.get(url + "?page=" + page);
+      setData(refine(result.data));
+    }
+  }
+
+  async function getDataAmount() {
+    const dataAmount = (await axios.get(url + "/amount")).data.amount;
+    const pageCount = Math.ceil(dataAmount / DATAPERPAGE);
+    setPageRange(pageCount);
+  }
+
   useEffect(() => {
     let completed = false;
+    getData(completed, 1);
+    getDataAmount();
 
-    async function get() {
-      if (!completed) {
-        // page query for only contributing and readme for now.
-        url += "?page=1";
-        const result = await axios.get(url);
-        setData(refine(result.data));
-      }
-    }
-    get();
-
-    function refine(data) {
-      const dataList = data.map((value) => {
-        const id = value._id;
-        const subtitle = value.repoName;
-        const star = value.star;
-        let title = "";
-        if (props.type === "pr") {
-          title = value.title;
-        } else {
-          title = value.repoName;
-        }
-        return new ListItemData(id, title, subtitle, star);
-      });
-      return dataList;
-    }
     return () => {
       completed = true;
     };
@@ -95,7 +112,7 @@ export function TemplateList(props) {
             height: "100%",
             width: 360,
             itemSize: 46,
-            itemCount: data.length,
+            itemCount: length,
             overscanCount: 5,
           }}
         >
@@ -133,6 +150,14 @@ export function TemplateList(props) {
           ))}
         </List>
       </ListWrapper>
+      <Pagination
+        count={pageRange}
+        defaultPage={1}
+        siblingCount={1}
+        page={currentPage}
+        onChange={handlePageSelect}
+        color="primary"
+      />
     </Item>
   );
 }
@@ -141,6 +166,7 @@ const ListWrapper = styled("div")(({ theme }) => ({
   width: "100%",
   height: "100%",
   maxWidth: 360,
+  marginBottom: theme.spacing(1),
   backgroundColor: COLOR.MAIN_WHITE,
   overflowX: "hidden",
   overflowY: "auto",
@@ -188,8 +214,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Item = styled(Paper)(({ theme }) => ({
   display: "flex",
-  textAlign: "center",
+  alignItems: "center",
   flexDirection: "column",
+  textAlign: "center",
   padding: theme.spacing(1),
   color: theme.palette.text.secondary,
   backgroundColor: COLOR.MAIN_BACKGROUND,
