@@ -38,16 +38,10 @@ export const Layout = () => {
           <ExplainWrapper>
             <StepInfo />
           </ExplainWrapper>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-            }}
-          >
-            <StepContentsContainer>
+          <StepContentsContainer>
+            <StepContentsWrapper>
               <Outlet />
-            </StepContentsContainer>
+            </StepContentsWrapper>
             <BottomContainer>
               {activeStep > 0 ? (
                 <ButtonWrapper
@@ -68,7 +62,7 @@ export const Layout = () => {
                 Next
               </ButtonWrapper>
             </BottomContainer>
-          </Box>
+          </StepContentsContainer>
         </StepContainer>
       </ContentsContainer>
       <BaseDialog type={"finishModal"}>
@@ -116,6 +110,12 @@ const ExplainWrapper = styled.div`
 `;
 
 const StepContentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const StepContentsWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
