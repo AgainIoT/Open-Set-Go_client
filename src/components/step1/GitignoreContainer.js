@@ -1,16 +1,15 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-
 import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  repoDataAtomFamily,
+  showAllGitignoreState,
+} from "../../recoil/repoData";
 import { Button, Typography } from "@mui/material";
 import { GitignoreModal } from "../common/modal/GitignoreModal";
 import { ReadonlyAuto } from "../common/ReadOnlyAuto";
 import { modalState } from "../../recoil/commonState";
 import { BaseModal2 } from "../common/modal/BaseModal2";
-import {
-  repoDataAtomFamily,
-  showAllGitignoreState,
-} from "../../recoil/repoData";
 
 // for gitignore
 export const GitIgnoreContainer = () => {

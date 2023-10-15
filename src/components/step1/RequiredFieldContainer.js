@@ -6,7 +6,6 @@ import axios from "axios";
 import { TextInputContainer } from "../common/InputComponent";
 import { SelectAuto } from "../common/SelectAuto";
 import { repoDataAtomFamily } from "../../recoil/repoData";
-import { COLOR } from "../../styles/color";
 
 // for Owner, RepoName, Description
 export const RequiredFieldContainer = () => {
@@ -132,8 +131,8 @@ export const RequiredFieldContainer = () => {
 };
 
 const StRequiredFieldContainer = styled(Grid)`
+width: 80%;
   min-height: 25rem;
-  width: 80%;
   min-width: 50rem;
   row-gap: 1rem;
 `;

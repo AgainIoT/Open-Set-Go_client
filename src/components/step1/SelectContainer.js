@@ -5,7 +5,6 @@ import { Grid, Typography } from "@mui/material";
 import axios from "axios";
 import { AutocompleteInput } from "../common/Autocomplete";
 import { repoDataAtomFamily } from "../../recoil/repoData";
-import { COLOR } from "../../styles/color";
 
 // for select Language & Framework
 export const SelectContainer = () => {

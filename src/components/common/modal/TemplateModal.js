@@ -28,12 +28,12 @@ export const TemplateModal = (props) => {
 
 const TemplateContainer = styled.div`
   display: flex;
-  width: 100%;
   flexdirection: row;
+  width: 100%;
 `;
 
 const TemplateContents = styled.div`
   display: flex;
-  width: 100%;
   flexdirection: column;
+  width: 100%;
 `;
