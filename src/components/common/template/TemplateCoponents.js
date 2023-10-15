@@ -11,6 +11,9 @@ export const ListWrapper = styled("div")(({ theme }) => ({
   overflowX: "hidden",
   overflowY: "auto",
 }));
+export const SearchWrapper = styled("div")(({ theme }) => ({
+  width: "100%",
+}));
 
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -28,11 +31,11 @@ export const Search = styled("div")(({ theme }) => ({
 
 export const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
   position: "absolute",
   height: "100%",
   padding: theme.spacing(0, 2),
-  alignItems: "center",
-  justifyContent: "center",
   pointerEvents: "none",
 }));
 

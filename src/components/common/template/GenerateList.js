@@ -20,6 +20,7 @@ import { DraggableListItemData } from "../../../data/ListItemData";
 import {
   Item,
   Search,
+  SearchWrapper,
   SearchIconWrapper,
   StyledInputBase,
   ListWrapper,
@@ -113,15 +114,17 @@ export function GenerateList(props) {
       >
         <Box sx={{ fontWeight: "bold", m: 1 }}>{props.type}</Box>
       </Typography>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search Template"
-          inputProps={{ "aria-label": "search" }}
-        />
-      </Search>
+      <SearchWrapper>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search Template"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
+      </SearchWrapper>
       <ListWrapper>
         <List
           sx={{

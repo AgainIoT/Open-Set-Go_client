@@ -20,6 +20,7 @@ import {
   SearchIconWrapper,
   StyledInputBase,
   ListWrapper,
+  SearchWrapper,
 } from "./TemplateCoponents";
 
 const DATAPERPAGE = 20;
@@ -100,15 +101,19 @@ export function TemplateList(props) {
       >
         {props.type}
       </Typography>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search Template"
-          inputProps={{ "aria-label": "search" }}
-        />
-      </Search>
+      {/* <div style={{ width: "100%" }}> */}
+      <SearchWrapper>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search Template"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
+      </SearchWrapper>
+      {/* </div> */}
       <ListWrapper>
         <List
           sx={{
