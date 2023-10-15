@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
 import { modalState } from "../../../recoil/commonState";
-// import { selectedState } from "../../../recoil/issueState";
+import { issueSelectedState, selectedTitle } from "../../../recoil/issueState";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { TextField, Typography } from "@mui/material";
 import React, { useState} from "react";
@@ -12,6 +12,14 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 const IssueModal = () => {
+  const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
+  const [selectedInfo, setSelectedInfo] = useRecoilState(issueSelectedState({
+    temTitle: "",
+    uname: "",
+    desc: "",
+    title: "",
+  }));
+
   const [userInput, setUserInput] = useState({
     uname: "",
     desc: "",
@@ -26,7 +34,12 @@ const IssueModal = () => {
     });
   };
   const handleFinish = (e) => {
-    console.log(`userInput: ${userInput.uname}`);
+    setSelectedInfo([...selectedInfo, {
+      temTitle: temTitle,
+      uname: userInput.uname,
+      desc: userInput.desc,
+      title: userInput.title,
+    }]);
     setUserInput({
       uname: "",
       desc: "",

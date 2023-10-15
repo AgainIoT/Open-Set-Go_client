@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-import Paper from "@mui/material/Paper";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Chip from "@mui/material/Chip";
 import { useState, useEffect } from "react";
+import { issueSelectedState, selectedTitle } from "../../recoil/issueState";
 
 const IssueChip = () => {
   const [chipData, setChipData] = useState([
@@ -14,18 +15,26 @@ const IssueChip = () => {
     "Feature Request for Web Service",
     "Documentation Issue for Web Service",
   ]);
+  const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
+  const [selectedInfo, setSelectedInfo] = useRecoilState(issueSelectedState({
+    temTitle: "",
+    uname: "",
+    desc: "",
+    title: "",
+  }));
+
   const handleDelete = (chipToDelete) => () => {
-    setChipData(
-      (chips) => chips.filter((chip) => chip !== chipToDelete),
-      //title이 같으면 칩리스트에서 제거(Recoil로 제어)
+    const newTmp = selectedInfo.filter((it)=> it.temTitle !== chipToDelete);
+    setSelectedInfo(
+      newTmp
     );
   };
   return (
     <StIssueChip component="ul">
-      {chipData.map((data) => {
+      {selectedInfo.map((data) => {
         return (
-          <li key={data}>
-            <SelectedChip label={data} onDelete={handleDelete(data)} />
+          <li key={data.temTitle}>
+            <SelectedChip label={data.temTitle} onDelete={handleDelete(data.temTitle)} />
           </li>
         );
       })}

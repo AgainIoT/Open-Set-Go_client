@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-// import { selectedState } from "../../recoil/issueState";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { issueSelectedState, selectedTitle } from "../../recoil/issueState";
 import styled from "styled-components";
 import { Interweave, Markup } from "interweave";
 import List from "@mui/material/List";
@@ -10,26 +10,23 @@ import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import { Button, Typography } from "@mui/material";
 import axios from "axios";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import { alpha } from "@mui/material/styles";
 import * as formSchema from "github-formschema-converter";
-// import dummy from "../../dummy/dummyIssueTemplate.json";
 import IssueChip from "./IssueChip";
-import {
-  templateContent,
-  templatePreviewState,
-  templateSelectState,
-} from "../../recoil/templateState";
 import { eachStepState, modalState } from "../../recoil/commonState";
 import { COLOR } from "../../styles/color";
 
 const IssueList = (props) => {
   const [data, setData] = useState([]);
   const [content, setContent] = useState("");
-  const [title, setTitle] = useState(" ");
+  const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
-  // const [selectedTitle, setSelectedTitle] = useRecoilState(selectedState);
+  const [selectedInfo, setSelectedInfo] = useRecoilState(issueSelectedState({
+    temTitle: "",
+    uname: "",
+    desc: "",
+    title: "",
+  }));
 
   useEffect(() => {
     let completed = false;
@@ -40,13 +37,11 @@ const IssueList = (props) => {
       );
       if (!completed) {
         const list = [];
-        // console.log(result.data); //이건 잘 됨
         result.data.map((it) => {
           const tmp = Object.entries(it);
           list.push(tmp);
         });
         setData(list);
-        // console.log(data);
       }
     }
     get();
@@ -62,9 +57,10 @@ const IssueList = (props) => {
       `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
     );
     // setContent(rst.data);
-    setTitle(temTitle);
+    setTemTitle(temTitle);
     const tmp = await formSchema.yaml2html(rst.data);
     setContent(tmp);
+    console.log(selectedInfo);
   };
 
   const handleOpen = () => setModalValue(true);
@@ -117,7 +113,7 @@ const IssueList = (props) => {
         <ContentDiv>
           <TitleWrapper>
             <TitleP id="PR-title" variant="h2" fontWeight="lg" m={2}>
-              {title}
+              {temTitle}
             </TitleP>
           </TitleWrapper>
           <PreviewWrapper>
@@ -172,10 +168,6 @@ const ListBox = styled(Box)`
   max-width: 36rem;
   max-height: 90%;
 `;
-
-// const ItemTxt = styled(ListItemText)`
-//   font-size: 20rem;
-// `;
 
 const ContentDiv = styled.div`
   height: 100%;
