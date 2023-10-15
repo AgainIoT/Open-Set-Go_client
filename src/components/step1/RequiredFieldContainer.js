@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import axios from "axios";
 import { TextInputContainer } from "../common/InputComponent";
 import { SelectAuto } from "../common/SelectAuto";
@@ -97,20 +97,28 @@ export const RequiredFieldContainer = () => {
           Required fields are marked with an asterisk (*).
         </ExplainText>
       </Grid>
-
-      <Grid item xs={12} sm={2}>
-        <SelectAuto labelText={"Owner*"} type={"owner"} data={userRepoData} />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <TextInputContainer
-          labelText={"Repository Name*"}
-          fieldType={1}
-          useHelperText={true}
-          type={"repoName"}
-          helperText={helperText}
-        />
-      </Grid>
-      <Grid item xs={8}>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <Grid item xs={12} sm={2}>
+          <SelectAuto labelText={"Owner*"} type={"owner"} data={userRepoData} />
+        </Grid>
+        <Grid item xs={12} sm={8}>
+          <TextInputContainer
+            labelText={"Repository Name*"}
+            fieldType={1}
+            useHelperText={true}
+            type={"repoName"}
+            helperText={helperText}
+          />
+        </Grid>
+      </Box>
+      <Grid item xs={12}>
         <TextInputContainer
           labelText={"Description"}
           fieldType={2}
@@ -123,9 +131,10 @@ export const RequiredFieldContainer = () => {
 };
 
 const StRequiredFieldContainer = styled(Grid)`
-  width: 100%;
+width: 80%;
+  min-height: 25rem;
+  min-width: 50rem;
   row-gap: 1rem;
-  column-gap: 0rem;
 `;
 
 const ExplainText = styled.p`

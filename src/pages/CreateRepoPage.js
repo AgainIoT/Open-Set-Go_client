@@ -24,13 +24,8 @@ function CreateRepo() {
     <>
       <StCreateRepo container>
         <RequiredFieldContainer />
-        <Grid item xs={12}>
-          <SelectContainer />
-        </Grid>
-        <Grid item xs={12}></Grid>
-        <Grid item xs={8}>
-          <GitIgnoreContainer />
-        </Grid>
+        <SelectContainer />
+        <GitIgnoreContainer />
       </StCreateRepo>
     </>
   );
@@ -38,6 +33,9 @@ function CreateRepo() {
 export default CreateRepo;
 
 const StCreateRepo = styled(Grid)`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   padding-left: 3rem;
