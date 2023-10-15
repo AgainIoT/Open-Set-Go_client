@@ -1,8 +1,13 @@
+import styled from "styled-components";
+import { COLOR } from "../../styles/color";
 import { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { issueSelectedState, selectedTitle, bodyState } from "../../recoil/issueState";
-import styled from "styled-components";
-import { Interweave, Markup } from "interweave";
+import { eachStepState, modalState } from "../../recoil/commonState";
+import {
+  issueSelectedState,
+  selectedTitle,
+  bodyState,
+} from "../../recoil/issueState";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -12,9 +17,8 @@ import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import * as formSchema from "github-formschema-converter";
+import { Interweave } from "interweave";
 import IssueChip from "./IssueChip";
-import { eachStepState, modalState } from "../../recoil/commonState";
-import { COLOR } from "../../styles/color";
 
 const IssueList = (props) => {
   const [data, setData] = useState([]);
@@ -22,10 +26,12 @@ const IssueList = (props) => {
   const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
   const [body, setBody] = useRecoilState(bodyState);
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
-  const [selectedInfo, setSelectedInfo] = useRecoilState(issueSelectedState({
-    type: "",
-    content: "",
-  }));
+  const [selectedInfo, setSelectedInfo] = useRecoilState(
+    issueSelectedState({
+      type: "",
+      content: "",
+    }),
+  );
 
   useEffect(() => {
     let completed = false;
@@ -140,8 +146,8 @@ const StIssueList = styled.div`
 
 const ChipWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: left;
+  flex-direction: column;
   width: 100%;
   height: 20%;
 `;
@@ -149,31 +155,31 @@ const ChipWrapper = styled.div`
 const ChipP = styled.p`
   width: 100%;
   height: 30%;
-  font-size: 1.3rem;
   padding: 1rem 0rem 0rem 1rem;
   margin-left: 1rem;
+  font-size: 1.3rem;
 `;
 
 const SelectDiv = styled.div`
   display: flex;
-  height: 80%;
   width: 100%;
+  height: 80%;
 `;
 
 const ListBox = styled(Box)`
-  height: 100%;
   width: 30%;
   max-width: 36rem;
+  height: 100%;
   max-height: 90%;
 `;
 
 const ContentDiv = styled.div`
-  height: 100%;
-  width: 75%;
   display: flex;
   justify-content: space-between;
   align-items: end;
   flex-direction: column;
+  width: 75%;
+  height: 100%;
   border-left: 0.2rem solid ${COLOR.MAIN_HOVER};
 `;
 
@@ -192,10 +198,10 @@ const TitleP = styled(Typography)`
 const PreviewWrapper = styled.div`
   width: 100%;
   height: 100%;
+  padding: 2rem;
   font-size: 2rem;
   text-align: justify;
   line-height: 2rem;
-  padding: 2rem;
   overflow-y: scroll;
 `;
 const BtnWrapper = styled.div``;
@@ -203,6 +209,6 @@ const BtnWrapper = styled.div``;
 const UseBtn = styled(Button)`
   width: 17rem;
   height: 4.5rem;
-  font-size: 1.5rem;
   border-radius: 0.8rem;
+  font-size: 1.5rem;
 `;

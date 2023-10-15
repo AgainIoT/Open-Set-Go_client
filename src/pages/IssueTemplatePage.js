@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import { COLOR } from "../styles/color";
 import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { templateContent } from "../recoil/templateState";
 import { BaseModal3 } from "../components/common/modal/BaseModal3";
 import { eachStepState, modalState } from "../recoil/commonState";
 import IssueList from "../components/common/IssueList";

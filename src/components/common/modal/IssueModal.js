@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
+import React, { useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { modalState } from "../../../recoil/commonState";
-import { issueSelectedState, selectedTitle, bodyState } from "../../../recoil/issueState";
+import {
+  issueSelectedState,
+  selectedTitle,
+  bodyState,
+} from "../../../recoil/issueState";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { TextField, Typography } from "@mui/material";
-import React, { useState} from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Button from "@mui/material/Button";
@@ -14,10 +18,12 @@ import Box from "@mui/material/Box";
 const IssueModal = () => {
   const [body, setBody] = useRecoilState(bodyState);
   const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
-  const [selectedInfo, setSelectedInfo] = useRecoilState(issueSelectedState({
-    type: "",
-    content: "",
-  }));
+  const [selectedInfo, setSelectedInfo] = useRecoilState(
+    issueSelectedState({
+      type: "",
+      content: "",
+    }),
+  );
 
   const [userInput, setUserInput] = useState({
     uname: "",
@@ -33,17 +39,21 @@ const IssueModal = () => {
     });
   };
   const handleFinish = (e) => {
-    const tmp = `---
+    const tmp =
+      `---
 name: "${userInput.uname}"
 description: ${userInput.desc}
 title: "${userInput.title}"
 labels: []
 assignees: []\n
 ` + body;
-    setSelectedInfo([...selectedInfo, {
-      type: temTitle,
-      body: tmp,
-    }]);
+    setSelectedInfo([
+      ...selectedInfo,
+      {
+        type: temTitle,
+        body: tmp,
+      },
+    ]);
     setUserInput({
       uname: "",
       desc: "",
@@ -57,15 +67,27 @@ assignees: []\n
       <InputDiv>
         <ObjectP>name</ObjectP>
         <InputFormControl variant="outlined" color="primary">
-          <InputWrapper name="uname" value={userInput.uname} onChange={handleChangeState}/>
+          <InputWrapper
+            name="uname"
+            value={userInput.uname}
+            onChange={handleChangeState}
+          />
         </InputFormControl>
         <ObjectP>description</ObjectP>
         <InputFormControl variant="outlined">
-          <InputWrapper name="desc" value={userInput.desc} onChange={handleChangeState}/>
+          <InputWrapper
+            name="desc"
+            value={userInput.desc}
+            onChange={handleChangeState}
+          />
         </InputFormControl>
         <ObjectP>title</ObjectP>
         <InputFormControl variant="outlined">
-          <InputWrapper name="title" value={userInput.title} onChange={handleChangeState}/>
+          <InputWrapper
+            name="title"
+            value={userInput.title}
+            onChange={handleChangeState}
+          />
         </InputFormControl>
       </InputDiv>
       <ButtonContainer>
@@ -101,24 +123,21 @@ const StIssueModal = styled.div`
   width: 70%;
   height: 100%;
   padding-top: 3rem;
-  /* border: 1px solid red; */
 `;
 
 const TitleTypo = styled(Typography)`
+  margin-bottom: 2rem;
   font-family: sans-serif;
   font-size: 2.2rem;
   font-weight: 550;
-  margin-bottom: 2rem;
-  /* border: 1px solid green; */
 `;
 
 const InputDiv = styled.div`
-  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: left;
   flex-direction: column;
-  /* border: 1px solid blue; */
+  width: 100%;
 `;
 
 const InputFormControl = styled(FormControl)`
@@ -132,12 +151,11 @@ const InputWrapper = styled(TextField)`
 `;
 
 const ObjectP = styled.p`
+  padding-bottom: 1rem;
   font-size: 1.5rem;
   font-weight: 600;
   text-transform: capitalize;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  /* border: 1px solid pink; */
-  padding-bottom: 1rem;
 `;
 
 const ButtonContainer = styled(Box)`
@@ -146,15 +164,14 @@ const ButtonContainer = styled(Box)`
   align-items: center;
   width: 100%;
   margin-top: 1rem;
-  /* border: 1px solid purple; */
 `;
 
 const SharedBtn = `
-  font-size: 1.2rem;
   width: 8.5rem;
   height: 3.5rem;
   margin-top: 2rem;
   margin-left: 1rem;
+  font-size: 1.2rem;
 `;
 
 const CancelBtnWrapper = styled(Button)`
