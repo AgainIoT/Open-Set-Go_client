@@ -32,6 +32,8 @@ function PRTemplatePage() {
 const StReadmeTemplatePage = styled.div`
   width: 100%;
   height: 100%;
+  min-width: 60rem;
+  min-height: 40rem;
 `;
 
 export default PRTemplatePage;

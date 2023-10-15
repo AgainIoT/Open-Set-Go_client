@@ -135,11 +135,7 @@ const StRequiredFieldContainer = styled(Grid)`
   min-height: 25rem;
   width: 80%;
   min-width: 50rem;
-  padding: 2rem 4rem 2rem 4rem;
-  background-color: ${COLOR.MAIN_HOVER};
   row-gap: 1rem;
-  border: 0.1rem solid ${COLOR.BORDER_GRAY};
-  border-radius: 2rem;
 `;
 
 const ExplainText = styled.p`

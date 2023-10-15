@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import styled from "styled-components";
+import React from "react";
+import { useRecoilValue } from "recoil";
 import { templateMode } from "../../../recoil/templateState";
 import { TemplateList } from "../template/TemplateList";
 import { GenerateList } from "../template/GenerateList";
@@ -11,16 +12,28 @@ export const TemplateModal = (props) => {
   const templateMod = useRecoilValue(templateMode);
 
   return (
-    <div style={{ display: "flex", width:"100%", flexDirection: "row"}}>
+    <TemplateContainer>
       {templateMod ? (
         <GenerateList type={props.type} />
       ) : (
         <TemplateList type={props.type} />
       )}
-      <div style={{ display: "flex", width: "100%", flexDirection: "column"}}>
+      <TemplateContents>
         <TemplateTitle type={props.type} />
         <TemplateBody type={props.type} />
-      </div>
-    </div>
+      </TemplateContents>
+    </TemplateContainer>
   );
 };
+
+const TemplateContainer = styled.div`
+  display: flex;
+  width: 100%;
+  flexdirection: row;
+`;
+
+const TemplateContents = styled.div`
+  display: flex;
+  width: 100%;
+  flexdirection: column;
+`;

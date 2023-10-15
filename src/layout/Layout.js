@@ -3,7 +3,6 @@ import { COLOR } from "../styles/color";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import { LinearStepper } from "./Stepper";
 import { Header } from "./Header";
 import StepInfo from "../components/common/StepInfo";
@@ -106,6 +105,7 @@ const ExplainWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 20%;
+  min-width: 22rem;
   height: 100vh;
 `;
 

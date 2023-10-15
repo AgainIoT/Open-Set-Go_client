@@ -93,14 +93,10 @@ export const SelectContainer = () => {
 };
 
 const StSelectContainer = styled(Grid)`
-  background-color: ${COLOR.MAIN_HOVER};
   height: 25%;
   width: 80%;
   min-width: 50rem;
   column-gap: 5rem;
-  padding: 2rem 4rem 2rem 4rem;
-  border: 0.1rem solid ${COLOR.BORDER_GRAY};
-  border-radius: 2rem;
 `;
 const Subtitle = styled(Typography)`
   font-size: 1.2rem;
