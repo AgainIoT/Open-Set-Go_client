@@ -31,7 +31,7 @@ function ContributingTemplatePage(props) {
 }
 
 const StReadmeTemplatePage = styled.div`
-  width: 95%;
+  width: 100%;
   height: 100%;
 `;
 

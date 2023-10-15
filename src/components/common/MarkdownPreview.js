@@ -24,7 +24,7 @@ const MarkdownPreview = (props) => {
 };
 
 const StMarkdownPreview = styled.div`
-  height: 90%;
+  height: 100%;
 `;
 
 export default MarkdownPreview;
