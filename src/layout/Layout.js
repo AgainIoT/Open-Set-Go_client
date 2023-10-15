@@ -127,10 +127,10 @@ const StepContentsWrapper = styled.div`
 
 const BottomContainer = styled.div`
   display: flex;
-  width: 100%;
   justify-content: space-between;
-  background-color: ${COLOR.MAIN_WHITE};
+  width: 100%;
   padding: 0rem 3rem 2rem 3rem;
+  background-color: ${COLOR.MAIN_WHITE};
 `;
 
 const ButtonWrapper = styled(Button)`

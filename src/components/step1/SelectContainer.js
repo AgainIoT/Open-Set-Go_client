@@ -92,8 +92,8 @@ export const SelectContainer = () => {
 };
 
 const StSelectContainer = styled(Grid)`
-  height: 25%;
   width: 80%;
+  height: 25%;
   min-width: 50rem;
   column-gap: 5rem;
 `;
