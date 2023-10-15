@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { issueSelectedState, selectedTitle } from "../../recoil/issueState";
+import { issueSelectedState, selectedTitle, bodyState } from "../../recoil/issueState";
 import styled from "styled-components";
 import { Interweave, Markup } from "interweave";
 import List from "@mui/material/List";
@@ -20,12 +20,11 @@ const IssueList = (props) => {
   const [data, setData] = useState([]);
   const [content, setContent] = useState("");
   const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
+  const [body, setBody] = useRecoilState(bodyState);
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
   const [selectedInfo, setSelectedInfo] = useRecoilState(issueSelectedState({
-    temTitle: "",
-    uname: "",
-    desc: "",
-    title: "",
+    type: "",
+    content: "",
   }));
 
   useEffect(() => {
@@ -56,11 +55,10 @@ const IssueList = (props) => {
     const rst = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
     );
-    // setContent(rst.data);
+    setBody(rst.data);
     setTemTitle(temTitle);
     const tmp = await formSchema.yaml2html(rst.data);
     setContent(tmp);
-    console.log(selectedInfo);
   };
 
   const handleOpen = () => setModalValue(true);

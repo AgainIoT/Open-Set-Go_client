@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
 import { modalState } from "../../../recoil/commonState";
-import { issueSelectedState, selectedTitle } from "../../../recoil/issueState";
+import { issueSelectedState, selectedTitle, bodyState } from "../../../recoil/issueState";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { TextField, Typography } from "@mui/material";
 import React, { useState} from "react";
@@ -12,12 +12,11 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 const IssueModal = () => {
+  const [body, setBody] = useRecoilState(bodyState);
   const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
   const [selectedInfo, setSelectedInfo] = useRecoilState(issueSelectedState({
-    temTitle: "",
-    uname: "",
-    desc: "",
-    title: "",
+    type: "",
+    content: "",
   }));
 
   const [userInput, setUserInput] = useState({
@@ -34,11 +33,16 @@ const IssueModal = () => {
     });
   };
   const handleFinish = (e) => {
+    const tmp = `---
+name: "${userInput.uname}"
+description: ${userInput.desc}
+title: "${userInput.title}"
+labels: []
+assignees: []\n
+` + body;
     setSelectedInfo([...selectedInfo, {
-      temTitle: temTitle,
-      uname: userInput.uname,
-      desc: userInput.desc,
-      title: userInput.title,
+      type: temTitle,
+      body: tmp,
     }]);
     setUserInput({
       uname: "",

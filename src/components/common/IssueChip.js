@@ -3,28 +3,18 @@ import { COLOR } from "../../styles/color";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Chip from "@mui/material/Chip";
 import { useState, useEffect } from "react";
-import { issueSelectedState, selectedTitle } from "../../recoil/issueState";
+import { issueSelectedState, selectedTitle, bodyState } from "../../recoil/issueState";
 
 const IssueChip = () => {
-  const [chipData, setChipData] = useState([
-    "Bug Report for Web Service",
-    "Bug Report for Web Service2",
-    "Bug Report for Web Service2",
-    "Bug Report for Web Service2",
-    "Bug Report for Web Service2",
-    "Feature Request for Web Service",
-    "Documentation Issue for Web Service",
-  ]);
+  const [body, setBody] = useRecoilState(bodyState);
   const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
   const [selectedInfo, setSelectedInfo] = useRecoilState(issueSelectedState({
-    temTitle: "",
-    uname: "",
-    desc: "",
-    title: "",
+    type: "",
+    content: "",
   }));
 
   const handleDelete = (chipToDelete) => () => {
-    const newTmp = selectedInfo.filter((it)=> it.temTitle !== chipToDelete);
+    const newTmp = selectedInfo.filter((it)=> it.type !== chipToDelete);
     setSelectedInfo(
       newTmp
     );
@@ -33,8 +23,8 @@ const IssueChip = () => {
     <StIssueChip component="ul">
       {selectedInfo.map((data) => {
         return (
-          <li key={data.temTitle}>
-            <SelectedChip label={data.temTitle} onDelete={handleDelete(data.temTitle)} />
+          <li key={data.type}>
+            <SelectedChip label={data.type} onDelete={handleDelete(data.type)} />
           </li>
         );
       })}
