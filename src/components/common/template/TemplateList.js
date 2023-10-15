@@ -69,7 +69,7 @@ export function TemplateList(props) {
   }, []);
 
   return (
-    <Item sx={{ bgcolor: COLOR.MAIN_BACKGROUND, borderRadius: 2 }}>
+    <Item>
       <Typography
         component="h1"
         id="modal-title"
@@ -89,23 +89,13 @@ export function TemplateList(props) {
           inputProps={{ "aria-label": "search" }}
         />
       </Search>
-      <Box
-        sx={{
-          width: "100%",
-          height: "100%",
-          maxWidth: 360,
-          bgcolor: "background.paper",
-          maxHeight: "90%",
-          overflowX: "hidden",
-          overflowY: "auto",
-        }}
-      >
+      <ListWrapper>
         <List
           sx={{
             height: "100%",
             width: 360,
             itemSize: 46,
-            itemCount: 1,
+            itemCount: data.length,
             overscanCount: 5,
           }}
         >
@@ -142,10 +132,19 @@ export function TemplateList(props) {
             </div>
           ))}
         </List>
-      </Box>
+      </ListWrapper>
     </Item>
   );
 }
+
+const ListWrapper = styled("div")(({ theme }) => ({
+  width: "100%",
+  height: "100%",
+  maxWidth: 360,
+  backgroundColor: COLOR.MAIN_WHITE,
+  overflowX: "hidden",
+  overflowY: "auto",
+}));
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -188,9 +187,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Item = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(1),
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  color: theme.palette.text.secondary,
+  display: "flex",
   textAlign: "center",
+  flexDirection: "column",
+  padding: theme.spacing(1),
+  color: theme.palette.text.secondary,
+  backgroundColor: COLOR.MAIN_BACKGROUND,
+  borderRadius: 2,
 }));
