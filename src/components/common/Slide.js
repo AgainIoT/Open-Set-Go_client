@@ -79,7 +79,7 @@ const StyledSlider = styled(Slider)`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 90%;
+    width: 120rem;
     height: 100%;
     margin: 0 auto;
   }
