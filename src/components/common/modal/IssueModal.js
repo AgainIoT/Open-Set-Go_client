@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
 import { modalState } from "../../../recoil/commonState";
-import { selectedState } from "../../../recoil/issueState";
+// import { selectedState } from "../../../recoil/issueState";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { TextField, Typography } from "@mui/material";
 import React, { useState} from "react";
@@ -18,7 +18,6 @@ const IssueModal = () => {
     title: "",
   });
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
-  const [selectedTitle, setSelectedTitle] = useRecoilState(selectedState);
   const handleClose = () => setModalValue(false);
   const handleChangeState = (e) => {
     setUserInput({
@@ -36,7 +35,7 @@ const IssueModal = () => {
     setModalValue(false);
   };
   return (
-    <StIssueModal align="left">
+    <StIssueModal>
       <TitleTypo variant="h3">Create a Issue template</TitleTypo>
       <InputDiv>
         <ObjectP>name</ObjectP>

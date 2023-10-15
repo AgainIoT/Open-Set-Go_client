@@ -1,4 +1,4 @@
-import { atom, atomFamily } from "recoil";
+import { atomFamily } from "recoil";
 
 // export const issueNameState = atomFamily({
 //   key: "issueNameState",
@@ -14,7 +14,7 @@ import { atom, atomFamily } from "recoil";
 //   default: "",
 // });
 
-export const selectedState = atom({
+export const selectedState = atomFamily({
   key: "selectedState",
-  default: [],
+  default: "",
 });

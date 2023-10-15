@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { selectedState } from "../../recoil/issueState";
+// import { selectedState } from "../../recoil/issueState";
 import styled from "styled-components";
+import { Interweave, Markup } from "interweave";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -12,6 +13,7 @@ import axios from "axios";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { alpha } from "@mui/material/styles";
+import * as formSchema from "github-formschema-converter";
 // import dummy from "../../dummy/dummyIssueTemplate.json";
 import IssueChip from "./IssueChip";
 import {
@@ -27,7 +29,7 @@ const IssueList = (props) => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState(" ");
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
-  const [selectedTitle, setSelectedTitle] = useRecoilState(selectedState);
+  // const [selectedTitle, setSelectedTitle] = useRecoilState(selectedState);
 
   useEffect(() => {
     let completed = false;
@@ -44,7 +46,7 @@ const IssueList = (props) => {
           list.push(tmp);
         });
         setData(list);
-        console.log(data);
+        // console.log(data);
       }
     }
     get();
@@ -52,89 +54,82 @@ const IssueList = (props) => {
       completed = true;
     };
   }, []);
-
+  const tmpIW = (c) => {
+    return <Interweave content={c} />;
+  };
   const handleCheck = async (temTitle, temId) => {
-    const content = await axios.get(
+    const rst = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
     );
-    setContent(content.data);
-    console.log(typeof content.data);
+    // setContent(rst.data);
     setTitle(temTitle);
+    const tmp = await formSchema.yaml2html(rst.data);
+    setContent(tmp);
   };
 
   const handleOpen = () => setModalValue(true);
-  const handleUse = (title) => {
-    handleOpen;
-    setSelectedTitle([...selectedState, title]);
-  };
   return (
     <StIssueList>
-      <ListBox
-        sx={{
-          width: "100%",
-          height: "100%",
-          maxWidth: 360,
-          bgcolor: "background.paper",
-          maxHeight: "90%",
-        }}
-        style={{ overflowX: "hidden", overflowY: "auto" }}
-      >
-        <List
+      <ChipWrapper>
+        <ChipP>selected template</ChipP>
+        <IssueChip />
+      </ChipWrapper>
+      <SelectDiv>
+        <ListBox
           sx={{
-            height: "100%",
-            width: 360,
-            itemSize: 46,
-            itemCount: 1,
-            overscanCount: 5,
+            maxWidth: 360,
+            bgcolor: "background.paper",
+            maxHeight: "90%",
           }}
+          style={{ overflowX: "hidden", overflowY: "auto" }}
         >
-          {data.map((it) => (
-            <li key={it[0][1]}>
-              <ul>
-                <ListSubheader>{`${it[0][1]}`}</ListSubheader>
-                {it[1][1].map((item) => (
-                  <ListItem
-                    components="div"
-                    onClick={() => {
-                      handleCheck(item.title, item.id);
-                    }}
-                    key={item.title}
-                  >
-                    <ListItemButton>
-                      <ItemTxt primary={`${item.title}`} />
-                    </ListItemButton>
-                  </ListItem>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </List>
-      </ListBox>
-      <ContentDiv>
-        <ChipWrapper>
-          <ChipP>selected template</ChipP>
-          <IssueChip />
-        </ChipWrapper>
-        <TitleWrapper>
-          <TitleP
-            id="PR-title"
-            variant="h2"
-            textColor="inherit"
-            fontWeight="lg"
-            m={2}
+          <List
+            sx={{
+              height: "100%",
+              width: 360,
+              itemSize: 46,
+              itemCount: 1,
+              overscanCount: 5,
+            }}
           >
-            {title}
-          </TitleP>
-        </TitleWrapper>
-        <PreviewWrapper>
-          <p>{content}</p>
-        </PreviewWrapper>
-        <BtnWrapper>
-          <UseBtn variant="contained" onClick={handleUse(title)}>
-            Use template
-          </UseBtn>
-        </BtnWrapper>
-      </ContentDiv>
+            {data.map((it) => (
+              <li key={it[0][1]}>
+                <ul>
+                  <ListSubheader>{`${it[0][1]}`}</ListSubheader>
+                  {it[1][1].map((item) => (
+                    <ListItem
+                      components="div"
+                      onClick={() => {
+                        handleCheck(item.title, item.id);
+                      }}
+                      key={item.title}
+                    >
+                      <ListItemButton>
+                        <ListItemText primary={`${item.title}`} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </List>
+        </ListBox>
+        <ContentDiv>
+          <TitleWrapper>
+            <TitleP id="PR-title" variant="h2" fontWeight="lg" m={2}>
+              {title}
+            </TitleP>
+          </TitleWrapper>
+          <PreviewWrapper>
+            <div>{tmpIW(content)}</div>
+          </PreviewWrapper>
+          <BtnWrapper>
+            <UseBtn variant="contained" onClick={handleOpen}>
+              Use template
+            </UseBtn>
+          </BtnWrapper>
+        </ContentDiv>
+      </SelectDiv>
     </StIssueList>
   );
 };
@@ -144,20 +139,44 @@ export default IssueList;
 const StIssueList = styled.div`
   display: flex;
   align-items: start;
-  justify-content: space-between;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   height: 100%;
 `;
 
-const ListBox = styled(Box)`
-  height: 110%;
-  width: 25%;
+const ChipWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 100%;
+  height: 20%;
 `;
 
-const ItemTxt = styled(ListItemText)`
-  font-size: 20rem;
+const ChipP = styled.p`
+  width: 100%;
+  height: 30%;
+  font-size: 1.3rem;
+  padding: 1rem 0rem 0rem 1rem;
+  margin-left: 1rem;
 `;
+
+const SelectDiv = styled.div`
+  display: flex;
+  height: 80%;
+  width: 100%;
+`;
+
+const ListBox = styled(Box)`
+  height: 100%;
+  width: 30%;
+  max-width: 36rem;
+  max-height: 90%;
+`;
+
+// const ItemTxt = styled(ListItemText)`
+//   font-size: 20rem;
+// `;
+
 const ContentDiv = styled.div`
   height: 100%;
   width: 75%;
@@ -166,19 +185,6 @@ const ContentDiv = styled.div`
   align-items: end;
   flex-direction: column;
   border-left: 0.2rem solid ${COLOR.MAIN_HOVER};
-`;
-
-const ChipWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  width: 100%;
-`;
-
-const ChipP = styled.p`
-  width: 100%;
-  font-size: 1.3rem;
-  padding: 1rem 0rem 0rem 1rem;
 `;
 
 const TitleWrapper = styled.div`
@@ -200,6 +206,7 @@ const PreviewWrapper = styled.div`
   text-align: justify;
   line-height: 2rem;
   padding: 2rem;
+  overflow-y: scroll;
 `;
 const BtnWrapper = styled.div``;
 

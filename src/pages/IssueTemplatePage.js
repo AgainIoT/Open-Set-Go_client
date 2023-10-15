@@ -9,12 +9,11 @@ import IssueList from "../components/common/IssueList";
 import IssueModal from "../components/common/modal/IssueModal";
 function IssueTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
-  const [content, setContent] = useRecoilState(templateContent("issue"));
 
   return (
     <StIssueTemplatePage>
       <BaseModal3 type={"issue"}>
-        <IssueModal />
+        <IssueModal type={"issue"} />
       </BaseModal3>
       <IssueList />
     </StIssueTemplatePage>
