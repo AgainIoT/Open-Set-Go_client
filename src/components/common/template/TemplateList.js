@@ -1,23 +1,26 @@
-import { COLOR } from "../../../styles/color";
 import React, { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   templatePreviewState,
   templateSelectState,
 } from "../../../recoil/templateState";
-import { styled, alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import StarIcon from "@mui/icons-material/Star";
+import { Pagination } from "@mui/material";
 import axios from "axios";
 import { ListItemData } from "../../../data/ListItemData";
-import { Pagination } from "@mui/material";
+import {
+  Item,
+  Search,
+  SearchIconWrapper,
+  StyledInputBase,
+  ListWrapper,
+} from "./TemplateCoponents";
 
 const DATAPERPAGE = 20;
 
@@ -161,64 +164,3 @@ export function TemplateList(props) {
     </Item>
   );
 }
-
-const ListWrapper = styled("div")(({ theme }) => ({
-  width: "100%",
-  height: "100%",
-  maxWidth: 360,
-  marginBottom: theme.spacing(1),
-  backgroundColor: COLOR.MAIN_WHITE,
-  overflowX: "hidden",
-  overflowY: "auto",
-}));
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  width: "100%",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  [theme.breakpoints.up("sm")]: {
-    marginBottom: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  display: "flex",
-  position: "absolute",
-  height: "100%",
-  padding: theme.spacing(0, 2),
-  alignItems: "center",
-  justifyContent: "center",
-  pointerEvents: "none",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    width: "100%",
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
-const Item = styled(Paper)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  flexDirection: "column",
-  textAlign: "center",
-  padding: theme.spacing(1),
-  color: theme.palette.text.secondary,
-  backgroundColor: COLOR.MAIN_BACKGROUND,
-  borderRadius: 2,
-}));
