@@ -8,6 +8,7 @@ import CreateRepo from "../pages/CreateRepoPage";
 import LicensePage from "../pages/LicensePage";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
 import ContributingTemplatePage from "../pages/ContributingTemplatePage";
+import IssueTemplatePage from "../pages/IssueTemplatePage";
 
 const Router = () => {
   return (
@@ -17,11 +18,13 @@ const Router = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/select" element={<SelectTypePage />} />
         <Route element={<Layout />}>
+          <Route path="/step0" element={<IssueTemplatePage />} />
           <Route path="/step1" element={<CreateRepo />} />
           <Route path="/step2" element={<LicensePage />} />
           <Route path="/step3" element={<PRTemplatePage />} />
-          <Route path="/step4" element={<ContributingTemplatePage />} />
-          <Route path="/step5" element={<ReadmeTemplatePage />} />
+          <Route path="/step4" element={<IssueTemplatePage />} />
+          <Route path="/step5" element={<ContributingTemplatePage />} />
+          <Route path="/step6" element={<ReadmeTemplatePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

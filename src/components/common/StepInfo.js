@@ -35,7 +35,7 @@ const StepInfo = () => {
                     STEP{it.step}. {it.title}
                   </TitleH1>
                   <ContentP>{it.content}</ContentP>
-                  {activeStep > 1 ? (
+                  {activeStep === 2 || activeStep === 4 || activeStep===5? (
                     <ButtonWrapper
                       size="large"
                       variant="text"
@@ -47,7 +47,7 @@ const StepInfo = () => {
                   ) : (
                     <div></div>
                   )}
-                  {activeStep > 2 ? (
+                  {activeStep > 4 ? (
                     <ButtonWrapper
                       size="large"
                       variant="text"

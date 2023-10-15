@@ -7,6 +7,11 @@ import IssueList from "../components/common/IssueList";
 import IssueModal from "../components/common/modal/IssueModal";
 function IssueTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
+  const [stepComplete, setStepComplted] = useRecoilState(eachStepState("4"));
+
+  useEffect(() => {
+    setStepComplted(true);
+  }, []);
 
   return (
     <StIssueTemplatePage>

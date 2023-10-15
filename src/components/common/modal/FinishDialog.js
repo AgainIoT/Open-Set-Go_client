@@ -10,6 +10,7 @@ import {
   selectGitignoreData,
 } from "../../../recoil/repoData";
 import { templateContent } from "../../../recoil/templateState";
+import { issueSelectedState } from "../../../recoil/issueState";
 import { modalState } from "../../../recoil/commonState";
 import { LoadingCompleted } from "../LoadingCompleted";
 
@@ -24,6 +25,7 @@ export const FinishDialog = (props) => {
   const license = useRecoilValue(repoDataAtomFamily("license"));
   const pr = useRecoilValue(templateContent("pr"));
   const contributing = useRecoilValue(templateContent("contributing"));
+  const issue = useRecoilValue(issueSelectedState());
   const readme = useRecoilValue(templateContent("readme"));
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
@@ -60,7 +62,7 @@ export const FinishDialog = (props) => {
           framework: framework,
           gitignore: gitignoreData,
           PRTemplate: pr,
-          IssueTemplate: [], // empty array required now
+          IssueTemplate: issue,
           contributingMd: contributing,
           readmeMd: readme,
           license: license,
