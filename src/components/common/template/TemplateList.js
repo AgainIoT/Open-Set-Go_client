@@ -1,3 +1,4 @@
+import { COLOR } from "../../../styles/color";
 import React, { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
@@ -68,16 +69,16 @@ export function TemplateList(props) {
   }, []);
 
   return (
-    <Item sx={{ bgcolor: "#F4F4FC", borderRadius: 2 }}>
+    <Item sx={{ bgcolor: COLOR.MAIN_BACKGROUND, borderRadius: 2 }}>
       <Typography
         component="h1"
         id="modal-title"
         variant="h5"
         textColor="inherit"
-        fontWeight="lg"
-        mb={1}
+        fontWeight="bold"
+        m={1}
       >
-        <Box sx={{ fontWeight: "bold", m: 1 }}>{props.type}</Box>
+        {props.type}
       </Typography>
       <Search>
         <SearchIconWrapper>
@@ -95,8 +96,9 @@ export function TemplateList(props) {
           maxWidth: 360,
           bgcolor: "background.paper",
           maxHeight: "90%",
+          overflowX: "hidden",
+          overflowY: "auto",
         }}
-        style={{ overflowX: "hidden", overflowY: "auto" }}
       >
         <List
           sx={{
@@ -107,40 +109,38 @@ export function TemplateList(props) {
             overscanCount: 5,
           }}
         >
-          <div>
-            {data.map((it) => (
-              <div key={it.id}>
-                <ListItem
-                  component="div"
-                  disablePadding
-                  onClick={() => {
-                    handleSelect(it);
-                  }}
-                >
-                  <ListItemButton>
-                    <ListItemText
-                      primary={it.title}
-                      id="PR-desc"
-                      variant="h6"
-                      gutterBottom
-                      color="textSecondary"
-                      m={2}
-                    />
-                    <StarIcon m={2} />
-                    <Typography
-                      id="PR-desc"
-                      variant="h6"
-                      paddingLeft={0.5}
-                      disablePadding
-                      color="textSecondary"
-                    >
-                      {it.star}
-                    </Typography>
-                  </ListItemButton>
-                </ListItem>
-              </div>
-            ))}
-          </div>
+          {data.map((it) => (
+            <div key={it.id}>
+              <ListItem
+                component="div"
+                disablePadding
+                onClick={() => {
+                  handleSelect(it);
+                }}
+              >
+                <ListItemButton>
+                  <ListItemText
+                    primary={it.title}
+                    id="PR-desc"
+                    variant="h6"
+                    gutterBottom
+                    color="textSecondary"
+                    m={2}
+                  />
+                  <StarIcon m={2} />
+                  <Typography
+                    id="PR-desc"
+                    variant="h6"
+                    paddingLeft={0.5}
+                    disablePadding
+                    color="textSecondary"
+                  >
+                    {it.star}
+                  </Typography>
+                </ListItemButton>
+              </ListItem>
+            </div>
+          ))}
         </List>
       </Box>
     </Item>
