@@ -57,7 +57,7 @@ export const RequiredFieldContainer = () => {
     const restrictCheck = await validateRepoName();
     let dupCheck = false;
     if (restrictCheck) {
-      dupCheck = await postCheckDupication();
+      dupCheck = await postCheckDuplication();
       if (dupCheck) {
         setHelperText("checked");
       } else {
@@ -92,7 +92,7 @@ export const RequiredFieldContainer = () => {
     repoDataAtomFamily("dupCheck"),
   );
 
-  async function postCheckDupication() {
+  async function postCheckDuplication() {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/repo/checkDuplication`,
@@ -107,7 +107,7 @@ export const RequiredFieldContainer = () => {
       return response.data;
     } catch (e) {
       console.error(e);
-      alert("기록 시작 실패. 재시도해주세요.");
+      alert("postCheckDuplication failed");
     }
   }
 
