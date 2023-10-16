@@ -52,10 +52,29 @@ export const RequiredFieldContainer = () => {
     getUserRepoData();
   }, []);
 
+  // validate repository name
+  function validateRepoName(repoName) {
+    // Max length: 100 code points
+    if (repoName.length > 100) {
+      return false;
+    }
+    // All code points must be either a hyphen (-), an underscore (_), a period (.), or an ASCII alphanumeric code point
+    const validCharacters = /^[A-Za-z0-9._-]+$/;
+    if (!validCharacters.test(repoName)) {
+      return false;
+    }
+    // The repository names containing only a single period (.) or double period (..) are reserved
+    if (repoName === "." || repoName === "..") {
+      return false;
+    }
+    return true;
+  }
+
   // POST - validate repo name
   const [validateCheck, setValidateCheck] = useRecoilState(
     repoDataAtomFamily("dupCheck"),
   );
+
   async function postCheckDupication() {
     setHelperText("checking");
     try {
@@ -131,7 +150,7 @@ export const RequiredFieldContainer = () => {
 };
 
 const StRequiredFieldContainer = styled(Grid)`
-width: 80%;
+  width: 80%;
   min-height: 25rem;
   min-width: 50rem;
   row-gap: 1rem;
