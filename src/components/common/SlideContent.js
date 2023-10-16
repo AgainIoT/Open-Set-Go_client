@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLOR } from "../../styles/color";
 import { useRecoilState } from "recoil";
 import { Button } from "@mui/material";
 import { repoDataAtomFamily } from "../../recoil/repoData";
@@ -15,9 +16,13 @@ export const SlideContent = (props) => {
     repoDataAtomFamily("licenseName"),
   );
 
-  const onSet = () => {
+  const handleSelect = () => {
     setPickLi(props.data.license);
     setLicenseName(props.data.name);
+  };
+
+  const handleCancel = () => {
+    setPickLi("");
   };
 
   const pmsList = props.data.permissions.map((p) => (
@@ -82,9 +87,9 @@ export const SlideContent = (props) => {
               <SelectedBtn
                 className="SubmitBtn"
                 variant="contained"
-                onClick={onSet}
+                onClick={handleCancel}
               >
-                Selected
+                Cancel
               </SelectedBtn>
             </BtnDiv>
           ) : (
@@ -92,7 +97,7 @@ export const SlideContent = (props) => {
               <SubmitBtn
                 className="SubmitBtn"
                 variant="contained"
-                onClick={onSet}
+                onClick={handleSelect}
               >
                 Select
               </SubmitBtn>
@@ -248,42 +253,30 @@ const SharedBtn = `
   font-size: 1.1rem;
   text-transform: none; //Turn off uppercase default settings
   white-space: nowrap;
-  box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
+  // box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
 `;
 
 const SelectedBtn = styled(Button)`
   ${SharedBtn}
-  background-color: green;
-  &:visited {
-    background-color: green;
-  }
-  &:link {
-    background-color: green;
-  }
+  background-color: ${COLOR.MAIN_PURPLE};
   &:hover {
-    background-color: green;
+    background-color: purple;
     box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
   }
   &:active {
-    background-color: green;
+    background-color: purple;
   }
 `;
 
 const SubmitBtn = styled(Button)`
   ${SharedBtn}
-  background-color: gray;
-  &:visited {
-    background-color: gray;
-  }
-  &:link {
-    background-color: gray;
-  }
+  background-color: green;
   &:hover {
-    background-color: gray;
+    background-color: ${COLOR.MAIN_GREEN};
     box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
   }
   &:active {
-    background-color: gray;
+    background-color: ${COLOR.MAIN_GREEN};
   }
 `;
 
