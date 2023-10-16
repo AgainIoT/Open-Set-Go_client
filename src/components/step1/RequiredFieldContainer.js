@@ -21,6 +21,7 @@ export const RequiredFieldContainer = () => {
       avatar: "",
     },
   ]);
+  const [toggle, setToggle] = useState(true);
 
   async function getUserRepoData() {
     try {
@@ -112,11 +113,14 @@ export const RequiredFieldContainer = () => {
   }
 
   useEffect(() => {
-    if (repoName !== "") {
-      checkRepoName();
-    } else {
-      setHelperText("null");
-    }
+    const debounce = setTimeout(() => {
+      if (repoName !== "") {
+        return checkRepoName();
+      } else {
+        setHelperText("null");
+      }
+    }, 300);
+    return () => clearTimeout(debounce);
   }, [repoName]);
 
   const [helperText, setHelperText] = useState(" ");
