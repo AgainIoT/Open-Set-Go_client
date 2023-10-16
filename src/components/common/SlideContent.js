@@ -17,7 +17,7 @@ export const SlideContent = (props) => {
 
   const onSet = () => {
     setPickLi(props.data.license);
-    setLicenseName(props.data.licenseName);
+    setLicenseName(props.data.name);
   };
 
   const pmsList = props.data.permissions.map((p) => (
