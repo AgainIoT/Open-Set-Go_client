@@ -52,8 +52,25 @@ export const RequiredFieldContainer = () => {
     getUserRepoData();
   }, []);
 
+  async function checkRepoName() {
+    setHelperText("checking");
+    const restrictCheck = await validateRepoName();
+    let dupCheck = false;
+    if (restrictCheck) {
+      dupCheck = await postCheckDupication();
+      if (dupCheck) {
+        setHelperText("checked");
+      } else {
+        setHelperText("duplicated");
+      }
+    } else {
+      setHelperText("invalid");
+    }
+    setValidateCheck(restrictCheck && dupCheck);
+  }
+
   // validate repository name
-  function validateRepoName(repoName) {
+  async function validateRepoName() {
     // Max length: 100 code points
     if (repoName.length > 100) {
       return false;
@@ -76,7 +93,6 @@ export const RequiredFieldContainer = () => {
   );
 
   async function postCheckDupication() {
-    setHelperText("checking");
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/repo/checkDuplication`,
@@ -88,20 +104,16 @@ export const RequiredFieldContainer = () => {
           withCredentials: true,
         },
       );
-      setValidateCheck(response.data);
-      if (response.data) {
-        setHelperText("checked");
-      } else {
-        setHelperText("error");
-      }
+      return response.data;
     } catch (e) {
       console.error(e);
       alert("기록 시작 실패. 재시도해주세요.");
     }
   }
+
   useEffect(() => {
     if (repoName !== "") {
-      postCheckDupication();
+      checkRepoName();
     } else {
       setHelperText("null");
     }

@@ -51,8 +51,14 @@ export const TextInputContainer = (props) => {
         icon: checkIcon,
       },
       {
-        type: "error",
+        type: "duplicated",
         text: `The repository ${props.currInput.current.value} already exists on this account.`,
+        textColor: COLOR.MAIN_RED,
+        icon: warningIcon,
+      },
+      {
+        type: "invalid",
+        text: `The repository name, ${props.currInput.current.value} is invalid.`,
         textColor: COLOR.MAIN_RED,
         icon: warningIcon,
       },
