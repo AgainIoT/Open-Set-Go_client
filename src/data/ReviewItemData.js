@@ -7,17 +7,17 @@ export const templateItem = [
     desc: "contributors can select the appropriate template when they open new issues in the repository",
   },
   {
-    item: "issue Template",
+    item: "pr Template",
     icon: ChecklistRoundedIcon,
     desc: "contributors can select the appropriate template when they open new issues in the repository",
   },
   {
-    item: "issue Template",
+    item: "Readme",
     icon: ChecklistRoundedIcon,
     desc: "contributors can select the appropriate template when they open new issues in the repository",
   },
   {
-    item: "issue Template",
+    item: "CONTRIBUTING Template",
     icon: ChecklistRoundedIcon,
     desc: "contributors can select the appropriate template when they open new issues in the repository",
   },
