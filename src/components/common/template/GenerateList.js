@@ -24,7 +24,7 @@ import {
   SearchIconWrapper,
   StyledInputBase,
   ListWrapper,
-} from "./TemplateCoponents";
+} from "./TemplateComponents";
 
 // props -> type(pr, readme, contributing)
 export function GenerateList(props) {

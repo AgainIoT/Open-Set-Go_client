@@ -21,7 +21,7 @@ import {
   StyledInputBase,
   ListWrapper,
   SearchWrapper,
-} from "./TemplateCoponents";
+} from "./TemplateComponents";
 
 const DATAPERPAGE = 20;
 
