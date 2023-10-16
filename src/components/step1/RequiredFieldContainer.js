@@ -21,7 +21,6 @@ export const RequiredFieldContainer = () => {
       avatar: "",
     },
   ]);
-  const [toggle, setToggle] = useState(true);
 
   async function getUserRepoData() {
     try {

@@ -1,10 +1,10 @@
 import styled from "styled-components";
+import { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import { SelectChip } from "../SelectChip";
 import { selectGitignoreData } from "../../../recoil/repoData";
 import { FixedOptionShowSelect } from "../ShowSelect";
 import { SearchAuto } from "../SearchAuto";
-import { useEffect, useState } from "react";
 import axios from "axios";
 
 export const GitignoreModal = () => {
