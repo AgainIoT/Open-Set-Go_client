@@ -3,7 +3,6 @@ import { COLOR } from "../styles/color";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import Button from "@mui/material/Button";
-import { LinearStepper } from "./Stepper";
 import { Header } from "./Header";
 import StepInfo from "../components/common/StepInfo";
 import { FinishDialog } from "../components/common/modal/FinishDialog";
@@ -41,23 +40,20 @@ export const ReviewLayout = () => {
               <Outlet />
             </StepContentsWrapper>
             <BottomContainer>
-              {activeStep > 0 ? (
-                <ButtonWrapper
-                  variant="contained"
-                  disableElevation
-                  onClick={() => handlePre()}
-                >
-                  Prev
-                </ButtonWrapper>
-              ) : (
-                <div></div>
-              )}
+              <ButtonWrapper
+                variant="contained"
+                disableElevation
+                onClick={() => navigate("")}
+              >
+                Cancel
+              </ButtonWrapper>
+              <div></div>
               <ButtonWrapper
                 variant="contained"
                 disabled={!stepCompleted}
-                onClick={() => (activeStep === 4 ? handleOpen() : handleNext())}
+                onClick={() => (handleOpen())}
               >
-                Next
+                Send
               </ButtonWrapper>
             </BottomContainer>
           </StepContentsContainer>
