@@ -8,6 +8,7 @@ import CreateRepo from "../pages/CreateRepoPage";
 import LicensePage from "../pages/LicensePage";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
 import ContributingTemplatePage from "../pages/ContributingTemplatePage";
+import OperationalReviewPage from "../pages/Review";
 
 const Router = () => {
   return (
@@ -16,6 +17,7 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/select" element={<SelectTypePage />} />
+        <Route path="/review" element={<OperationalReviewPage />} />
         <Route element={<Layout />}>
           <Route path="/step1" element={<CreateRepo />} />
           <Route path="/step2" element={<LicensePage />} />

@@ -4,10 +4,10 @@ import { Button } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
 
-export const SelectType= () =>{
+export const SelectType = () => {
   const navigate = new useNavigate();
 
-  return(
+  return (
     <StSelectType>
       <Stack spacing={20} direction="row">
         <CreateBox>
@@ -25,8 +25,9 @@ export const SelectType= () =>{
               <Explanation>creating Open Source repositories</Explanation>
             </Stack>
             <CreateBtn variant="contained" onClick={() => navigate("/step1")}>
-            Choose
-            </CreateBtn></Stack>
+              Choose
+            </CreateBtn>
+          </Stack>
         </CreateBox>
         <CheckBox>
           <Stack spacing={2} direction="column">
@@ -42,14 +43,14 @@ export const SelectType= () =>{
               <Explanation>Recommended for those who already run</Explanation>
               <Explanation>an open source repository</Explanation>
             </Stack>
-            <CheckBtn variant="contained" onClick={() => navigate("/step1")}>
-            Choose
-            </CheckBtn></Stack>
+            <CheckBtn variant="contained" onClick={() => navigate("/review")}>
+              Choose
+            </CheckBtn>
+          </Stack>
         </CheckBox>
       </Stack>
     </StSelectType>
   );
-
 };
 
 const StSelectType = styled.div`
@@ -62,39 +63,39 @@ const StSelectType = styled.div`
     to bottom,
     ${COLOR.MAIN_HOVER},
     ${COLOR.MAIN_BACKGROUND}
-);
+  );
   text-align: center;
 `;
 
 const CreateBox = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: row;
-width: 100%;
-min-width: 50rem;
-height: 100%;
-min-height: 30rem;
-margin: 0 auto;
-border-radius: 2rem;
-background-color: white;
-text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  min-width: 50rem;
+  height: 100%;
+  min-height: 30rem;
+  margin: 0 auto;
+  border-radius: 2rem;
+  background-color: white;
+  text-align: center;
 `;
 
 const CheckBox = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: row;
-width: 100%;
-min-width: 50rem;
-height: 100%;
-min-height: 30rem;
-margin: 0 auto;
-border-radius: 2rem;
-background-color: ${COLOR.MAIN_PURPLE};
-color: white;
-text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  min-width: 50rem;
+  height: 100%;
+  min-height: 30rem;
+  margin: 0 auto;
+  border-radius: 2rem;
+  background-color: ${COLOR.MAIN_PURPLE};
+  color: white;
+  text-align: center;
 `;
 
 const CreateBtn = styled(Button)({
@@ -138,5 +139,5 @@ export const SubTitle = styled.h3`
 export const Explanation = styled.h4`
   font-size: 1.3rem;
   font-weight: 00;
-  color: ${COLOR.FONT_GRAY}
+  color: ${COLOR.FONT_GRAY};
 `;
