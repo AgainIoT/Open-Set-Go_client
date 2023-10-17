@@ -27,10 +27,7 @@ const IssueList = (props) => {
   const [body, setBody] = useRecoilState(bodyState);
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
   const [selectedInfo, setSelectedInfo] = useRecoilState(
-    issueSelectedState({
-      type: "",
-      content: "",
-    }),
+    issueSelectedState("issue")
   );
 
   useEffect(() => {
@@ -54,17 +51,15 @@ const IssueList = (props) => {
       completed = true;
     };
   }, []);
-  const tmpIW = (c) => {
-    return <Interweave content={c} />;
-  };
   const handleCheck = async (temTitle, temId) => {
     const rst = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
     );
     setBody(rst.data);
     setTemTitle(temTitle);
-    const tmp = await formSchema.yaml2html(rst.data);
-    setContent(tmp);
+    // const tmp = await formSchema.yaml2html(rst.data.content);
+    // setContent(rst.data.image);
+    setContent(rst.data.image);
   };
 
   const handleOpen = () => setModalValue(true);
@@ -121,8 +116,8 @@ const IssueList = (props) => {
             </TitleP>
           </TitleWrapper>
           <PreviewWrapper>
-            <div>{tmpIW(content)}</div>
-          </PreviewWrapper>
+            <div><img src={"data:image/png;base64,"+content}/></div>
+            </PreviewWrapper>
           <BtnWrapper>
             <UseBtn variant="contained" onClick={handleOpen}>
               Use template

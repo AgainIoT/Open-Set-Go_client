@@ -25,7 +25,7 @@ export const FinishDialog = (props) => {
   const license = useRecoilValue(repoDataAtomFamily("license"));
   const pr = useRecoilValue(templateContent("pr"));
   const contributing = useRecoilValue(templateContent("contributing"));
-  const issue = useRecoilValue(issueSelectedState());
+  const issue = useRecoilValue(issueSelectedState("issue"));
   const readme = useRecoilValue(templateContent("readme"));
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));

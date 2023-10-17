@@ -56,7 +56,7 @@ export const Layout = () => {
               <ButtonWrapper
                 variant="contained"
                 disabled={!stepCompleted}
-                onClick={() => (activeStep === 4 ? handleOpen() : handleNext())}
+                onClick={() => (activeStep === 5 ? handleOpen() : handleNext())}
               >
                 Next
               </ButtonWrapper>

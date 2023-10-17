@@ -4,10 +4,7 @@ import Chip from "@mui/material/Chip";
 import { issueSelectedState, selectedTitle, bodyState } from "../../recoil/issueState";
 
 const IssueChip = () => {
-  const [selectedInfo, setSelectedInfo] = useRecoilState(issueSelectedState({
-    type: "",
-    content: "",
-  }));
+  const [selectedInfo, setSelectedInfo] = useRecoilState(issueSelectedState("issue"));
 
   const handleDelete = (chipToDelete) => () => {
     const newTmp = selectedInfo.filter((it)=> it.type !== chipToDelete);

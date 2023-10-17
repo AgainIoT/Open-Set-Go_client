@@ -19,10 +19,7 @@ const IssueModal = () => {
   const [body, setBody] = useRecoilState(bodyState);
   const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
   const [selectedInfo, setSelectedInfo] = useRecoilState(
-    issueSelectedState({
-      type: "",
-      content: "",
-    }),
+    issueSelectedState("issue")
   );
 
   const [userInput, setUserInput] = useState({
@@ -58,7 +55,7 @@ assignees: []\n
       ...selectedInfo,
       {
         type: temTitle,
-        body: tmp,
+        content: tmp,
       },
     ]);
     setUserInput({
