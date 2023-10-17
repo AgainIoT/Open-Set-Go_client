@@ -54,17 +54,17 @@ export const RequiredFieldContainer = () => {
 
   async function checkRepoName() {
     setHelperText("checking");
-    const restrictCheck = await validateRepoName();
-    let dupCheck = false;
-    if (restrictCheck) {
-      dupCheck = await postCheckDuplication();
-      if (dupCheck) {
+    let restrictCheck = false;
+    const dupCheck = await postCheckDuplication();
+    if (dupCheck) {
+      restrictCheck = await validateRepoName();
+      if (restrictCheck) {
         setHelperText("checked");
       } else {
-        setHelperText("duplicated");
+        setHelperText("invalid");
       }
     } else {
-      setHelperText("invalid");
+      setHelperText("duplicated");
     }
     setValidateCheck(restrictCheck && dupCheck);
   }
