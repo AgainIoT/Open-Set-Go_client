@@ -4,24 +4,12 @@ import {
   templatePreviewState,
   templateSelectState,
 } from "../../../recoil/templateState";
-import Typography from "@mui/material/Typography";
-import SearchIcon from "@mui/icons-material/Search";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import StarIcon from "@mui/icons-material/Star";
 import { Pagination } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
 import { ListItemData } from "../../../data/ListItemData";
-import {
-  Item,
-  Search,
-  SearchIconWrapper,
-  StyledInputBase,
-  ListWrapper,
-  SearchWrapper,
-} from "./TemplateComponents";
+import { Item } from "./TemplateComponents";
+import { BasicList, ListHeader } from "./LIstUtils";
 
 const DATAPERPAGE = 20;
 
@@ -89,75 +77,17 @@ export function TemplateList(props) {
     };
   }, []);
 
+  const starIcon = <StarIcon m={2} />;
+
   return (
     <Item>
-      <Typography
-        component="h1"
-        id="modal-title"
-        variant="h5"
-        textColor="inherit"
-        fontWeight="bold"
-        m={1}
-      >
-        {props.type}
-      </Typography>
-      {/* <div style={{ width: "100%" }}> */}
-      <SearchWrapper>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search Template"
-            inputProps={{ "aria-label": "search" }}
-          />
-        </Search>
-      </SearchWrapper>
-      {/* </div> */}
-      <ListWrapper>
-        <List
-          sx={{
-            height: "100%",
-            width: 360,
-            itemSize: 46,
-            itemCount: length,
-            overscanCount: 5,
-          }}
-        >
-          {data.map((it) => (
-            <div key={it.id}>
-              <ListItem
-                component="div"
-                disablePadding
-                onClick={() => {
-                  handleSelect(it);
-                }}
-              >
-                <ListItemButton>
-                  <ListItemText
-                    primary={it.title}
-                    id="PR-desc"
-                    variant="h6"
-                    gutterBottom
-                    color="textSecondary"
-                    m={2}
-                  />
-                  <StarIcon m={2} />
-                  <Typography
-                    id="PR-desc"
-                    variant="h6"
-                    paddingLeft={0.5}
-                    disablePadding
-                    color="textSecondary"
-                  >
-                    {it.star}
-                  </Typography>
-                </ListItemButton>
-              </ListItem>
-            </div>
-          ))}
-        </List>
-      </ListWrapper>
+      <ListHeader type={props.type} />
+      <BasicList
+        data={data}
+        subData={"star"}
+        handleSelect={handleSelect}
+        icon={starIcon}
+      />
       <Pagination
         count={pageRange}
         defaultPage={1}

@@ -5,27 +5,19 @@ import {
   templateSelectState,
 } from "../../../recoil/templateState";
 import { repoDataAtomFamily } from "../../../recoil/repoData";
-import Typography from "@mui/material/Typography";
-import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import StarIcon from "@mui/icons-material/Star";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
 import { DraggableListItemData } from "../../../data/ListItemData";
-import {
-  Item,
-  Search,
-  SearchWrapper,
-  SearchIconWrapper,
-  StyledInputBase,
-  ListWrapper,
-} from "./TemplateComponents";
+import { Item, ListWrapper } from "./TemplateComponents";
 import { activeState } from "../../../recoil/commonState";
+import { BasicList, ListHeader } from "./LIstUtils";
 
 // props -> type(pr, readme, contributing)
 export function GenerateList(props) {
@@ -106,27 +98,7 @@ export function GenerateList(props) {
 
   return (
     <Item sx={{ bgcolor: "#F4F4FC", borderRadius: 2 }}>
-      <Typography
-        component="h1"
-        id="modal-title"
-        variant="h5"
-        textColor="inherit"
-        fontWeight="lg"
-        mb={1}
-      >
-        <Box sx={{ fontWeight: "bold", m: 1 }}>{props.type}</Box>
-      </Typography>
-      <SearchWrapper>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search Template"
-            inputProps={{ "aria-label": "search" }}
-          />
-        </Search>
-      </SearchWrapper>
+      <ListHeader type={props.type} />
       <ListWrapper>
         <List
           sx={{
@@ -186,39 +158,7 @@ export function GenerateList(props) {
             </Droppable>
           </DragDropContext>
         </List>
-        <List
-          sx={{
-            width: 360,
-            itemSize: 46,
-            itemCount: 20,
-            overscanCount: 5,
-          }}
-        >
-          <div>
-            {data.map((it) => (
-              <div key={it.id}>
-                <ListItem
-                  component="div"
-                  disablePadding
-                  onClick={() => {
-                    handleSelect(it);
-                  }}
-                >
-                  <ListItemButton>
-                    <ListItemText
-                      primary={it.title}
-                      id="PR-desc"
-                      variant="h6"
-                      gutterBottom
-                      color="textSecondary"
-                      m={2}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              </div>
-            ))}
-          </div>
-        </List>
+        <BasicList data={data} handleSelect={handleSelect}/>
       </ListWrapper>
     </Item>
   );
