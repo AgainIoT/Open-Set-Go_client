@@ -67,7 +67,7 @@ export const SelectContainer = () => {
       <Grid item xs={12}>
         <Subtitle>Select your project Language/Framework</Subtitle>
       </Grid>
-      <Grid item xs={12} sm={3.5}>
+      <Grid item xs={12} sm={5}>
         <AutocompleteInput
           type={"lang"}
           options={langs}
@@ -77,7 +77,7 @@ export const SelectContainer = () => {
           label={"Language"}
         />
       </Grid>
-      <Grid item xs={12} sm={3.5}>
+      <Grid item xs={12} sm={5}>
         <AutocompleteInput
           type={"framework"}
           options={frameworkOpions}
@@ -92,8 +92,9 @@ export const SelectContainer = () => {
 };
 
 const StSelectContainer = styled(Grid)`
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 25%;
+  min-width: 50rem;
   column-gap: 5rem;
 `;
 const Subtitle = styled(Typography)`

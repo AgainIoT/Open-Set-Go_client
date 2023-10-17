@@ -97,6 +97,7 @@ const SelectLabelWrapper = styled(InputLabel)`
 
 const SelectContainer = styled(Select)`
   display: flex;
+  min-width: 10rem;
 
   & .MuiSelect-select {
     width: 100%;
@@ -128,6 +129,7 @@ const SelectContainer = styled(Select)`
   & .css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
     border-radius: 3rem;
   }
+  background-color:${COLOR.MAIN_WHITE};
 `;
 
 const MenuOptionItem = styled(MenuItem)`

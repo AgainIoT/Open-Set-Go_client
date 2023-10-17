@@ -5,13 +5,10 @@ import {
   templateSelectState,
 } from "../../../recoil/templateState";
 import { repoDataAtomFamily } from "../../../recoil/repoData";
-import { styled, alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -19,12 +16,21 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
+import { DraggableListItemData } from "../../../data/ListItemData";
+import {
+  Item,
+  Search,
+  SearchWrapper,
+  SearchIconWrapper,
+  StyledInputBase,
+  ListWrapper,
+} from "./TemplateComponents";
 
 // props -> type(pr, readme, contributing)
 export function GenerateList(props) {
   const owner = useRecoilValue(repoDataAtomFamily("owner"));
   const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
-  const desc = useRecoilValue(repoDataAtomFamily("desc"));
+  const description = useRecoilValue(repoDataAtomFamily("desc"));
   const license = useRecoilValue(repoDataAtomFamily("licenseName"));
   // React state to track order of items
   const [selectedData, setSelectedData] = useState([]);
@@ -40,15 +46,13 @@ export function GenerateList(props) {
   const handleSelect = (selected) => {
     const dataList = [...selectedData, selected];
     setSelectedData(dataList);
-    const filteredData = data.filter((item) => item._id !== selected._id);
+    const filteredData = data.filter((item) => item.id !== selected.id);
     setData(filteredData);
     setShowValue(dataList);
   };
 
   const handleRemove = (selected) => {
-    const filteredData = selectedData.filter(
-      (item) => item._id !== selected._id,
-    );
+    const filteredData = selectedData.filter((item) => item.id !== selected.id);
     setSelectedData(filteredData);
     setData([...data, selected].sort((a, b) => a.index - b.index));
     setShowValue(filteredData);
@@ -74,7 +78,7 @@ export function GenerateList(props) {
       const result = await axios.post(url, {
         owner,
         repoName,
-        desc,
+        description,
         license,
       });
       if (!completed) {
@@ -83,19 +87,14 @@ export function GenerateList(props) {
     }
 
     function refine(data) {
-      const ret = [];
-      data.map((value) => {
-        const tmp = {
-          _id: value._id,
-          index: value.index,
-          title: value.type,
-          subtitle: null,
-          repoUrl: null,
-          content: value.content,
-        };
-        ret.push(tmp);
+      const dataList = data.map((value) => {
+        const id = value._id;
+        const index = value.index;
+        const title = value.type;
+        const content = value.content;
+        return new DraggableListItemData(id, title, index, content);
       });
-      return ret.sort((a, b) => a.index - b.index);
+      return dataList.sort((a, b) => a.index - b.index);
     }
     get();
     return () => {
@@ -115,31 +114,23 @@ export function GenerateList(props) {
       >
         <Box sx={{ fontWeight: "bold", m: 1 }}>{props.type}</Box>
       </Typography>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search Template"
-          inputProps={{ "aria-label": "search" }}
-        />
-      </Search>
-      <Box
-        sx={{
-          width: "100%",
-          height: "100%",
-          maxWidth: 360,
-          bgcolor: "background.paper",
-          maxHeight: "90%",
-          borderRadius: 2,
-        }}
-        style={{ overflowX: "hidden", overflowY: "auto" }}
-      >
+      <SearchWrapper>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search Template"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
+      </SearchWrapper>
+      <ListWrapper>
         <List
           sx={{
             width: 360,
             itemSize: 46,
-            itemCount: 1,
+            itemCount: selectedData.length,
             overscanCount: 5,
           }}
         >
@@ -149,8 +140,8 @@ export function GenerateList(props) {
                 <ul {...provided.droppableProps} ref={provided.innerRef}>
                   {selectedData.map((item, index) => (
                     <Draggable
-                      key={item._id}
-                      draggableId={item._id}
+                      key={item.id}
+                      draggableId={item.id}
                       index={index}
                     >
                       {(provided, snapshot) => {
@@ -197,13 +188,13 @@ export function GenerateList(props) {
           sx={{
             width: 360,
             itemSize: 46,
-            itemCount: 1,
+            itemCount: 20,
             overscanCount: 5,
           }}
         >
           <div>
             {data.map((it) => (
-              <div key={it._id}>
+              <div key={it.id}>
                 <ListItem
                   component="div"
                   disablePadding
@@ -226,55 +217,7 @@ export function GenerateList(props) {
             ))}
           </div>
         </List>
-      </Box>
+      </ListWrapper>
     </Item>
   );
 }
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  width: "100%",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  [theme.breakpoints.up("sm")]: {
-    marginBottom: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  display: "flex",
-  position: "absolute",
-  height: "100%",
-  padding: theme.spacing(0, 2),
-  alignItems: "center",
-  justifyContent: "center",
-  pointerEvents: "none",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    width: "100%",
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
-const Item = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(1),
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  color: theme.palette.text.secondary,
-  textAlign: "center",
-}));

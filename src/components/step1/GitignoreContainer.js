@@ -1,16 +1,15 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-
 import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  repoDataAtomFamily,
+  showAllGitignoreState,
+} from "../../recoil/repoData";
 import { Button, Typography } from "@mui/material";
 import { GitignoreModal } from "../common/modal/GitignoreModal";
 import { ReadonlyAuto } from "../common/ReadOnlyAuto";
 import { modalState } from "../../recoil/commonState";
 import { BaseModal2 } from "../common/modal/BaseModal2";
-import {
-  repoDataAtomFamily,
-  showAllGitignoreState,
-} from "../../recoil/repoData";
 
 // for gitignore
 export const GitIgnoreContainer = () => {
@@ -44,7 +43,9 @@ export const GitIgnoreContainer = () => {
 const StGitIgnoreContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem 1rem 2rem;
+  width: 80%;
+  min-width: 50rem;
+  padding: 2rem 4rem 2rem 4rem;
   gap: 0.5rem;
   border: 0.1rem solid ${COLOR.BORDER_GRAY};
   border-radius: 2rem;
