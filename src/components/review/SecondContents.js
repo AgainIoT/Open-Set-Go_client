@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-import { SvgIcon, Typography } from "@mui/material";
+import { Box, CircularProgress, SvgIcon, Typography } from "@mui/material";
 import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
+import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import {
   communityItem,
   securityItem,
@@ -41,6 +42,10 @@ export const SecondContents = () => {
   //   };
   const selectedOwner = useRecoilValue(reviewRepoDataState("owner"));
   const selectedRepo = useRecoilValue(reviewRepoDataState("repoName"));
+
+  const [isLoadingTemplate, setIsLoadingTemplate] = useState(true);
+  const [isLoadingSecurity, setIsLoadingSecurity] = useState(true);
+  const [isLoadingCommunity, setIsLoadingCommunity] = useState(true);
 
   const [reviewTemplateData, setReviewTemplateData] = useState({
     pr: false,
@@ -89,6 +94,7 @@ export const SecondContents = () => {
       console.log("initReview: %o", initReviewData);
       //setOwner(response.data.id);
       setReviewTemplateData(initReviewData);
+      setIsLoadingTemplate(false);
     } catch (e) {
       console.error(e);
     }
@@ -118,6 +124,7 @@ export const SecondContents = () => {
       console.log("initReview: %o", initReviewData);
       //setOwner(response.data.id);
       setReviewSecurityData(initReviewData);
+      setIsLoadingSecurity(false);
     } catch (e) {
       console.error(e);
     }
@@ -147,6 +154,7 @@ export const SecondContents = () => {
       console.log("initReview: %o", initReviewData);
       //setOwner(response.data.id);
       setReviewCommunityData(initReviewData);
+      setIsLoadingCommunity(false);
     } catch (e) {
       console.error(e);
     }
@@ -157,6 +165,10 @@ export const SecondContents = () => {
     getSecurityReviewData();
     getCommunityReviewData();
   }, []);
+
+  //   useEffect(()=>{if(!isLoadingTemplate){
+
+  //   }},[isLoadingTemplate]);
 
   const ItemContainer = (props) => {
     return (
@@ -172,12 +184,26 @@ export const SecondContents = () => {
   };
 
   const TemplateItemContainer = (props) => {
+    const item = props.item;
+    const status = !isLoadingTemplate && reviewTemplateData[item];
+
     return (
       <ItemBox onMouseOver={() => {}}>
         {/* <IconWrapper></IconWrapper> */}
-        <IconBox component={props.icon} inheritViewBox />
+        <ItemIconBox>
+          <TemplateIconBox
+            component={status ? CheckRoundedIcon : props.icon}
+            iconcolor={COLOR.MAIN_NAVY}
+          />
+          {isLoadingTemplate ? (
+            <ItemProgress />
+          ) : (
+            <ItemProgress variant="determinate" value={100} />
+          )}
+        </ItemIconBox>
+
         <TextContainer>
-          <ItemTitle variant="h4">{props.item}</ItemTitle>
+          <ItemTitle variant="h4">{props.title}</ItemTitle>
           <DecsText variant="subtitle1">{props.desc}</DecsText>
         </TextContainer>
       </ItemBox>
@@ -192,6 +218,7 @@ export const SecondContents = () => {
             <TemplateItemContainer
               key={it.item}
               item={it.item}
+              title={it.title}
               icon={it.icon}
               desc={it.desc}
             />
@@ -271,6 +298,15 @@ const ItemBox = styled.div`
   background-color: ${COLOR.MAIN_WHITE};
   box-shadow: 0rem 0.1rem 2rem lightgrey;
 `;
+const ItemIconBox = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0.1rem;
+  width: 5rem;
+  height: 5rem;
+`;
 const TopContainer = styled.div`
   display: flex;
   /* justify-content: space-between; */
@@ -286,9 +322,26 @@ const IconWrapper = styled.div`
   border: 0.1rem solid ${COLOR.MAIN_NAVY};
   border-radius: 10rem;
 `;
+const ItemProgress = styled(CircularProgress)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: ${COLOR.MAIN_SKYBLUE};
+
+  .MuiCircularProgress-svg {
+    width: 5rem;
+    height: 5rem;
+  }
+`;
 const IconBox = styled(SvgIcon)`
   color: ${COLOR.MAIN_NAVY};
   font-size: 3.8rem;
+`;
+const TemplateIconBox = styled(SvgIcon)`
+  color: ${(props) => props.iconcolor};
+  position: absolute;
+  font-size: 3.6rem;
 `;
 const TextContainer = styled.div`
   display: flex;
