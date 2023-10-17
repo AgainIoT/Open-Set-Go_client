@@ -2,22 +2,26 @@ import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
 
 export const templateItem = [
   {
-    item: "issue Template",
+    item: "issue",
+    title: "issue Template",
     icon: ChecklistRoundedIcon,
     desc: "contributors can select the appropriate template when they open new issues in the repository",
   },
   {
-    item: "pr Template",
+    item: "pr",
+    title: "pr Template",
     icon: ChecklistRoundedIcon,
     desc: "contributors can select the appropriate template when they open new issues in the repository",
   },
   {
-    item: "Readme",
+    item: "readme",
+    title: "Readme",
     icon: ChecklistRoundedIcon,
     desc: "contributors can select the appropriate template when they open new issues in the repository",
   },
   {
-    item: "CONTRIBUTING Template",
+    item: "contributing",
+    title: "CONTRIBUTING.md ",
     icon: ChecklistRoundedIcon,
     desc: "contributors can select the appropriate template when they open new issues in the repository",
   },
