@@ -71,7 +71,7 @@ const IssueList = (props) => {
   return (
     <StIssueList>
       <ChipWrapper>
-        <ChipP>selected template</ChipP>
+        <ChipP >selected template</ChipP>
         <IssueChip />
       </ChipWrapper>
       <SelectDiv>
@@ -95,7 +95,7 @@ const IssueList = (props) => {
             {data.map((it) => (
               <li key={it[0][1]}>
                 <ul>
-                  <ListSubheader>{`${it[0][1]}`}</ListSubheader>
+                  <ListSubheader sx={{fontSize: "1.5rem"}}>{`${it[0][1]}`}</ListSubheader>
                   {it[1][1].map((item) => (
                     <ListItem
                       components="div"
@@ -105,7 +105,7 @@ const IssueList = (props) => {
                       key={item.title}
                     >
                       <ListItemButton>
-                        <ListItemText primary={`${item.title}`} />
+                        <ListItemText primaryTypographyProps={{fontSize: "1.2rem"}} primary={`${item.title}`} />
                       </ListItemButton>
                     </ListItem>
                   ))}
@@ -158,6 +158,7 @@ const ChipP = styled.p`
   padding: 1rem 0rem 0rem 1rem;
   margin-left: 1rem;
   font-size: 1.3rem;
+  color: ${COLOR.MAIN_BLUE};
 `;
 
 const SelectDiv = styled.div`
@@ -188,6 +189,10 @@ const TitleWrapper = styled.div`
   align-items: left;
   width: 100%;
   border-bottom: 0.2rem solid ${COLOR.MAIN_HOVER};
+`;
+
+const TmpTxt = styled(ListItemText)`
+  font-size: 3rem;
 `;
 
 const TitleP = styled(Typography)`

@@ -9,7 +9,7 @@ import {
   bodyState,
 } from "../../../recoil/issueState";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { TextField, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Button from "@mui/material/Button";
@@ -31,7 +31,14 @@ const IssueModal = () => {
     title: "",
   });
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
-  const handleClose = () => setModalValue(false);
+  const handleClose = () => {
+    setModalValue(false);
+    setUserInput({
+      uname: "",
+      desc: "",
+      title: "",
+    });
+  };
   const handleChangeState = (e) => {
     setUserInput({
       ...userInput,
@@ -66,29 +73,26 @@ assignees: []\n
       <TitleTypo variant="h3">Create a Issue template</TitleTypo>
       <InputDiv>
         <ObjectP>name</ObjectP>
-        <InputFormControl variant="outlined" color="primary">
-          <InputWrapper
-            name="uname"
-            value={userInput.uname}
-            onChange={handleChangeState}
-          />
-        </InputFormControl>
+        <InputWrapper
+          name="uname"
+          placeholder="🐛 Bug Report"
+          value={userInput.uname}
+          onChange={handleChangeState}
+        />
         <ObjectP>description</ObjectP>
-        <InputFormControl variant="outlined">
-          <InputWrapper
-            name="desc"
-            value={userInput.desc}
-            onChange={handleChangeState}
-          />
-        </InputFormControl>
+        <InputWrapper
+          name="desc"
+          placeholder="Report a bug"
+          value={userInput.desc}
+          onChange={handleChangeState}
+        />
         <ObjectP>title</ObjectP>
-        <InputFormControl variant="outlined">
-          <InputWrapper
-            name="title"
-            value={userInput.title}
-            onChange={handleChangeState}
-          />
-        </InputFormControl>
+        <InputWrapper
+          name="title"
+          placeholder="🐛 [BUG] - <title>"
+          value={userInput.title}
+          onChange={handleChangeState}
+        />
       </InputDiv>
       <ButtonContainer>
         <ThemeProvider theme={theme}>
@@ -116,20 +120,20 @@ export default IssueModal;
 
 const StIssueModal = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: start;
   align-content: flex-start;
   flex-direction: column;
   width: 70%;
   height: 100%;
-  padding-top: 3rem;
 `;
 
 const TitleTypo = styled(Typography)`
-  margin-bottom: 2rem;
+  margin: 0rem 0rem 2rem 0rem;
   font-family: sans-serif;
   font-size: 2.2rem;
   font-weight: 550;
+  padding-top: 1rem;
 `;
 
 const InputDiv = styled.div`
@@ -140,22 +144,39 @@ const InputDiv = styled.div`
   width: 100%;
 `;
 
-const InputFormControl = styled(FormControl)`
-  margin-bottom: 1.5rem;
-`;
-
-const InputWrapper = styled(TextField)`
-  & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border-color: ${COLOR.MAIN_PURPLE};
-  }
-`;
-
 const ObjectP = styled.p`
-  padding-bottom: 1rem;
-  font-size: 1.5rem;
+  padding-bottom: 0.1rem;
+  font-size: 1.6rem;
   font-weight: 600;
   text-transform: capitalize;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+`;
+
+const InputWrapper = styled.input`
+  height: fit-content;
+  font-size: 1.5rem;
+  padding: 1.7rem 0rem 1.7rem 1.3rem;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+  border: 0.1rem solid black;
+  &::placeholder{
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  &:focus{
+    &::-webkit-input-placeholder{
+      color: transparent;
+    }
+    &::-moz-placeholder{
+      color: transparent;
+    }
+    &:-ms-input-placeholder{
+      color: transparent;
+    }
+    &::-ms-input-placeholder {
+      color: transparent;
+    }
+  }
 `;
 
 const ButtonContainer = styled(Box)`
