@@ -253,7 +253,7 @@ const SharedBtn = `
   font-size: 1.1rem;
   text-transform: none; //Turn off uppercase default settings
   white-space: nowrap;
-  // box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
+  box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
 `;
 
 const SelectedBtn = styled(Button)`
