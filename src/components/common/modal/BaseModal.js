@@ -30,8 +30,8 @@ const ModalContainer = styled.div`
   left: 50%;
   width: 60%;
   height: 70%;
+  min-width: 103rem;
   padding: 2rem;
-  margin-top: 1rem;
   border-radius: 2rem;
   background-color: ${COLOR.MAIN_WHITE};
   transform: translate(-50%, -50%);
