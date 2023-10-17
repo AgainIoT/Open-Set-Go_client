@@ -2,7 +2,16 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import { SvgIcon, Typography } from "@mui/material";
 import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
-import { templateItem } from "../../data/ReviewItemData";
+import {
+  communityItem,
+  securityItem,
+  templateItem,
+} from "../../data/ReviewItemData";
+import { useState } from "react";
+import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { reviewRepoDataState } from "../../recoil/reviewState";
+import { useEffect } from "react";
 
 export const SecondContents = () => {
   //   const ItemContainer = (props) => {
@@ -30,6 +39,124 @@ export const SecondContents = () => {
   //       </StItemContainer>
   //     );
   //   };
+  const selectedOwner = useRecoilValue(reviewRepoDataState("owner"));
+  const selectedRepo = useRecoilValue(reviewRepoDataState("repoName"));
+
+  const [reviewTemplateData, setReviewTemplateData] = useState({
+    pr: false,
+    issue: false,
+    contributing: false,
+    readme: false,
+  });
+  const [reviewSecurityData, setReviewSecurityData] = useState({
+    codeql: false,
+    secretScan: false,
+    securityPolicy: false,
+    dependabot: false,
+  });
+  const [reviewCommunityData, setReviewCommunityData] = useState({
+    description: true,
+    license: {
+      exist: true,
+      name: "",
+    },
+    conduct: true,
+    discussion: true,
+  });
+
+  async function getTemplateReviewData() {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/review/template`,
+        {
+          owner: selectedOwner,
+          repoName: selectedRepo,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      console.log("init: %o", response.data);
+
+      const initReviewData = {
+        // pr: response.data.pr, // or false
+        // issue: response.data.issue, // or false
+        // contributing: response.data.contributing, // or false
+        // readme: response.data.readme,
+        ...response.data,
+      };
+
+      console.log("initReview: %o", initReviewData);
+      //setOwner(response.data.id);
+      setReviewTemplateData(initReviewData);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  async function getSecurityReviewData() {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/review/security`,
+        {
+          owner: selectedOwner,
+          repoName: selectedRepo,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      console.log("init: %o", response.data);
+
+      const initReviewData = {
+        // codeql: response.data.codeql,
+        // secretScan: response.data.secretScan,
+        // securityPolicy: response.data.securityPolicy,
+        // dependabot: response.data.dependabot,
+        ...response.data,
+      };
+
+      console.log("initReview: %o", initReviewData);
+      //setOwner(response.data.id);
+      setReviewSecurityData(initReviewData);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  async function getCommunityReviewData() {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/review/community`,
+        {
+          owner: selectedOwner,
+          repoName: selectedRepo,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      console.log("init: %o", response.data);
+
+      const initReviewData = {
+        // description: response.data.description,
+        // license: response.data.license,
+        // conduct: response.data,
+        // discussion: true,
+        ...response.data,
+      };
+
+      console.log("initReview: %o", initReviewData);
+      //setOwner(response.data.id);
+      setReviewCommunityData(initReviewData);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  useEffect(() => {
+    getTemplateReviewData();
+    getSecurityReviewData();
+    getCommunityReviewData();
+  }, []);
 
   const ItemContainer = (props) => {
     return (
@@ -44,11 +171,31 @@ export const SecondContents = () => {
     );
   };
 
+  const TemplateItemContainer = (props) => {
+    return (
+      <ItemBox onMouseOver={() => {}}>
+        {/* <IconWrapper></IconWrapper> */}
+        <IconBox component={props.icon} inheritViewBox />
+        <TextContainer>
+          <ItemTitle variant="h4">{props.item}</ItemTitle>
+          <DecsText variant="subtitle1">{props.desc}</DecsText>
+        </TextContainer>
+      </ItemBox>
+    );
+  };
+
   const ItemListContainer = (props) => {
     return (
       <StItemListContainer>
         {props.category.map((it) => {
-          return (
+          return props.category === templateItem ? (
+            <TemplateItemContainer
+              key={it.item}
+              item={it.item}
+              icon={it.icon}
+              desc={it.desc}
+            />
+          ) : (
             <ItemContainer
               key={it.item}
               item={it.item}
@@ -60,9 +207,27 @@ export const SecondContents = () => {
       </StItemListContainer>
     );
   };
+
   return (
     <StSecondContents>
-      <ItemListContainer category={templateItem} />
+      <div>
+        <TitleContainer>
+          <Title variant="h4">Category</Title>
+        </TitleContainer>
+        <ItemListContainer category={templateItem} />
+      </div>
+      <div>
+        <TitleContainer>
+          <Title variant="h4">Category</Title>
+        </TitleContainer>
+        <ItemListContainer category={securityItem} />
+      </div>
+      <div>
+        <TitleContainer>
+          <Title variant="h4">Category</Title>
+        </TitleContainer>
+        <ItemListContainer category={communityItem} />
+      </div>
     </StSecondContents>
   );
 };
