@@ -6,6 +6,7 @@ import axios from "axios";
 import { TextInputContainer } from "../common/InputComponent";
 import { SelectAuto } from "../common/SelectAuto";
 import { repoDataAtomFamily } from "../../recoil/repoData";
+import test from "../../assets/images/test.gif";
 
 // for Owner, RepoName, Description
 export const RequiredFieldContainer = () => {
@@ -115,6 +116,7 @@ export const RequiredFieldContainer = () => {
             useHelperText={true}
             type={"repoName"}
             helperText={helperText}
+            gif={test}
           />
         </Grid>
       </Box>
@@ -124,6 +126,7 @@ export const RequiredFieldContainer = () => {
           fieldType={2}
           type={"desc"}
           option={"(optional)"}
+          gif={test}
         />
       </Grid>
     </StRequiredFieldContainer>

@@ -78,7 +78,7 @@ export const TextInputContainer = (props) => {
             {props.labelText}
             {props.option && <OptionLabel>{props.option}</OptionLabel>}
           </InputLabelWrapper>
-          <TooltipContainer title="test" arrow placement="top">
+          <TooltipContainer title = {<img src = {props.gif} alt = ""/>} arrow placement="top">
             <TooltipBtn>
               <HelpIcon />
             </TooltipBtn>
