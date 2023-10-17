@@ -25,6 +25,7 @@ import {
   StyledInputBase,
   ListWrapper,
 } from "./TemplateComponents";
+import { activeState } from "../../../recoil/commonState";
 
 // props -> type(pr, readme, contributing)
 export function GenerateList(props) {
@@ -35,6 +36,7 @@ export function GenerateList(props) {
   // React state to track order of items
   const [selectedData, setSelectedData] = useState([]);
   const [data, setData] = useState([]);
+  const activeStep = useRecoilValue(activeState);
   const url =
     process.env.REACT_APP_SERVER_URL + "/file/" + props.type + "/generate";
 
@@ -75,13 +77,13 @@ export function GenerateList(props) {
     let completed = false;
 
     async function get() {
-      const result = await axios.post(url, {
-        owner,
-        repoName,
-        description,
-        license,
-      });
-      if (!completed) {
+      if (!completed && activeStep > 2) {
+        const result = await axios.post(url, {
+          owner,
+          repoName,
+          description,
+          license,
+        });
         setData(refine(result.data));
       }
     }
