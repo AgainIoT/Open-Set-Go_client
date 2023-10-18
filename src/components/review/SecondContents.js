@@ -186,12 +186,11 @@ export const SecondContents = () => {
   const TemplateItemContainer = (props) => {
     const item = props.item;
     const status = !isLoadingTemplate && reviewTemplateData[item];
-    const [ishover, setIsHover] = useState(false);
+    // const [ishover, setIsHover] = useState(false);
 
     return (
       <TemplateItemBox>
-        {/* <IconWrapper></IconWrapper> */}
-        <ItemIconBox>
+        <TemplateItemIconBox>
           <TemplateIconBox
             component={status ? CheckRoundedIcon : props.icon}
             iconcolor={COLOR.MAIN_NAVY}
@@ -201,11 +200,11 @@ export const SecondContents = () => {
           ) : (
             <ItemProgress variant="determinate" value={100} />
           )}
-        </ItemIconBox>
+        </TemplateItemIconBox>
 
         <TextContainer>
-          <ItemTitle variant="h4">{props.title}</ItemTitle>
-          <DecsText variant="subtitle1">{props.desc}</DecsText>
+          <TemplateItemTitle variant="h4">{props.title}</TemplateItemTitle>
+          <TemplateDecsText variant="subtitle1">{props.desc}</TemplateDecsText>
         </TextContainer>
       </TemplateItemBox>
     );
@@ -303,6 +302,16 @@ const ItemBox = styled.div`
   box-shadow: 0rem 0.1rem 2rem lightgrey;
 `;
 
+const ItemIconBox = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0.1rem;
+  width: 5rem;
+  height: 5rem;
+`;
+
 const IconBox = styled(SvgIcon)`
   color: ${COLOR.MAIN_NAVY};
   font-size: 3.8rem;
@@ -336,14 +345,14 @@ const TemplateItemBox = styled.div`
   border-radius: 2rem;
   background-color: ${COLOR.MAIN_WHITE};
   box-shadow: 0rem 0.1rem 2rem lightgrey;
-  transition: top 1s ease-in;
   &:hover {
+    padding: 2rem 1.5rem;
     background-color: ${COLOR.MAIN_PURPLE};
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in;
   }
 `;
 
-const ItemIconBox = styled(Box)`
+const TemplateItemIconBox = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -351,6 +360,11 @@ const ItemIconBox = styled(Box)`
   margin: 0.1rem;
   width: 5rem;
   height: 5rem;
+  transition: all 1s ease-in-out;
+  ${TemplateItemBox}:hover & {
+    display: none;
+    transition: all 0.5s ease-in-out;
+  }
 `;
 
 // const TopContainer = styled.div`
@@ -373,8 +387,18 @@ const TemplateIconBox = styled(SvgIcon)`
   color: ${(props) => props.iconcolor};
   position: absolute;
   font-size: 3.6rem;
+`;
+
+const TemplateItemTitle = styled(ItemTitle)`
   ${TemplateItemBox}:hover & {
-    display: none;
+    color: ${COLOR.MAIN_WHITE};
+    transition: all 0.2s ease-in-out;
+  }
+`;
+const TemplateDecsText = styled(DecsText)`
+  ${TemplateItemBox}:hover & {
+    color: ${COLOR.MAIN_WHITE};
+    transition: all 0.2s ease-in-out;
   }
 `;
 
