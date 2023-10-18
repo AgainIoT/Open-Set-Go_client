@@ -188,12 +188,31 @@ export const SecondContents = () => {
   };
 
   const ItemContainer = (props) => {
+    console.log("category", props.category);
+    const isLoading =
+      props.category === "securityItem"
+        ? isLoadingSecurity
+        : isLoadingCommunity;
+    const reviewData =
+      props.category === "securityItem"
+        ? reviewSecurityData
+        : reviewCommunityData;
+    const status = !isLoading && reviewData[props.item];
     return (
       <ItemBox>
-        {/* <IconWrapper></IconWrapper> */}
-        <IconBox component={props.icon} inheritViewBox />
+        <ItemIconBox>
+          <IconBox
+            component={status ? CheckRoundedIcon : props.icon}
+            iconcolor={COLOR.MAIN_NAVY}
+          />
+          {isLoadingTemplate ? (
+            <ItemProgress />
+          ) : (
+            <ItemProgress variant="determinate" value={100} />
+          )}
+        </ItemIconBox>
         <TextContainer>
-          <ItemTitle variant="h4">{props.item}</ItemTitle>
+          <ItemTitle variant="h4">{props.title}</ItemTitle>
           <DecsText variant="subtitle1">{props.desc}</DecsText>
         </TextContainer>
       </ItemBox>
@@ -218,7 +237,6 @@ export const SecondContents = () => {
             <ItemProgress variant="determinate" value={100} />
           )}
         </TemplateItemIconBox>
-
         <TextContainer>
           <TemplateItemTitle variant="h4">{props.title}</TemplateItemTitle>
           <TemplateDecsText variant="subtitle1">{props.desc}</TemplateDecsText>
@@ -230,8 +248,8 @@ export const SecondContents = () => {
   const ItemListContainer = (props) => {
     return (
       <StItemListContainer>
-        {props.category.map((it) => {
-          return props.category === templateItem ? (
+        {props.data.map((it) => {
+          return props.data === templateItem ? (
             <TemplateItemContainer
               key={it.item}
               item={it.item}
@@ -243,8 +261,10 @@ export const SecondContents = () => {
             <ItemContainer
               key={it.item}
               item={it.item}
+              title={it.title}
               icon={it.icon}
               desc={it.desc}
+              category={props.category}
             />
           );
         })}
@@ -258,19 +278,19 @@ export const SecondContents = () => {
         <TitleContainer>
           <Title variant="h4">Category</Title>
         </TitleContainer>
-        <ItemListContainer category={templateItem} />
+        <ItemListContainer data={templateItem} category={"templateItem"} />
       </div>
       <div>
         <TitleContainer>
           <Title variant="h4">Category</Title>
         </TitleContainer>
-        <ItemListContainer category={securityItem} />
+        <ItemListContainer data={securityItem} category={"securityItem"} />
       </div>
       <div>
         <TitleContainer>
           <Title variant="h4">Category</Title>
         </TitleContainer>
-        <ItemListContainer category={communityItem} />
+        <ItemListContainer data={communityItem} category={"communityItem"} />
       </div>
       <Button
         variant="outlined"
@@ -338,8 +358,9 @@ const ItemIconBox = styled(Box)`
 `;
 
 const IconBox = styled(SvgIcon)`
-  color: ${COLOR.MAIN_NAVY};
-  font-size: 3.8rem;
+  color: ${(props) => props.iconcolor};
+  position: absolute;
+  font-size: 3.6rem;
 `;
 
 const TextContainer = styled.div`
@@ -377,14 +398,7 @@ const TemplateItemBox = styled.div`
   }
 `;
 
-const TemplateItemIconBox = styled(Box)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  margin: 0.1rem;
-  width: 5rem;
-  height: 5rem;
+const TemplateItemIconBox = styled(ItemIconBox)`
   transition: all 1s ease-in-out;
   ${TemplateItemBox}:hover & {
     display: none;
@@ -408,11 +422,7 @@ const TemplateItemIconBox = styled(Box)`
 //   border-radius: 10rem;
 // `;
 
-const TemplateIconBox = styled(SvgIcon)`
-  color: ${(props) => props.iconcolor};
-  position: absolute;
-  font-size: 3.6rem;
-`;
+const TemplateIconBox = styled(IconBox)``;
 
 const TemplateItemTitle = styled(ItemTitle)`
   ${TemplateItemBox}:hover & {
