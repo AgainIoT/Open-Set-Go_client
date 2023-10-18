@@ -3,72 +3,80 @@ import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
 export const templateItem = [
   {
     item: "issue",
-    title: "issue Template",
+    title: "ISSUE TEMPLATE",
     icon: ChecklistRoundedIcon,
-    desc: "contributors can select the appropriate template when they open new issues in the repository",
+    desc: "Customize the templates that are available for contributors to use when they open new issues in your repository.",
   },
   {
     item: "pr",
-    title: "pr Template",
+    title: "PR TEMPLATE",
     icon: ChecklistRoundedIcon,
-    desc: "contributors can select the appropriate template when they open new issues in the repository",
+    desc: "Using Pull-Request Template, project contributors will automatically see the template's contents in the pull request body.",
   },
   {
     item: "readme",
-    title: "Readme",
+    title: "README.md",
     icon: ChecklistRoundedIcon,
-    desc: "contributors can select the appropriate template when they open new issues in the repository",
+    desc: "README file tell other people why your project is useful, what they can do with your project, and how they can use it.",
   },
   {
     item: "contributing",
-    title: "CONTRIBUTING.md ",
+    title: "CONTRIBUTING.md",
     icon: ChecklistRoundedIcon,
-    desc: "contributors can select the appropriate template when they open new issues in the repository",
+    desc: "Guidelines to communicate how people should contribute to your project.",
   },
 ];
 
 export const communityItem = [
   {
-    item: "issue Template",
+    item: "description",
+    title: "Description",
     icon: ChecklistRoundedIcon,
-    desc: "contributors can select the appropriate template when they open new issues in the repository",
+    desc: "This is a explanation used in Repository, which is the first item that is visible to the user, and is a concise description that best describes the topic.",
   },
   {
-    item: "pr Template",
+    item: "license",
+    title: "License",
     icon: ChecklistRoundedIcon,
-    desc: "contributors can select the appropriate template when they open new issues in the repository",
+    desc: "Open source licenses are licenses that comply with the Open Source Definition – in brief, they allow software to be freely used, modified, and shared.",
   },
   {
-    item: "Readme",
+    item: "conduct",
+    title: "Code of Conduct",
     icon: ChecklistRoundedIcon,
-    desc: "contributors can select the appropriate template when they open new issues in the repository",
+    desc: "A code of conduct is a document that establishes expectations for behavior for your project’s participants.",
   },
   {
-    item: "CONTRIBUTING Template",
+    item: "discussion",
+    title: "Discussion",
     icon: ChecklistRoundedIcon,
-    desc: "contributors can select the appropriate template when they open new issues in the repository",
+    desc: "Collaborative communication forum for the community around an open source or internal project.",
   },
 ];
 
 export const securityItem = [
   {
-    item: "issue Template",
+    item: "codeql",
+    title: "CodeQL",
     icon: ChecklistRoundedIcon,
-    desc: "contributors can select the appropriate template when they open new issues in the repository",
+    desc: "Automatically detect common vulnerability and coding errors",
   },
   {
-    item: "pr Template",
+    item: "secretScan",
+    title: "Secret scanning",
     icon: ChecklistRoundedIcon,
-    desc: "contributors can select the appropriate template when they open new issues in the repository",
+    desc: "Get notified when a secret is pushed to this repository",
   },
   {
-    item: "Readme",
+    item: "securityPolicy",
+    title: "Security Policy",
     icon: ChecklistRoundedIcon,
-    desc: "contributors can select the appropriate template when they open new issues in the repository",
+    desc: "View how to securely report security vulnerabilities for this repository",
   },
   {
-    item: "CONTRIBUTING Template",
+    item: "dependabot",
+    title: "Dependabot alerts",
     icon: ChecklistRoundedIcon,
-    desc: "contributors can select the appropriate template when they open new issues in the repository",
+    desc: "Get notified when one of your dependencies has a vulnerability",
   },
 ];
