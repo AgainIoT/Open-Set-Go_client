@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-import { Box, CircularProgress, SvgIcon, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  SvgIcon,
+  Typography,
+} from "@mui/material";
 import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import {
@@ -10,9 +16,10 @@ import {
 } from "../../data/ReviewItemData";
 import { useState } from "react";
 import axios from "axios";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { reviewRepoDataState } from "../../recoil/reviewState";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const SecondContents = () => {
   //   const ItemContainer = (props) => {
@@ -40,8 +47,15 @@ export const SecondContents = () => {
   //       </StItemContainer>
   //     );
   //   };
-  const selectedOwner = useRecoilValue(reviewRepoDataState("owner"));
-  const selectedRepo = useRecoilValue(reviewRepoDataState("repoName"));
+  const navigate = new useNavigate();
+
+  const [selectedOwner, setSelectedOwner] = useRecoilState(
+    reviewRepoDataState("owner"),
+  );
+  const [selectedRepo, setSelectedRepo] = useRecoilState(
+    reviewRepoDataState("repoName"),
+  );
+  const [page, setPage] = useRecoilState(reviewRepoDataState("page"));
 
   const [isLoadingTemplate, setIsLoadingTemplate] = useState(true);
   const [isLoadingSecurity, setIsLoadingSecurity] = useState(true);
@@ -166,9 +180,12 @@ export const SecondContents = () => {
     getCommunityReviewData();
   }, []);
 
-  //   useEffect(()=>{if(!isLoadingTemplate){
-
-  //   }},[isLoadingTemplate]);
+  const handleFinish = () => {
+    setPage(0);
+    setSelectedOwner("");
+    setSelectedRepo("");
+    navigate("/");
+  };
 
   const ItemContainer = (props) => {
     return (
@@ -255,6 +272,14 @@ export const SecondContents = () => {
         </TitleContainer>
         <ItemListContainer category={communityItem} />
       </div>
+      <Button
+        variant="outlined"
+        onClick={() => {
+          handleFinish();
+        }}
+      >
+        Primary
+      </Button>
     </StSecondContents>
   );
 };
