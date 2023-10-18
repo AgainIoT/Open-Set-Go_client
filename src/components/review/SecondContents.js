@@ -186,9 +186,10 @@ export const SecondContents = () => {
   const TemplateItemContainer = (props) => {
     const item = props.item;
     const status = !isLoadingTemplate && reviewTemplateData[item];
+    const [ishover, setIsHover] = useState(false);
 
     return (
-      <ItemBox onMouseOver={() => {}}>
+      <TemplateItemBox>
         {/* <IconWrapper></IconWrapper> */}
         <ItemIconBox>
           <TemplateIconBox
@@ -206,7 +207,7 @@ export const SecondContents = () => {
           <ItemTitle variant="h4">{props.title}</ItemTitle>
           <DecsText variant="subtitle1">{props.desc}</DecsText>
         </TextContainer>
-      </ItemBox>
+      </TemplateItemBox>
     );
   };
 
@@ -272,20 +273,23 @@ const StSecondContents = styled.div`
   overflow-y: auto;
 `;
 
-const StItemContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  gap: 1rem;
-`;
+// const StItemContainer = styled.div`
+//   display: flex;
+//   justify-content: space-around;
+//   flex-direction: column;
+//   gap: 1rem;
+// `;
 
 const TitleContainer = styled.div``;
 const Title = styled(Typography)``;
-const ContentsContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-`;
+
+// const ContentsContainer = styled.div`
+//   display: flex;
+//   justify-content: space-around;
+//   flex-direction: row;
+// `;
+
+// for security, community item
 const ItemBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -298,6 +302,47 @@ const ItemBox = styled.div`
   background-color: ${COLOR.MAIN_WHITE};
   box-shadow: 0rem 0.1rem 2rem lightgrey;
 `;
+
+const IconBox = styled(SvgIcon)`
+  color: ${COLOR.MAIN_NAVY};
+  font-size: 3.8rem;
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const ItemTitle = styled(Typography)`
+  font-weight: bolder;
+  text-align: left;
+`;
+const DecsText = styled(Typography)`
+  color: ${COLOR.FONT_GRAY};
+  font-size: 1.2rem;
+  text-align: justify;
+`;
+
+// for template item
+const TemplateItemBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 23rem;
+  height: 18rem;
+  padding: 1.5rem;
+  gap: 1rem;
+  /* border: 0.1rem solid lightgrey; */
+  border-radius: 2rem;
+  background-color: ${COLOR.MAIN_WHITE};
+  box-shadow: 0rem 0.1rem 2rem lightgrey;
+  transition: top 1s ease-in;
+  &:hover {
+    background-color: ${COLOR.MAIN_PURPLE};
+    transition: all 0.3s ease;
+  }
+`;
+
 const ItemIconBox = styled(Box)`
   display: flex;
   align-items: center;
@@ -307,21 +352,32 @@ const ItemIconBox = styled(Box)`
   width: 5rem;
   height: 5rem;
 `;
-const TopContainer = styled.div`
-  display: flex;
-  /* justify-content: space-between; */
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
-  gap: 2rem;
+
+// const TopContainer = styled.div`
+//   display: flex;
+//   /* justify-content: space-between; */
+//   align-items: center;
+//   flex-direction: row;
+//   width: 100%;
+//   gap: 2rem;
+// `;
+
+// const IconWrapper = styled.div`
+//   width: 5rem;
+//   height: 5rem;
+//   border: 0.1rem solid ${COLOR.MAIN_NAVY};
+//   border-radius: 10rem;
+// `;
+
+const TemplateIconBox = styled(SvgIcon)`
+  color: ${(props) => props.iconcolor};
+  position: absolute;
+  font-size: 3.6rem;
+  ${TemplateItemBox}:hover & {
+    display: none;
+  }
 `;
 
-const IconWrapper = styled.div`
-  width: 5rem;
-  height: 5rem;
-  border: 0.1rem solid ${COLOR.MAIN_NAVY};
-  border-radius: 10rem;
-`;
 const ItemProgress = styled(CircularProgress)`
   display: flex;
   justify-content: center;
@@ -334,30 +390,8 @@ const ItemProgress = styled(CircularProgress)`
     height: 5rem;
   }
 `;
-const IconBox = styled(SvgIcon)`
-  color: ${COLOR.MAIN_NAVY};
-  font-size: 3.8rem;
-`;
-const TemplateIconBox = styled(SvgIcon)`
-  color: ${(props) => props.iconcolor};
-  position: absolute;
-  font-size: 3.6rem;
-`;
-const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-const ItemTitle = styled(Typography)`
-  font-weight: bolder;
-  text-align: left;
-`;
-const DecsText = styled(Typography)`
-  color: ${COLOR.FONT_GRAY};
-  font-size: 1.2rem;
-  text-align: justify;
-`;
 
+// for item list
 const StItemListContainer = styled.div`
   display: flex;
   justify-content: space-around;
