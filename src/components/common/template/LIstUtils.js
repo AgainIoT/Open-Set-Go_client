@@ -141,6 +141,7 @@ export function DraggableList(props) {
                   }}
                 </Draggable>
               ))}
+              {provided.placeholder}
             </ul>
           )}
         </Droppable>

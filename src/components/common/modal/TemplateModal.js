@@ -3,7 +3,6 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { templateMode } from "../../../recoil/templateState";
 import { TemplateList } from "../template/TemplateList";
-import { GenerateList } from "../template/GenerateList";
 import TemplateTitle from "../template/TemplateTitle";
 import TemplateBody from "../template/TemplateBody";
 
@@ -13,11 +12,7 @@ export const TemplateModal = (props) => {
 
   return (
     <TemplateContainer>
-      {templateMod ? (
-        <GenerateList type={props.type} />
-      ) : (
-        <TemplateList type={props.type} />
-      )}
+      <TemplateList type={props.type} mode={templateMod} />
       <TemplateContents>
         <TemplateTitle type={props.type} />
         <TemplateBody type={props.type} />
