@@ -8,7 +8,7 @@ import { Pagination } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
 import { ListItemData } from "../../../data/ListItemData";
-import { Item } from "./TemplateComponents";
+import { Item, ListWrapper } from "./TemplateComponents";
 import { BasicList, ListHeader } from "./LIstUtils";
 
 const DATAPERPAGE = 20;
@@ -82,12 +82,14 @@ export function TemplateList(props) {
   return (
     <Item>
       <ListHeader type={props.type} />
-      <BasicList
-        data={data}
-        subData={"star"}
-        handleSelect={handleSelect}
-        icon={starIcon}
-      />
+      <ListWrapper>
+        <BasicList
+          data={data}
+          subData={"star"}
+          handleSelect={handleSelect}
+          icon={starIcon}
+        />
+      </ListWrapper>
       <Pagination
         count={pageRange}
         defaultPage={1}

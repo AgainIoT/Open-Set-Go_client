@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { activeState } from "../../../recoil/commonState";
 import {
   templatePreviewState,
   templateSelectState,
 } from "../../../recoil/templateState";
 import { repoDataAtomFamily } from "../../../recoil/repoData";
 import DeleteIcon from "@mui/icons-material/Delete";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import StarIcon from "@mui/icons-material/Star";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
 import { DraggableListItemData } from "../../../data/ListItemData";
 import { Item, ListWrapper } from "./TemplateComponents";
-import { activeState } from "../../../recoil/commonState";
-import { BasicList, ListHeader } from "./LIstUtils";
+import { BasicList, DraggableList, ListHeader } from "./LIstUtils";
 
 // props -> type(pr, readme, contributing)
 export function GenerateList(props) {
@@ -96,69 +89,19 @@ export function GenerateList(props) {
     };
   }, []);
 
+  const deleteIcon = <DeleteIcon fontSize="inherit" />;
+
   return (
     <Item sx={{ bgcolor: "#F4F4FC", borderRadius: 2 }}>
       <ListHeader type={props.type} />
       <ListWrapper>
-        <List
-          sx={{
-            width: 360,
-            itemSize: 46,
-            itemCount: selectedData.length,
-            overscanCount: 5,
-          }}
-        >
-          <DragDropContext onDragEnd={handleDrop}>
-            <Droppable droppableId="droppable">
-              {(provided) => (
-                <ul {...provided.droppableProps} ref={provided.innerRef}>
-                  {selectedData.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
-                    >
-                      {(provided, snapshot) => {
-                        if (snapshot.isDragging) {
-                          provided.draggableProps.style.left =
-                            provided.draggableProps.style.offsetLeft;
-                          provided.draggableProps.style.top =
-                            provided.draggableProps.style.offsetTop;
-                        }
-                        return (
-                          <ListItem
-                            components="div"
-                            disablePadding
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                          >
-                            <ListItemButton>
-                              <ListItemText
-                                primary={item.title}
-                                id="PR-desc"
-                                variant="h6"
-                                gutterBottom
-                                color="textSecondary"
-                              />
-                              <IconButton
-                                aria-label="delete"
-                                onClick={() => handleRemove(item)}
-                              >
-                                <DeleteIcon fontSize="inherit" />
-                              </IconButton>
-                            </ListItemButton>
-                          </ListItem>
-                        );
-                      }}
-                    </Draggable>
-                  ))}
-                </ul>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </List>
-        <BasicList data={data} handleSelect={handleSelect}/>
+        <DraggableList
+          data={selectedData}
+          handleDrop={handleDrop}
+          handleRemove={handleRemove}
+          icon={deleteIcon}
+        />
+        <BasicList data={data} handleSelect={handleSelect} />
       </ListWrapper>
     </Item>
   );
