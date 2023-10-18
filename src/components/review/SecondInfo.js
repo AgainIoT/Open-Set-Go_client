@@ -94,18 +94,6 @@ export const SecondInfo = () => {
       <SummarySection>
         <SummaryItem>
           <ItemProgress variant="determinate" value={75} />
-          <ItemIcon
-            component={CheckRoundedIcon}
-            iconcolor={COLOR.MAIN_GREEN}
-            inheritViewBox
-          />
-        </SummaryItem>
-        <SummaryItem>
-          <ItemIcon
-            component={CheckRoundedIcon}
-            iconcolor={COLOR.MAIN_GREEN}
-            inheritViewBox
-          />
         </SummaryItem>
       </SummarySection>
     </StFirstInfo>
@@ -164,39 +152,43 @@ const SummarySection = styled.div`
 `;
 const SummaryItem = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: row;
+  justify-content: center;
   position: relative;
-  gap: 2rem;
+  margin: 0.1rem;
+  width: 10rem;
+  height: 10rem;
 `;
 
 const ItemProgress = styled(CircularProgress)`
   display: flex;
-  width: 7rem;
-  height: 7rem;
-  &.MuiCircularProgress-root {
-    width: 7rem;
-    height: 7rem;
-    size: 5rem;
-  }
-  .MuiCircularProgress-svg {
-    width: 5rem;
-    height: 5rem;
-  }
-`;
-const ItemIcon = styled(SvgIcon)`
-  display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  font-size: 3.5rem;
-  color: ${(props) => props.iconcolor};
+  width: 9rem;
+  height: 9rem;
+
+  color: ${COLOR.MAIN_SKYBLUE};
+  span {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  &.MuiCircularProgress-determinate {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  &.MuiCircularProgress-root {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  &.MuiCircularProgress-svg {
+    width: 9rem;
+    height: 9rem;
+  }
 `;
+
 const ItemText = styled(Typography)`
   font-size: 1.8rem;
 `;
