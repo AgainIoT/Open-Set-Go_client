@@ -41,7 +41,7 @@ export function TemplateList(props) {
 
   const handlePageSelect = async (event, page) => {
     setCurrentPage(page);
-    getTemplateData(false, page);
+    getTemplateData(page);
   };
 
   const handleSelect = async (selected) => {
@@ -170,14 +170,16 @@ export function TemplateList(props) {
           icon={templateMod ? null : starIcon}
         />
       </ListWrapper>
-      <Pagination
-        count={pageRange}
-        defaultPage={1}
-        siblingCount={1}
-        page={currentPage}
-        onChange={handlePageSelect}
-        color="primary"
-      />
+      {templateMod ? null : (
+        <Pagination
+          count={pageRange}
+          defaultPage={1}
+          siblingCount={1}
+          page={currentPage}
+          onChange={handlePageSelect}
+          color="primary"
+        />
+      )}
     </Item>
   );
 }
