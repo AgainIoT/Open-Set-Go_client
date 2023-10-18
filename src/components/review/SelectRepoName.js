@@ -1,17 +1,14 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-
+import { useRecoilState } from "recoil";
 import {
   FormControl,
   FormHelperText,
-  InputBase,
   InputLabel,
   MenuItem,
-  NativeSelect,
   Select,
   Typography,
 } from "@mui/material";
-import { useRecoilState } from "recoil";
 
 export const SelectRepoName = (props) => {
   const [selectValue, setSelectValue] = useRecoilState(
@@ -31,7 +28,6 @@ export const SelectRepoName = (props) => {
           id="demo-customized-select-native"
           value={selectValue}
           onChange={handleChange}
-          // input={<BootstrapInput />}
           readOnly={!props.isSelectOwner}
           displayEmpty
           renderValue={(selected) => {
@@ -49,10 +45,6 @@ export const SelectRepoName = (props) => {
               {option}
             </MenuItem>
           ))}
-          {/* <option aria-label="None" value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option> */}
         </SelectAuto>
         {!props.isSelectOwner && (
           <SelectFormHelperText>
