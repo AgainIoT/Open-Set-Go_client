@@ -11,7 +11,7 @@ import {
   SearchWrapper,
   SearchIconWrapper,
   StyledInputBase,
-} from "./TemplateComponents";
+} from "./StyledTemplate";
 
 export function ListHeader(props) {
   return (

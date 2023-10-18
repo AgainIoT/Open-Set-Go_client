@@ -14,7 +14,7 @@ import {
   ListItemData,
   DraggableListItemData,
 } from "../../../data/ListItemData";
-import { Item, ListWrapper } from "./TemplateComponents";
+import { Item, ListWrapper } from "./StyledTemplate";
 import { ListHeader, BasicList, DraggableList } from "./LIstUtils";
 
 const DATAPERPAGE = 20;
