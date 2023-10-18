@@ -23,11 +23,11 @@ export const SelectRepoName = (props) => {
 
   return (
     <>
-      <FormControl sx={{ m: 1 }} variant="standard">
+      <SelectFormControl sx={{ m: 1 }} variant="standard">
         <InputLabel htmlFor="demo-customized-select-native" shrink>
           {props.labelText}
         </InputLabel>
-        <Select
+        <SelectAuto
           id="demo-customized-select-native"
           value={selectValue}
           onChange={handleChange}
@@ -53,9 +53,13 @@ export const SelectRepoName = (props) => {
           <option value={10}>Ten</option>
           <option value={20}>Twenty</option>
           <option value={30}>Thirty</option> */}
-        </Select>
-        {!props.isSelectOwner && <FormHelperText>helperText</FormHelperText>}
-      </FormControl>
+        </SelectAuto>
+        {!props.isSelectOwner && (
+          <SelectFormHelperText>
+            Please choose the owner first
+          </SelectFormHelperText>
+        )}
+      </SelectFormControl>
     </>
   );
 };
@@ -71,3 +75,13 @@ const Placeholder = styled(Typography)`
 `;
 
 const SelectMenuItem = styled(MenuItem)``;
+
+const SelectFormHelperText = styled(FormHelperText)`
+  color: ${COLOR.MAIN_BLACK};
+  ${SelectFormControl}:active & {
+    color: ${COLOR.MAIN_RED};
+  }
+  ${SelectFormControl}:focus-within & {
+    color: ${COLOR.MAIN_RED};
+  }
+`;
