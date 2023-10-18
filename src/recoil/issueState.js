@@ -5,6 +5,11 @@ export const selectedTitle = atom({
   default: " ",
 });
 
+export const selectedType = atom({
+  key: "selectedType",
+  default: "",
+});
+
 export const bodyState = atom({
   key: "bodyState",
   default: "",

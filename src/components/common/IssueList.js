@@ -7,6 +7,7 @@ import {
   issueSelectedState,
   selectedTitle,
   bodyState,
+  selectedType,
 } from "../../recoil/issueState";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -17,10 +18,10 @@ import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import * as formSchema from "github-formschema-converter";
-import { Interweave } from "interweave";
 import IssueChip from "./IssueChip";
 
 const IssueList = (props) => {
+  const [temType, setTemType] = useRecoilState(selectedType);
   const [isClicked, setIsClicked] = useState(false);
   const [data, setData] = useState([]);
   const [content, setContent] = useState("");
@@ -52,12 +53,14 @@ const IssueList = (props) => {
       completed = true;
     };
   }, []);
-  const handleCheck = async (temTitle, temId) => {
+  const handleCheck = async (temTitle, temId, temType) => {
     const rst = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
     );
     setBody(rst.data.content);
     setTemTitle(temTitle);
+    setTemType(temType);
+    console.log(temType);
     // const tmp = await formSchema.yaml2html(rst.data.content);
     // setContent(rst.data.image);
     setContent(rst.data.image);
@@ -98,11 +101,12 @@ const IssueList = (props) => {
                     <ListItem
                       components="div"
                       onClick={() => {
-                        handleCheck(item.title, item.id);
+                        handleCheck(item.title, item.id, it[0][1]);
                         setIsClicked(true);
                       }}
                       key={item.title}
                     >
+                      {temTitle ? <div></div> : <div></div>}
                       <ListItemButton>
                         <ListItemText
                           primaryTypographyProps={{ fontSize: "1.2rem" }}

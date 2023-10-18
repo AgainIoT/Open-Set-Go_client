@@ -7,6 +7,7 @@ import {
   issueSelectedState,
   selectedTitle,
   bodyState,
+  selectedType
 } from "../../../recoil/issueState";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Typography } from "@mui/material";
@@ -22,6 +23,7 @@ const IssueModal = () => {
   const [nameOk, setNameOk] = useState(true);
   const [descOk, setDescOk] = useState(true);
   const [body, setBody] = useRecoilState(bodyState);
+  const [temType, setTemType] = useRecoilState(selectedType);
   const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
   const [selectedInfo, setSelectedInfo] = useRecoilState(
     issueSelectedState("issue"),
@@ -109,6 +111,7 @@ assignees: []\n
       title: "",
     });
     setModalValue(false);
+    setTemType(temType);
   };
   return (
     <StIssueModal>
