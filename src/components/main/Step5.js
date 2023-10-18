@@ -1,7 +1,7 @@
-import Step3 from "./Step3";
-import Step4 from "./Step4";
 import { styled } from "styled-components";
 import { COLOR } from "../../styles/color.js";
+import Step3 from "./Step3";
+import Step4 from "./Step4";
 
 //Step5: Components located at the bottom of the description on the main page
 //It contains Step3 & Step4 for applying linear-gradient

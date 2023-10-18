@@ -1,8 +1,8 @@
+import styled from "styled-components";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Slider from "react-slick";
 import SlideContent from "./SlideContent";
-import styled from "styled-components";
-import axios from "axios";
 
 //Slide: Component for Implementing the License Page using the React Slick
 const Slide = () => {
@@ -14,6 +14,7 @@ const Slide = () => {
     async function get() {
       const result = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}/file/license`,
+        { withCredentials: true },
       );
       if (!completed) {
         setData(result.data);
@@ -70,24 +71,22 @@ const StSlide = styled.div`
 `;
 
 const StyledSlider = styled(Slider)`
+  display: flex;
   width: 100%;
   height: 100%;
-  display: flex;
-  /* min-width:50rem; */
-
   .slick-list {
-    //슬라이드 스크린
-    width: 90%;
-    height: 100%;
-    margin: 0 auto;
+    //slide screen
+    display: flex;
     justify-content: center;
     align-items: center;
-    display: flex;
+    width: 120rem;
+    height: 100%;
+    margin: 0 auto;
   }
 
   .slick-track {
-    height: 100%;
     display: flex;
+    height: 100%;
   }
 
   .slick-center {
@@ -108,7 +107,8 @@ const StyledSlider = styled(Slider)`
     left: 0;
   }
 
-  .slick-next:before, .slick-prev:before {
+  .slick-next:before,
+  .slick-prev:before {
     color: #888;
   }
 `;

@@ -1,13 +1,11 @@
 import styled from "styled-components";
-
 import { useRecoilState } from "recoil";
-import { repoDataAtomFamily } from "../../recoil/repoData";
+import { Paper } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-
-import SearchIcon from "@mui/icons-material/Search";
 import { createFilterOptions } from "@mui/material/Autocomplete";
-import { Paper } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { repoDataAtomFamily } from "../../recoil/repoData";
 
 // props -> type(lang/framework), options(for lang->langs/for framework->frameworkOptions), setIsSelectLang(setIsSelectLang), setDisableValue(setDisableValue), disableValue(false/disableValue)
 export const AutocompleteInput = (props) => {
@@ -91,8 +89,8 @@ const AutocompleteWrapper = styled(Autocomplete)`
     transform: none;
   }
   & .MuiAutocomplete-endAdornment {
-    margin-right: 0.7rem;
     float: center;
+    margin-right: 0.7rem;
   }
 `;
 const AutocompleteTextField = styled(TextField)`
@@ -100,8 +98,8 @@ const AutocompleteTextField = styled(TextField)`
 
   & .MuiFormLabel-root {
     padding-left: 0.3rem;
-    line-height: 3rem;
     font-size: 1.4rem;
+    line-height: 3rem;
   }
   & .MuiAutocomplete-input {
     font-size: 1.4rem;

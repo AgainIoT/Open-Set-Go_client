@@ -1,30 +1,41 @@
 import styled from "styled-components";
-import { PropTypes } from "prop-types";
-import { Button } from "@mui/material";
+import { COLOR } from "../../styles/color";
 import { useRecoilState } from "recoil";
+import { Button } from "@mui/material";
 import { repoDataAtomFamily } from "../../recoil/repoData";
+import { PropTypes } from "prop-types";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 
 //SlideContent: Internal component in the slick to be used in the license page
 //using props to connect data to Slide
 export const SlideContent = (props) => {
   //using recoil to send finally selected license url to the server
   const [pickLi, setPickLi] = useRecoilState(repoDataAtomFamily("license"));
+  const [licenseName, setLicenseName] = useRecoilState(
+    repoDataAtomFamily("licenseName"),
+  );
 
-  const onSet = () => {
-    setPickLi(props.data.url);
+  const handleSelect = () => {
+    setPickLi(props.data.license);
+    setLicenseName(props.data.name);
   };
 
-  const pmsList = props.data.conditions.permissions.map((p) => (
+  const handleCancel = () => {
+    setPickLi("");
+  };
+
+  const pmsList = props.data.permissions.map((p) => (
     <PermissionContent key={p}>
       <li>{p}</li>
     </PermissionContent>
   ));
-  const limList = props.data.conditions.limitations.map((p) => (
+  const limList = props.data.limitations.map((p) => (
     <LimitationContent key={p}>
       <li>{p}</li>
     </LimitationContent>
   ));
-  const conList = props.data.conditions.conditions.map((p) => (
+  const conList = props.data.conditions.map((p) => (
     <ConditionContent key={p}>
       <li>{p}</li>
     </ConditionContent>
@@ -34,10 +45,12 @@ export const SlideContent = (props) => {
       <DivBox>
         <InformationBox className="InformationBox">
           <Title>
-            <h1>{props.data.license}</h1>
+            <h1>{props.data.name}</h1>
           </Title>
           <Content>
-            <p>{props.data.description}</p>
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+              {props.data.description}
+            </ReactMarkdown>
           </Content>
         </InformationBox>
         <ConditionBox className="ConditionBox">
@@ -64,19 +77,19 @@ export const SlideContent = (props) => {
           <LinkDiv>
             <LinkText>
               This is not legal advice.&nbsp;
-              <LinkA href={props.data.url}>
+              <LinkA href={props.data.license}>
                 Learn more about repository licenses.
               </LinkA>
             </LinkText>
           </LinkDiv>
-          {pickLi === props.data.url ? (
+          {pickLi === props.data.license ? (
             <BtnDiv className="BtnDiv">
               <SelectedBtn
                 className="SubmitBtn"
                 variant="contained"
-                onClick={onSet}
+                onClick={handleCancel}
               >
-                Selected
+                Cancel
               </SelectedBtn>
             </BtnDiv>
           ) : (
@@ -84,7 +97,7 @@ export const SlideContent = (props) => {
               <SubmitBtn
                 className="SubmitBtn"
                 variant="contained"
-                onClick={onSet}
+                onClick={handleSelect}
               >
                 Select
               </SubmitBtn>
@@ -105,32 +118,32 @@ SlideContent.propTypes = {
 const StSlideContent = styled.div`
   display: flex;
   justify-content: center;
-  border-radius: 0.5rem;
-  border: 0.01rem outset #dedede;
-  padding: 2rem;
-  margin: 0 auto;
-  white-space: pre-wrap;
-  background-color: white;
-  box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   width: 80%;
   height: 100%;
+  padding: 2rem;
+  margin: 0 auto;
+  border: 0.01rem outset #dedede;
+  border-radius: 0.5rem;
+  background-color: white;
+  white-space: pre-wrap;
+  box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
 `;
 
 const DivBox = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   gap: 1.4rem;
 `;
 
 const InformationBox = styled.div`
-  margin: auto;
-  width: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  margin: auto;
 `;
 
 const Title = styled.h1`
@@ -141,23 +154,23 @@ const Title = styled.h1`
 
 const Content = styled.p`
   font-size: 1rem;
-  line-height: 1.7rem;
   text-align: justify;
+  line-height: 1.7rem;
 `;
 
 const ConditionBox = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  flex-direction: row;
   width: 100%;
   gap: 0.5rem;
 
   div {
     //div for permissions limitations conditions
     display: flex;
+    flex: 1;
     flex-direction: column;
     height: 100%;
-    flex: 1;
   }
 
   ul {
@@ -168,14 +181,14 @@ const ConditionBox = styled.div`
 `;
 
 const Condition = styled.h2`
-  font-size: 1.1rem;
   justify-items: center;
+  font-size: 1.1rem;
   font-weight: bold;
 `;
 
 const SharedContent = `
-display: block;
-padding-inline-start: 2ch;
+  display: block;
+  padding-inline-start: 2ch;
 `;
 
 const PermissionContent = styled.li`
@@ -194,17 +207,17 @@ const ConditionContent = styled.li`
 `;
 
 const LinkBox = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 `;
 
 const LinkDiv = styled.div`
   display: flex;
+  justify-content: left;
   width: 100%;
   height: fit-content;
-  justify-content: left;
 `;
 
 const LinkText = styled.p`
@@ -226,55 +239,44 @@ const LinkA = styled.a`
   }
 `;
 const BtnDiv = styled.div`
-  width: 100%;
   display: flex;
-  justify-content: end;
   align-items: end;
+  justify-content: end;
+  width: 100%;
   gap: 0.5rem;
 `;
 
 const SharedBtn = `
-  font-size: 1.1rem;
-  height: fit-content;
   width: 25%;
-  text-transform: none; //대문자 고정 취소
-  white-space: nowrap;
+  height: fit-content;
   padding: 0.5rem 1rem 0.4rem 1rem;
+  font-size: 1.1rem;
+  text-transform: none; //Turn off uppercase default settings
+  white-space: nowrap;
   box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
 `;
+
 const SelectedBtn = styled(Button)`
   ${SharedBtn}
-  background-color: green;
-  &:visited {
-    background-color: green;
-  }
-  &:link {
-    background-color: green;
-  }
+  background-color: ${COLOR.MAIN_PURPLE};
   &:hover {
-    background-color: green;
+    background-color: purple;
     box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
   }
   &:active {
-    background-color: green;
+    background-color: purple;
   }
 `;
 
 const SubmitBtn = styled(Button)`
   ${SharedBtn}
-  background-color: gray;
-  &:visited {
-    background-color: gray;
-  }
-  &:link {
-    background-color: gray;
-  }
+  background-color: green;
   &:hover {
-    background-color: gray;
+    background-color: ${COLOR.MAIN_GREEN};
     box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
   }
   &:active {
-    background-color: gray;
+    background-color: ${COLOR.MAIN_GREEN};
   }
 `;
 

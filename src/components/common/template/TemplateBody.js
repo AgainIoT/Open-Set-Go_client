@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Typography from "@mui/material/Typography";
-import {
-  templateContent,
-  templatePreviewState,
-  templateState,
-  templateToModal,
-} from "../../../recoil/templateState";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
-import { WidthFull } from "@mui/icons-material";
+import React, { useState, useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { templatePreviewState } from "../../../recoil/templateState";
+import Typography from "@mui/material/Typography";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
 // props -> type(pr, readme, contributing)
 export default function TemplateBody(props) {
-  const showValue = useRecoilValue(templatePreviewState(props.type));
+  const rawData = useRecoilValue(templatePreviewState(props.type));
+  const [previewData, setPreviewData] = useState("");
+  useEffect(() => {
+    const tmp = rawData.map((obj) => obj["content"]).join("\n");
+    setPreviewData(tmp);
+  }, [rawData]);
 
   return (
     <BodyBox>
@@ -25,7 +23,9 @@ export default function TemplateBody(props) {
         color="textSecondary"
         m={4}
       >
-        <MarkdownPreview source={showValue.content} />
+        <MarkdownPreview
+          source={rawData.map((obj) => obj["content"]).join("\n")}
+        />
       </Typography>
     </BodyBox>
   );
@@ -33,9 +33,9 @@ export default function TemplateBody(props) {
 
 const BodyBox = styled.div`
   display: flex;
+  flex-direction: column;
   max-height: 52rem;
   max-width: 65rem;
-  flex-direction: column;
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;

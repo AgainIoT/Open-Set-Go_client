@@ -1,21 +1,44 @@
 import styled from "styled-components";
-
+import { useEffect, useState } from "react";
+import { Grid } from "@mui/material";
 import { SelectChip } from "../SelectChip";
-
-import optionData from "../../../data/optionData.json";
-
 import { selectGitignoreData } from "../../../recoil/repoData";
 import { FixedOptionShowSelect } from "../ShowSelect";
-import { Grid } from "@mui/material";
 import { SearchAuto } from "../SearchAuto";
+import axios from "axios";
 
 export const GitignoreModal = () => {
-  const osOptions = optionData["OS"];
-  const ideOptions = optionData["IDE"];
-  const etcOptions = optionData["Etc."];
-  const allOptions = Object.values(optionData).flatMap((itemArray) =>
-    itemArray.map((item) => item.option),
-  );
+  const [osOptions, setOsOptions] = useState([]);
+  const [ideOptions, setIdeOptions] = useState([]);
+  const [etcOptions, setEtcOptions] = useState([]);
+  const [allOptions, setAllOptions] = useState([]);
+
+  const bindData = async (rawData) => {
+    const data = rawData.map((value, idx) => ({
+      id: idx,
+      option: value,
+    }));
+    return data;
+  };
+
+  const getData = async () => {
+    const result = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/file/gitignore`,
+    );
+    const data = result.data[0];
+    console.log(data);
+    setOsOptions(await bindData(data.OS));
+    setIdeOptions(await bindData(data.IDE));
+    setEtcOptions(await bindData(data.ETC));
+    setAllOptions(
+      Object.values(data).flatMap((arr) => arr.map((item) => item)),
+    );
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <StGitIgnoreModal container>
       <Grid item xs={6}>
@@ -54,9 +77,9 @@ export const GitignoreModal = () => {
 };
 
 const StGitIgnoreModal = styled(Grid)`
-  padding: 1rem;
   width: 100%;
   height: 100%;
+  padding: 1rem;
   row-gap: 1rem;
   overflow-y: hidden;
 `;

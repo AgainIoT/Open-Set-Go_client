@@ -1,11 +1,11 @@
-import Stack from "@mui/material/Stack";
-import { Button } from "@mui/material";
-import propTypes from "prop-types";
+import styled from "styled-components";
+import { COLOR } from "../../styles/color.js";
 import { useRecoilValue } from "recoil";
 import { isLogin } from "../../recoil/authorize";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { COLOR } from "../../styles/color.js";
+import Stack from "@mui/material/Stack";
+import { Button } from "@mui/material";
+import propTypes from "prop-types";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
@@ -32,7 +32,7 @@ export const Welcome = (ref) => {
           learn more
         </LearnmoreBtn>
         {Logined === true ? (
-          <LoginBtn variant="contained" onClick={() => navigate("/step1")}>
+          <LoginBtn variant="contained" onClick={() => navigate("/select")}>
             get started
           </LoginBtn>
         ) : (
@@ -52,16 +52,16 @@ Welcome.propTypes = {
 
 const StWelcome = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   height: 80vh;
   background: linear-gradient(
     to bottom,
     ${COLOR.MAIN_HOVER},
     ${COLOR.MAIN_BACKGROUND}
   );
+  text-align: center;
 `;
 
 export const Title = styled.h1`
@@ -71,8 +71,8 @@ export const Title = styled.h1`
 `;
 
 export const SubTitle = styled.h3`
-  font-size: 3rem;
   padding-bottom: 2rem;
+  font-size: 3rem;
   font-weight: 00;
 `;
 

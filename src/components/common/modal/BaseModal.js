@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
 import { useRecoilState } from "recoil";
-import Modal from "@mui/material/Modal";
 import { modalState } from "../../../recoil/commonState";
+import Modal from "@mui/material/Modal";
 
 export const BaseModal = (props) => {
   const handleClose = () => setModalValue(false);
@@ -25,14 +25,14 @@ export const BaseModal = (props) => {
 const StBaseModal = styled(Modal)``;
 const ModalContainer = styled.div`
   display: flex;
-  width: 60%;
-  height: 70%;
-  padding: 2rem;
-  margin-top: 1rem;
-  transform: translate(-50%, -50%);
   position: fixed;
   top: 50%;
   left: 50%;
+  width: 60%;
+  height: 70%;
+  min-width: 103rem;
+  padding: 2rem;
   border-radius: 2rem;
   background-color: ${COLOR.MAIN_WHITE};
+  transform: translate(-50%, -50%);
 `;

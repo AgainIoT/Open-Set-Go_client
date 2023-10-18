@@ -1,13 +1,11 @@
 import styled from "styled-components";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
-
+import { Box, Stack, Typography } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
 import Chip from "@mui/material/Chip";
-import { Box, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CheckIcon from "@mui/icons-material/Check";
 
 //props-> data, type,
@@ -108,8 +106,8 @@ export const ChipGroup = (props) => {
 const StSelectChip = styled(Box)`
   display: flex;
   align-items: center;
-  gap: 1rem;
   width: 100%;
+  gap: 1rem;
   & .css-1elwnq4-MuiPaper-root-MuiAccordion-root {
     box-shadow: none;
   }

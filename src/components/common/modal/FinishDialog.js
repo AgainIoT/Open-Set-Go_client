@@ -1,18 +1,17 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
-
+import { useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Box, Button, DialogContent, DialogTitle } from "@mui/material";
+import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
+import axios from "axios";
 import {
   repoDataAtomFamily,
   selectGitignoreData,
 } from "../../../recoil/repoData";
-import { Box, Button, DialogContent, DialogTitle } from "@mui/material";
-import axios from "axios";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { templateContent } from "../../../recoil/templateState";
-import { useState } from "react";
-import { LoadingCompleted } from "../LoadingCompleted";
-import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
 import { modalState } from "../../../recoil/commonState";
+import { LoadingCompleted } from "../LoadingCompleted";
 
 export const FinishDialog = (props) => {
   const [loading, setLoading] = useState(false);
@@ -29,7 +28,25 @@ export const FinishDialog = (props) => {
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
 
-  /* POST - repo info for create repository */
+  async function checkDuplication() {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/repo/checkDuplication`,
+        {
+          owner,
+          repoName,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      return response.data;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // POST - repo info for create repository
   async function postCreatRepo() {
     try {
       const response = await axios.post(
@@ -49,7 +66,7 @@ export const FinishDialog = (props) => {
     }
   }
 
-  /* POST - file for settings */
+  // POST - file for settings
   async function postRepoData() {
     try {
       const response = await axios.post(
@@ -76,7 +93,7 @@ export const FinishDialog = (props) => {
     }
   }
 
-  /* POST - email */
+  // POST - email
   async function postEmail() {
     try {
       const response = await axios.post(
@@ -97,11 +114,19 @@ export const FinishDialog = (props) => {
   }
 
   const handlePost = async () => {
-    setLoading(true);
-    await postCreatRepo();
-    await postRepoData();
-    await postEmail();
-    setDialogValue(false);
+    const isUnique = await checkDuplication();
+
+    if (isUnique) {
+      setLoading(true);
+      await postCreatRepo();
+      await postRepoData();
+      await postEmail();
+      setDialogValue(false);
+    } else {
+      alert(
+        `Your repository '${owner}/${repoName}' is already exists!\nPlease delete repository and try again!`,
+      );
+    }
   };
 
   const handleClose = () => {
@@ -138,17 +163,17 @@ export const FinishDialog = (props) => {
 
 const StFinishDialog = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   overflow-y: scroll;
 `;
 
 const Icon = styled(TaskAltRoundedIcon)`
-  font-size: 7rem;
   color: ${COLOR.MAIN_BLUE};
+  font-size: 7rem;
 `;
 
 const DialogTitleText = styled(DialogTitle)`
@@ -157,15 +182,15 @@ const DialogTitleText = styled(DialogTitle)`
 `;
 
 const DialogContentText = styled(DialogContent)`
-  font-size: 1.5rem;
   color: ${COLOR.BORDER_GRAY};
+  font-size: 1.5rem;
 `;
 
 const DialogBtnContainer = styled(Box)`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   width: 100%;
   row-gap: 1rem;
 `;
@@ -175,6 +200,6 @@ const DialogBtn = styled(Button)`
   height: 100%;
   padding: 1rem;
   border-radius: 2rem;
-  font-size: 1.5rem;
   background-color: ${(props) => props.bgcolor};
+  font-size: 1.5rem;
 `;

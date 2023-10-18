@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
-import MDEditor from "@uiw/react-md-editor";
-import Button from "@mui/material/Button";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { templateContent, templateState } from "../recoil/templateState";
-
-import { BaseModal } from "../components/common/modal/BaseModal";
-import { eachStepState, modalState } from "../recoil/commonState";
-import { TemplateModal } from "../components/common/modal/templateModal";
-import MarkdownPreview from "../components/common/MarkdownPreview";
-
 import { styled } from "styled-components";
+import React, { useState, useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { eachStepState, modalState } from "../recoil/commonState";
+import { templateContent } from "../recoil/templateState";
+import { BaseModal } from "../components/common/modal/BaseModal";
+import { TemplateModal } from "../components/common/modal/TemplateModal";
+import MarkdownPreview from "../components/common/MarkdownPreview";
 
 function ReadmeTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("readme"));
@@ -35,6 +31,8 @@ function ReadmeTemplatePage() {
 const StReadmeTemplatePage = styled.div`
   width: 100%;
   height: 100%;
+  min-width: 60rem;
+  min-height: 40rem;
 `;
 
 export default ReadmeTemplatePage;
