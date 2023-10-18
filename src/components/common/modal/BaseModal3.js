@@ -28,8 +28,8 @@ const StBaseModal = styled(Modal)`
 const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 40%;
-  height: 65%;
+  width: 38%;
+  height: 70%;
   padding: 1.5rem;
   margin-top: 1rem;
   transform: translate(-50%, -50%);

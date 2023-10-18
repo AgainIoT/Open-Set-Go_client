@@ -30,7 +30,7 @@ const StIssueChip = styled.div`
   flex-direction: row;
   list-style: none;
   width: 100%;
-  height: 70%;
+  height: 100%;
   margin-top: 1rem;
   margin-left: 1rem;
   overflow-x: scroll;
