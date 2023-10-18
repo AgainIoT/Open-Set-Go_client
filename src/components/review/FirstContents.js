@@ -98,8 +98,8 @@ export const FirstContents = () => {
         labelText={"Repository Name"}
         type={"repoName"}
         data={repoNameOptions}
-        setIsSelectOwner={setIsSelectOwner}
         dataState={reviewRepoDataState}
+        isSelectOwner={isSelectOwner}
       />
       <Button
         variant="outlined"

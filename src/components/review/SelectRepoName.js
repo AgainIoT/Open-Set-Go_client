@@ -1,14 +1,15 @@
-// import styled from "styled-components";
+import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-import { styled, alpha } from "@mui/material/styles";
 
 import {
   FormControl,
+  FormHelperText,
   InputBase,
   InputLabel,
   MenuItem,
   NativeSelect,
   Select,
+  Typography,
 } from "@mui/material";
 import { useRecoilState } from "recoil";
 
@@ -23,55 +24,50 @@ export const SelectRepoName = (props) => {
   return (
     <>
       <FormControl sx={{ m: 1 }} variant="standard">
-        <InputLabel htmlFor="demo-customized-select-native">
+        <InputLabel htmlFor="demo-customized-select-native" shrink>
           {props.labelText}
         </InputLabel>
-        <NativeSelect
+        <Select
           id="demo-customized-select-native"
           value={selectValue}
           onChange={handleChange}
-          input={<BootstrapInput />}
+          // input={<BootstrapInput />}
+          readOnly={!props.isSelectOwner}
+          displayEmpty
+          renderValue={(selected) => {
+            if (selected.length === 0) {
+              return <Placeholder>Select your Repository</Placeholder>;
+            }
+            return selected;
+          }}
         >
-          {props.data.map((option, index) => (
-            <option key={option} value={option}>
+          <MenuItem disabled value="">
+            <em>Select your Repository</em>
+          </MenuItem>
+          {props.data.map((option) => (
+            <MenuItem key={option} value={option}>
               {option}
-            </option>
+            </MenuItem>
           ))}
           {/* <option aria-label="None" value="" />
           <option value={10}>Ten</option>
           <option value={20}>Twenty</option>
           <option value={30}>Thirty</option> */}
-        </NativeSelect>
+        </Select>
+        {!props.isSelectOwner && <FormHelperText>helperText</FormHelperText>}
       </FormControl>
     </>
   );
 };
 
-// const StSelectRepoName = styled.div``;
-const BootstrapInput = styled(InputBase)(({ theme }) => ({
-  "label + &": {
-    marginTop: theme.spacing(3),
-  },
-  "& .MuiInputBase-input": {
-    borderRadius: 4,
-    position: "relative",
-    backgroundColor: theme.palette.background.paper,
-    border: "1px solid #ced4da",
-    fontSize: 16,
-    padding: "10px 26px 10px 12px",
-    transition: theme.transitions.create(["border-color", "box-shadow"]),
-    // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      "Roboto",
-      "Arial",
-      "sans-serif",
-    ].join(","),
-    "&:focus": {
-      borderRadius: 4,
-      borderColor: "#80bdff",
-      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
-    },
-  },
-}));
+const StSelectRepoName = styled.div``;
+
+const SelectFormControl = styled(FormControl)``;
+const SelectInputLabel = styled(InputLabel)``;
+const SelectAuto = styled(Select)``;
+
+const Placeholder = styled(Typography)`
+  color: ${COLOR.FONT_GRAY};
+`;
+
+const SelectMenuItem = styled(MenuItem)``;
