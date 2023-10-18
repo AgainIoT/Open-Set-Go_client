@@ -3,12 +3,12 @@ import MainPage from "../pages/MainPage";
 import LoginPage from "../pages/Login";
 import SelectTypePage from "../pages/SelectTypePage";
 import PRTemplatePage from "../pages/PRTemplatePage";
-import { ReviewLayout } from "../layout/ReviewLayout";
+import { Layout } from "../layout/Layout";
 import CreateRepo from "../pages/CreateRepoPage";
 import LicensePage from "../pages/LicensePage";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
 import ContributingTemplatePage from "../pages/ContributingTemplatePage";
-
+import ErrorPage from "../pages/ErrorPage";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -16,7 +16,8 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/select" element={<SelectTypePage />} />
-        <Route element={<ReviewLayout />}>
+        <Route path="/*" element={<ErrorPage/>} />
+        <Route element={<Layout />}>
           <Route path="/step1" element={<CreateRepo />} />
           <Route path="/step2" element={<LicensePage />} />
           <Route path="/step3" element={<PRTemplatePage />} />

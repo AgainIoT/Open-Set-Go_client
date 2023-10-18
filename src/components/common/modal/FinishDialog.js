@@ -28,6 +28,24 @@ export const FinishDialog = (props) => {
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
 
+  async function checkDuplication() {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/repo/checkDuplication`,
+        {
+          owner,
+          repoName,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      return response.data;
+    } catch (e) {
+      return false;
+    }
+  }
+
   // POST - repo info for create repository
   async function postCreatRepo() {
     try {
@@ -96,11 +114,19 @@ export const FinishDialog = (props) => {
   }
 
   const handlePost = async () => {
-    setLoading(true);
-    await postCreatRepo();
-    await postRepoData();
-    await postEmail();
-    setDialogValue(false);
+    const isUnique = await checkDuplication();
+
+    if (isUnique) {
+      setLoading(true);
+      await postCreatRepo();
+      await postRepoData();
+      await postEmail();
+      setDialogValue(false);
+    } else {
+      alert(
+        `Your repository '${owner}/${repoName}' is already exists!\nPlease delete repository and try again!`,
+      );
+    }
   };
 
   const handleClose = () => {
