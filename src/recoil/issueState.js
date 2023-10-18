@@ -2,7 +2,7 @@ import { atom, atomFamily, selector } from "recoil";
 
 export const selectedTitle = atom({
   key: "selectedTitle",
-  default: "",
+  default: " ",
 });
 
 export const bodyState = atom({

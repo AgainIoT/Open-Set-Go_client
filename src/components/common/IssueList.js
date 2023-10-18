@@ -21,13 +21,14 @@ import { Interweave } from "interweave";
 import IssueChip from "./IssueChip";
 
 const IssueList = (props) => {
+  const [isClicked, setIsClicked] = useState(false);
   const [data, setData] = useState([]);
   const [content, setContent] = useState("");
   const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
   const [body, setBody] = useRecoilState(bodyState);
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
   const [selectedInfo, setSelectedInfo] = useRecoilState(
-    issueSelectedState("issue")
+    issueSelectedState("issue"),
   );
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const IssueList = (props) => {
     const rst = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
     );
-    setBody(rst.data);
+    setBody(rst.data.content);
     setTemTitle(temTitle);
     // const tmp = await formSchema.yaml2html(rst.data.content);
     // setContent(rst.data.image);
@@ -66,7 +67,7 @@ const IssueList = (props) => {
   return (
     <StIssueList>
       <ChipWrapper>
-        <ChipP >selected template</ChipP>
+        <ChipP>selected template</ChipP>
         <IssueChip />
       </ChipWrapper>
       <SelectDiv>
@@ -90,17 +91,23 @@ const IssueList = (props) => {
             {data.map((it) => (
               <li key={it[0][1]}>
                 <ul>
-                  <ListSubheader sx={{fontSize: "1.5rem"}}>{`${it[0][1]}`}</ListSubheader>
+                  <ListSubheader
+                    sx={{ fontSize: "1.5rem" }}
+                  >{`${it[0][1]}`}</ListSubheader>
                   {it[1][1].map((item) => (
                     <ListItem
                       components="div"
                       onClick={() => {
                         handleCheck(item.title, item.id);
+                        setIsClicked(true);
                       }}
                       key={item.title}
                     >
                       <ListItemButton>
-                        <ListItemText primaryTypographyProps={{fontSize: "1.2rem"}} primary={`${item.title}`} />
+                        <ListItemText
+                          primaryTypographyProps={{ fontSize: "1.2rem" }}
+                          primary={`${item.title}`}
+                        />
                       </ListItemButton>
                     </ListItem>
                   ))}
@@ -116,12 +123,22 @@ const IssueList = (props) => {
             </TitleP>
           </TitleWrapper>
           <PreviewWrapper>
-            <div><img src={"data:image/png;base64,"+content}/></div>
-            </PreviewWrapper>
+            {isClicked ? (
+              <div>
+                <img src={"data:image/png;base64," + content} />
+              </div>
+            ) : (
+              <div></div>
+            )}
+          </PreviewWrapper>
           <BtnWrapper>
-            <UseBtn variant="contained" onClick={handleOpen}>
-              Use template
-            </UseBtn>
+            {isClicked ? (
+              <UseBtn variant="contained" onClick={handleOpen}>
+                Use template
+              </UseBtn>
+            ) : (
+              <div></div>
+            )}
           </BtnWrapper>
         </ContentDiv>
       </SelectDiv>
@@ -133,7 +150,6 @@ export default IssueList;
 
 const StIssueList = styled.div`
   display: flex;
-  align-items: start;
   flex-direction: column;
   width: 100%;
   height: 100%;
@@ -145,6 +161,7 @@ const ChipWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   height: 20%;
+  border-bottom: 0.2rem solid ${COLOR.MAIN_BORDER};
 `;
 
 const ChipP = styled.p`
@@ -158,15 +175,14 @@ const ChipP = styled.p`
 
 const SelectDiv = styled.div`
   display: flex;
+  align-items: center;
   width: 100%;
   height: 80%;
 `;
 
 const ListBox = styled(Box)`
   width: 30%;
-  max-width: 36rem;
   height: 100%;
-  max-height: 90%;
 `;
 
 const ContentDiv = styled.div`
@@ -176,35 +192,41 @@ const ContentDiv = styled.div`
   flex-direction: column;
   width: 75%;
   height: 100%;
-  border-left: 0.2rem solid ${COLOR.MAIN_HOVER};
+  border-left: 0.1rem solid ${COLOR.MAIN_BORDER};
 `;
 
 const TitleWrapper = styled.div`
   display: flex;
   align-items: left;
+  justify-content: center;
   width: 100%;
-  border-bottom: 0.2rem solid ${COLOR.MAIN_HOVER};
-`;
-
-const TmpTxt = styled(ListItemText)`
-  font-size: 3rem;
+  height: 20%;
+  border-bottom: 0.1rem solid ${COLOR.MAIN_BORDER};
 `;
 
 const TitleP = styled(Typography)`
+  width: 100%;
+  height: 100%;
   font-size: 2rem;
   font-weight: bold;
 `;
 
 const PreviewWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 80%;
   padding: 2rem;
   font-size: 2rem;
   text-align: justify;
   line-height: 2rem;
   overflow-y: scroll;
+  border-bottom: 1px solid ${COLOR.MAIN_BORDER};
 `;
-const BtnWrapper = styled.div``;
+const BtnWrapper = styled.div`
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  margin-top: 1rem;
+`;
 
 const UseBtn = styled(Button)`
   width: 17rem;
