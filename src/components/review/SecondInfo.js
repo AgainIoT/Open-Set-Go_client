@@ -2,9 +2,16 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { CircularProgress, SvgIcon, Typography } from "@mui/material";
+import {
+  CircularProgress,
+  IconButton,
+  SvgIcon,
+  Typography,
+} from "@mui/material";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
+import { ReactComponent as GitForkIcon } from "../../assets/icons/gitFork.svg";
+import { ReactComponent as GitHubIcon } from "../../assets/icons/github.svg";
 import { reviewRepoDataState } from "../../recoil/reviewState";
 import axios from "axios";
 
@@ -54,19 +61,35 @@ export const SecondInfo = () => {
     getUserRepoData();
   }, []);
 
+  const handleOpenRepo = () => {
+    console.log("link:", selectedRepoData.repoURL);
+    window.open(selectedRepoData.repoURL, "_blank");
+  };
+
   return (
     <StFirstInfo>
-      <Title variant="h3">Review about</Title>
-      <SubTitle variant="h4">{selectedRepo}</SubTitle>
+      <Title variant="h3">Review Report</Title>
+      <div>
+        <SubTitle variant="h4">{selectedRepo}</SubTitle>
+        <OwnerText>{selectedOwner}</OwnerText>
+      </div>
+
       <DetailRepoDataContainer>
         <RepoItemWrapper>
-          <GitIcon component={StarRateRoundedIcon} />
+          <GitIcon component={GitForkIcon} />
           <RepoDataText>Fork {selectedRepoData.fork}</RepoDataText>
         </RepoItemWrapper>
         <RepoItemWrapper>
           <GitIcon component={StarRateRoundedIcon} />
           <RepoDataText>Starred {selectedRepoData.star}</RepoDataText>
         </RepoItemWrapper>
+        <IconButton
+          onClick={() => {
+            handleOpenRepo();
+          }}
+        >
+          <GitHubIcon />
+        </IconButton>
       </DetailRepoDataContainer>
       <SummarySection>
         <SummaryItem>
@@ -100,7 +123,7 @@ const StFirstInfo = styled.div`
 const Title = styled(Typography)`
   color: ${COLOR.MAIN_NAVY};
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 2rem;
 `;
 const SubTitle = styled(Typography)`
   color: ${COLOR.MAIN_BLACK};
@@ -108,9 +131,15 @@ const SubTitle = styled(Typography)`
   font-size: 3.8rem;
 `;
 
+const OwnerText = styled(Typography)`
+  color: ${COLOR.FONT_GRAY};
+  font-size: 2rem;
+`;
+
 const DetailRepoDataContainer = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 2rem;
 `;
 const RepoItemWrapper = styled.div`
   display: flex;
