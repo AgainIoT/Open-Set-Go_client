@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import { Header } from "./Header";
 import StepInfo from "../components/common/StepInfo";
 import { FinishDialog } from "../components/common/modal/FinishDialog";
+import { CancelDialog } from "../components/common/modal/CancelDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
 import { activeState, eachStepState, modalState } from "../recoil/commonState";
 
@@ -16,14 +17,6 @@ export const ReviewLayout = () => {
   );
   const navigate = useNavigate();
 
-  const handleNext = () => {
-    navigate(`/step${activeStep + 2}`);
-    setActiveState(activeStep + 1);
-  };
-  const handlePre = () => {
-    navigate(`/step${activeStep}`);
-    setActiveState(activeStep - 1);
-  };
   const [modalValue, setModalValue] = useRecoilState(modalState("finishModal"));
   const handleOpen = () => setModalValue(true);
 
