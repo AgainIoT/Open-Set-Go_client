@@ -42,7 +42,7 @@ export function ListHeader(props) {
   );
 }
 
-ListHeader.PropTypes = {
+ListHeader.propTypes = {
   type: PropTypes.string,
 };
 
@@ -92,7 +92,7 @@ export function BasicList(props) {
   );
 }
 
-BasicList.PropTypes = {
+BasicList.propTypes = {
   data: PropTypes.array,
   subData: PropTypes.string,
   handleSelect: PropTypes.func,
@@ -162,7 +162,7 @@ export function DraggableList(props) {
   );
 }
 
-DraggableList.PropTypes = {
+DraggableList.propTypes = {
   data: PropTypes.array,
   handleDrop: PropTypes.func,
   handleRemove: PropTypes.func,

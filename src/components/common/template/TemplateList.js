@@ -185,6 +185,6 @@ export function TemplateList(props) {
   );
 }
 
-TemplateList.PropTypes = {
+TemplateList.propTypes = {
   type: PropTypes.string,
 };
