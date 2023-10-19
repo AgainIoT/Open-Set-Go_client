@@ -8,7 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import { repoDataAtomFamily } from "../../recoil/repoData";
@@ -84,7 +84,7 @@ export const TextInputContainer = (props) => {
             {props.labelText}
             {props.option && <OptionLabel>{props.option}</OptionLabel>}
           </InputLabelWrapper>
-          <TooltipContainer title={<img src={props.gif} alt="gif"/>} arrow placement="top">
+          <TooltipContainer title={<img src={props.gif} width='288rem' height='162rem' alt="gif"/>} arrow placement="top">
             <TooltipBtn>
               <HelpIcon />
             </TooltipBtn>
@@ -163,8 +163,9 @@ const OptionLabel = styled.p`
 `;
 
 const TooltipContainer = styled(Tooltip)`
-  & .MuiTooltip-popper {
-    transform-origin: center bottom;
+
+  & .MuiTooltip-tooltip {
+    transform-origin: center bottom; 
     margin-bottom: 0rem;
   }
 `;
