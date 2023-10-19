@@ -13,16 +13,16 @@ import { activeState, eachStepState, modalState } from "../recoil/commonState";
 export const Layout = () => {
   const [activeStep, setActiveState] = useRecoilState(activeState);
   const [stepCompleted, setStepComplted] = useRecoilState(
-    eachStepState(`${activeStep + 1}`),
+    eachStepState(`${activeStep}`),
   );
   const navigate = useNavigate();
 
   const handleNext = () => {
-    navigate(`/step${activeStep + 2}`);
+    navigate(`/step${activeStep + 1}`);
     setActiveState(activeStep + 1);
   };
   const handlePre = () => {
-    navigate(`/step${activeStep}`);
+    navigate(`/step${activeStep - 1}`);
     setActiveState(activeStep - 1);
   };
   const [modalValue, setModalValue] = useRecoilState(modalState("finishModal"));
@@ -56,7 +56,7 @@ export const Layout = () => {
               <ButtonWrapper
                 variant="contained"
                 disabled={!stepCompleted}
-                onClick={() => (activeStep === 5 ? handleOpen() : handleNext())}
+                onClick={() => (activeStep === 6 ? handleOpen() : handleNext())}
               >
                 Next
               </ButtonWrapper>
