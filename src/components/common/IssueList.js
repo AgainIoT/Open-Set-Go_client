@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import { useState, useEffect } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { eachStepState, modalState } from "../../recoil/commonState";
+import { useRecoilState} from "recoil";
+import { modalState } from "../../recoil/commonState";
 import {
-  issueSelectedState,
   selectedTitle,
   bodyState,
   selectedType,
+  typesLst,
 } from "../../recoil/issueState";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -17,10 +17,10 @@ import ListSubheader from "@mui/material/ListSubheader";
 import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import Box from "@mui/material/Box";
-import * as formSchema from "github-formschema-converter";
 import IssueChip from "./IssueChip";
 
-const IssueList = (props) => {
+const IssueList = () => {
+  const [types, setTypes] = useRecoilState(typesLst);
   const [temType, setTemType] = useRecoilState(selectedType);
   const [isClicked, setIsClicked] = useState(false);
   const [data, setData] = useState([]);
@@ -28,9 +28,6 @@ const IssueList = (props) => {
   const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
   const [body, setBody] = useRecoilState(bodyState);
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
-  const [selectedInfo, setSelectedInfo] = useRecoilState(
-    issueSelectedState("issue"),
-  );
 
   useEffect(() => {
     let completed = false;
@@ -53,6 +50,7 @@ const IssueList = (props) => {
       completed = true;
     };
   }, []);
+
   const handleCheck = async (temTitle, temId, temType) => {
     const rst = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
@@ -60,9 +58,6 @@ const IssueList = (props) => {
     setBody(rst.data.content);
     setTemTitle(temTitle);
     setTemType(temType);
-    console.log(temType);
-    // const tmp = await formSchema.yaml2html(rst.data.content);
-    // setContent(rst.data.image);
     setContent(rst.data.image);
   };
 
@@ -106,13 +101,21 @@ const IssueList = (props) => {
                       }}
                       key={item.title}
                     >
-                      {temTitle ? <div></div> : <div></div>}
-                      <ListItemButton>
-                        <ListItemText
-                          primaryTypographyProps={{ fontSize: "1.2rem" }}
-                          primary={`${item.title}`}
-                        />
-                      </ListItemButton>
+                      {types.includes(it[0][1][0]) ? (
+                        <ListItemButton disabled>
+                          <ListItemText
+                            primaryTypographyProps={{ fontSize: "1.2rem" }}
+                            primary={`${item.title}`}
+                          />
+                        </ListItemButton>
+                      ) : (
+                        <ListItemButton>
+                          <ListItemText
+                            primaryTypographyProps={{ fontSize: "1.2rem" }}
+                            primary={`${item.title}`}
+                          />
+                        </ListItemButton>
+                      )}
                     </ListItem>
                   ))}
                 </ul>
@@ -201,10 +204,11 @@ const ContentDiv = styled.div`
 
 const TitleWrapper = styled.div`
   display: flex;
-  align-items: left;
   justify-content: center;
+  align-items: left;
   width: 100%;
   height: 20%;
+  margin-top: 0.5rem;
   border-bottom: 0.1rem solid ${COLOR.MAIN_BORDER};
 `;
 
@@ -219,11 +223,11 @@ const PreviewWrapper = styled.div`
   width: 100%;
   height: 80%;
   padding: 2rem;
+  border-bottom: 1px solid ${COLOR.MAIN_BORDER};
   font-size: 2rem;
   text-align: justify;
   line-height: 2rem;
   overflow-y: scroll;
-  border-bottom: 1px solid ${COLOR.MAIN_BORDER};
 `;
 const BtnWrapper = styled.div`
   display: flex;

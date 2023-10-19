@@ -1,16 +1,19 @@
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import Chip from "@mui/material/Chip";
-import { issueSelectedState, selectedTitle, bodyState } from "../../recoil/issueState";
+import { issueSelectedState, typesLst } from "../../recoil/issueState";
 
 const IssueChip = () => {
   const [selectedInfo, setSelectedInfo] = useRecoilState(issueSelectedState("issue"));
-
+  const [types, setTypes] = useRecoilState(typesLst);
   const handleDelete = (chipToDelete) => () => {
     const newTmp = selectedInfo.filter((it)=> it.type !== chipToDelete);
     setSelectedInfo(
       newTmp
     );
+    const tmp = types.filter((it)=>it !== chipToDelete[0]);
+    setTypes(tmp);
+
   };
   return (
     <StIssueChip component="ul">
@@ -33,8 +36,8 @@ const StIssueChip = styled.div`
   height: 100%;
   margin-top: 1rem;
   margin-left: 1rem;
-  overflow-x: scroll;
   white-space: nowrap;
+  overflow-x: scroll;
   &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
