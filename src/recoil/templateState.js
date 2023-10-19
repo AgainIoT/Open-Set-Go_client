@@ -6,6 +6,11 @@ export const templateSelectState = atomFamily({
   default: [],
 });
 
+export const templateListData = atomFamily({
+  key: "templateListData",
+  default: [],
+});
+
 // state to show  preview about user select from template modal(templateList)
 export const templatePreviewState = atomFamily({
   key: "templatePreviewState",

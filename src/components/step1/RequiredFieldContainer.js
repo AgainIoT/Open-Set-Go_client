@@ -6,6 +6,8 @@ import axios from "axios";
 import { TextInputContainer } from "../common/InputComponent";
 import { SelectAuto } from "../common/SelectAuto";
 import { repoDataAtomFamily } from "../../recoil/repoData";
+import gifRepoName from "../../assets/images/repoName.gif";
+import gifDescription from "../../assets/images/description.gif";
 
 // for Owner, RepoName, Description
 export const RequiredFieldContainer = () => {
@@ -52,12 +54,47 @@ export const RequiredFieldContainer = () => {
     getUserRepoData();
   }, []);
 
+  async function checkRepoName() {
+    setHelperText("checking");
+    let restrictCheck = false;
+    const dupCheck = await postCheckDuplication();
+    if (dupCheck) {
+      restrictCheck = await validateRepoName();
+      if (restrictCheck) {
+        setHelperText("checked");
+      } else {
+        setHelperText("invalid");
+      }
+    } else {
+      setHelperText("duplicated");
+    }
+    setValidateCheck(restrictCheck && dupCheck);
+  }
+
+  // validate repository name
+  async function validateRepoName() {
+    // Max length: 100 code points
+    if (repoName.length > 100) {
+      return false;
+    }
+    // All code points must be either a hyphen (-), an underscore (_), a period (.), or an ASCII alphanumeric code point
+    const validCharacters = /^[A-Za-z0-9._-]+$/;
+    if (!validCharacters.test(repoName)) {
+      return false;
+    }
+    // The repository names containing only a single period (.) or double period (..) are reserved
+    if (repoName === "." || repoName === "..") {
+      return false;
+    }
+    return true;
+  }
+
   // POST - validate repo name
   const [validateCheck, setValidateCheck] = useRecoilState(
     repoDataAtomFamily("dupCheck"),
   );
-  async function postCheckDupication() {
-    setHelperText("checking");
+
+  async function postCheckDuplication() {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/repo/checkDuplication`,
@@ -69,23 +106,22 @@ export const RequiredFieldContainer = () => {
           withCredentials: true,
         },
       );
-      setValidateCheck(response.data);
-      if (response.data) {
-        setHelperText("checked");
-      } else {
-        setHelperText("error");
-      }
+      return response.data;
     } catch (e) {
       console.error(e);
-      alert("기록 시작 실패. 재시도해주세요.");
+      alert("postCheckDuplication failed");
     }
   }
+
   useEffect(() => {
-    if (repoName !== "") {
-      postCheckDupication();
-    } else {
-      setHelperText("null");
-    }
+    const debounce = setTimeout(() => {
+      if (repoName !== "") {
+        return checkRepoName();
+      } else {
+        setHelperText("null");
+      }
+    }, 300);
+    return () => clearTimeout(debounce);
   }, [repoName]);
 
   const [helperText, setHelperText] = useState(" ");
@@ -115,6 +151,7 @@ export const RequiredFieldContainer = () => {
             useHelperText={true}
             type={"repoName"}
             helperText={helperText}
+            gif={gifRepoName}
           />
         </Grid>
       </Box>
@@ -124,6 +161,7 @@ export const RequiredFieldContainer = () => {
           fieldType={2}
           type={"desc"}
           option={"(optional)"}
+          gif={gifDescription}
         />
       </Grid>
     </StRequiredFieldContainer>
@@ -131,7 +169,7 @@ export const RequiredFieldContainer = () => {
 };
 
 const StRequiredFieldContainer = styled(Grid)`
-width: 80%;
+  width: 80%;
   min-height: 25rem;
   min-width: 50rem;
   row-gap: 1rem;

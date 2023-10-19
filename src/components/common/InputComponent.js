@@ -51,8 +51,14 @@ export const TextInputContainer = (props) => {
         icon: checkIcon,
       },
       {
-        type: "error",
+        type: "duplicated",
         text: `The repository ${props.currInput.current.value} already exists on this account.`,
+        textColor: COLOR.MAIN_RED,
+        icon: warningIcon,
+      },
+      {
+        type: "invalid",
+        text: `The repository name, ${props.currInput.current.value} is invalid.`,
         textColor: COLOR.MAIN_RED,
         icon: warningIcon,
       },
@@ -78,7 +84,7 @@ export const TextInputContainer = (props) => {
             {props.labelText}
             {props.option && <OptionLabel>{props.option}</OptionLabel>}
           </InputLabelWrapper>
-          <TooltipContainer title="test" arrow placement="top">
+          <TooltipContainer title={<img src={props.gif} width='288rem' height='162rem' alt="gif"/>} arrow placement="top">
             <TooltipBtn>
               <HelpIcon />
             </TooltipBtn>
@@ -157,8 +163,9 @@ const OptionLabel = styled.p`
 `;
 
 const TooltipContainer = styled(Tooltip)`
-  & .MuiTooltip-popper {
-    transform-origin: center bottom;
+
+  & .MuiTooltip-tooltip {
+    transform-origin: center bottom; 
     margin-bottom: 0rem;
   }
 `;

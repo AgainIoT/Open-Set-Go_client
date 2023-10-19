@@ -9,6 +9,7 @@ import LicensePage from "../pages/LicensePage";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
 import ContributingTemplatePage from "../pages/ContributingTemplatePage";
 import IssueTemplatePage from "../pages/IssueTemplatePage";
+import ErrorPage from "../pages/ErrorPage";
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/select" element={<SelectTypePage />} />
+        <Route path="/*" element={<ErrorPage/>} />
         <Route element={<Layout />}>
           <Route path="/step0" element={<IssueTemplatePage />} />
           <Route path="/step1" element={<CreateRepo />} />
