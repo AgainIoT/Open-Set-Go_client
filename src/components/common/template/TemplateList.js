@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   templatePreviewState,
   templateSelectState,
+  templateMode,
 } from "../../../recoil/templateState";
-import { templateMode } from "../../../recoil/templateState";
 import { repoDataAtomFamily } from "../../../recoil/repoData";
 import { Pagination } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
@@ -146,7 +147,7 @@ export function TemplateList(props) {
       completed = true;
       setSelectedData([]);
     };
-  }, [props.mode]);
+  }, [templateMod]);
 
   const starIcon = <StarIcon m={2} />;
   const deleteIcon = <DeleteIcon fontSize="inherit" />;
@@ -183,3 +184,7 @@ export function TemplateList(props) {
     </Item>
   );
 }
+
+TemplateList.PropTypes = {
+  type: PropTypes.string,
+};

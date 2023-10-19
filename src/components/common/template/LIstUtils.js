@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -40,6 +41,10 @@ export function ListHeader(props) {
     </>
   );
 }
+
+ListHeader.PropTypes = {
+  type: PropTypes.string,
+};
 
 export function BasicList(props) {
   return (
@@ -86,6 +91,13 @@ export function BasicList(props) {
     </List>
   );
 }
+
+BasicList.PropTypes = {
+  data: PropTypes.array,
+  subData: PropTypes.string,
+  handleSelect: PropTypes.func,
+  icon: PropTypes.object,
+};
 
 export function DraggableList(props) {
   const data = props.data;
@@ -149,3 +161,10 @@ export function DraggableList(props) {
     </List>
   );
 }
+
+DraggableList.PropTypes = {
+  data: PropTypes.array,
+  handleDrop: PropTypes.func,
+  handleRemove: PropTypes.func,
+  icon: PropTypes.object,
+};
