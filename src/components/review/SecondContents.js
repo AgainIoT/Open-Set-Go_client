@@ -256,32 +256,14 @@ export const SecondContents = () => {
     const item = props.item;
     const status = !isLoadingTemplate && reviewTemplateData[item];
     // const [ishover, setIsHover] = useState(false);
-    var ItemIcon = {
-      true: (
-        <TemplateIconBox
-          component={CheckRoundedIcon}
-          iconcolor={COLOR.MAIN_NAVY}
-        />
-      ),
-      false: (
-        <TemplateIconBox component={props.icon} iconcolor={COLOR.MAIN_NAVY} />
-      ),
-      NULL: (
-        <TemplateIconBox
-          component={WarningRoundedIcon}
-          iconcolor={COLOR.MAIN_NAVY}
-        />
-      ),
-    };
 
     return (
       <TemplateItemBox>
         <TemplateItemIconBox>
-          {/* <TemplateIconBox
+          <TemplateIconBox
             component={status ? CheckRoundedIcon : props.icon}
             iconcolor={COLOR.MAIN_NAVY}
-          /> */}
-          {ItemIcon[reviewTemplateData[item]]}
+          />
           {isLoadingTemplate ? (
             <ItemProgress />
           ) : (
