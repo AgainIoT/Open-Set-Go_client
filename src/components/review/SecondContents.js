@@ -371,7 +371,7 @@ const ItemBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 23rem;
-  height: 18rem;
+  height: 22rem;
   padding: 1.5rem;
   gap: 1rem;
   /* border: 0.1rem solid lightgrey; */
