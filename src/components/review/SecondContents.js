@@ -309,19 +309,19 @@ export const SecondContents = () => {
     <StSecondContents>
       <div>
         <TitleContainer>
-          <Title variant="h4">Category</Title>
+          <Title variant="h4">about Template</Title>
         </TitleContainer>
         <ItemListContainer data={templateItem} category={"templateItem"} />
       </div>
       <div>
         <TitleContainer>
-          <Title variant="h4">Category</Title>
+          <Title variant="h4">about Security</Title>
         </TitleContainer>
         <ItemListContainer data={securityItem} category={"securityItem"} />
       </div>
       <div>
         <TitleContainer>
-          <Title variant="h4">Category</Title>
+          <Title variant="h4">about Community</Title>
         </TitleContainer>
         <ItemListContainer data={communityItem} category={"communityItem"} />
       </div>
@@ -341,22 +341,27 @@ const StSecondContents = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 5rem 2rem 0 2rem;
-  gap: 6rem;
+  padding: 4rem 4rem 0 4rem;
+  gap: 5rem;
   overflow-y: auto;
 `;
 
 const TitleContainer = styled.div``;
-const Title = styled(Typography)``;
+const Title = styled(Typography)`
+  padding-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+`;
 
 // for security, community item
 const ItemBox = styled.div`
   display: flex;
+  justify-content: space-evenly;
   flex-direction: column;
   width: 23rem;
   height: 22rem;
   padding: 1.5rem;
-  gap: 1rem;
+  /* gap: 1rem; */
   /* border: 0.1rem solid lightgrey; */
   border-radius: 2rem;
   background-color: ${COLOR.MAIN_WHITE};
@@ -368,6 +373,7 @@ const ItemIconBox = styled(Box)`
   align-items: center;
   justify-content: center;
   position: relative;
+  top: 0;
   margin: 0.1rem;
   width: 5rem;
   height: 5rem;
@@ -442,6 +448,6 @@ const ItemProgress = styled(CircularProgress)`
 // for item list
 const StItemListContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: row;
 `;
