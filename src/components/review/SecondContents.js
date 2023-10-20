@@ -75,13 +75,13 @@ export const SecondContents = () => {
     dependabot: false,
   });
   const [reviewCommunityData, setReviewCommunityData] = useState({
-    description: true,
+    description: false,
     license: {
-      exist: true,
+      exist: false,
       name: "",
     },
-    conduct: true,
-    discussion: true,
+    conduct: false,
+    discussion: false,
   });
 
   async function getTemplateReviewData() {
@@ -159,11 +159,11 @@ export const SecondContents = () => {
       console.log("init: %o", response.data);
 
       const initReviewData = {
-        // description: response.data.description,
-        // license: response.data.license,
-        // conduct: response.data,
-        // discussion: true,
-        ...response.data,
+        description: response.data.description,
+        license: response.data.license.exist,
+        conduct: response.data.conduct,
+        discussion: response.data.discussion,
+        // ...response.data,
       };
 
       console.log("initReview: %o", initReviewData);
