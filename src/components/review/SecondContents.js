@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
+import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import {
   communityItem,
@@ -187,6 +188,19 @@ export const SecondContents = () => {
     navigate("/");
   };
 
+  // const ItemIcon = (props) => {
+  //   switch (reviewTemplateData[props.item]) {
+  //     case true:
+  //       return CheckRoundedIcon;
+  //     case false:
+  //       return props.icon;
+  //     case null:
+  //       return WarningRoundedIcon;
+  //     default:
+  //       return props.icon;
+  //   }
+  // };
+
   const ItemContainer = (props) => {
     console.log("category", props.category);
     const isLoading =
@@ -198,13 +212,32 @@ export const SecondContents = () => {
         ? reviewSecurityData
         : reviewCommunityData;
     const status = !isLoading && reviewData[props.item];
+
+    var ItemIcon = {
+      true: (
+        <TemplateIconBox
+          component={CheckRoundedIcon}
+          iconcolor={COLOR.MAIN_NAVY}
+        />
+      ),
+      false: (
+        <TemplateIconBox component={props.icon} iconcolor={COLOR.MAIN_NAVY} />
+      ),
+      null: (
+        <TemplateIconBox
+          component={WarningRoundedIcon}
+          iconcolor={COLOR.MAIN_NAVY}
+        />
+      ),
+    };
     return (
       <ItemBox>
         <ItemIconBox>
-          <IconBox
+          {/* <IconBox
             component={status ? CheckRoundedIcon : props.icon}
             iconcolor={COLOR.MAIN_NAVY}
-          />
+          /> */}
+          {ItemIcon[reviewData[props.item]]}
           {isLoadingTemplate ? (
             <ItemProgress />
           ) : (
@@ -223,14 +256,32 @@ export const SecondContents = () => {
     const item = props.item;
     const status = !isLoadingTemplate && reviewTemplateData[item];
     // const [ishover, setIsHover] = useState(false);
+    var ItemIcon = {
+      true: (
+        <TemplateIconBox
+          component={CheckRoundedIcon}
+          iconcolor={COLOR.MAIN_NAVY}
+        />
+      ),
+      false: (
+        <TemplateIconBox component={props.icon} iconcolor={COLOR.MAIN_NAVY} />
+      ),
+      NULL: (
+        <TemplateIconBox
+          component={WarningRoundedIcon}
+          iconcolor={COLOR.MAIN_NAVY}
+        />
+      ),
+    };
 
     return (
       <TemplateItemBox>
         <TemplateItemIconBox>
-          <TemplateIconBox
+          {/* <TemplateIconBox
             component={status ? CheckRoundedIcon : props.icon}
             iconcolor={COLOR.MAIN_NAVY}
-          />
+          /> */}
+          {ItemIcon[reviewTemplateData[item]]}
           {isLoadingTemplate ? (
             <ItemProgress />
           ) : (
