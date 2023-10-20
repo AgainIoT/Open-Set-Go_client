@@ -4,111 +4,23 @@ import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Box, Button, DialogContent, DialogTitle } from "@mui/material";
 import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
-import axios from "axios";
-import {
-  repoDataAtomFamily,
-  selectGitignoreData,
-} from "../../../recoil/repoData";
-import { templateContent } from "../../../recoil/templateState";
+import { useNavigate } from "react-router-dom";
 import { modalState } from "../../../recoil/commonState";
 import { LoadingCompleted } from "../LoadingCompleted";
 
 export const CancelDialog = (props) => {
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(false);
-  const owner = useRecoilValue(repoDataAtomFamily("owner"));
-  const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
-  const desc = useRecoilValue(repoDataAtomFamily("desc"));
-  const lang = useRecoilValue(repoDataAtomFamily("lang"));
-  const framework = useRecoilValue(repoDataAtomFamily("framework"));
-  const gitignoreData = useRecoilValue(selectGitignoreData);
-  const license = useRecoilValue(repoDataAtomFamily("license"));
-  const pr = useRecoilValue(templateContent("pr"));
-  const contributing = useRecoilValue(templateContent("contributing"));
-  const readme = useRecoilValue(templateContent("readme"));
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
-
-  // POST - repo info for create repository
-  async function postCreatRepo() {
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/repo`,
-        {
-          owner: owner,
-          repoName: repoName,
-          description: desc,
-        },
-        {
-          withCredentials: true,
-        },
-      );
-    } catch (e) {
-      console.error(e);
-      alert("Failed Repository info post ");
-    }
-  }
-
-  // POST - file for settings
-  async function postRepoData() {
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/file`,
-        {
-          owner: owner,
-          repoName: repoName,
-          language: lang,
-          framework: framework,
-          gitignore: gitignoreData,
-          PRTemplate: pr,
-          IssueTemplate: [], // empty array required now
-          contributingMd: contributing,
-          readmeMd: readme,
-          license: license,
-        },
-        {
-          withCredentials: true,
-        },
-      );
-    } catch (e) {
-      console.error(e);
-      alert("Failed File post");
-    }
-  }
-
-  // POST - email
-  async function postEmail() {
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/mail`,
-        "",
-        {
-          withCredentials: true,
-        },
-      );
-      if (response.status < 300) {
-        window.location.replace("/");
-        setLoading(false);
-      }
-    } catch (e) {
-      console.error(e);
-      alert("Failed to send email");
-    }
-  }
-
-  const handlePost = async () => {
-    setLoading(true);
-    await postCreatRepo();
-    await postRepoData();
-    await postEmail();
-    setDialogValue(false);
-  };
 
   const handleClose = () => {
     setDialogValue(false);
   };
 
   return (
-    <StFinishDialog>
+    <StCancelDialog>
       {loading ? <LoadingCompleted /> : null}
       <Icon />
       <DialogTitleText>Are you sure?</DialogTitleText>
@@ -116,12 +28,12 @@ export const CancelDialog = (props) => {
       <DialogBtnContainer>
         <DialogBtn
           variant="contained"
-          onClick={() => handlePost()}
+          onClick={() => navigate("")}
           autoFocus
           disableElevation
           bhcolor={COLOR.MAIN_BLUE}
         >
-          complete!
+          Go Main Page!
         </DialogBtn>
         <DialogBtn
           variant="outlined"
@@ -131,11 +43,11 @@ export const CancelDialog = (props) => {
           Cancel
         </DialogBtn>
       </DialogBtnContainer>
-    </StFinishDialog>
+    </StCancelDialog>
   );
 };
 
-const StFinishDialog = styled.div`
+const StCancelDialog = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
