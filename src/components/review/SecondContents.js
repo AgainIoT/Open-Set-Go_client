@@ -338,33 +338,16 @@ export const SecondContents = () => {
 };
 const StSecondContents = styled.div`
   display: flex;
-  /* justify-content: space-between; */
-  /* justify-content: center; */
   flex-direction: column;
   width: 100%;
   height: 100%;
-
   padding: 5rem 2rem 0 2rem;
   gap: 6rem;
-
   overflow-y: auto;
 `;
 
-// const StItemContainer = styled.div`
-//   display: flex;
-//   justify-content: space-around;
-//   flex-direction: column;
-//   gap: 1rem;
-// `;
-
 const TitleContainer = styled.div``;
 const Title = styled(Typography)``;
-
-// const ContentsContainer = styled.div`
-//   display: flex;
-//   justify-content: space-around;
-//   flex-direction: row;
-// `;
 
 // for security, community item
 const ItemBox = styled.div`
@@ -429,22 +412,6 @@ const TemplateItemIconBox = styled(ItemIconBox)`
   }
 `;
 
-// const TopContainer = styled.div`
-//   display: flex;
-//   /* justify-content: space-between; */
-//   align-items: center;
-//   flex-direction: row;
-//   width: 100%;
-//   gap: 2rem;
-// `;
-
-// const IconWrapper = styled.div`
-//   width: 5rem;
-//   height: 5rem;
-//   border: 0.1rem solid ${COLOR.MAIN_NAVY};
-//   border-radius: 10rem;
-// `;
-
 const TemplateIconBox = styled(IconBox)``;
 
 const TemplateItemTitle = styled(ItemTitle)`
@@ -464,7 +431,6 @@ const ItemProgress = styled(CircularProgress)`
   display: flex;
   justify-content: center;
   align-items: center;
-
   color: ${COLOR.MAIN_SKYBLUE};
 
   .MuiCircularProgress-svg {
