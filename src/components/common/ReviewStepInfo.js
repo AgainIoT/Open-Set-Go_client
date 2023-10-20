@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import StepData from "../../data/StepData.json";
 
 //StepInfo: Component for description of each step (located on the left side of the screen)
-const StepInfo = () => {
+const ReviewStepInfo = () => {
   //using recoil for matching step information and step
   const activeStep = useRecoilValue(activeState);
   const [templateMod, setTemplateMod] = useRecoilState(templateMode);
@@ -104,4 +104,4 @@ const Box_ = styled.div`
   height: 100%;
 `;
 
-export default StepInfo;
+export default ReviewStepInfo;

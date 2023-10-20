@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
-import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Box, Button, DialogContent, DialogTitle } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useNavigate } from "react-router-dom";
 import { modalState } from "../../../recoil/commonState";
-import { LoadingCompleted } from "../LoadingCompleted";
 
 export const CancelDialog = (props) => {
   const navigate = useNavigate();
