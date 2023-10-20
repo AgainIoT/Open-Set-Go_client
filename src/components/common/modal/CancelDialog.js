@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { Box, Button, DialogContent, DialogTitle } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useNavigate } from "react-router-dom";

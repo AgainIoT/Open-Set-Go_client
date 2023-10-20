@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import Button from "@mui/material/Button";
 import { Header } from "./Header";
@@ -13,9 +13,6 @@ import { useState } from "react";
 
 export const ReviewLayout = () => {
   const [activeStep, setActiveState] = useRecoilState(activeState);
-  const [stepCompleted, setStepComplted] = useRecoilState(
-    eachStepState(`${activeStep + 1}`),
-  );
 
   const [finishModalValue, setFinishModalValue] = useRecoilState(modalState("finishModal"));
   const [cancelModalValue, setCancelModalValue] = useRecoilState(modalState("cancelModal"));
@@ -56,7 +53,7 @@ export const ReviewLayout = () => {
               <div></div>
               <ButtonWrapper
                 variant="contained"
-                disabled={!stepCompleted}
+                disableElevation
                 onClick={handleFinishOpen}
               >
                 Send
