@@ -9,6 +9,7 @@ import { FinishDialog } from "../components/common/modal/FinishDialog";
 import { CancelDialog } from "../components/common/modal/CancelDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
 import { activeState, eachStepState, modalState } from "../recoil/commonState";
+import { useState } from "react";
 
 export const ReviewLayout = () => {
   const [activeStep, setActiveState] = useRecoilState(activeState);
@@ -16,10 +17,21 @@ export const ReviewLayout = () => {
     eachStepState(`${activeStep + 1}`),
   );
 
-  const [modalValue, setModalValue] = useRecoilState(modalState("cancelModal"));
-  const handleOpen = (toggle) => {
-    setModalValue(true);
+  const [finishModalValue, setFinishModalValue] = useRecoilState(modalState("finishModal"));
+  const [cancelModalValue, setCancelModalValue] = useRecoilState(modalState("cancelModal"));
+
+  const handleFinishOpen = () => {
+    setFinishModalValue(true);
+    setTmp("finishModal");
+    console.log(tmp);
   };
+  const handleCancelOpen = () => {
+    setCancelModalValue(true);
+    setTmp("cancelModal");
+    console.log(tmp);
+  };
+
+  const [tmp, setTmp] = useState();
 
   return (
     <StLayout>
@@ -37,7 +49,7 @@ export const ReviewLayout = () => {
               <ButtonWrapper
                 variant="contained"
                 disableElevation
-                onClick={() => (handleOpen(false))}
+                onClick={handleCancelOpen}
               >
                 Cancel
               </ButtonWrapper>
@@ -45,7 +57,7 @@ export const ReviewLayout = () => {
               <ButtonWrapper
                 variant="contained"
                 disabled={!stepCompleted}
-                onClick={() => (handleOpen(true))}
+                onClick={handleFinishOpen}
               >
                 Send
               </ButtonWrapper>
@@ -53,9 +65,10 @@ export const ReviewLayout = () => {
           </StepContentsContainer>
         </StepContainer>
       </ContentsContainer>
-      <BaseDialog type={"cancelModal"}>
-        {/* <CancelDialog type={"cancelModal"}/> */}
-        <FinishDialog type={"finishModal"} />
+      <BaseDialog type={tmp}>
+        {
+          tmp === "cancelModal" ? <CancelDialog type={"cancelModal"}/> : <FinishDialog type={"finishModal"} />
+        }
       </BaseDialog>
     </StLayout>
   );
