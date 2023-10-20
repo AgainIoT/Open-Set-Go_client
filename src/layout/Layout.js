@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
+import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { activeState, eachStepState, modalState } from "../recoil/commonState";
 import { useRecoilState } from "recoil";
 import Button from "@mui/material/Button";
 import { LinearStepper } from "./Stepper";
@@ -8,7 +10,6 @@ import { Header } from "./Header";
 import StepInfo from "../components/common/StepInfo";
 import { FinishDialog } from "../components/common/modal/FinishDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
-import { activeState, eachStepState, modalState } from "../recoil/commonState";
 
 export const Layout = () => {
   const [activeStep, setActiveState] = useRecoilState(activeState);
@@ -16,6 +17,23 @@ export const Layout = () => {
     eachStepState(`${activeStep + 1}`),
   );
   const navigate = useNavigate();
+
+  const preventGoBack = () => {
+    history.pushState(null, "", location.href);
+    alert("please press 'prev' button instead of this");
+  };
+
+  useEffect(() => {
+    (() => {
+      history.pushState(null, "", location.href);
+      window.addEventListener("popstate", preventGoBack);
+      navigate("/step1");
+    })();
+
+    return () => {
+      window.removeEventListener("popstate", preventGoBack);
+    };
+  }, []);
 
   const handleNext = () => {
     navigate(`/step${activeStep + 2}`);
