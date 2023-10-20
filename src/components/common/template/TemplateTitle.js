@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLOR } from "../../../styles/color";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { modalState } from "../../../recoil/commonState";
 import {
@@ -27,31 +28,30 @@ export default function TemplateTitle(props) {
       // setSelectValue(selectValue.concat({ _id: showValue._id }));
       setContent(showValue.map((obj) => obj["content"]).join("\n"));
     } else {
-      setSelectValue({ _id: showValue[0]._id });
+      setSelectValue({ _id: showValue[0].id });
       setContent(showValue[0].content);
     }
+    handleClose();
   };
+
   const handleClose = () => setModalValue(false);
 
   return (
-    <box>
-      <Box
-        sx={{
-          ...commonStyles,
-          borderBottom: 1,
-          height: "100%",
-          maxWidth: "80%",
-        }}
+    <Box
+      sx={{
+        p: 2,
+      }}
+    >
+      <Typography
+        id="PR-title"
+        variant="h2"
+        textColor="inherit"
+        fontWeight="lg"
+        m={2}
       >
-        <Typography
-          id="PR-title"
-          variant="h2"
-          textColor="inherit"
-          fontWeight="lg"
-          m={2}
-        >
-          {showValue.length ? showValue[0].title : ""}
-        </Typography>
+        {showValue.length ? showValue[0].title : ""}
+      </Typography>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography
           id="PR-desc"
           variant="h5"
@@ -68,24 +68,18 @@ export default function TemplateTitle(props) {
             ></LinkIcon>
           ) : null}
         </Typography>
-        <Button
-          variant="contained"
-          m={4}
-          onClick={() => {
-            handleSelect();
-          }}
-        >
-          Use Template
-        </Button>
+        {showValue.length && showValue[0].id ? (
+          <Button
+            variant="contained"
+            sx={{ height: "4rem" }}
+            onClick={() => {
+              handleSelect();
+            }}
+          >
+            Use Template
+          </Button>
+        ) : null}
       </Box>
-    </box>
+    </Box>
   );
 }
-
-const commonStyles = {
-  width: "100%",
-  height: "25%",
-  m: 1,
-  borderColor: "text.secondary",
-  bgcolor: "background.paper",
-};

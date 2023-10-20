@@ -55,7 +55,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const Item = styled(Paper)(({ theme }) => ({
+export const Item = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   flexDirection: "column",

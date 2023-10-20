@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { templatePreviewState } from "../../../recoil/templateState";
-import Typography from "@mui/material/Typography";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
 // props -> type(pr, readme, contributing)
@@ -16,27 +15,21 @@ export default function TemplateBody(props) {
 
   return (
     <BodyBox>
-      <Typography
-        id="PR-desc"
-        variant="h4"
-        gutterBottom
-        color="textSecondary"
-        m={4}
-      >
+      {rawData.length ? (
         <MarkdownPreview
           source={rawData.map((obj) => obj["content"]).join("\n")}
+          style={{ maxHeight: "52rem", maxWidth: "65rem", margin: "auto" }}
         />
-      </Typography>
+      ) : null}
     </BodyBox>
   );
 }
 
 const BodyBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-height: 52rem;
-  max-width: 65rem;
-  height: 100%;
+  display: flex,
+  justify-content: center,
+  align-items: center,
+  height: 100%,
   overflow-x: hidden;
   overflow-y: auto;
 `;
