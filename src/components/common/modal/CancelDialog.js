@@ -3,15 +3,13 @@ import { COLOR } from "../../../styles/color";
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Box, Button, DialogContent, DialogTitle } from "@mui/material";
-import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
+import CancelIcon from "@mui/icons-material/Cancel";
 import { useNavigate } from "react-router-dom";
 import { modalState } from "../../../recoil/commonState";
 import { LoadingCompleted } from "../LoadingCompleted";
 
 export const CancelDialog = (props) => {
   const navigate = useNavigate();
-
-  const [loading, setLoading] = useState(false);
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
 
@@ -21,10 +19,9 @@ export const CancelDialog = (props) => {
 
   return (
     <StCancelDialog>
-      {loading ? <LoadingCompleted /> : null}
       <Icon />
       <DialogTitleText>Are you sure?</DialogTitleText>
-      <DialogContentText>completed project settings</DialogContentText>
+      <DialogContentText>If you cancel, all the content you are creating will disappear.</DialogContentText>
       <DialogBtnContainer>
         <DialogBtn
           variant="contained"
@@ -57,7 +54,7 @@ const StCancelDialog = styled.div`
   overflow-y: scroll;
 `;
 
-const Icon = styled(TaskAltRoundedIcon)`
+const Icon = styled(CancelIcon)`
   color: ${COLOR.MAIN_BLUE};
   font-size: 7rem;
 `;

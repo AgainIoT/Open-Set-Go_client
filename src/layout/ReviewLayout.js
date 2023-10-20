@@ -35,7 +35,7 @@ export const ReviewLayout = () => {
               <ButtonWrapper
                 variant="contained"
                 disableElevation
-                onClick={() => navigate("")}
+                onClick={() => (handleOpen())}
               >
                 Cancel
               </ButtonWrapper>
