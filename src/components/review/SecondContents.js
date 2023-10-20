@@ -413,17 +413,7 @@ const DecsText = styled(Typography)`
 `;
 
 // for template item
-const TemplateItemBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 23rem;
-  height: 18rem;
-  padding: 1.5rem;
-  gap: 1rem;
-  /* border: 0.1rem solid lightgrey; */
-  border-radius: 2rem;
-  background-color: ${COLOR.MAIN_WHITE};
-  box-shadow: 0rem 0.1rem 2rem lightgrey;
+const TemplateItemBox = styled(ItemBox)`
   &:hover {
     padding: 2rem 1.5rem;
     background-color: ${COLOR.MAIN_PURPLE};
