@@ -5,8 +5,7 @@ import { useRecoilState } from "recoil";
 import Button from "@mui/material/Button";
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
-import StepInfo from "../components/common/StepInfo";
-import { FinishDialog } from "../components/common/modal/FinishDialog";
+import ReviewStepInfo from "../components/common/ReviewStepInfo";
 import { ReviewDialog } from "../components/common/modal/ReviewDialog";
 import { CancelDialog } from "../components/common/modal/CancelDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
@@ -14,15 +13,9 @@ import { modalState } from "../recoil/commonState";
 
 export const ReviewLayout = () => {
 
-  const [finishModalValue, setFinishModalValue] = useRecoilState(modalState("finishModal"));
   const [reviewModalValue, setReviewModalValue] = useRecoilState(modalState("reviewModal"));
   const [cancelModalValue, setCancelModalValue] = useRecoilState(modalState("cancelModal"));
 
-  const handleFinishOpen = () => {
-    setFinishModalValue(true);
-    setTmp("finishModal");
-    console.log(tmp);
-  };
   const handleReviewOpen = () => {
     setReviewModalValue(true);
     setTmp("reviewModal");
@@ -42,7 +35,7 @@ export const ReviewLayout = () => {
       <ContentsContainer>
         <StepContainer>
           <ExplainWrapper>
-            <StepInfo />
+            <ReviewStepInfo />
           </ExplainWrapper>
           <StepContentsContainer>
             <StepContentsWrapper>

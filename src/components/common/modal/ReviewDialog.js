@@ -41,7 +41,7 @@ export const ReviewDialog = (props) => {
   }
 
   // POST - PRTemplate data
-  async function postPRTemplateData() {
+  async function postPRData() {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/review/file/pr`,
@@ -126,7 +126,7 @@ export const ReviewDialog = (props) => {
 
     if (isUnique) {
       setLoading(true);
-      await postReadmeData();
+      await postPRData();
       setDialogValue(false);
     } else {
       alert(

@@ -29,6 +29,12 @@ const Router = () => {
           <Route path="/step5" element={<ContributingTemplatePage />} />
           <Route path="/step6" element={<ReadmeTemplatePage />} />
         </Route>
+        <Route element={<ReviewLayout />}>
+          <Route path="/reviewPR" element={<PRTemplatePage />} />
+          <Route path="/reviewIssue" element={<IssueTemplatePage />} />
+          <Route path="/reviewContributing" element={<ContributingTemplatePage />} />
+          <Route path="/reviewReadme" element={<ReadmeTemplatePage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

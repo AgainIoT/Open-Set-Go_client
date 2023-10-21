@@ -30,18 +30,14 @@ const ReviewStepInfo = () => {
               <Box>
                 <StStepInfo>
                   <ContentP>{it.content}</ContentP>
-                  {activeStep > 1 ? (
-                    <ButtonWrapper
-                      size="large"
-                      variant="text"
-                      disableElevation
-                      onClick={() => handleOpen(false)}
-                    >
-                      Find Template
-                    </ButtonWrapper>
-                  ) : (
-                    <div></div>
-                  )}
+                  <ButtonWrapper
+                    size="large"
+                    variant="text"
+                    disableElevation
+                    onClick={() => handleOpen(false)}
+                  >
+                    Find Template
+                  </ButtonWrapper>
                   {activeStep > 2 ? (
                     <ButtonWrapper
                       size="large"
