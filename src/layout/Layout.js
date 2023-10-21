@@ -12,22 +12,36 @@ import { FinishDialog } from "../components/common/modal/FinishDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
 
 export const Layout = () => {
-  const [activeStep, setActiveState] = useRecoilState(activeState);
+  const [activeStep, setActiveStep] = useRecoilState(activeState);
   const [stepCompleted, setStepComplted] = useRecoilState(
-    eachStepState(`${activeStep + 1}`),
+    eachStepState(`${activeStep}`),
   );
   const navigate = useNavigate();
 
+  const preventClose = (event) => {
+    event.preventDefault();
+    event.returnValue = "";
+  };
+
+  useEffect(() => {
+    (() => {
+      window.addEventListener("beforeunload", preventClose);
+    })();
+
+    return () => {
+      window.removeEventListener("beforeunload", preventClose);
+    };
+  }, []);
+
   const preventGoBack = () => {
     history.pushState(null, "", location.href);
-    alert("please press 'prev' button instead of this");
+    alert("please press 'prev' button instead of the browser button");
   };
 
   useEffect(() => {
     (() => {
       history.pushState(null, "", location.href);
       window.addEventListener("popstate", preventGoBack);
-      navigate("/step1");
     })();
 
     return () => {
@@ -36,12 +50,12 @@ export const Layout = () => {
   }, []);
 
   const handleNext = () => {
-    navigate(`/step${activeStep + 2}`);
-    setActiveState(activeStep + 1);
+    navigate(`/step${activeStep + 1}`);
+    setActiveStep(activeStep + 1);
   };
   const handlePre = () => {
-    navigate(`/step${activeStep}`);
-    setActiveState(activeStep - 1);
+    navigate(`/step${activeStep - 1}`);
+    setActiveStep(activeStep - 1);
   };
   const [modalValue, setModalValue] = useRecoilState(modalState("finishModal"));
   const handleOpen = () => setModalValue(true);
@@ -74,7 +88,7 @@ export const Layout = () => {
               <ButtonWrapper
                 variant="contained"
                 disabled={!stepCompleted}
-                onClick={() => (activeStep === 4 ? handleOpen() : handleNext())}
+                onClick={() => (activeStep === 5 ? handleOpen() : handleNext())}
               >
                 Next
               </ButtonWrapper>

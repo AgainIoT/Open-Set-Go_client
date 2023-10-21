@@ -11,9 +11,9 @@ export const LinearStepper = () => {
 
   return (
     <StStepperContainer>
-      <StepperWraper activeStep={activeStep} alternativeLabel>
+      <StepperWraper activeStep={activeStep - 1} alternativeLabel>
         {StepData.StepData.map((label) => (
-          <Step key={label.step}>
+          <Step key={label.step - 1}>
             <StepLabelWrapper>{label.title}</StepLabelWrapper>
           </Step>
         ))}

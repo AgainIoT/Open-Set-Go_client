@@ -14,7 +14,7 @@ const StepInfo = () => {
 
   return (
     <div>
-      {StepData.StepData.filter((eachStep) => eachStep.id === activeStep).map(
+      {StepData.StepData.filter((eachStep) => eachStep.step === activeStep).map(
         (it) => {
           const [modalValue, setModalValue] = useRecoilState(
             modalState(it.type),
@@ -43,7 +43,7 @@ const StepInfo = () => {
                   ) : (
                     <div></div>
                   )}
-                  {activeStep > 2 ? (
+                  {activeStep > 3 ? (
                     <ButtonWrapper
                       size="large"
                       variant="text"
