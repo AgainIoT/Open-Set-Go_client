@@ -24,7 +24,7 @@ export const ReviewLayout = () => {
     console.log(tmp);
   };
   const handleReviewOpen = () => {
-    setCancelModalValue(true);
+    setReviewModalValue(true);
     setTmp("reviewModal");
     console.log(tmp);
   };

@@ -48,26 +48,6 @@ export const ReviewDialog = (props) => {
     }
   }
 
-//   // POST - repo info for create repository
-//   async function postCreatRepo() {
-//     try {
-//       const response = await axios.post(
-//         `${process.env.REACT_APP_SERVER_URL}/repo`,
-//         {
-//           owner: owner,
-//           repoName: repoName,
-//           description: desc,
-//         },
-//         {
-//           withCredentials: true,
-//         },
-//       );
-//     } catch (e) {
-//       console.error(e);
-//       alert("Failed Repository info post ");
-//     }
-//   }
-
   // POST - file for settings
   async function postRepoData() {
     try {
@@ -120,7 +100,6 @@ export const ReviewDialog = (props) => {
 
     if (isUnique) {
       setLoading(true);
-    //   await postCreatRepo();
       await postRepoData();
       await postEmail();
       setDialogValue(false);
