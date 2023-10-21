@@ -16,7 +16,7 @@
       "step": 3,
       "title": "Pull-Request Template",
       "type": "pr",
-      "content": "Pull-Request template (PR template) is a template of a PR body that is entered when pr is performed. This standardizes the description format so that the code can be easily understood and identifies the parts that need to be checked during PR. We provide you with PR templates of several famous open source projects. You can choose and edit the template that is appropriate for you."
+      "content": "Pull-Request template (PR template) is a template of a PR body that is entered when pr is performed. This standardizes the description format so that the code can be easily understood and looks over the parts that need to be checked during PR. We provide you with PR templates of several famous open source projects. You can choose and edit the template that is appropriate for you."
     },
     {
       "step": 4,
