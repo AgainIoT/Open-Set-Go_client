@@ -12,7 +12,7 @@ function ContributingTemplatePage(props) {
     modalState("contributing"),
   );
   const [content, setContent] = useRecoilState(templateContent("contributing"));
-  const [stepComplete, setStepComplted] = useRecoilState(eachStepState("4"));
+  const [stepComplete, setStepComplted] = useRecoilState(eachStepState("5"));
 
   useEffect(() => {
     setStepComplted(true);

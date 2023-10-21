@@ -10,7 +10,7 @@ import MarkdownPreview from "../components/common/MarkdownPreview";
 function ReadmeTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("readme"));
   const [content, setContent] = useRecoilState(templateContent("readme"));
-  const [stepComplete, setStepComplted] = useRecoilState(eachStepState("5"));
+  const [stepComplete, setStepComplted] = useRecoilState(eachStepState("6"));
 
   useEffect(() => {
     setStepComplted(true);
