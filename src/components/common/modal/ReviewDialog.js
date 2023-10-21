@@ -18,11 +18,6 @@ export const ReviewDialog = (props) => {
   const [loading, setLoading] = useState(false);
   const owner = useRecoilValue(repoDataAtomFamily("owner"));
   const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
-  const desc = useRecoilValue(repoDataAtomFamily("desc"));
-  const lang = useRecoilValue(repoDataAtomFamily("lang"));
-  const framework = useRecoilValue(repoDataAtomFamily("framework"));
-  const gitignoreData = useRecoilValue(selectGitignoreData);
-  const license = useRecoilValue(repoDataAtomFamily("license"));
   const pr = useRecoilValue(templateContent("pr"));
   const contributing = useRecoilValue(templateContent("contributing"));
   const issue = useRecoilValue(issueSelectedState("issue"));
@@ -134,7 +129,7 @@ export const ReviewDialog = (props) => {
 
     if (isUnique) {
       setLoading(true);
-    await postReadmeData();
+      await postReadmeData();
       setDialogValue(false);
     } else {
       alert(
