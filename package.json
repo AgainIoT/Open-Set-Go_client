@@ -22,6 +22,8 @@
     "@uiw/react-md-editor": "^3.23.5",
     "axios": "^1.5.0",
     "env-cmd": "^10.1.0",
+    "github-formschema-converter": "^0.0.2",
+    "interweave": "^13.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
