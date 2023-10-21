@@ -4,6 +4,7 @@ import LoginPage from "../pages/Login";
 import SelectTypePage from "../pages/SelectTypePage";
 import PRTemplatePage from "../pages/PRTemplatePage";
 import { Layout } from "../layout/Layout";
+import { ReviewLayout } from "../layout/ReviewLayout";
 import CreateRepo from "../pages/CreateRepoPage";
 import LicensePage from "../pages/LicensePage";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
@@ -18,7 +19,7 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/select" element={<SelectTypePage />} />
-        <Route path="/*" element={<ErrorPage/>} />
+        <Route path="/*" element={<ErrorPage />} />
         <Route element={<Layout />}>
           <Route path="/step0" element={<IssueTemplatePage />} />
           <Route path="/step1" element={<CreateRepo />} />
