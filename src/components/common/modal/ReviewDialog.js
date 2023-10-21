@@ -75,33 +75,12 @@ export const ReviewDialog = (props) => {
     }
   }
 
-  // POST - email
-  async function postEmail() {
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/mail`,
-        "",
-        {
-          withCredentials: true,
-        },
-      );
-      if (response.status < 300) {
-        window.location.replace("/");
-        setLoading(false);
-      }
-    } catch (e) {
-      console.error(e);
-      alert("Failed to send email");
-    }
-  }
-
   const handlePost = async () => {
     const isUnique = await checkDuplication();
 
     if (isUnique) {
       setLoading(true);
       await postRepoData();
-      await postEmail();
       setDialogValue(false);
     } else {
       alert(
