@@ -1,15 +1,11 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
 import React, { useState, useMemo, useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState,useRecoilValue } from "recoil";
 import { modalState } from "../../../recoil/commonState";
 import {
   issueSelectedState,
   selectedState,
-  bodyState,
-  typesLst,
-  selectedInfo2,
-  selectedInfo3,
   clickState
 } from "../../../recoil/issueState";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -19,23 +15,22 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import FormHelperText from "@mui/material/FormHelperText";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { async } from "q";
 
 const IssueModal = () => {
   const [isDu, setIsDu] = useState(false);
   const [clickNow, setClickNow] = useRecoilState(clickState);
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
   const [isFinished, setIsFinished] = useState(false);
-  const [body, setBody] = useRecoilState(bodyState);
-  const [types, setTypes] = useRecoilState(typesLst);
+  const [body, setBody] = useRecoilState(selectedState("body"));
+  const [types, setTypes] = useRecoilState(issueSelectedState("type"));
   const [temType, setTemType] = useRecoilState(selectedState("type"));
   const [temTitle, setTemTitle] = useRecoilState(selectedState("title"));
   const [selectedInfo, setSelectedInfo] = useRecoilState(
     issueSelectedState("issue"),
   );
 
-  const [selectedInfo22, setSelectedInfo22] = useRecoilState(selectedInfo2);
-  const [selectedInfo33, setSelectedInfo33] = useRecoilState(selectedInfo3);
+  const [selectedInfo22, setSelectedInfo22] = useRecoilState(issueSelectedState("typeAndTitle"));
+  const [selectedInfo33, setSelectedInfo33] = useRecoilState(issueSelectedState("uname"));
 
   const [userInput, setUserInput] = useState({
     uname: "",
@@ -107,7 +102,7 @@ labels: []
 assignees: []\n
 ` ;
     }
-    tmp = tmp + body;
+    const rst = tmp + body;
     setSelectedInfo22([
       ...selectedInfo22,
       {
@@ -120,7 +115,7 @@ assignees: []\n
       ...selectedInfo,
       {
         type: temTitle,
-        content: tmp,
+        content: rst,
       },
     ]);
     setUserInput({

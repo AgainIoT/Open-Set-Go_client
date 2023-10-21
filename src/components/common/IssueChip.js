@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import Chip from "@mui/material/Chip";
-import { issueSelectedState, typesLst, selectedInfo2, selectedInfo3 } from "../../recoil/issueState";
+import { issueSelectedState} from "../../recoil/issueState";
 
 const IssueChip = () => {
-  const [types, setTypes] = useRecoilState(typesLst);
+  const [types, setTypes] = useRecoilState(issueSelectedState("type"));
   const [selectedInfo, setSelectedInfo] = useRecoilState(issueSelectedState("issue"));
-  const [selectedInfo22, setSelectedInfo22] = useRecoilState(selectedInfo2);
-  const [selectedInfo33, setSelectedInfo33] = useRecoilState(selectedInfo3);
+  const [selectedInfo22, setSelectedInfo22] = useRecoilState(issueSelectedState("typeAndTitle"));
+  const [selectedInfo33, setSelectedInfo33] = useRecoilState(issueSelectedState("uname"));
   const handleDelete = (typeToDelete, unameToDelete) => () => {
-    const newTmp = selectedInfo.filter((it)=> it.type !== typeToDelete);
+    const newTmp = selectedInfo22.filter((it)=> it.type !== typeToDelete);
     setSelectedInfo22(
       newTmp
     );

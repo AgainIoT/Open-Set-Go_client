@@ -4,10 +4,9 @@ import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { modalState } from "../../recoil/commonState";
 import {
-  bodyState,
   selectedState,
-  typesLst,
   clickState,
+  issueSelectedState
 } from "../../recoil/issueState";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -20,13 +19,13 @@ import Box from "@mui/material/Box";
 import IssueChip from "./IssueChip";
 
 const IssueList = () => {
-  const [types, setTypes] = useRecoilState(typesLst);
+  const [types, setTypes] = useRecoilState(issueSelectedState("type"));
   const [temType, setTemType] = useRecoilState(selectedState("type"));
   const [isClicked, setIsClicked] = useState(false);
   const [data, setData] = useState([]);
   const [content, setContent] = useState("");
   const [temTitle, setTemTitle] = useRecoilState(selectedState("title"));
-  const [body, setBody] = useRecoilState(bodyState);
+  const [body, setBody] = useRecoilState(selectedState("body"));
   const [clickNow, setClickNow] = useRecoilState(clickState);
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
 
@@ -57,6 +56,7 @@ const IssueList = () => {
       `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
     );
     setBody(rst.data.content);
+    console.log(rst.data.content);
     setTemTitle(temTitle);
     setTemType(temType);
     setContent(rst.data.image);
