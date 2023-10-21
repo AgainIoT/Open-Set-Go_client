@@ -5,7 +5,6 @@ import {
   modalState,
   activeState,
 } from "../../recoil/commonState";
-import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import StepData from "../../data/StepData.json";
 

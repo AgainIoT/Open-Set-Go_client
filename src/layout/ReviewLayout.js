@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-import { Outlet } from "react-router-dom";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import Button from "@mui/material/Button";
+import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import StepInfo from "../components/common/StepInfo";
 import { FinishDialog } from "../components/common/modal/FinishDialog";
 import { CancelDialog } from "../components/common/modal/CancelDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
 import { modalState } from "../recoil/commonState";
-import { useState } from "react";
 
 export const ReviewLayout = () => {
 
