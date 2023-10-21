@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { templateContent, templateState } from "../recoil/templateState";
+import { templateContent } from "../recoil/templateState";
 import { eachStepState, modalState } from "../recoil/commonState";
 import { BaseModal } from "../components/common/modal/BaseModal";
 import { TemplateModal } from "../components/common/modal/TemplateModal";
