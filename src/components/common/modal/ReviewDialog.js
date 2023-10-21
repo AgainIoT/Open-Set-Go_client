@@ -48,22 +48,15 @@ export const ReviewDialog = (props) => {
     }
   }
 
-  // POST - file for settings
-  async function postRepoData() {
+  // POST - PRTemplate data
+  async function postPRTemplateData() {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/file`,
+        `${process.env.REACT_APP_SERVER_URL}/review/file/pr`,
         {
           owner: owner,
           repoName: "test",
-          language: lang,
-          framework: framework,
-          gitignore: gitignoreData,
-          PRTemplate: pr,
-          IssueTemplate: issue,
-          contributingMd: contributing,
-          readmeMd: readme,
-          license: license,
+          content: pr,
         },
         {
           withCredentials: true,
@@ -75,12 +68,73 @@ export const ReviewDialog = (props) => {
     }
   }
 
+  // POST - issue data
+  async function postIssueData() {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/review/file/issue`,
+        {
+          owner: owner,
+          repoName: "test",
+          content: issue,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+    } catch (e) {
+      console.error(e);
+      alert("Failed File post");
+    }
+  }
+
+  // POST - contributing data
+  async function postContributingData() {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/review/file/contributing`,
+        {
+          owner: owner,
+          repoName: "test",
+          content: contributing,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+    } catch (e) {
+      console.error(e);
+      alert("Failed File post");
+    }
+  }
+
+  // POST - readme data
+  async function postReadmeData() {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/review/file/readme`,
+        {
+          owner: owner,
+          repoName: "test",
+          content: readme,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+    } catch (e) {
+      console.error(e);
+      alert("Failed File post");
+    }
+  }
+
+
   const handlePost = async () => {
     const isUnique = await checkDuplication();
 
     if (isUnique) {
       setLoading(true);
-      await postRepoData();
+    await postReadmeData();
       setDialogValue(false);
     } else {
       alert(
