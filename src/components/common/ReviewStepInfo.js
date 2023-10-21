@@ -74,12 +74,6 @@ const StStepInfo = styled.div`
   gap: 2rem;
 `;
 
-const TitleH1 = styled(Typography)`
-  font-size: 2.3rem;
-  font-weight: bolder;
-  text-align: center;
-`;
-
 const ContentP = styled.p`
   margin: 0rem 2rem 0rem 2rem;
   text-align: justify;
