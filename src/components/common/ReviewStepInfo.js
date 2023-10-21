@@ -28,7 +28,7 @@ const ReviewStepInfo = () => {
           };
           return (
             <div key={it.step}>
-              <Box_>
+              <Box>
                 <StStepInfo>
                   <ContentP>{it.content}</ContentP>
                   {activeStep > 1 ? (
@@ -56,7 +56,7 @@ const ReviewStepInfo = () => {
                     <div></div>
                   )}
                 </StStepInfo>
-              </Box_>
+              </Box>
             </div>
           );
         },
@@ -95,12 +95,12 @@ const ButtonWrapper = styled(Button)`
   font-size: 2rem;
 `;
 
-const Box_ = styled.div`
-  gap: 2rem;
+const Box = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  flex-direction: column;
   height: 100%;
+  gap: 2rem;
 `;
 
 export default ReviewStepInfo;
