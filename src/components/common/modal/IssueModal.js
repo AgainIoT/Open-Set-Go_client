@@ -5,10 +5,12 @@ import { useRecoilState } from "recoil";
 import { modalState } from "../../../recoil/commonState";
 import {
   issueSelectedState,
-  selectedTitle,
+  selectedState,
   bodyState,
-  selectedType,
   typesLst,
+  selectedInfo2,
+  selectedInfo3,
+  clickState
 } from "../../../recoil/issueState";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Typography } from "@mui/material";
@@ -17,17 +19,24 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import FormHelperText from "@mui/material/FormHelperText";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { async } from "q";
 
 const IssueModal = () => {
+  const [isDu, setIsDu] = useState(false);
+  const [clickNow, setClickNow] = useRecoilState(clickState);
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
   const [isFinished, setIsFinished] = useState(false);
   const [body, setBody] = useRecoilState(bodyState);
   const [types, setTypes] = useRecoilState(typesLst);
-  const [temType, setTemType] = useRecoilState(selectedType);
-  const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
+  const [temType, setTemType] = useRecoilState(selectedState("type"));
+  const [temTitle, setTemTitle] = useRecoilState(selectedState("title"));
   const [selectedInfo, setSelectedInfo] = useRecoilState(
     issueSelectedState("issue"),
   );
+
+  const [selectedInfo22, setSelectedInfo22] = useRecoilState(selectedInfo2);
+  const [selectedInfo33, setSelectedInfo33] = useRecoilState(selectedInfo3);
+
   const [userInput, setUserInput] = useState({
     uname: "",
     desc: "",
@@ -44,34 +53,69 @@ const IssueModal = () => {
   };
 
   const handleChangeState = (e) => {
+    setIsDu(false);
     setUserInput({
       ...userInput,
       [e.target.name]: e.target.value,
     });
   };
 
+  function isDuplicated () {
+    if (selectedInfo33.includes(userInput.uname)){
+      return true;
+    }
+    return false;
+  }
+
   useEffect(() => {
+    const hey = isDuplicated();
+    setIsDu(hey);
+    console.log(`isDu: ${hey}`);
     if (
+      !hey &&
       userInput.uname.length > 2 &&
       userInput.desc.length > 2 &&
       !userInput.uname.includes("\"") &&
-      !userInput.desc.includes()
+      !userInput.desc.includes("\"") &&
+      !userInput.title.includes("\"")
     ) {
       setIsFinished(true);
+      console.log("isFinished: true");
     } else {
       setIsFinished(false);
+      console.log("isFInished: false");
     }
-  }, [userInput.uname, userInput.desc]);
+  }, [userInput.uname, userInput.desc, userInput.title]);
 
   const handleFinish = (e) => {
-    const tmp =
+    let tmp = "";
+    if(userInput.title === ""){
+      tmp =
+      `---
+name: "${userInput.uname}"
+description: "${userInput.desc}"
+labels: []
+assignees: []\n
+` ;
+    } else {
+      tmp =
       `---
 name: "${userInput.uname}"
 description: "${userInput.desc}"
 title: "${userInput.title}"
 labels: []
 assignees: []\n
-` + body;
+` ;
+    }
+    tmp = tmp + body;
+    setSelectedInfo22([
+      ...selectedInfo22,
+      {
+        type: temTitle,
+        uname: userInput.uname,
+      }
+    ]);
+    setSelectedInfo33([...selectedInfo33, userInput.uname]);
     setSelectedInfo([
       ...selectedInfo,
       {
@@ -86,23 +130,27 @@ assignees: []\n
     });
     setModalValue(false);
     setTypes([...types, temType[0]]);
+    setClickNow(false);
   };
 
-  function NameFormHelperText() {
+  const NameFormHelperText = () => {
     const helperText = useMemo(() => {
       if (userInput.uname.length < 3) {
         return "Name must have at least 3 characters.";
       }
       if (userInput.uname.includes("\"")) {
-        return "doublequote cannot be used";
+        return "doublequote cannot be used.";
+      }
+      if (isDu) {
+        return "The name is already used.";
       }
       return " ";
     }, [userInput.uname]);
 
     return <FormHelperText>{helperText}</FormHelperText>;
-  }
+  };
 
-  function DescFormHelperText() {
+  const DescFormHelperText = () => {
     const helperText = useMemo(() => {
       if (userInput.desc.length < 3) {
         return "Description must have at least 3 characters.";
@@ -114,11 +162,23 @@ assignees: []\n
     }, [userInput.desc]);
 
     return <FormHelperText>{helperText}</FormHelperText>;
-  }
+  };
+
+  const TitleFormHelperText = () => {
+    const helperText = useMemo(() => {
+      if (userInput.title.includes("\"")) {
+        return "doublequote cannot be used";
+      }
+      return " ";
+    }, [userInput.desc]);
+
+    return <FormHelperText>{helperText}</FormHelperText>;
+  };
 
   return (
     <StIssueModal>
       <ThemeProvider theme={theme}>
+        {/* <button onClick={haha}>click</button> */}
         <TitleTypo variant="h3">Create a Issue template</TitleTypo>
         <ExplainText>
           Required fields are marked with an asterisk (*).
@@ -158,6 +218,7 @@ assignees: []\n
             value={userInput.title}
             onChange={handleChangeState}
           />
+          <TitleFormHelperText/>
         </InputDiv>
         <ButtonContainer>
           <BtnWrapper
@@ -283,3 +344,4 @@ const theme = createTheme({
     primary: { main: COLOR.MAIN_PURPLE },
   },
 });
+

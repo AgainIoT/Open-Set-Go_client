@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import { useState, useEffect } from "react";
-import { useRecoilState} from "recoil";
+import { useRecoilState } from "recoil";
 import { modalState } from "../../recoil/commonState";
 import {
-  selectedTitle,
   bodyState,
-  selectedType,
+  selectedState,
   typesLst,
+  clickState,
 } from "../../recoil/issueState";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -21,12 +21,13 @@ import IssueChip from "./IssueChip";
 
 const IssueList = () => {
   const [types, setTypes] = useRecoilState(typesLst);
-  const [temType, setTemType] = useRecoilState(selectedType);
+  const [temType, setTemType] = useRecoilState(selectedState("type"));
   const [isClicked, setIsClicked] = useState(false);
   const [data, setData] = useState([]);
   const [content, setContent] = useState("");
-  const [temTitle, setTemTitle] = useRecoilState(selectedTitle);
+  const [temTitle, setTemTitle] = useRecoilState(selectedState("title"));
   const [body, setBody] = useRecoilState(bodyState);
+  const [clickNow, setClickNow] = useRecoilState(clickState);
   const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
 
   useEffect(() => {
@@ -59,9 +60,13 @@ const IssueList = () => {
     setTemTitle(temTitle);
     setTemType(temType);
     setContent(rst.data.image);
+    setClickNow(true);
   };
 
-  const handleOpen = () => setModalValue(true);
+  const handleOpen = () => {
+    setModalValue(true);
+  };
+
   return (
     <StIssueList>
       <ChipWrapper>
@@ -93,61 +98,71 @@ const IssueList = () => {
                     sx={{ fontSize: "1.5rem" }}
                   >{`${it[0][1]}`}</ListSubheader>
                   {it[1][1].map((item) => (
-                    <ListItem
-                      components="div"
-                      onClick={() => {
-                        handleCheck(item.title, item.id, it[0][1]);
-                        setIsClicked(true);
-                      }}
-                      key={item.title}
-                    >
+                    <div key={item.title}>
                       {types.includes(it[0][1][0]) ? (
-                        <ListItemButton disabled>
-                          <ListItemText
-                            primaryTypographyProps={{ fontSize: "1.2rem" }}
-                            primary={`${item.title}`}
-                          />
-                        </ListItemButton>
+                        <ListItem components="div">
+                          <ListItemButton disabled>
+                            <ListItemText
+                              primaryTypographyProps={{ fontSize: "1.2rem" }}
+                              primary={`${item.title}`}
+                            />
+                          </ListItemButton>
+                        </ListItem>
                       ) : (
-                        <ListItemButton>
-                          <ListItemText
-                            primaryTypographyProps={{ fontSize: "1.2rem" }}
-                            primary={`${item.title}`}
-                          />
-                        </ListItemButton>
+                        <ListItem
+                          components="div"
+                          onClick={() => {
+                            handleCheck(item.title, item.id, it[0][1]);
+                            setIsClicked(true);
+                          }}
+                        >
+                          <ListItemButton>
+                            <ListItemText
+                              primaryTypographyProps={{ fontSize: "1.2rem" }}
+                              primary={`${item.title}`}
+                            />
+                          </ListItemButton>
+                        </ListItem>
                       )}
-                    </ListItem>
+                    </div>
                   ))}
                 </ul>
               </li>
             ))}
           </List>
         </ListBox>
-        <ContentDiv>
-          <TitleWrapper>
-            <TitleP id="PR-title" variant="h2" fontWeight="lg" m={2}>
-              {temTitle}
-            </TitleP>
-          </TitleWrapper>
-          <PreviewWrapper>
-            {isClicked ? (
+        {isClicked && clickNow ? (
+          <ContentDiv>
+            <TitleWrapper>
+              <TitleP id="PR-title" variant="h2" fontWeight="lg" m={2}>
+                {temTitle}
+              </TitleP>
+            </TitleWrapper>
+            <PreviewWrapper>
               <div>
                 <img src={"data:image/png;base64," + content} />
               </div>
-            ) : (
-              <div></div>
-            )}
-          </PreviewWrapper>
-          <BtnWrapper>
-            {isClicked ? (
+            </PreviewWrapper>
+            <BtnWrapper>
               <UseBtn variant="contained" onClick={handleOpen}>
                 Use template
               </UseBtn>
-            ) : (
+            </BtnWrapper>
+          </ContentDiv>
+        ) : (
+          <ContentDiv>
+            <TitleWrapper>
+              <TitleP id="PR-title" variant="h2" fontWeight="lg" m={2}>
+              </TitleP>
+            </TitleWrapper>
+            <PreviewWrapper>
               <div></div>
-            )}
-          </BtnWrapper>
-        </ContentDiv>
+            </PreviewWrapper>
+            <BtnWrapper>
+              <div></div>
+            </BtnWrapper>
+          </ContentDiv>
+        )}
       </SelectDiv>
     </StIssueList>
   );
