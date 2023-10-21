@@ -11,6 +11,7 @@ export const ListWrapper = styled("div")(({ theme }) => ({
   overflowX: "hidden",
   overflowY: "auto",
 }));
+
 export const SearchWrapper = styled("div")(({ theme }) => ({
   width: "100%",
 }));
