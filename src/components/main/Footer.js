@@ -25,7 +25,7 @@ export default function Footer() {
           <DocsP>DOCS</DocsP>
         </a>
         <a href="https://github.com/AgainIoT/Open-Set-Go">
-          <GithubIcon style={{ color: COLOR.MAIN_BLACK, fontSize: "3.3rem" }} />
+          <GithubIcon/>
         </a>
       </GithubDiv>
     </StFooter>
@@ -37,8 +37,8 @@ const StFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  height: 15rem;
-  background-color: ${COLOR.MAIN_WHITE};
+  height: 17rem;
+  background-color: ${COLOR.MAIN_BACKGROUND};
 `;
 
 const LogoDiv = styled.div`
@@ -68,7 +68,8 @@ const InfoDiv = styled.div`
 const InfoP = styled.p`
   justify-content: center;
   align-content: center;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  margin: 0.4rem 0rem 0.4rem 0rem;
 `;
 
 const VlineDiv = styled.div`
@@ -84,11 +85,12 @@ const GithubDiv = styled.div`
 `;
 
 const DocsP = styled.p`
+  font-size: 1.5rem;
   font-family: "Inter", sans-serif;
 `;
 
 const GithubIcon = styled(GitHubIcon)`
   margin-left: 2rem;
   color: ${COLOR.MAIN_BLACK};
-  font-size: "3.3rem";
+  font-size: 4rem;
 `;
