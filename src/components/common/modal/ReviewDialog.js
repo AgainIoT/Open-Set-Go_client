@@ -5,10 +5,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { Box, Button, DialogContent, DialogTitle } from "@mui/material";
 import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
 import axios from "axios";
-import {
-  repoDataAtomFamily,
-  selectGitignoreData,
-} from "../../../recoil/repoData";
+import { repoDataAtomFamily } from "../../../recoil/repoData";
 import { templateContent } from "../../../recoil/templateState";
 import { issueSelectedState } from "../../../recoil/issueState";
 import { modalState } from "../../../recoil/commonState";
