@@ -51,7 +51,13 @@ export default function TemplateTitle(props) {
       >
         {showValue.length ? showValue[0].title : ""}
       </Typography>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Typography
           id="PR-desc"
           variant="h5"
@@ -71,7 +77,7 @@ export default function TemplateTitle(props) {
         {showValue.length && showValue[0].id ? (
           <Button
             variant="contained"
-            sx={{ height: "4rem" }}
+            sx={{ height: "4rem", marginRight: "1.6rem" }}
             onClick={() => {
               handleSelect();
             }}

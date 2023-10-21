@@ -18,7 +18,7 @@ export default function TemplateBody(props) {
       {rawData.length ? (
         <MarkdownPreview
           source={rawData.map((obj) => obj["content"]).join("\n")}
-          style={{ maxHeight: "52rem", maxWidth: "65rem", margin: "auto" }}
+          style={{ maxWidth: "35vw", margin: "auto" }}
         />
       ) : null}
     </BodyBox>
