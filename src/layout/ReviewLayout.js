@@ -7,6 +7,7 @@ import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import StepInfo from "../components/common/StepInfo";
 import { FinishDialog } from "../components/common/modal/FinishDialog";
+import { ReviewDialog } from "../components/common/modal/ReviewDialog";
 import { CancelDialog } from "../components/common/modal/CancelDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
 import { modalState } from "../recoil/commonState";
@@ -14,11 +15,17 @@ import { modalState } from "../recoil/commonState";
 export const ReviewLayout = () => {
 
   const [finishModalValue, setFinishModalValue] = useRecoilState(modalState("finishModal"));
+  const [reviewModalValue, setReviewModalValue] = useRecoilState(modalState("reviewModal"));
   const [cancelModalValue, setCancelModalValue] = useRecoilState(modalState("cancelModal"));
 
   const handleFinishOpen = () => {
     setFinishModalValue(true);
     setTmp("finishModal");
+    console.log(tmp);
+  };
+  const handleReviewOpen = () => {
+    setCancelModalValue(true);
+    setTmp("reviewModal");
     console.log(tmp);
   };
   const handleCancelOpen = () => {
@@ -53,7 +60,7 @@ export const ReviewLayout = () => {
               <ButtonWrapper
                 variant="contained"
                 disableElevation
-                onClick={handleFinishOpen}
+                onClick={handleReviewOpen}
               >
                 Send
               </ButtonWrapper>
@@ -63,7 +70,7 @@ export const ReviewLayout = () => {
       </ContentsContainer>
       <BaseDialog type={tmp}>
         {
-          tmp === "cancelModal" ? <CancelDialog type={"cancelModal"}/> : <FinishDialog type={"finishModal"} />
+          tmp === "cancelModal" ? <CancelDialog type={"cancelModal"}/> : <ReviewDialog type={"reviewModal"} />
         }
       </BaseDialog>
     </StLayout>
