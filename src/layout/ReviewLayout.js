@@ -11,7 +11,7 @@ import { CancelDialog } from "../components/common/modal/CancelDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
 import { modalState } from "../recoil/commonState";
 
-export const ReviewLayout = (props) => {
+export const ReviewLayout = () => {
 
   const [reviewModalValue, setReviewModalValue] = useRecoilState(modalState("reviewModal"));
   const [cancelModalValue, setCancelModalValue] = useRecoilState(modalState("cancelModal"));
@@ -35,7 +35,7 @@ export const ReviewLayout = (props) => {
       <ContentsContainer>
         <StepContainer>
           <ExplainWrapper>
-            <ReviewStepInfo step = {props.step}/>
+            <ReviewStepInfo />
           </ExplainWrapper>
           <StepContentsContainer>
             <StepContentsWrapper>
