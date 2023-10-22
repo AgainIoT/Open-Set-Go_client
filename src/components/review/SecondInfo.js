@@ -3,6 +3,9 @@ import { COLOR } from "../../styles/color";
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import {
+  Alert,
+  AlertTitle,
+  Box,
   CircularProgress,
   IconButton,
   SvgIcon,
@@ -12,12 +15,16 @@ import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { ReactComponent as GitForkIcon } from "../../assets/icons/gitFork.svg";
 import { ReactComponent as GitHubIcon } from "../../assets/icons/github.svg";
-import { reviewRepoDataState } from "../../recoil/reviewState";
+import {
+  reivewAlertListState,
+  reviewRepoDataState,
+} from "../../recoil/reviewState";
 import axios from "axios";
 
 export const SecondInfo = () => {
   const selectedOwner = useRecoilValue(reviewRepoDataState("owner"));
   const selectedRepo = useRecoilValue(reviewRepoDataState("repoName"));
+  const alertList = useRecoilValue(reivewAlertListState);
 
   const [selectedRepoData, setSelectedRepoData] = useState({
     repoURL: "",
@@ -66,6 +73,31 @@ export const SecondInfo = () => {
     window.open(selectedRepoData.repoURL, "_blank");
   };
 
+  const NotificationItem = (props) => {
+    console.log("item::", props.item);
+    return (
+      <StNotificationItem>
+        <NotificationItemWrapper severity="warning">
+          <AlertTitle>{props.item}</AlertTitle>
+          This is a warning alert — <strong>check it out!</strong>
+        </NotificationItemWrapper>
+      </StNotificationItem>
+    );
+  };
+
+  const NotificationList = () => {
+    console.log("alertList", alertList);
+
+    return (
+      <StNotificationList>
+        {alertList.map((it, index) => {
+          console.log("list Item:", it);
+          return <NotificationItem key={it} item={it} />;
+        })}
+      </StNotificationList>
+    );
+  };
+
   return (
     <StFirstInfo>
       <Title variant="h3">Review Report</Title>
@@ -91,11 +123,18 @@ export const SecondInfo = () => {
           <GitHubIcon />
         </IconButton>
       </DetailRepoDataContainer>
-      <SummarySection>
-        <SummaryItem>
-          <ItemProgress variant="determinate" value={75} />
-        </SummaryItem>
-      </SummarySection>
+      <ReportContainer>
+        {" "}
+        <SummarySection>
+          <SummaryItem>
+            <ItemProgress variant="determinate" value={75} size="15rem" />
+          </SummaryItem>
+        </SummarySection>
+        <NotificationSection>
+          <ItemText>Notification</ItemText>
+          <NotificationList />
+        </NotificationSection>
+      </ReportContainer>
     </StFirstInfo>
   );
 };
@@ -144,9 +183,22 @@ const RepoDataText = styled(Typography)`
   color: ${COLOR.BORDER_GRAY};
   font-size: 2rem;
 `;
-const SummarySection = styled.div`
+const ReportContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   width: 100%;
-  height: 20%;
+
+  gap: 2rem;
+  /* height: 30%; */
+`;
+const SummarySection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 2rem 1rem;
   background-color: ${COLOR.MAIN_HOVER};
   border-radius: 2rem;
 `;
@@ -191,4 +243,33 @@ const ItemProgress = styled(CircularProgress)`
 
 const ItemText = styled(Typography)`
   font-size: 1.8rem;
+`;
+
+const NotificationSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 2rem 1rem;
+  gap: 2rem;
+  background-color: ${COLOR.MAIN_HOVER};
+  border-radius: 1.5rem;
+`;
+
+const StNotificationItem = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const NotificationItemWrapper = styled(Alert)`
+  display: flex;
+  width: 100%;
+  background-color: ${COLOR.MAIN_WHITE};
+  font-size: 1.5rem;
+`;
+const StNotificationList = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
 `;

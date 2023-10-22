@@ -18,7 +18,10 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { reviewRepoDataState } from "../../recoil/reviewState";
+import {
+  reivewAlertListState,
+  reviewRepoDataState,
+} from "../../recoil/reviewState";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -57,6 +60,7 @@ export const SecondContents = () => {
     reviewRepoDataState("repoName"),
   );
   const [page, setPage] = useRecoilState(reviewRepoDataState("page"));
+  const [alertList, setAlertList] = useRecoilState(reivewAlertListState);
 
   const [isLoadingTemplate, setIsLoadingTemplate] = useState(true);
   const [isLoadingSecurity, setIsLoadingSecurity] = useState(true);
@@ -135,6 +139,12 @@ export const SecondContents = () => {
         // dependabot: response.data.dependabot,
         ...response.data,
       };
+
+      const nullValue = Object.keys(response.data).filter(
+        (key) => response.data[key] === null,
+      );
+
+      setAlertList(nullValue);
 
       console.log("initReview: %o", initReviewData);
       //setOwner(response.data.id);
@@ -230,6 +240,11 @@ export const SecondContents = () => {
         />
       ),
     };
+    // console.log("item:", reviewData[props.item]);
+    // if (reviewData[props.item] === null) {
+    //   setAlertList([alertList, props.item]);
+    //   console.log("alert:", alertList);
+    // }
     return (
       <ItemBox>
         <ItemIconBox>
