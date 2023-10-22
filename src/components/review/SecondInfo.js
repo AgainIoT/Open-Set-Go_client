@@ -79,8 +79,10 @@ export const SecondInfo = () => {
     return (
       <StNotificationItem>
         <NotificationItemWrapper severity="warning">
-          <AlertTitle>{props.item}</AlertTitle>
-          This is a warning alert — <strong>check it out!</strong>
+          <NotificationItemTitle>
+            Unable to confirm about {props.item}
+          </NotificationItemTitle>
+          Authority above the owner are required for accurately evaluated.
         </NotificationItemWrapper>
       </StNotificationItem>
     );
@@ -258,7 +260,8 @@ const NotificationSection = styled.div`
   min-height: 15rem;
   padding: 2rem 1rem;
   gap: 2rem;
-  background-color: ${COLOR.MAIN_HOVER};
+  background-color: ${COLOR.MAIN_WHITE};
+
   border-radius: 1.5rem;
 `;
 
@@ -271,6 +274,9 @@ const NotificationItemWrapper = styled(Alert)`
   display: flex;
   width: 100%;
   background-color: ${COLOR.MAIN_WHITE};
+  font-size: 1.2rem;
+`;
+const NotificationItemTitle = styled(AlertTitle)`
   font-size: 1.5rem;
 `;
 const StNotificationList = styled.div`
