@@ -8,15 +8,14 @@ import DeskTop from "../../assets/images/desktop.svg";
 //Step2: Component for description on the main page (a brief description of the project)
 const Step2 = () => {
   const zoominItem = useZoomIn(1.5, 0);
-  const fadeinItem = useScrollFadeIn("left", 1.5, 0);
   return (
     <StStep2>
-      <ImgDiv {... zoominItem}>
-        <DesktopImg src={DeskTop}/>
+      <ImgDiv >
+        <DesktopImg {... zoominItem} src={DeskTop}/>
       </ImgDiv>
-      <TextDiv {... fadeinItem}>
-        <TitleTypo variant="h3">You can create Repository easily</TitleTypo>
-        <DescTypo>
+      <TextDiv>
+        <TitleTypo {... useScrollFadeIn("left", 1.5, 0)} variant="h3">You can create Repository easily</TitleTypo>
+        <DescTypo {... useScrollFadeIn("left", 1.5, 0.2)}>
           Create a repository to start a new open-source project.<br></br>You can choose
           the environment(e.g., programming<br></br>language, framework, .gitignore,
           etc.) for your project.
@@ -61,7 +60,7 @@ const TextDiv = styled.div`
 `;
 
 const TitleTypo = styled(Typography)`
-  width: 100%;
+  width: fit-content;
   height: fit-content;
   font-size: 3.2rem;
   font-family: "Inter", sans-serif;
@@ -69,7 +68,7 @@ const TitleTypo = styled(Typography)`
 `;
 
 const DescTypo = styled(Typography)`
-  width: 100%;
+  width: fit-content;
   height: fit-content;
   font-size: 2rem;
   font-weight: 200;
