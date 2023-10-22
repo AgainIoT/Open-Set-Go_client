@@ -1,7 +1,7 @@
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import { useRecoilValue } from "recoil";
 import {
   reivewAlertListState,
   reivewReportState,
@@ -81,8 +81,8 @@ const StReviewChart = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  min-width: 25rem;
   height: 100%;
+  min-width: 25rem;
   min-height: 25rem;
 `;
 const DoughnutChart = styled(Doughnut)``;
