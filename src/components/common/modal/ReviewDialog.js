@@ -5,14 +5,12 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { Box, Button, DialogContent, DialogTitle } from "@mui/material";
 import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
 import axios from "axios";
-import {
-  repoDataAtomFamily,
-  selectGitignoreData,
-} from "../../../recoil/repoData";
+import { repoDataAtomFamily } from "../../../recoil/repoData";
 import { templateContent } from "../../../recoil/templateState";
 import { issueSelectedState } from "../../../recoil/issueState";
-import { modalState } from "../../../recoil/commonState";
+import { modalState, activeState } from "../../../recoil/commonState";
 import { LoadingCompleted } from "../LoadingCompleted";
+import { useNavigate } from "react-router-dom";
 
 export const ReviewDialog = (props) => {
   const [loading, setLoading] = useState(false);
@@ -24,6 +22,8 @@ export const ReviewDialog = (props) => {
   const readme = useRecoilValue(templateContent("readme"));
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
+  const navigate = new useNavigate();
+  const [activeStep, setActiveStep] = useRecoilState(activeState);
 
   async function checkDuplication() {
     try {
@@ -44,12 +44,12 @@ export const ReviewDialog = (props) => {
   }
 
   // POST - PRTemplate data
-  async function postPRTemplateData() {
+  async function postPRData() {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/review/file/pr`,
         {
-          owner: owner,
+          owner: "sinji2102",
           repoName: "test",
           content: pr,
         },
@@ -71,7 +71,7 @@ export const ReviewDialog = (props) => {
         {
           owner: owner,
           repoName: "test",
-          content: issue,
+          issues: issue,
         },
         {
           withCredentials: true,
@@ -129,8 +129,22 @@ export const ReviewDialog = (props) => {
 
     if (isUnique) {
       setLoading(true);
-      await postReadmeData();
+      switch (activeStep){
+        case 3 :
+          await postPRData();
+          break;
+        case 4:
+          await postIssueData();
+          break;
+        case 5:
+          await postContributingData();
+          break;
+        case 6:
+          await postReadmeData();
+      }
       setDialogValue(false);
+      setActiveStep(1);
+      navigate("/");
     } else {
       alert(
         `Your repository '${owner}/${repoName}' is already exists!\nPlease delete repository and try again!`,

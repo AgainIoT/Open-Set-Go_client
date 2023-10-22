@@ -3,6 +3,7 @@ import MainPage from "../pages/MainPage";
 import LoginPage from "../pages/Login";
 import SelectTypePage from "../pages/SelectTypePage";
 import PRTemplatePage from "../pages/PRTemplatePage";
+import ReviewPRTemplatePage from "../pages/ReviewPRTemplatePage";
 import { Layout } from "../layout/Layout";
 import { ReviewLayout } from "../layout/ReviewLayout";
 import CreateRepo from "../pages/CreateRepoPage";
@@ -28,6 +29,12 @@ const Router = () => {
           <Route path="/step4" element={<IssueTemplatePage />} />
           <Route path="/step5" element={<ContributingTemplatePage />} />
           <Route path="/step6" element={<ReadmeTemplatePage />} />
+        </Route>
+        <Route element={<ReviewLayout />}>
+          <Route path="/reviewPR" element={<ReviewPRTemplatePage />} />
+          <Route path="/reviewIssue" element={<IssueTemplatePage />} />
+          <Route path="/reviewContributing" element={<ContributingTemplatePage />} />
+          <Route path="/reviewReadme" element={<ReadmeTemplatePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

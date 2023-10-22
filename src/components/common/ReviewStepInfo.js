@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import { templateMode } from "../../recoil/templateState";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { Typography } from "@mui/material";
+import Button from "@mui/material/Button";
 import {
   modalState,
   activeState,
 } from "../../recoil/commonState";
-import Button from "@mui/material/Button";
+import { templateMode } from "../../recoil/templateState";
 import StepData from "../../data/StepData.json";
 
 //StepInfo: Component for description of each step (located on the left side of the screen)
@@ -16,7 +17,7 @@ const ReviewStepInfo = () => {
 
   return (
     <div>
-      {StepData.StepData.filter((eachStep) => eachStep.id === activeStep).map(
+      {StepData.StepData.filter((eachStep) => eachStep.step === activeStep).map(
         (it) => {
           const [modalValue, setModalValue] = useRecoilState(
             modalState(it.type),
@@ -29,20 +30,19 @@ const ReviewStepInfo = () => {
             <div key={it.step}>
               <Box>
                 <StStepInfo>
+                  <TitleH1>
+                    {it.title}
+                  </TitleH1>
                   <ContentP>{it.content}</ContentP>
-                  {activeStep > 1 ? (
-                    <ButtonWrapper
-                      size="large"
-                      variant="text"
-                      disableElevation
-                      onClick={() => handleOpen(false)}
-                    >
-                      Find Template
-                    </ButtonWrapper>
-                  ) : (
-                    <div></div>
-                  )}
-                  {activeStep > 2 ? (
+                  <ButtonWrapper
+                    size="large"
+                    variant="text"
+                    disableElevation
+                    onClick={() => handleOpen(false)}
+                  >
+                    Find Template
+                  </ButtonWrapper>
+                  {activeStep > 4 ? (
                     <ButtonWrapper
                       size="large"
                       variant="text"
@@ -71,6 +71,12 @@ const StStepInfo = styled.div`
   justify-content: space-evenly;
   align-items: center;
   gap: 2rem;
+`;
+
+const TitleH1 = styled(Typography)`
+  font-size: 2.3rem;
+  font-weight: bolder;
+  text-align: center;
 `;
 
 const ContentP = styled.p`
