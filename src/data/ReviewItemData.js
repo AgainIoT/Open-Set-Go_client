@@ -6,24 +6,28 @@ export const templateItem = [
     title: "ISSUE TEMPLATE",
     icon: ChecklistRoundedIcon,
     desc: "Customize the templates that are available for contributors to use when they open new issues in your repository.",
+    path: "/reviewIssue",
   },
   {
     item: "pr",
     title: "PR TEMPLATE",
     icon: ChecklistRoundedIcon,
     desc: "Using Pull-Request Template, project contributors will automatically see the template's contents in the pull request body.",
+    path: "/reviewPR",
   },
   {
     item: "readme",
     title: "README.md",
     icon: ChecklistRoundedIcon,
     desc: "README file tell other people why your project is useful, what they can do with your project, and how they can use it.",
+    path: "/reviewReadme",
   },
   {
     item: "contributing",
     title: "CONTRIBUTING.md",
     icon: ChecklistRoundedIcon,
     desc: "Guidelines to communicate how people should contribute to your project.",
+    path: "/reviewContributing",
   },
 ];
 
