@@ -10,6 +10,7 @@ import {
   selectGitignoreData,
 } from "../../../recoil/repoData";
 import { templateContent } from "../../../recoil/templateState";
+import { issueSelectedState } from "../../../recoil/issueState";
 import { modalState } from "../../../recoil/commonState";
 import { LoadingCompleted } from "../LoadingCompleted";
 
@@ -24,9 +25,28 @@ export const FinishDialog = (props) => {
   const license = useRecoilValue(repoDataAtomFamily("license"));
   const pr = useRecoilValue(templateContent("pr"));
   const contributing = useRecoilValue(templateContent("contributing"));
+  const issue = useRecoilValue(issueSelectedState("issue"));
   const readme = useRecoilValue(templateContent("readme"));
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
+
+  async function checkDuplication() {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/repo/checkDuplication`,
+        {
+          owner,
+          repoName,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      return response.data;
+    } catch (e) {
+      return false;
+    }
+  }
 
   // POST - repo info for create repository
   async function postCreatRepo() {
@@ -60,7 +80,7 @@ export const FinishDialog = (props) => {
           framework: framework,
           gitignore: gitignoreData,
           PRTemplate: pr,
-          IssueTemplate: [], // empty array required now
+          IssueTemplate: issue,
           contributingMd: contributing,
           readmeMd: readme,
           license: license,
@@ -96,11 +116,19 @@ export const FinishDialog = (props) => {
   }
 
   const handlePost = async () => {
-    setLoading(true);
-    await postCreatRepo();
-    await postRepoData();
-    await postEmail();
-    setDialogValue(false);
+    const isUnique = await checkDuplication();
+
+    if (isUnique) {
+      setLoading(true);
+      await postCreatRepo();
+      await postRepoData();
+      await postEmail();
+      setDialogValue(false);
+    } else {
+      alert(
+        `Your repository '${owner}/${repoName}' is already exists!\nPlease delete repository and try again!`,
+      );
+    }
   };
 
   const handleClose = () => {

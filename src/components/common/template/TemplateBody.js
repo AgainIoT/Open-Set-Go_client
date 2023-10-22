@@ -1,41 +1,35 @@
 import { styled } from "styled-components";
 import React, { useState, useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import Typography from "@mui/material/Typography";
-import {
-  templateContent,
-  templatePreviewState,
-  templateState,
-  templateToModal,
-} from "../../../recoil/templateState";
+import { useRecoilValue } from "recoil";
+import { templatePreviewState } from "../../../recoil/templateState";
 import MarkdownPreview from "@uiw/react-markdown-preview";
-
 
 // props -> type(pr, readme, contributing)
 export default function TemplateBody(props) {
-  const showValue = useRecoilValue(templatePreviewState(props.type));
+  const rawData = useRecoilValue(templatePreviewState(props.type));
+  const [previewData, setPreviewData] = useState("");
+  useEffect(() => {
+    const tmp = rawData.map((obj) => obj["content"]).join("\n");
+    setPreviewData(tmp);
+  }, [rawData]);
 
   return (
     <BodyBox>
-      <Typography
-        id="PR-desc"
-        variant="h4"
-        gutterBottom
-        color="textSecondary"
-        m={4}
-      >
-        <MarkdownPreview source={showValue.content} />
-      </Typography>
+      {rawData.length ? (
+        <MarkdownPreview
+          source={rawData.map((obj) => obj["content"]).join("\n")}
+          style={{ maxWidth: "35vw", margin: "auto" }}
+        />
+      ) : null}
     </BodyBox>
   );
 }
 
 const BodyBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-height: 52rem;
-  max-width: 65rem;
-  height: 100%;
+  display: flex,
+  justify-content: center,
+  align-items: center,
+  height: 100%,
   overflow-x: hidden;
   overflow-y: auto;
 `;

@@ -1,30 +1,41 @@
 import styled from "styled-components";
+import { COLOR } from "../../styles/color";
 import { useRecoilState } from "recoil";
 import { Button } from "@mui/material";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 import { PropTypes } from "prop-types";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 
 //SlideContent: Internal component in the slick to be used in the license page
 //using props to connect data to Slide
 export const SlideContent = (props) => {
   //using recoil to send finally selected license url to the server
   const [pickLi, setPickLi] = useRecoilState(repoDataAtomFamily("license"));
+  const [licenseName, setLicenseName] = useRecoilState(
+    repoDataAtomFamily("licenseName"),
+  );
 
-  const onSet = () => {
-    setPickLi(props.data.url);
+  const handleSelect = () => {
+    setPickLi(props.data.license);
+    setLicenseName(props.data.name);
   };
 
-  const pmsList = props.data.conditions.permissions.map((p) => (
+  const handleCancel = () => {
+    setPickLi("");
+  };
+
+  const pmsList = props.data.permissions.map((p) => (
     <PermissionContent key={p}>
       <li>{p}</li>
     </PermissionContent>
   ));
-  const limList = props.data.conditions.limitations.map((p) => (
+  const limList = props.data.limitations.map((p) => (
     <LimitationContent key={p}>
       <li>{p}</li>
     </LimitationContent>
   ));
-  const conList = props.data.conditions.conditions.map((p) => (
+  const conList = props.data.conditions.map((p) => (
     <ConditionContent key={p}>
       <li>{p}</li>
     </ConditionContent>
@@ -34,10 +45,12 @@ export const SlideContent = (props) => {
       <DivBox>
         <InformationBox className="InformationBox">
           <Title>
-            <h1>{props.data.license}</h1>
+            <h1>{props.data.name}</h1>
           </Title>
           <Content>
-            <p>{props.data.description}</p>
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+              {props.data.description}
+            </ReactMarkdown>
           </Content>
         </InformationBox>
         <ConditionBox className="ConditionBox">
@@ -64,19 +77,19 @@ export const SlideContent = (props) => {
           <LinkDiv>
             <LinkText>
               This is not legal advice.&nbsp;
-              <LinkA href={props.data.url}>
+              <LinkA href={props.data.license}>
                 Learn more about repository licenses.
               </LinkA>
             </LinkText>
           </LinkDiv>
-          {pickLi === props.data.url ? (
+          {pickLi === props.data.license ? (
             <BtnDiv className="BtnDiv">
               <SelectedBtn
                 className="SubmitBtn"
                 variant="contained"
-                onClick={onSet}
+                onClick={handleCancel}
               >
-                Selected
+                Cancel
               </SelectedBtn>
             </BtnDiv>
           ) : (
@@ -84,7 +97,7 @@ export const SlideContent = (props) => {
               <SubmitBtn
                 className="SubmitBtn"
                 variant="contained"
-                onClick={onSet}
+                onClick={handleSelect}
               >
                 Select
               </SubmitBtn>
@@ -245,37 +258,25 @@ const SharedBtn = `
 
 const SelectedBtn = styled(Button)`
   ${SharedBtn}
-  background-color: green;
-  &:visited {
-    background-color: green;
-  }
-  &:link {
-    background-color: green;
-  }
+  background-color: ${COLOR.MAIN_PURPLE};
   &:hover {
-    background-color: green;
+    background-color: purple;
     box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
   }
   &:active {
-    background-color: green;
+    background-color: purple;
   }
 `;
 
 const SubmitBtn = styled(Button)`
   ${SharedBtn}
-  background-color: gray;
-  &:visited {
-    background-color: gray;
-  }
-  &:link {
-    background-color: gray;
-  }
+  background-color: green;
   &:hover {
-    background-color: gray;
+    background-color: ${COLOR.MAIN_GREEN};
     box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
   }
   &:active {
-    background-color: gray;
+    background-color: ${COLOR.MAIN_GREEN};
   }
 `;
 

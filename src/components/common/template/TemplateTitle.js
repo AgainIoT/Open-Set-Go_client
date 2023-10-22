@@ -1,16 +1,15 @@
-import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import LinkIcon from "@mui/icons-material/Link";
+import { modalState } from "../../../recoil/commonState";
 import {
   templateContent,
   templatePreviewState,
   templateSelectState,
+  templateMode,
 } from "../../../recoil/templateState";
-import { modalState } from "../../../recoil/commonState";
-
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import LinkIcon from "@mui/icons-material/Link";
 
 // props -> type(pr, readme, contributing)
 export default function TemplateTitle(props) {
@@ -20,31 +19,39 @@ export default function TemplateTitle(props) {
   const showValue = useRecoilValue(templatePreviewState(props.type));
   const [content, setContent] = useRecoilState(templateContent(props.type));
   const [modalValue, setModalValue] = useRecoilState(modalState(props.type));
+  const [templateMod, setTemplateMod] = useRecoilState(templateMode);
 
   const handleSelect = () => {
-    if (props.type === "contributing") {
-      setSelectValue(selectValue.concat({ _id: showValue._id }));
-      setContent(content + "\n" + showValue.content);
+    if (templateMod) {
+      // setSelectValue(selectValue.concat({ _id: showValue._id }));
+      setContent(showValue.map((obj) => obj["content"]).join("\n"));
     } else {
-      setSelectValue({ _id: showValue._id });
-      setContent(showValue.content);
+      setSelectValue({ _id: showValue[0].id });
+      setContent(showValue[0].content);
     }
+    handleClose();
   };
+
   const handleClose = () => setModalValue(false);
 
   return (
-    <box>
-      <Box sx={{ ...commonStyles, borderBottom: 1, height: "100%", maxWidth: "80%" }}>
-        <Typography
-          id="PR-title"
-          variant="h2"
-          textColor="inherit"
-          fontWeight="lg"
-          m={2}
-
-        >
-          {showValue.title}
-        </Typography>
+    <Box padding={2}>
+      <Typography
+        id="PR-title"
+        variant="h2"
+        textColor="inherit"
+        fontWeight="lg"
+        m={2}
+      >
+        {showValue.length ? showValue[0].title : ""}
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Typography
           id="PR-desc"
           variant="h5"
@@ -52,29 +59,27 @@ export default function TemplateTitle(props) {
           color="textSecondary"
           m={2}
         >
-          {showValue.repoName}
-          <LinkIcon onClick={() => {
-            window.open(showValue.repoUrl);
-          }}></LinkIcon>
+          {showValue.length ? showValue[0].subtitle : ""}
+          {showValue.length && showValue[0].repoUrl ? (
+            <LinkIcon
+              onClick={() => {
+                window.open(showValue[0].repoUrl);
+              }}
+            ></LinkIcon>
+          ) : null}
         </Typography>
-        <Button
-          variant="contained"
-          m={4}
-          onClick={() => {
-            handleSelect();
-          }}
-        >
-          Use Template
-        </Button>
+        {showValue.length && showValue[0].id ? (
+          <Button
+            variant="contained"
+            sx={{ height: "4rem", marginRight: "1.6rem" }}
+            onClick={() => {
+              handleSelect();
+            }}
+          >
+            Use Template
+          </Button>
+        ) : null}
       </Box>
-    </box>
+    </Box>
   );
 }
-
-const commonStyles = {
-  width: "100%",
-  height: "25%",
-  m: 1,
-  borderColor: "text.secondary",
-  bgcolor: "background.paper",
-};

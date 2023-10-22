@@ -1,189 +1,193 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { styled, alpha } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import axios from "axios";
 import {
-  templateContent,
   templatePreviewState,
   templateSelectState,
+  templateMode,
 } from "../../../recoil/templateState";
+import { repoDataAtomFamily } from "../../../recoil/repoData";
+import { Pagination } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
+import DeleteIcon from "@mui/icons-material/Delete";
+import axios from "axios";
+import {
+  ListItemData,
+  DraggableListItemData,
+} from "../../../data/ListItemData";
+import { Item, ListWrapper } from "./StyledTemplate";
+import { ListHeader, BasicList, DraggableList } from "./LIstUtils";
+import { activeState } from "../../../recoil/commonState";
+
+const DATAPERPAGE = 20;
 
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {
-  const [data, setData] = useState([]);
-  const url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;
+  const owner = useRecoilValue(repoDataAtomFamily("owner"));
+  const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
+  const description = useRecoilValue(repoDataAtomFamily("desc"));
+  const license = useRecoilValue(repoDataAtomFamily("licenseName"));
+
+  const [templateData, setTemplateData] = useState([]);
+  const [generateData, setGenerateData] = useState([]);
+  const [selectedData, setSelectedData] = useState([]);
+  const activeStep = useRecoilValue(activeState);
+
+  const [pageRange, setPageRange] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  let url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;
 
   const selectValue = useRecoilValue(templateSelectState(props.type));
   const [showValue, setShowValue] = useRecoilState(
     templatePreviewState(props.type),
   );
+  const templateMod = useRecoilValue(templateMode);
 
-  const handleSelect = (value) => {
-    setShowValue({
-      _id: value._id,
-      title: value.title,
-      repoName: value.repoName,
-      repoUrl: value.repoUrl,
-      content: value.content,
-    });
+  const handlePageSelect = async (event, page) => {
+    setCurrentPage(page);
+    getTemplateData(page);
   };
+
+  const handleSelect = async (selected) => {
+    if (templateMod) {
+      const dataList = [...selectedData, selected];
+      setSelectedData(dataList);
+      const filteredData = generateData.filter(
+        (item) => item.id !== selected.id,
+      );
+      setGenerateData(filteredData);
+      setShowValue(dataList);
+    } else {
+      const content = await axios.get(url + "/" + selected.id);
+      const tmp = JSON.parse(JSON.stringify(selected));
+      tmp.content = content.data;
+      setShowValue([tmp]);
+    }
+  };
+
+  const handleRemove = (selected) => {
+    const filteredData = selectedData.filter((item) => item.id !== selected.id);
+    setSelectedData(filteredData);
+    setGenerateData(
+      [...generateData, selected].sort((a, b) => a.index - b.index),
+    );
+    setShowValue(filteredData);
+  };
+
+  const handleDrop = (droppedItem) => {
+    // Ignore drop outside droppable container
+    if (!droppedItem.destination) return;
+    let updatedList = [...selectedData];
+    // Remove dragged item
+    const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
+    // Add dropped item
+    updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
+    // Update State
+    setSelectedData(updatedList);
+    setShowValue(updatedList);
+  };
+
+  function refineTemplateData(data) {
+    const dataList = data.map((value) => {
+      const id = value._id;
+      const subtitle = value.repoName;
+      const star = value.star;
+      let title = "";
+      if (props.type === "pr") {
+        title = value.title;
+      } else {
+        title = value.repoName;
+      }
+      return new ListItemData(id, title, subtitle, star);
+    });
+    return dataList;
+  }
+
+  function refineGenerateData(data) {
+    const dataList = data.map((value) => {
+      const id = value._id;
+      const index = value.index;
+      const title = value.type;
+      const content = value.content;
+      return new DraggableListItemData(id, title, index, content);
+    });
+    return dataList.sort((a, b) => a.index - b.index);
+  }
+
+  async function getGenerateData() {
+    if (props.type === "contributing" || props.type === "readme") {
+      const reulst = await axios.post(url + "/generate", {
+        owner,
+        repoName,
+        description,
+        license,
+      });
+      setGenerateData(refineGenerateData(reulst.data));
+    }
+  }
+
+  async function getTemplateData(page) {
+    // page query for only contributing and readme for now.
+    const result = await axios.get(url + "?page=" + page);
+    setTemplateData(refineTemplateData(result.data));
+  }
+
+  async function getDataAmount() {
+    const dataAmount = (await axios.get(url + "/amount")).data.amount;
+    const pageCount = Math.ceil(dataAmount / DATAPERPAGE);
+    setPageRange(pageCount);
+  }
 
   useEffect(() => {
     let completed = false;
-
-    async function get() {
-      const result = await axios.get(url);
-      if (!completed) {
-        if (props.type === "contributing") {
-          const list = [];
-          result.data.forEach((typeList) => {
-            typeList.map((it) => {
-              list.push(it);
-            });
-          });
-          setData(list);
-        } else {
-          setData(result.data);
-        }
-      }
+    if (!completed) {
+      getGenerateData();
+      getTemplateData(1);
     }
-    get();
+    getDataAmount();
+
     return () => {
       completed = true;
+      setSelectedData([]);
     };
-  }, []);
+  }, [templateMod]);
+
+  const starIcon = <StarIcon m={2} />;
+  const deleteIcon = <DeleteIcon fontSize="inherit" />;
 
   return (
     <Item>
-      <Typography
-        component="h1"
-        id="modal-title"
-        variant="h5"
-        textColor="inherit"
-        fontWeight="lg"
-        mb={1}
-      >
-        <Box sx={{ fontWeight: "bold", m: 1 }}>{props.type}</Box>
-      </Typography>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search Template"
-          inputProps={{ "aria-label": "search" }}
+      <ListHeader type={props.type} />
+      <ListWrapper>
+        {templateMod ? (
+          <DraggableList
+            data={selectedData}
+            handleDrop={handleDrop}
+            handleRemove={handleRemove}
+            icon={deleteIcon}
+          />
+        ) : null}
+        <BasicList
+          data={templateMod ? generateData : templateData}
+          subData={"star"}
+          handleSelect={handleSelect}
+          icon={templateMod ? null : starIcon}
         />
-      </Search>
-      <Box
-        sx={{
-          width: "100%",
-          height: "100%",
-          maxWidth: 360,
-          bgcolor: "background.paper",
-          maxHeight: "90%",
-        }}
-        style={{ overflowX: "hidden", overflowY: "auto" }}
-      >
-        <List
-          sx={{
-            height: "100%",
-            width: 360,
-            itemSize: 46,
-            itemCount: 1,
-            overscanCount: 5,
-          }}
-        >
-          <div>
-            {data.map((it) => (
-              <div key={it._id}>
-                <ListItem
-                  component="div"
-                  disablePadding
-                  onClick={() => {
-                    handleSelect(it);
-                  }}
-                >
-                  <ListItemButton>
-                    <ListItemText
-                      primary={props.type === "contributing" ? it.type : it.title}
-                      id="PR-desc"
-                      variant="h6"
-                      gutterBottom
-                      color="textSecondary"
-                      m={2}
-                    />
-                    <ListItemText
-                      primary={props.type === "contributing" ? it.title : it.repoName}
-                      id="PR-desc"
-                      variant="h6"
-                      gutterBottom
-                      color="textSecondary"
-                    />
-                  </ListItemButton>
-                </ListItem>
-              </div>
-            ))}
-          </div>
-        </List>
-      </Box>
+      </ListWrapper>
+      {templateMod ? null : (
+        <Pagination
+          count={pageRange}
+          defaultPage={1}
+          siblingCount={1}
+          page={currentPage}
+          onChange={handlePageSelect}
+          color="primary"
+        />
+      )}
     </Item>
   );
 }
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  width: "100%",
-  marginLeft: 0,
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  display: "flex",
-  position: "absolute",
-  height: "100%",
-  padding: theme.spacing(0, 2),
-  alignItems: "center",
-  justifyContent: "center",
-  pointerEvents: "none",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    width: "100%",
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
-const Item = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(1),
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  color: theme.palette.text.secondary,
-  textAlign: "center",
-}));
+TemplateList.propTypes = {
+  type: PropTypes.string,
+};

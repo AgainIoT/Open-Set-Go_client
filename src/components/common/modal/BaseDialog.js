@@ -5,9 +5,9 @@ import { Dialog } from "@mui/material";
 import { modalState } from "../../../recoil/commonState";
 
 export const BaseDialog = (props) => {
-  const handleClose = () => setDialogValue(false);
-
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
+
+  const handleClose = () => setDialogValue(false);
 
   return (
     <StDialog
@@ -24,7 +24,6 @@ export const BaseDialog = (props) => {
 
 const StDialog = styled(Dialog)`
   display: flex;
-
   width: 100%;
 `;
 const DialogContainer = styled.div`
