@@ -89,7 +89,7 @@ export const Layout = () => {
               <ButtonWrapper
                 variant="contained"
                 disabled={!stepCompleted}
-                onClick={() => (activeStep === 5 ? handleOpen() : handleNext())}
+                onClick={() => (activeStep === 6 ? handleOpen() : handleNext())}
               >
                 Next
               </ButtonWrapper>
@@ -107,8 +107,8 @@ export const Layout = () => {
 const StLayout = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: ${COLOR.MAIN_WHITE};
   overflow-x: hidden;
   overflow-y: hidden;
@@ -116,10 +116,8 @@ const StLayout = styled.div`
 
 const ContentsContainer = styled.div`
   display: flex;
-  justify-content: space-around;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  height: 100%;
   padding: 2rem;
   margin-left: 2.6rem;
   border-top-left-radius: 2rem;
@@ -130,7 +128,7 @@ const StepContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 76vh;
+  height: 100%;
   gap: 2.5rem;
 `;
 
@@ -138,14 +136,15 @@ const ExplainWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 20%;
+  height: 100%;
   min-width: 22rem;
-  height: 100vh;
 `;
 
 const StepContentsContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
 `;
 
 const StepContentsWrapper = styled.div`
@@ -159,11 +158,11 @@ const StepContentsWrapper = styled.div`
 `;
 
 const BottomContainer = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  padding: 0rem 3rem 2rem 3rem;
-  background-color: ${COLOR.MAIN_WHITE};
+  padding: 2rem 2rem 0rem 2rem;
+  background-color: ${COLOR.MAIN_BACKGROUND};
 `;
 
 const ButtonWrapper = styled(Button)`

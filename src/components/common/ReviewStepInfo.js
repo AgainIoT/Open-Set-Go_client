@@ -1,20 +1,22 @@
 import styled from "styled-components";
 import { templateMode } from "../../recoil/templateState";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { modalState, activeState } from "../../recoil/commonState";
-import { Typography } from "@mui/material";
+import {
+  modalState,
+  activeState,
+} from "../../recoil/commonState";
 import Button from "@mui/material/Button";
 import StepData from "../../data/StepData.json";
 
 //StepInfo: Component for description of each step (located on the left side of the screen)
-const StepInfo = () => {
+const ReviewStepInfo = () => {
   //using recoil for matching step information and step
   const activeStep = useRecoilValue(activeState);
   const [templateMod, setTemplateMod] = useRecoilState(templateMode);
 
   return (
     <div>
-      {StepData.StepData.filter((eachStep) => eachStep.step === activeStep).map(
+      {StepData.StepData.filter((eachStep) => eachStep.id === activeStep).map(
         (it) => {
           const [modalValue, setModalValue] = useRecoilState(
             modalState(it.type),
@@ -25,13 +27,10 @@ const StepInfo = () => {
           };
           return (
             <div key={it.step}>
-              <Box_>
+              <Box>
                 <StStepInfo>
-                  <TitleH1>
-                    STEP{it.step}. {it.title}
-                  </TitleH1>
                   <ContentP>{it.content}</ContentP>
-                  {activeStep === 3 || activeStep === 5 || activeStep === 6 ? (
+                  {activeStep > 1 ? (
                     <ButtonWrapper
                       size="large"
                       variant="text"
@@ -43,7 +42,7 @@ const StepInfo = () => {
                   ) : (
                     <div></div>
                   )}
-                  {activeStep > 4 ? (
+                  {activeStep > 2 ? (
                     <ButtonWrapper
                       size="large"
                       variant="text"
@@ -56,7 +55,7 @@ const StepInfo = () => {
                     <div></div>
                   )}
                 </StStepInfo>
-              </Box_>
+              </Box>
             </div>
           );
         },
@@ -74,12 +73,6 @@ const StStepInfo = styled.div`
   gap: 2rem;
 `;
 
-const TitleH1 = styled(Typography)`
-  font-size: 2.3rem;
-  font-weight: bolder;
-  text-align: center;
-`;
-
 const ContentP = styled.p`
   margin: 0rem 2rem 0rem 2rem;
   text-align: justify;
@@ -95,12 +88,12 @@ const ButtonWrapper = styled(Button)`
   font-size: 2rem;
 `;
 
-const Box_ = styled.div`
-  gap: 2rem;
+const Box = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  flex-direction: column;
   height: 100%;
+  gap: 2rem;
 `;
 
-export default StepInfo;
+export default ReviewStepInfo;

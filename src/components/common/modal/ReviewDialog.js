@@ -14,15 +14,10 @@ import { issueSelectedState } from "../../../recoil/issueState";
 import { modalState } from "../../../recoil/commonState";
 import { LoadingCompleted } from "../LoadingCompleted";
 
-export const FinishDialog = (props) => {
+export const ReviewDialog = (props) => {
   const [loading, setLoading] = useState(false);
   const owner = useRecoilValue(repoDataAtomFamily("owner"));
   const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
-  const desc = useRecoilValue(repoDataAtomFamily("desc"));
-  const lang = useRecoilValue(repoDataAtomFamily("lang"));
-  const framework = useRecoilValue(repoDataAtomFamily("framework"));
-  const gitignoreData = useRecoilValue(selectGitignoreData);
-  const license = useRecoilValue(repoDataAtomFamily("license"));
   const pr = useRecoilValue(templateContent("pr"));
   const contributing = useRecoilValue(templateContent("contributing"));
   const issue = useRecoilValue(issueSelectedState("issue"));
@@ -48,42 +43,15 @@ export const FinishDialog = (props) => {
     }
   }
 
-  // POST - repo info for create repository
-  async function postCreatRepo() {
+  // POST - PRTemplate data
+  async function postPRTemplateData() {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/repo`,
+        `${process.env.REACT_APP_SERVER_URL}/review/file/pr`,
         {
           owner: owner,
-          repoName: repoName,
-          description: desc,
-        },
-        {
-          withCredentials: true,
-        },
-      );
-    } catch (e) {
-      console.error(e);
-      alert("Failed Repository info post ");
-    }
-  }
-
-  // POST - file for settings
-  async function postRepoData() {
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/file`,
-        {
-          owner: owner,
-          repoName: repoName,
-          language: lang,
-          framework: framework,
-          gitignore: gitignoreData,
-          PRTemplate: pr,
-          IssueTemplate: issue,
-          contributingMd: contributing,
-          readmeMd: readme,
-          license: license,
+          repoName: "test",
+          content: pr,
         },
         {
           withCredentials: true,
@@ -95,34 +63,73 @@ export const FinishDialog = (props) => {
     }
   }
 
-  // POST - email
-  async function postEmail() {
+  // POST - issue data
+  async function postIssueData() {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/mail`,
-        "",
+        `${process.env.REACT_APP_SERVER_URL}/review/file/issue`,
+        {
+          owner: owner,
+          repoName: "test",
+          content: issue,
+        },
         {
           withCredentials: true,
         },
       );
-      if (response.status < 300) {
-        window.location.replace("/");
-        setLoading(false);
-      }
     } catch (e) {
       console.error(e);
-      alert("Failed to send email");
+      alert("Failed File post");
     }
   }
+
+  // POST - contributing data
+  async function postContributingData() {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/review/file/contributing`,
+        {
+          owner: owner,
+          repoName: "test",
+          content: contributing,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+    } catch (e) {
+      console.error(e);
+      alert("Failed File post");
+    }
+  }
+
+  // POST - readme data
+  async function postReadmeData() {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/review/file/readme`,
+        {
+          owner: owner,
+          repoName: "test",
+          content: readme,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+    } catch (e) {
+      console.error(e);
+      alert("Failed File post");
+    }
+  }
+
 
   const handlePost = async () => {
     const isUnique = await checkDuplication();
 
     if (isUnique) {
       setLoading(true);
-      await postCreatRepo();
-      await postRepoData();
-      await postEmail();
+      await postReadmeData();
       setDialogValue(false);
     } else {
       alert(

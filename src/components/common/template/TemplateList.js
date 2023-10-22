@@ -17,6 +17,7 @@ import {
 } from "../../../data/ListItemData";
 import { Item, ListWrapper } from "./StyledTemplate";
 import { ListHeader, BasicList, DraggableList } from "./LIstUtils";
+import { activeState } from "../../../recoil/commonState";
 
 const DATAPERPAGE = 20;
 
@@ -30,6 +31,8 @@ export function TemplateList(props) {
   const [templateData, setTemplateData] = useState([]);
   const [generateData, setGenerateData] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
+  const activeStep = useRecoilValue(activeState);
+
   const [pageRange, setPageRange] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   let url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;
