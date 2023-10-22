@@ -36,14 +36,11 @@ const Router = () => {
         </Route>
         <Route element={<ReviewLayout />}>
           <Route path="/reviewPR" element={<ReviewPRTemplatePage />} />
-          <Route path="/reviewIssue" element={<IssueTemplatePage />} />
+          <Route path="/reviewIssue" element={<ReviewIssueTemplatePage />} />
           <Route
             path="/reviewContributing"
-            element={<ContributingTemplatePage />}
+            element={<ReviewContributingTemplatePage />}
           />
-          <Route path="/reviewReadme" element={<ReadmeTemplatePage />} />
-          <Route path="/reviewIssue" element={<ReviewIssueTemplatePage />} />
-          <Route path="/reviewContributing" element={<ReviewContributingTemplatePage />} />
           <Route path="/reviewReadme" element={<ReviewReadmeTemplatePage />} />
         </Route>
       </Routes>
