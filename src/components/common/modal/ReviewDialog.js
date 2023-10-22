@@ -23,7 +23,7 @@ export const ReviewDialog = (props) => {
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
   const navigate = new useNavigate();
-  const activeStep = useRecoilValue(activeState);
+  const [activeStep, setActiveStep] = useRecoilState(activeState);
 
   async function checkDuplication() {
     try {
@@ -143,6 +143,7 @@ export const ReviewDialog = (props) => {
           await postReadmeData();
       }
       setDialogValue(false);
+      setActiveStep(1);
       navigate("/");
     } else {
       alert(
