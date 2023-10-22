@@ -10,6 +10,7 @@ import { templateContent } from "../../../recoil/templateState";
 import { issueSelectedState } from "../../../recoil/issueState";
 import { modalState } from "../../../recoil/commonState";
 import { LoadingCompleted } from "../LoadingCompleted";
+import { useNavigate } from "react-router-dom";
 
 export const ReviewDialog = (props) => {
   const [loading, setLoading] = useState(false);
@@ -21,6 +22,7 @@ export const ReviewDialog = (props) => {
   const readme = useRecoilValue(templateContent("readme"));
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
+  const navigate = new useNavigate();
 
   async function checkDuplication() {
     try {
@@ -128,6 +130,7 @@ export const ReviewDialog = (props) => {
       setLoading(true);
       await postPRData();
       setDialogValue(false);
+      navigate("/");
     } else {
       alert(
         `Your repository '${owner}/${repoName}' is already exists!\nPlease delete repository and try again!`,
