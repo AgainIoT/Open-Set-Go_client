@@ -32,7 +32,7 @@ function CreateRepo() {
 }
 export default CreateRepo;
 
-const StCreateRepo = styled(Grid)`
+const StCreateRepo = styled.div`
   display: flex;
   justify-content: space-around;
   flex-direction: column;

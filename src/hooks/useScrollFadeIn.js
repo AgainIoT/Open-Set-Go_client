@@ -19,6 +19,7 @@ const useScrollFadeIn = (direction="up", duration=1, delay=0) => {
         return;
     }
   };
+
   const handleScroll = useCallback(([entry]) => {
     const { current } = dom;
     if (entry.isIntersecting) {
