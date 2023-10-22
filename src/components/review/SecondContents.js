@@ -24,6 +24,7 @@ import {
   reivewReportState,
   reviewRepoDataState,
 } from "../../recoil/reviewState";
+import { ReactComponent as Arrow } from "../../assets/icons/arrowLongRight.svg";
 
 export const SecondContents = () => {
   const navigate = new useNavigate();
@@ -245,6 +246,7 @@ export const SecondContents = () => {
           <TemplateItemTitle variant="h4">{props.title}</TemplateItemTitle>
           <TemplateDecsText variant="subtitle1">{props.desc}</TemplateDecsText>
         </TextContainer>
+        <ArrowIcon component={Arrow} inheritViewBox />
       </TemplateItemBox>
     );
   };
@@ -399,6 +401,17 @@ const TemplateItemTitle = styled(ItemTitle)`
 `;
 const TemplateDecsText = styled(DecsText)`
   ${TemplateItemBox}:hover & {
+    color: ${COLOR.MAIN_WHITE};
+    transition: all 0.2s ease-in-out;
+  }
+`;
+
+const ArrowIcon = styled(SvgIcon)`
+  display: none;
+  color: ${COLOR.MAIN_WHITE};
+  font-size: 5rem;
+  ${TemplateItemBox}:hover & {
+    display: block;
     color: ${COLOR.MAIN_WHITE};
     transition: all 0.2s ease-in-out;
   }
