@@ -2,15 +2,18 @@ import styled from "styled-components";
 import { Typography } from "@mui/material";
 import MODAL from "../../assets/images/modal.svg";
 import MARKER from "../../assets/icons/li_mark.svg";
-
+import useZoomIn from "../../hooks/useZoomIn";
+import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 //Step4: Components (used on the main page) that contain content related to the use of templates
 const Step4 = () => {
+  const zoominItem = useZoomIn(1.5, 0);
+  const fadeinItem = useScrollFadeIn("left", 1.5, 0);
   return (
     <StStep4>
-      <ImageDiv>
+      <ImageDiv {...zoominItem}>
         <ModalImg src={MODAL} />
       </ImageDiv>
-      <TextDiv>
+      <TextDiv {... fadeinItem}>
         <TitleTypo variant="h3">
           Create your templates conveniently<br></br>with the templates we
           provide
@@ -64,7 +67,7 @@ const TextDiv = styled.div`
   flex-direction: column;
   width: 50%;
   height: 100%;
-  padding-left: 5.5rem;
+  padding-left: 6rem;
   margin-left: 1rem;
   gap: 1.5rem;
 `;

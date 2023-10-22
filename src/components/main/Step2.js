@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useRef } from "react";
+import useZoomIn from "../../hooks/useZoomIn";
 import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 import { Typography } from "@mui/material";
 import DeskTop from "../../assets/images/desktop.svg";
@@ -7,13 +7,14 @@ import DeskTop from "../../assets/images/desktop.svg";
 
 //Step2: Component for description on the main page (a brief description of the project)
 const Step2 = () => {
-  const animatedItem = useScrollFadeIn();
+  const zoominItem = useZoomIn(1.5, 0);
+  const fadeinItem = useScrollFadeIn("left", 1.5, 0);
   return (
     <StStep2>
-      <ImgDiv {...animatedItem}>
+      <ImgDiv {... zoominItem}>
         <DesktopImg src={DeskTop}/>
       </ImgDiv>
-      <TextDiv>
+      <TextDiv {... fadeinItem}>
         <TitleTypo variant="h3">You can create Repository easily</TitleTypo>
         <DescTypo>
           Create a repository to start a new open-source project.<br></br>You can choose
@@ -44,8 +45,8 @@ const ImgDiv = styled.div`
 `;
 
 const DesktopImg = styled.img`
-  width: 80%;
-  height: 80%;
+  width: 70%;
+  height: 70%;
   `;
 
 const TextDiv = styled.div`
@@ -54,7 +55,8 @@ const TextDiv = styled.div`
   flex-direction: column;
   width: 50%;
   height: 100%;
-  margin-left: 1rem;
+  margin-left: 3rem;
+  padding-left: 2rem;
   gap: 1rem;
 `;
 

@@ -92,6 +92,7 @@ export const Title = styled.h1`
   font-size: 6.5rem;
   font-family: "Inter", sans-serif;
   font-weight: 700;
+  margin-bottom: 1.5rem;
 `;
 
 export const SubTitle = styled.h3`

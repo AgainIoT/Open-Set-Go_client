@@ -1,18 +1,21 @@
 import styled from "styled-components";
 import { Typography } from "@mui/material";
 import LICENSE from "../../assets/images/licenseEx.svg";
+import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 
 //Step3: Component for the bottom description of the main page (license description)
 const Step3 = () => {
+  const textFadeIn = useScrollFadeIn("right", 1.5, 0);
+  const imgFadeIn = useScrollFadeIn("left", 1.5, 0);
   return (
     <StStep3>
-      <TextDiv>
+      <TextDiv {... textFadeIn}>
         <TitleTypo variant="h3">Look into Licenses at a glance</TitleTypo>
         <DescTypo>
         You must have licenses for open source projects.<br></br>We show you the licenses provided by GitHub.<br></br> You can determine and select a license based on the<br></br> information provided about it.
         </DescTypo>
       </TextDiv>
-      <ImgDiv>
+      <ImgDiv {... imgFadeIn}>
         <LicenseImg src={LICENSE} />
       </ImgDiv>
     </StStep3>

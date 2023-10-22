@@ -1,16 +1,16 @@
 import { useEffect, useCallback, useRef } from "react";
 
-const useZoomIn = () => {
+const useZoomIn = (duration=1, delay=0) => {
   const dom = useRef();
 
   const handleScroll = useCallback(([entry]) => {
     const { current } = dom;
     if (entry.isIntersecting) {
       current.style.transitionProperty = "opacity transform";
-      current.style.transitionDuration = "2s";
-      current.style.transitionDelay = "0s";
+      current.style.transitionDuration = `${duration}s`;
+      current.style.transitionDelay = `${delay}s`;
       current.style.opacity = 1;
-      current.style.transform = "translate3d(0, -20%, 0)";
+      current.style.transform = "scale3d(1.1, 1.1, 1.1)";
     }
   }, []);
 

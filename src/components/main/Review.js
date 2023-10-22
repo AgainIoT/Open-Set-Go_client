@@ -7,10 +7,14 @@ import checkRM from "../../assets/images/checkRM.svg";
 import checkSecurity from "../../assets/images/checkSecurity.svg";
 import checkCodeQL from "../../assets/images/checkCodeQL.svg";
 import secretscan from "../../assets/images/checkSecret.svg";
+import useZoomIn from "../../hooks/useZoomIn";
+import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 export function Review() {
+  const zoominItem = useZoomIn(1.5, 0);
+  const fadeinItem = useScrollFadeIn("up", 1.5, 0);
   return (
     <StReview>
-      <IntroDiv>
+      <IntroDiv {...useScrollFadeIn("up", 1.5, 0.2)}>
         <TitleTypo>Check the status of existing repositories</TitleTypo>
         <DescTypo>
           checks that the existing repository is running well as opensource
@@ -18,14 +22,14 @@ export function Review() {
       </IntroDiv>
       <ImageDiv>
         <Row1Div>
-          <ImgWrapper src={checkPR} />
-          <ImgWrapper src={checkIssue} />
-          <ImgWrapper src={checkRM} />
+          <ImgWrapper {...useScrollFadeIn("up", 1.0, 0.2)} src={checkPR} />
+          <ImgWrapper {...useScrollFadeIn("up", 1.0, 0.4)} src={checkIssue} />
+          <ImgWrapper {...useScrollFadeIn("up", 1.0, 0.6)} src={checkRM} />
         </Row1Div>
         <Row2Div>
-          <ImgWrapper src={checkSecurity} />
-          <ImgWrapper src={checkCodeQL} />
-          <ImgWrapper src={secretscan} />
+          <ImgWrapper {...useScrollFadeIn("up", 1.0, 0.2)} src={checkSecurity} />
+          <ImgWrapper {...useScrollFadeIn("up", 1.0, 0.4)} src={checkCodeQL} />
+          <ImgWrapper {...useScrollFadeIn("up", 1.0, 0.6)} src={secretscan} />
         </Row2Div>
       </ImageDiv>
     </StReview>
@@ -39,7 +43,7 @@ const StReview = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 10rem 0rem 6rem 0rem;
+  padding: 6rem 0rem 6rem 0rem;
   margin: 2rem 0rem 2rem 0rem;
   background-color: ${COLOR.MAIN_WHITE};
   gap: 4rem;
