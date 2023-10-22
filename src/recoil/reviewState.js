@@ -10,3 +10,8 @@ export const reivewAlertListState = atom({
   key: "reviewAlertListState",
   default: [],
 });
+
+export const reivewReportState = atomFamily({
+  key: "reivewReportState",
+  default: [],
+});
