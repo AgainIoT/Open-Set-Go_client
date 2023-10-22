@@ -6,7 +6,6 @@ import TemplateBody from "../template/TemplateBody";
 
 // props -> type(pr, readme, contributing)
 export const TemplateModal = (props) => {
-
   return (
     <TemplateContainer>
       <TemplateList type={props.type} />
@@ -27,5 +26,6 @@ const TemplateContainer = styled.div`
 const TemplateContents = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
   width: 100%;
 `;
