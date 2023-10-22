@@ -230,7 +230,11 @@ export const SecondContents = () => {
     // const [ishover, setIsHover] = useState(false);
 
     return (
-      <TemplateItemBox>
+      <TemplateItemBox
+        onClick={() => {
+          navigate(props.path);
+        }}
+      >
         <TemplateItemIconBox>
           <TemplateIconBox
             component={status ? CheckRoundedIcon : props.icon}
@@ -262,6 +266,7 @@ export const SecondContents = () => {
               title={it.title}
               icon={it.icon}
               desc={it.desc}
+              path={it.path}
             />
           ) : (
             <ItemContainer
