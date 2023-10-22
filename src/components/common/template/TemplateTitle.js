@@ -35,11 +35,7 @@ export default function TemplateTitle(props) {
   const handleClose = () => setModalValue(false);
 
   return (
-    <Box
-      sx={{
-        p: 2,
-      }}
-    >
+    <Box padding={2}>
       <Typography
         id="PR-title"
         variant="h2"
