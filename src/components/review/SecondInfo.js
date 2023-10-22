@@ -20,6 +20,7 @@ import {
   reviewRepoDataState,
 } from "../../recoil/reviewState";
 import axios from "axios";
+import { ReviewChart } from "./ReviewChart";
 
 export const SecondInfo = () => {
   const selectedOwner = useRecoilValue(reviewRepoDataState("owner"));
@@ -126,9 +127,11 @@ export const SecondInfo = () => {
       <ReportContainer>
         {" "}
         <SummarySection>
-          <SummaryItem>
+          {/* <SummaryItem>
             <ItemProgress variant="determinate" value={75} size="15rem" />
-          </SummaryItem>
+          </SummaryItem> */}
+          <ItemText>Summary</ItemText>
+          <ReviewChart />
         </SummarySection>
         <NotificationSection>
           <ItemText>Notification</ItemText>
@@ -194,13 +197,15 @@ const ReportContainer = styled.div`
 `;
 const SummarySection = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  min-height: 20rem;
   padding: 2rem 1rem;
   background-color: ${COLOR.MAIN_HOVER};
-  border-radius: 2rem;
+  border-radius: 1.5rem;
 `;
 const SummaryItem = styled.div`
   display: flex;
@@ -250,6 +255,7 @@ const NotificationSection = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+  min-height: 15rem;
   padding: 2rem 1rem;
   gap: 2rem;
   background-color: ${COLOR.MAIN_HOVER};
