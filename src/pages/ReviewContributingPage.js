@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
 import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import axios from "axios";
 import { templateContent, templateMode } from "../recoil/templateState";
 import { eachStepState,modalState } from "../recoil/commonState";
 import { BaseModal } from "../components/common/modal/BaseModal";
@@ -17,32 +16,6 @@ function ReviewContributingPage(props) {
   useEffect(() => {
     setStepComplted(true);
   }, []);
-  // async function postContributingData() {
-  //   try {
-  //     const response = await axios.post(
-  //       `${process.env.REACT_APP_SERVER_URL}/review/file/contributing`,
-  //       {
-  //         contributingMd: content,
-  //       },
-  //       {
-  //         withCredentials: true,
-  //       },
-  //     );
-  //   } catch (e) {
-  //     console.error(e);
-  //     alert("Failed File post");
-  //   }
-  // }
-
-  // const handlePost = async () => {
-  //   await postContributingData();
-  // };
-  const handleOpen = (toggle) => {
-    setModalValue(true);
-  };
-  const handlePost = () => {
-    console.log(content);
-  };
 
   return (
     <StReviewContributingPage>
