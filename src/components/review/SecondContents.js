@@ -188,7 +188,7 @@ export const SecondContents = () => {
         ? reviewSecurityData
         : reviewCommunityData;
 
-    var ItemIcon = {
+    const ItemIcon = {
       true: (
         <TemplateIconBox
           component={CheckRoundedIcon}
