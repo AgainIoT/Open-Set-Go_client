@@ -108,4 +108,3 @@ const Title = styled(Typography)`
   font-weight: bold;
   color: ${COLOR.MAIN_NAVY};
 `;
-// const SubTitle = styled(Typography)``;

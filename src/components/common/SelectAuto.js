@@ -10,7 +10,6 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import { repoDataAtomFamily } from "../../recoil/repoData";
 
 // props -> type(userName) data(userRepoName) labelText(Owner*) dataState(repoDataAtomFamily)
 export const SelectAuto = (props) => {
@@ -129,7 +128,7 @@ const SelectContainer = styled(Select)`
   & .css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
     border-radius: 3rem;
   }
-  background-color:${COLOR.MAIN_WHITE};
+  background-color: ${COLOR.MAIN_WHITE};
 `;
 
 const MenuOptionItem = styled(MenuItem)`
