@@ -83,7 +83,7 @@ const StLayout = styled.div`
 
 const ContentsContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
@@ -130,7 +130,7 @@ const BottomContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 1rem 3rem 0rem 3rem;
+  padding: 2rem 3rem 0rem 3rem;
   background-color: ${COLOR.MAIN_BACKGROUND};
 `;
 
