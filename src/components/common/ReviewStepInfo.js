@@ -17,7 +17,7 @@ const ReviewStepInfo = (props) => {
 
   return (
     <div>
-      {StepData.StepData.filter((eachStep) => eachStep.id === activeStep).map(
+      {StepData.StepData.filter((eachStep) => eachStep.step === activeStep).map(
         (it) => {
           const [modalValue, setModalValue] = useRecoilState(
             modalState(it.type),
@@ -42,7 +42,7 @@ const ReviewStepInfo = (props) => {
                   >
                     Find Template
                   </ButtonWrapper>
-                  {activeStep > 2 ? (
+                  {activeStep > 4 ? (
                     <ButtonWrapper
                       size="large"
                       variant="text"

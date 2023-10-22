@@ -1,7 +1,7 @@
 import React, {  useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { BaseModal } from "../components/common/modal/BaseModal";
-import { eachStepState, modalState } from "../recoil/commonState";
+import { activeState, eachStepState, modalState } from "../recoil/commonState";
 import MarkdownPreview from "../components/common/MarkdownPreview";
 import { TemplateModal } from "../components/common/modal/TemplateModal";
 import { styled } from "styled-components";
@@ -11,13 +11,12 @@ function ReviewPRTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("pr"));
 
   const [stepComplete, setStepComplted] = useRecoilState(eachStepState("3"));
-  const activeStep = useRecoilValue(3);
+  const [activeStep, setActiveStep] = useRecoilState(activeState);
 
   useEffect(() => {
     setStepComplted(true);
+    setActiveStep(3);
   }, []);
-
-  const handleOpen = () => setModalValue(true);
 
   return (
     <StReadmeTemplatePage>
@@ -25,7 +24,6 @@ function ReviewPRTemplatePage() {
         <TemplateModal type={"pr"} />
       </BaseModal>
       <MarkdownPreview type={"pr"} />
-      <ReviewLayout step={"pr"} />
     </StReadmeTemplatePage>
   );
 }
