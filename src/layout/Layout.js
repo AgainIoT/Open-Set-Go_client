@@ -18,6 +18,7 @@ export const Layout = () => {
   );
   const navigate = useNavigate();
 
+  // prevent user from leaving
   const preventClose = (event) => {
     event.preventDefault();
     event.returnValue = "";
@@ -33,14 +34,14 @@ export const Layout = () => {
     };
   }, []);
 
+  // you go back, come back
   const preventGoBack = () => {
-    history.pushState(null, "", location.href);
+    window.history.forward();
     alert("please press 'prev' button instead of the browser button");
   };
 
   useEffect(() => {
     (() => {
-      history.pushState(null, "", location.href);
       window.addEventListener("popstate", preventGoBack);
     })();
 
