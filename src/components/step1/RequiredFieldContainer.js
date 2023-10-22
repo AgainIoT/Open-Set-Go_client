@@ -141,7 +141,7 @@ export const RequiredFieldContainer = () => {
           justifyContent: "space-between",
         }}
       >
-        <Grid item xs={12} sm={2}>
+        <Grid item xs={12} sm={5}>
           <SelectAuto labelText={"Owner*"} type={"owner"} data={userRepoData} />
         </Grid>
         <Grid item xs={12} sm={8}>
