@@ -19,10 +19,10 @@ export const ReviewChart = () => {
     labels: ["None   ", "Checked", "need authority"],
     datasets: [
       {
-        label: "report chart",
+        label: "",
         data: [noneList.length, checkList.length, alertList.length],
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
+          "rgba(235,69,95, 0.2)",
           "rgba(54, 162, 235, 0.2)",
           "rgba(255, 206, 86, 0.2)",
         ],
