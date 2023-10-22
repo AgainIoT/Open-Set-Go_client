@@ -9,11 +9,12 @@ import { ReviewLayout } from "../layout/ReviewLayout";
 import CreateRepo from "../pages/CreateRepoPage";
 import LicensePage from "../pages/LicensePage";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
+import ReviewReadmeTemplatePage from "../pages/ReviewReadmeTemplatePage";
 import ContributingTemplatePage from "../pages/ContributingTemplatePage";
+import ReviewContributingTemplatePage from "../pages/ReviewContributingTemplatePage";
 import IssueTemplatePage from "../pages/IssueTemplatePage";
 import ReviewIssueTemplatePage from "../pages/ReviewIssueTemplatePage";
 import ErrorPage from "../pages/ErrorPage";
-
 const Router = () => {
   return (
     <BrowserRouter>
@@ -34,8 +35,8 @@ const Router = () => {
         <Route element={<ReviewLayout />}>
           <Route path="/reviewPR" element={<ReviewPRTemplatePage />} />
           <Route path="/reviewIssue" element={<ReviewIssueTemplatePage />} />
-          <Route path="/reviewContributing" element={<ContributingTemplatePage />} />
-          <Route path="/reviewReadme" element={<ReadmeTemplatePage />} />
+          <Route path="/reviewContributing" element={<ReviewContributingTemplatePage />} />
+          <Route path="/reviewReadme" element={<ReviewReadmeTemplatePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

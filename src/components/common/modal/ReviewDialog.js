@@ -50,7 +50,7 @@ export const ReviewDialog = (props) => {
         `${process.env.REACT_APP_SERVER_URL}/review/file/pr`,
         {
           owner: owner,
-          repoName: "test",
+          repoName: repoName,
           content: pr,
         },
         {
@@ -70,7 +70,7 @@ export const ReviewDialog = (props) => {
         `${process.env.REACT_APP_SERVER_URL}/review/file/issue`,
         {
           owner: owner,
-          repoName: "test",
+          repoName: repoName,
           issues: issue,
         },
         {
@@ -90,7 +90,7 @@ export const ReviewDialog = (props) => {
         `${process.env.REACT_APP_SERVER_URL}/review/file/contributing`,
         {
           owner: owner,
-          repoName: "test",
+          repoName: repoName,
           content: contributing,
         },
         {
@@ -110,7 +110,7 @@ export const ReviewDialog = (props) => {
         `${process.env.REACT_APP_SERVER_URL}/review/file/readme`,
         {
           owner: owner,
-          repoName: "test",
+          repoName: repoName,
           content: readme,
         },
         {

@@ -20,16 +20,16 @@ function PRTemplatePage() {
   const handleOpen = () => setModalValue(true);
 
   return (
-    <StReadmeTemplatePage>
+    <StPRTemplatePage>
       <BaseModal type={"pr"}>
         <TemplateModal type={"pr"} />
       </BaseModal>
       <MarkdownPreview type={"pr"} />
-    </StReadmeTemplatePage>
+    </StPRTemplatePage>
   );
 }
 
-const StReadmeTemplatePage = styled.div`
+const StPRTemplatePage = styled.div`
   width: 100%;
   height: 100%;
   min-width: 60rem;
