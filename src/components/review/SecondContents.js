@@ -27,31 +27,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const SecondContents = () => {
-  //   const ItemContainer = (props) => {
-  //     return (
-  //       <StItemContainer>
-  //         <TitleContainer>
-  //           <Title variant="h4">Category</Title>
-  //         </TitleContainer>
-  //         <ContentsContainer>
-  //           <ItemBox>
-  //             {/* <IconWrapper></IconWrapper> */}
-  //             <IconBox component={category1[0].icon} inheritViewBox />
-  //             <TextContainer>
-  //               <ItemTitle variant="h4">issue template</ItemTitle>
-  //               <DecsText variant="subtitle1">
-  //                 contributors can select the appropriate template when they open
-  //                 new issues in the repository
-  //               </DecsText>
-  //             </TextContainer>
-  //           </ItemBox>
-  //           <ItemBox>2</ItemBox>
-  //           <ItemBox>3</ItemBox>
-  //           <ItemBox>4</ItemBox>
-  //         </ContentsContainer>
-  //       </StItemContainer>
-  //     );
-  //   };
   const navigate = new useNavigate();
 
   const [selectedOwner, setSelectedOwner] = useRecoilState(
@@ -105,18 +80,11 @@ export const SecondContents = () => {
           withCredentials: true,
         },
       );
-      console.log("init: %o", response.data);
 
       const initReviewData = {
-        // pr: response.data.pr, // or false
-        // issue: response.data.issue, // or false
-        // contributing: response.data.contributing, // or false
-        // readme: response.data.readme,
         ...response.data,
       };
 
-      console.log("initReview: %o", initReviewData);
-      //setOwner(response.data.id);
       setReviewTemplateData(initReviewData);
       setIsLoadingTemplate(false);
     } catch (e) {
@@ -135,13 +103,8 @@ export const SecondContents = () => {
           withCredentials: true,
         },
       );
-      console.log("init: %o", response.data);
 
       const initReviewData = {
-        // codeql: response.data.codeql,
-        // secretScan: response.data.secretScan,
-        // securityPolicy: response.data.securityPolicy,
-        // dependabot: response.data.dependabot,
         ...response.data,
       };
 
@@ -151,8 +114,6 @@ export const SecondContents = () => {
 
       setAlertList(nullValue);
 
-      console.log("initReview: %o", initReviewData);
-      //setOwner(response.data.id);
       setReviewSecurityData(initReviewData);
       setIsLoadingSecurity(false);
     } catch (e) {
@@ -171,18 +132,13 @@ export const SecondContents = () => {
           withCredentials: true,
         },
       );
-      console.log("init: %o", response.data);
 
       const initReviewData = {
         description: response.data.description,
         license: response.data.license.exist,
         conduct: response.data.conduct,
         discussion: response.data.discussion,
-        // ...response.data,
       };
-
-      console.log("initReview: %o", initReviewData);
-      //setOwner(response.data.id);
 
       setReviewCommunityData(initReviewData);
       setIsLoadingCommunity(false);
@@ -221,19 +177,6 @@ export const SecondContents = () => {
     navigate("/");
   };
 
-  // const ItemIcon = (props) => {
-  //   switch (reviewTemplateData[props.item]) {
-  //     case true:
-  //       return CheckRoundedIcon;
-  //     case false:
-  //       return props.icon;
-  //     case null:
-  //       return WarningRoundedIcon;
-  //     default:
-  //       return props.icon;
-  //   }
-  // };
-
   const ItemContainer = (props) => {
     console.log("category", props.category);
     const isLoading =
@@ -244,7 +187,6 @@ export const SecondContents = () => {
       props.category === "securityItem"
         ? reviewSecurityData
         : reviewCommunityData;
-    const status = !isLoading && reviewData[props.item];
 
     var ItemIcon = {
       true: (
@@ -263,18 +205,10 @@ export const SecondContents = () => {
         />
       ),
     };
-    // console.log("item:", reviewData[props.item]);
-    // if (reviewData[props.item] === null) {
-    //   setAlertList([alertList, props.item]);
-    //   console.log("alert:", alertList);
-    // }
+
     return (
       <ItemBox>
         <ItemIconBox>
-          {/* <IconBox
-            component={status ? CheckRoundedIcon : props.icon}
-            iconcolor={COLOR.MAIN_NAVY}
-          /> */}
           {ItemIcon[reviewData[props.item]]}
           {isLoadingTemplate ? (
             <ItemProgress />
