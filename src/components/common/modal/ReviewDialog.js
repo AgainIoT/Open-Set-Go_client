@@ -71,7 +71,7 @@ export const ReviewDialog = (props) => {
         {
           owner: owner,
           repoName: "test",
-          content: issue,
+          issues: issue,
         },
         {
           withCredentials: true,
