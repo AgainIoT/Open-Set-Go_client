@@ -165,8 +165,8 @@ export const SecondContents = () => {
       const noneCheckValue = Object.keys(arr).filter(
         (key) => arr[key] === false,
       );
-      setCheckList([checkValue]);
-      setNoneList([noneCheckValue]);
+      setCheckList(checkValue);
+      setNoneList(noneCheckValue);
     }
   }, [isLoadingTemplate, isLoadingSecurity, isLoadingCommunity]);
 
@@ -210,7 +210,7 @@ export const SecondContents = () => {
       <ItemBox>
         <ItemIconBox>
           {ItemIcon[reviewData[props.item]]}
-          {isLoadingTemplate ? (
+          {isLoading ? (
             <ItemProgress />
           ) : (
             <ItemProgress variant="determinate" value={100} />

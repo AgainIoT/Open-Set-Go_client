@@ -4,33 +4,37 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 import { Doughnut } from "react-chartjs-2";
 import { useRecoilValue } from "recoil";
-import { reivewReportState } from "../../recoil/reviewState";
+import {
+  reivewAlertListState,
+  reivewReportState,
+} from "../../recoil/reviewState";
 ChartJS.register(ArcElement, Tooltip, Legend);
-
-export const data = {
-  labels: ["None   ", "Checked", "need authority"],
-  datasets: [
-    {
-      label: "report chart",
-      data: [12, 19, 3],
-      backgroundColor: [
-        "rgba(255, 99, 132, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(255, 206, 86, 0.2)",
-      ],
-      borderColor: [
-        "rgba(255, 99, 132, 1)",
-        "rgba(54, 162, 235, 1)",
-        "rgba(255, 206, 86, 1)",
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
 
 export const ReviewChart = () => {
   const checkList = useRecoilValue(reivewReportState("checked"));
+  const noneList = useRecoilValue(reivewReportState("none"));
+  const alertList = useRecoilValue(reivewAlertListState);
   console.log("checked:", checkList);
+  const data = {
+    labels: ["None   ", "Checked", "need authority"],
+    datasets: [
+      {
+        label: "report chart",
+        data: [noneList.length, checkList.length, alertList.length],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
   const options = {
     plugins: {
       title: {
