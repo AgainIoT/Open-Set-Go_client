@@ -19,11 +19,11 @@ export const SelectRepoName = (props) => {
   };
 
   return (
-    <>
+    <StSelectRepoName>
       <SelectFormControl sx={{ m: 1 }} variant="standard">
-        <InputLabel htmlFor="demo-customized-select-native" shrink>
+        <SelectInputLabel htmlFor="demo-customized-select-native" shrink>
           {props.labelText}
-        </InputLabel>
+        </SelectInputLabel>
         <SelectAuto
           id="demo-customized-select-native"
           value={selectValue}
@@ -37,13 +37,13 @@ export const SelectRepoName = (props) => {
             return selected;
           }}
         >
-          <MenuItem disabled value="">
+          <SelectMenuItem disabled value="">
             <em>Select your Repository</em>
-          </MenuItem>
+          </SelectMenuItem>
           {props.data.map((option) => (
-            <MenuItem key={option} value={option}>
+            <SelectMenuItem key={option} value={option}>
               {option}
-            </MenuItem>
+            </SelectMenuItem>
           ))}
         </SelectAuto>
         {!props.isSelectOwner && (
@@ -52,7 +52,7 @@ export const SelectRepoName = (props) => {
           </SelectFormHelperText>
         )}
       </SelectFormControl>
-    </>
+    </StSelectRepoName>
   );
 };
 
