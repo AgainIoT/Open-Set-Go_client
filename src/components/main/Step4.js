@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Typography } from "@mui/material";
-import MODAL from "../../assets/images/modal.svg";
+import MODAL from "../../assets/images/pr2.svg";
 import MARKER from "../../assets/icons/li_mark.svg";
 import useZoomIn from "../../hooks/useZoomIn";
 import useScrollFadeIn from "../../hooks/useScrollFadeIn";
@@ -69,8 +69,9 @@ const ImageDiv = styled.div`
 `;
 
 const ModalImg = styled.img`
-  width: 85%;
-  height: 85%;
+  width: 80%;
+  height: 80%;
+  box-shadow: 0.1rem 0.1rem  0.5rem grey;
 `;
 
 const TextDiv = styled.div`

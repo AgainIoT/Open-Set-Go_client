@@ -2,7 +2,7 @@ import styled from "styled-components";
 import useZoomIn from "../../hooks/useZoomIn";
 import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 import { Typography } from "@mui/material";
-import DeskTop from "../../assets/images/desktop.svg";
+import DeskTop from "../../assets/images/notebook.svg";
 
 
 //Step2: Component for description on the main page (a brief description of the project)
@@ -44,8 +44,8 @@ const ImgDiv = styled.div`
 `;
 
 const DesktopImg = styled.img`
-  width: 70%;
-  height: 70%;
+  width: 80%;
+  height: 80%;
   `;
 
 const TextDiv = styled.div`
