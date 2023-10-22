@@ -5,12 +5,11 @@ import { useRecoilValue } from "recoil";
 import {
   Alert,
   AlertTitle,
-  CircularProgress,
   IconButton,
   SvgIcon,
   Typography,
 } from "@mui/material";
-import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+// import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { ReactComponent as GitForkIcon } from "../../assets/icons/gitFork.svg";
 import { ReactComponent as GitHubIcon } from "../../assets/icons/github.svg";
@@ -46,7 +45,6 @@ export const SecondInfo = () => {
           withCredentials: true,
         },
       );
-      console.log("init: %o", response.data);
 
       const initUserData = {
         repoURL: response.data.repoURL,
@@ -56,8 +54,6 @@ export const SecondInfo = () => {
         fork: response.data.fork,
       };
 
-      console.log("init2: %o", initUserData);
-      //setOwner(response.data.id);
       setSelectedRepoData(initUserData);
     } catch (e) {
       console.error(e);
@@ -128,9 +124,6 @@ export const SecondInfo = () => {
       <ReportContainer>
         {" "}
         <SummarySection>
-          {/* <SummaryItem>
-            <ItemProgress variant="determinate" value={75} size="15rem" />
-          </SummaryItem> */}
           <ItemText>Summary</ItemText>
           <ReviewChart />
         </SummarySection>
@@ -207,44 +200,6 @@ const SummarySection = styled.div`
   padding: 2rem 1rem;
   background-color: ${COLOR.MAIN_HOVER};
   border-radius: 1.5rem;
-`;
-const SummaryItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  margin: 0.1rem;
-  width: 10rem;
-  height: 10rem;
-`;
-
-const ItemProgress = styled(CircularProgress)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 9rem;
-  height: 9rem;
-
-  color: ${COLOR.MAIN_SKYBLUE};
-  span {
-    width: 9rem;
-    height: 9rem;
-  }
-
-  &.MuiCircularProgress-determinate {
-    width: 9rem;
-    height: 9rem;
-  }
-
-  &.MuiCircularProgress-root {
-    width: 9rem;
-    height: 9rem;
-  }
-
-  &.MuiCircularProgress-svg {
-    width: 9rem;
-    height: 9rem;
-  }
 `;
 
 const ItemText = styled(Typography)`

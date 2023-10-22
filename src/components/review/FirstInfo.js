@@ -7,7 +7,6 @@ export const FirstInfo = () => {
   return (
     <StFirstInfo>
       <TextContainer>
-        {" "}
         <Title variant="h2">
           Review your project <br />
           as an open source

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { FirstInfo } from "../components/review/FirstInfo";
 import { FirstContents } from "../components/review/FirstContents";
