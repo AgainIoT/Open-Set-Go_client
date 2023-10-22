@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import React, { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { eachStepState, modalState } from "../recoil/commonState";
+import { eachStepState, modalState, activeState } from "../recoil/commonState";
 import { templateContent } from "../recoil/templateState";
 import { BaseModal } from "../components/common/modal/BaseModal";
 import { TemplateModal } from "../components/common/modal/TemplateModal";
@@ -11,9 +11,11 @@ function ReviewReadmeTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("readme"));
   const [content, setContent] = useRecoilState(templateContent("readme"));
   const [stepComplete, setStepComplted] = useRecoilState(eachStepState("6"));
+  const [activeStep, setActiveStep] = useRecoilState(activeState);
 
   useEffect(() => {
     setStepComplted(true);
+    setActiveStep(6);
   }, []);
 
   const handleOpen = () => setModalValue(true);

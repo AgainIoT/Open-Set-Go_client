@@ -110,7 +110,7 @@ export const ReviewDialog = (props) => {
         `${process.env.REACT_APP_SERVER_URL}/review/file/readme`,
         {
           owner: owner,
-          repoName: "test",
+          repoName: repoName,
           content: readme,
         },
         {
