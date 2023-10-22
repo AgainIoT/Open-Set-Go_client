@@ -1,17 +1,21 @@
 import styled from "styled-components";
+import useZoomIn from "../../hooks/useZoomIn";
+import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 import { Typography } from "@mui/material";
-import DeskTop from "../../assets/images/desktop.svg";
+import DeskTop from "../../assets/images/notebook.svg";
+
 
 //Step2: Component for description on the main page (a brief description of the project)
 const Step2 = () => {
+  const zoominItem = useZoomIn(1.5, 0);
   return (
     <StStep2>
-      <ImgDiv>
-        <DesktopImg src={DeskTop}/>
+      <ImgDiv >
+        <DesktopImg {... zoominItem} src={DeskTop}/>
       </ImgDiv>
       <TextDiv>
-        <TitleTypo variant="h3">You can create Repository easily</TitleTypo>
-        <DescTypo>
+        <TitleTypo {... useScrollFadeIn("left", 1.5, 0)} variant="h3">You can create Repository easily</TitleTypo>
+        <DescTypo {... useScrollFadeIn("left", 1.5, 0.2)}>
           Create a repository to start a new open-source project.<br></br>You can choose
           the environment(e.g., programming<br></br>language, framework, .gitignore,
           etc.) for your project.
@@ -50,12 +54,13 @@ const TextDiv = styled.div`
   flex-direction: column;
   width: 50%;
   height: 100%;
-  margin-left: 1rem;
+  margin-left: 3rem;
+  padding-left: 2rem;
   gap: 1rem;
 `;
 
 const TitleTypo = styled(Typography)`
-  width: 100%;
+  width: fit-content;
   height: fit-content;
   font-size: 3.2rem;
   font-family: "Inter", sans-serif;
@@ -63,7 +68,7 @@ const TitleTypo = styled(Typography)`
 `;
 
 const DescTypo = styled(Typography)`
-  width: 100%;
+  width: fit-content;
   height: fit-content;
   font-size: 2rem;
   font-weight: 200;
