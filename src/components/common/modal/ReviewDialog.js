@@ -11,11 +11,12 @@ import { issueSelectedState } from "../../../recoil/issueState";
 import { modalState, activeState } from "../../../recoil/commonState";
 import { LoadingCompleted } from "../LoadingCompleted";
 import { useNavigate } from "react-router-dom";
+import { reviewRepoDataState } from "../../../recoil/reviewState";
 
 export const ReviewDialog = (props) => {
   const [loading, setLoading] = useState(false);
-  const owner = useRecoilValue(repoDataAtomFamily("owner"));
-  const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
+  const owner = useRecoilValue(reviewRepoDataState("owner"));
+  const repoName = useRecoilValue(reviewRepoDataState("repoName"));
   const pr = useRecoilValue(templateContent("pr"));
   const contributing = useRecoilValue(templateContent("contributing"));
   const issue = useRecoilValue(issueSelectedState("issue"));
@@ -59,7 +60,7 @@ export const ReviewDialog = (props) => {
       );
     } catch (e) {
       console.error(e);
-      alert("Failed File post");
+      alert("Failed pr post");
     }
   }
 
@@ -79,7 +80,7 @@ export const ReviewDialog = (props) => {
       );
     } catch (e) {
       console.error(e);
-      alert("Failed File post");
+      alert("Failed issue post");
     }
   }
 
@@ -99,7 +100,7 @@ export const ReviewDialog = (props) => {
       );
     } catch (e) {
       console.error(e);
-      alert("Failed File post");
+      alert("Failed contributing post");
     }
   }
 
@@ -119,18 +120,17 @@ export const ReviewDialog = (props) => {
       );
     } catch (e) {
       console.error(e);
-      alert("Failed File post");
+      alert("Failed readme post");
     }
   }
-
 
   const handlePost = async () => {
     const isUnique = await checkDuplication();
 
     if (isUnique) {
       setLoading(true);
-      switch (activeStep){
-        case 3 :
+      switch (activeStep) {
+        case 3:
           await postPRData();
           break;
         case 4:
