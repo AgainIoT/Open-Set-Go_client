@@ -113,6 +113,7 @@ const StepContentsContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
 `;
 
 const StepContentsWrapper = styled.div`
@@ -126,11 +127,11 @@ const StepContentsWrapper = styled.div`
 `;
 
 const BottomContainer = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  padding: 0rem 3rem 2rem 3rem;
-  background-color: ${COLOR.MAIN_WHITE};
+  padding: 1rem 3rem 0rem 3rem;
+  background-color: ${COLOR.MAIN_BACKGROUND};
 `;
 
 const ButtonWrapper = styled(Button)`
