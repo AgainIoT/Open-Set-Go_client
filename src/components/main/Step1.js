@@ -1,5 +1,7 @@
-import { styled } from "styled-components";
+import { styled, keyframes } from "styled-components";
 import { COLOR } from "../../styles/color.js";
+import { useRef, useState } from "react";
+import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 import { Typography } from "@mui/material";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -11,8 +13,11 @@ import NEXT from "../../assets/icons/next.svg";
 
 //Step1: Component for description on main page (project step description)
 const Step1 = () => {
+  const animatedItem = useScrollFadeIn();
   const folderIcon = (
-    <FolderOutlinedIcon style={{ color: COLOR.MAIN_NAVY, fontSize: "3.3rem" }}/>
+    <FolderOutlinedIcon
+      style={{ color: COLOR.MAIN_NAVY, fontSize: "3.3rem" }}
+    />
   );
   const lockIcon = (
     <LockOutlinedIcon style={{ color: COLOR.MAIN_NAVY, fontSize: "3.3rem" }} />
@@ -21,7 +26,9 @@ const Step1 = () => {
     <WarningAmberIcon style={{ color: COLOR.MAIN_NAVY, fontSize: "3.3rem" }} />
   );
   const handIcon = (
-    <HandshakeOutlinedIcon style={{ color: COLOR.MAIN_NAVY, fontSize: "3.3rem" }}/>
+    <HandshakeOutlinedIcon
+      style={{ color: COLOR.MAIN_NAVY, fontSize: "3.3rem" }}
+    />
   );
   const infoIcon = (
     <InfoOutlinedIcon style={{ color: COLOR.MAIN_NAVY, fontSize: "3.3rem" }} />
@@ -63,23 +70,26 @@ const Step1 = () => {
 
   return (
     <StStep1>
-      <IntroDiv>
-        <TitleTypo>Make your repository in the easiest way</TitleTypo>
-        <InfoDiv>
-          <DescTypo>Create a project for open source through</DescTypo>
-          <HighlightTypo>&nbsp;6 Steps</HighlightTypo>
-        </InfoDiv>
-      </IntroDiv>
-      <StepDiv>
-        {iconCircles}
-        <EachStepDiv>
-          <Circle>{infoIcon}</Circle>
-          <p>README.md</p>
-        </EachStepDiv>
-      </StepDiv>
+      <AnimDiv {...animatedItem}>
+        <IntroDiv>
+          <TitleTypo>Make your repository in the easiest way</TitleTypo>
+          <InfoDiv>
+            <DescTypo>Create a project for open source through</DescTypo>
+            <HighlightTypo>&nbsp;6 Steps</HighlightTypo>
+          </InfoDiv>
+        </IntroDiv>
+        <StepDiv>
+          {iconCircles}
+          <EachStepDiv>
+            <Circle>{infoIcon}</Circle>
+            <p>README.md</p>
+          </EachStepDiv>
+        </StepDiv>
+      </AnimDiv>
     </StStep1>
   );
 };
+
 
 const StStep1 = styled.div`
   display: flex;
@@ -88,12 +98,21 @@ const StStep1 = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 2rem 0rem 6rem 0rem;
+  padding: 8rem 0rem 6rem 0rem;
   margin: 2rem 0rem 2rem 0rem;
   background-color: ${COLOR.MAIN_WHITE};
   gap: 4rem;
 `;
 
+const AnimDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  gap: 4rem;
+`;
 const IntroDiv = styled.div`
   display: flex;
   justify-content: center;

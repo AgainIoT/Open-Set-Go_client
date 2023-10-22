@@ -1,12 +1,16 @@
 import styled from "styled-components";
+import { useRef } from "react";
+import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 import { Typography } from "@mui/material";
 import DeskTop from "../../assets/images/desktop.svg";
 
+
 //Step2: Component for description on the main page (a brief description of the project)
 const Step2 = () => {
+  const animatedItem = useScrollFadeIn();
   return (
     <StStep2>
-      <ImgDiv>
+      <ImgDiv {...animatedItem}>
         <DesktopImg src={DeskTop}/>
       </ImgDiv>
       <TextDiv>
