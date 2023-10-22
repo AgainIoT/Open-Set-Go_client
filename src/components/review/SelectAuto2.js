@@ -11,21 +11,20 @@ import {
   Select,
 } from "@mui/material";
 
-// props -> type(userName) data(userRepoName) labelText(Owner*) dataState(repoDataAtomFamily)
-export const SelectAuto = (props) => {
+export const SelectAuto2 = (props) => {
   const [selectValue, setSelectValue] = useRecoilState(
     props.dataState(props.type),
   );
 
   const handleChange = (event) => {
     setSelectValue(event.target.value);
+    props.setIsSelectOwner(true);
   };
 
   return (
-    <StSelectAuto>
+    <StSelectAuto2>
       <SelectInputFormControl>
         <SelectLabelWrapper
-          shrink
           variant="standard"
           htmlFor={props.labelText}
           id={props.labelText}
@@ -37,12 +36,12 @@ export const SelectAuto = (props) => {
           id={props.labelText}
           value={selectValue}
           onChange={handleChange}
-          autoWidth
+          // autoWidth
           renderValue={(selected) => {
             return (
               <RenderOptionItem>
                 <ItmeAvatar
-                  src={props.data.find((it) => it.id === selected)?.avatar}
+                  src={props.data.find((it) => it.owner === selected)?.avatar}
                 ></ItmeAvatar>
 
                 <OPtionItemText id={selected} primary={selected} />
@@ -51,20 +50,24 @@ export const SelectAuto = (props) => {
           }}
         >
           {props.data.map((option, index) => (
-            <MenuOptionItem key={option.id} value={option.id} label={option.id}>
+            <MenuOptionItem
+              key={option.owner}
+              value={option.owner}
+              label={option.owner}
+            >
               <OptionItemAvatar>
                 <ItmeAvatar src={option.avatar}></ItmeAvatar>
               </OptionItemAvatar>
-              <OPtionItemText id={option.id} primary={option.id} />
+              <OPtionItemText id={option.owner} primary={option.owner} />
             </MenuOptionItem>
           ))}
         </SelectContainer>
       </SelectInputFormControl>
-    </StSelectAuto>
+    </StSelectAuto2>
   );
 };
 
-const StSelectAuto = styled.div`
+const StSelectAuto2 = styled.div`
   display: flex;
   width: 100%;
 `;
@@ -76,12 +79,15 @@ const SelectInputFormControl = styled(FormControl)`
 
 const SelectLabelWrapper = styled(InputLabel)`
   display: flex;
+  justify-content: center;
+
   align-items: center;
-  transform-origin: center left;
-  position: static;
-  height: 100%;
-  gap: 0.5rem;
-  color: ${COLOR.MAIN_BLACK};
+  transform-origin: top left;
+  /* transform-origin: center left; */
+  position: absolute;
+  /* height: 100%; */
+  /* gap: 0.5rem; */
+  color: ${COLOR.FONT_GRAY};
   font-size: 1.8rem;
   font-weight: 500;
   text-align: center;
@@ -89,19 +95,19 @@ const SelectLabelWrapper = styled(InputLabel)`
   & .MuiFormLabel-root {
     justify-content: center;
     align-items: center;
-    transform-origin: center left;
+    transform-origin: top left;
     text-align: center;
   }
 `;
 
 const SelectContainer = styled(Select)`
   display: flex;
-  min-width: 10rem;
+  position: relative;
 
   & .MuiSelect-select {
     width: 100%;
     height: 4rem;
-    padding: 0.5rem 2rem;
+    padding: 2rem;
   }
   & .MuiInputBase-input {
     display: flex;
@@ -128,7 +134,6 @@ const SelectContainer = styled(Select)`
   & .css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
     border-radius: 3rem;
   }
-  background-color: ${COLOR.MAIN_WHITE};
 `;
 
 const MenuOptionItem = styled(MenuItem)`

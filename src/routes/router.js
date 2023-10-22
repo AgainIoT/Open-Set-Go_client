@@ -11,6 +11,7 @@ import LicensePage from "../pages/LicensePage";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
 import ReviewReadmeTemplatePage from "../pages/ReviewReadmeTemplatePage";
 import ContributingTemplatePage from "../pages/ContributingTemplatePage";
+import OperationalReviewPage from "../pages/Review";
 import ReviewContributingTemplatePage from "../pages/ReviewContributingTemplatePage";
 import IssueTemplatePage from "../pages/IssueTemplatePage";
 import ReviewIssueTemplatePage from "../pages/ReviewIssueTemplatePage";
@@ -22,6 +23,7 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/select" element={<SelectTypePage />} />
+        <Route path="/review" element={<OperationalReviewPage />} />
         <Route path="/*" element={<ErrorPage />} />
         <Route element={<Layout />}>
           <Route path="/step0" element={<IssueTemplatePage />} />
@@ -34,6 +36,12 @@ const Router = () => {
         </Route>
         <Route element={<ReviewLayout />}>
           <Route path="/reviewPR" element={<ReviewPRTemplatePage />} />
+          <Route path="/reviewIssue" element={<IssueTemplatePage />} />
+          <Route
+            path="/reviewContributing"
+            element={<ContributingTemplatePage />}
+          />
+          <Route path="/reviewReadme" element={<ReadmeTemplatePage />} />
           <Route path="/reviewIssue" element={<ReviewIssueTemplatePage />} />
           <Route path="/reviewContributing" element={<ReviewContributingTemplatePage />} />
           <Route path="/reviewReadme" element={<ReviewReadmeTemplatePage />} />
