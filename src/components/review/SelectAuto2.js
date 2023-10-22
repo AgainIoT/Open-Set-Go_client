@@ -36,7 +36,7 @@ export const SelectAuto2 = (props) => {
           id={props.labelText}
           value={selectValue}
           onChange={handleChange}
-          autoWidth
+          // autoWidth
           renderValue={(selected) => {
             return (
               <RenderOptionItem>
