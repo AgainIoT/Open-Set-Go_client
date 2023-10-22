@@ -34,7 +34,7 @@ const Router = () => {
         <Route element={<ReviewLayout />}>
           <Route path="/reviewPR" element={<ReviewPRTemplatePage />} />
           <Route path="/reviewIssue" element={<ReviewIssueTemplatePage />} />
-          <Route path="/reviewContributing" element={<ContributingTemplatePage />} />
+          <Route path="/reviewContributing" element={<ReviewContributingTemplatePage />} />
           <Route path="/reviewReadme" element={<ReadmeTemplatePage />} />
         </Route>
       </Routes>
