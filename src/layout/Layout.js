@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { activeState, eachStepState, modalState } from "../recoil/commonState";
 import { useRecoilState } from "recoil";
@@ -18,26 +18,15 @@ export const Layout = () => {
   );
   const navigate = useNavigate();
 
-  // prevent user from leaving
-  const preventClose = (event) => {
-    event.preventDefault();
-    event.returnValue = "";
-  };
-
-  useEffect(() => {
-    (() => {
-      window.addEventListener("beforeunload", preventClose);
-    })();
-
-    return () => {
-      window.removeEventListener("beforeunload", preventClose);
-    };
-  }, []);
-
   // you go back, come back
-  const preventGoBack = () => {
-    window.history.forward();
-    alert("please press 'prev' button instead of the browser button");
+  const preventGoBack = (event) => {
+    const currentURL = window.location.href;
+    const match = currentURL.match(/\/step(\d+)/);
+
+    if (match) {
+      const number = parseInt(match[1], 10);
+      setActiveStep(number);
+    }
   };
 
   useEffect(() => {
