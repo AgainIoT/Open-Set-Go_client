@@ -3,6 +3,7 @@ import MainPage from "../pages/MainPage";
 import LoginPage from "../pages/Login";
 import SelectTypePage from "../pages/SelectTypePage";
 import PRTemplatePage from "../pages/PRTemplatePage";
+// import ReviewPRTemplatePage from "../pages/ReviewPRTemplatePage";
 import { Layout } from "../layout/Layout";
 import { ReviewLayout } from "../layout/ReviewLayout";
 import CreateRepo from "../pages/CreateRepoPage";
