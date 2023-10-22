@@ -8,7 +8,7 @@ import axios from "axios";
 import { repoDataAtomFamily } from "../../../recoil/repoData";
 import { templateContent } from "../../../recoil/templateState";
 import { issueSelectedState } from "../../../recoil/issueState";
-import { modalState } from "../../../recoil/commonState";
+import { modalState, activeState } from "../../../recoil/commonState";
 import { LoadingCompleted } from "../LoadingCompleted";
 import { useNavigate } from "react-router-dom";
 
@@ -23,6 +23,7 @@ export const ReviewDialog = (props) => {
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
   const navigate = new useNavigate();
+  const activeStep = useRecoilValue(activeState);
 
   async function checkDuplication() {
     try {
@@ -128,7 +129,19 @@ export const ReviewDialog = (props) => {
 
     if (isUnique) {
       setLoading(true);
-      await postPRData();
+      switch (activeStep){
+        case 3 :
+          await postPRData();
+          break;
+        case 4:
+          await postIssueData();
+          break;
+        case 5:
+          await postContributingData();
+          break;
+        case 6:
+          await postReadmeData();
+      }
       setDialogValue(false);
       navigate("/");
     } else {
