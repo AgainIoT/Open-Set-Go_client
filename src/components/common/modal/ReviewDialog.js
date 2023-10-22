@@ -49,7 +49,7 @@ export const ReviewDialog = (props) => {
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/review/file/pr`,
         {
-          owner: "sinji2102",
+          owner: owner,
           repoName: "test",
           content: pr,
         },

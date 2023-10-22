@@ -11,6 +11,7 @@ import LicensePage from "../pages/LicensePage";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
 import ContributingTemplatePage from "../pages/ContributingTemplatePage";
 import IssueTemplatePage from "../pages/IssueTemplatePage";
+import ReviewIssueTemplatePage from "../pages/ReviewIssueTemplatePage";
 import ErrorPage from "../pages/ErrorPage";
 
 const Router = () => {
@@ -32,7 +33,7 @@ const Router = () => {
         </Route>
         <Route element={<ReviewLayout />}>
           <Route path="/reviewPR" element={<ReviewPRTemplatePage />} />
-          <Route path="/reviewIssue" element={<IssueTemplatePage />} />
+          <Route path="/reviewIssue" element={<ReviewIssueTemplatePage />} />
           <Route path="/reviewContributing" element={<ContributingTemplatePage />} />
           <Route path="/reviewReadme" element={<ReadmeTemplatePage />} />
         </Route>
