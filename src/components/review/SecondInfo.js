@@ -142,7 +142,6 @@ const StFirstInfo = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  /* background-color: ${COLOR.MAIN_WHITE}; */
 `;
 const Title = styled(Typography)`
   color: ${COLOR.MAIN_NAVY};
