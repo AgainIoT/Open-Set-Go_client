@@ -6,7 +6,6 @@ import { eachStepState, modalState } from "../recoil/commonState";
 import MarkdownPreview from "../components/common/MarkdownPreview";
 import { TemplateModal } from "../components/common/modal/TemplateModal";
 import { styled } from "styled-components";
-import { ReviewLayout } from "../layout/ReviewLayout";
 
 function PRTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("pr"));
