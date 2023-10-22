@@ -184,15 +184,7 @@ export const SecondContents = () => {
       console.log("initReview: %o", initReviewData);
       //setOwner(response.data.id);
 
-      const checkValue = Object.keys(response.data).filter(
-        (key) => response.data[key] === true,
-      );
-      const noneCheckValue = Object.keys(response.data).filter(
-        (key) => response.data[key] === false,
-      );
       setReviewCommunityData(initReviewData);
-      setCheckList([checkList, checkValue]);
-      setNoneList([noneList, noneCheckValue]);
       setIsLoadingCommunity(false);
     } catch (e) {
       console.error(e);
@@ -204,6 +196,23 @@ export const SecondContents = () => {
     getSecurityReviewData();
     getCommunityReviewData();
   }, []);
+
+  useEffect(() => {
+    if (!isLoadingTemplate && !isLoadingSecurity && !isLoadingCommunity) {
+      const arr = {
+        ...reviewTemplateData,
+        ...reviewSecurityData,
+        ...reviewCommunityData,
+      };
+
+      const checkValue = Object.keys(arr).filter((key) => arr[key] === true);
+      const noneCheckValue = Object.keys(arr).filter(
+        (key) => arr[key] === false,
+      );
+      setCheckList([checkValue]);
+      setNoneList([noneCheckValue]);
+    }
+  }, [isLoadingTemplate, isLoadingSecurity, isLoadingCommunity]);
 
   const handleFinish = () => {
     setPage(0);
