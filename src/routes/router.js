@@ -21,7 +21,6 @@ const Router = () => {
         <Route path="/select" element={<SelectTypePage />} />
         <Route path="/*" element={<ErrorPage />} />
         <Route element={<Layout />}>
-          <Route path="/step0" element={<IssueTemplatePage />} />
           <Route path="/step1" element={<CreateRepo />} />
           <Route path="/step2" element={<LicensePage />} />
           <Route path="/step3" element={<PRTemplatePage />} />

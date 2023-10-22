@@ -3,22 +3,24 @@ import { COLOR } from "../styles/color";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { activeState, eachStepState, modalState } from "../recoil/commonState";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Button from "@mui/material/Button";
 import { LinearStepper } from "./Stepper";
 import { Header } from "./Header";
 import StepInfo from "../components/common/StepInfo";
 import { FinishDialog } from "../components/common/modal/FinishDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
+import { repoDataAtomFamily } from "../recoil/repoData";
+import { isLogin } from "../recoil/authorize";
 
 export const Layout = () => {
   const [activeStep, setActiveStep] = useRecoilState(activeState);
   const [stepCompleted, setStepComplted] = useRecoilState(
     eachStepState(`${activeStep}`),
   );
+  const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
   const navigate = useNavigate();
 
-  // you go back, come back
   const preventGoBack = (event) => {
     const currentURL = window.location.href;
     const match = currentURL.match(/\/step(\d+)/);
@@ -33,6 +35,23 @@ export const Layout = () => {
     (() => {
       window.addEventListener("popstate", preventGoBack);
     })();
+
+    preventGoBack();
+
+    // check if user logined
+    if (!localStorage.getItem("id")) {
+      navigate("/");
+    }
+
+    console.log(parseInt(window.location.href.match(/\/step(\d+)/)[1], 10));
+    console.log(repoName);
+
+    if (
+      parseInt(window.location.href.match(/\/step(\d+)/)[1], 10) !== 1 &&
+      (!repoName || repoName === "")
+    ) {
+      navigate("/");
+    }
 
     return () => {
       window.removeEventListener("popstate", preventGoBack);
@@ -64,7 +83,7 @@ export const Layout = () => {
               <Outlet />
             </StepContentsWrapper>
             <BottomContainer>
-              {activeStep > 0 ? (
+              {activeStep > 1 ? (
                 <ButtonWrapper
                   variant="contained"
                   disableElevation
