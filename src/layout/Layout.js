@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { activeState, eachStepState, modalState } from "../recoil/commonState";
 import { useRecoilState } from "recoil";

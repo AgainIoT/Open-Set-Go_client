@@ -22,8 +22,7 @@ const MarkdownPreview = (props) => {
 };
 
 const StMarkdownPreview = styled.div`
-  height: 69vh;
-  overflow-y: auto;
+  height: 60vh;
 `;
 
 export default MarkdownPreview;
