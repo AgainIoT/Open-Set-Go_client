@@ -12,6 +12,7 @@ import {
   SearchWrapper,
   SearchIconWrapper,
   StyledInputBase,
+  ListText,
 } from "./StyledTemplate";
 
 export function ListHeader(props) {
@@ -27,7 +28,7 @@ export function ListHeader(props) {
       >
         {props.type}
       </Typography>
-      <SearchWrapper>
+      {/* <SearchWrapper>
         <Search>
           <SearchIconWrapper>
             <SearchIcon />
@@ -37,7 +38,7 @@ export function ListHeader(props) {
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
-      </SearchWrapper>
+      </SearchWrapper> */}
     </>
   );
 }
@@ -52,7 +53,7 @@ export function BasicList(props) {
       sx={{
         width: 360,
         itemSize: 46,
-        itemCount: length,
+        itemCount: props.length,
         overscanCount: 5,
       }}
     >

@@ -1,15 +1,16 @@
-import { InputBase, Paper } from "@mui/material";
+import { InputBase, ListItemText } from "@mui/material";
 import { COLOR } from "../../../styles/color";
 import { styled, alpha } from "@mui/material/styles";
 
-export const ListWrapper = styled("div")(({ theme }) => ({
-  width: "100%",
-  height: "100%",
-  maxWidth: 360,
-  marginBottom: theme.spacing(1),
-  backgroundColor: COLOR.MAIN_WHITE,
-  overflowX: "hidden",
-  overflowY: "auto",
+export const Item = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
+  textAlign: "center",
+  padding: theme.spacing(1),
+  color: theme.palette.text.secondary,
+  backgroundColor: COLOR.MAIN_BACKGROUND,
+  borderRadius: 2,
 }));
 
 export const SearchWrapper = styled("div")(({ theme }) => ({
@@ -56,13 +57,16 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const Item = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  flexDirection: "column",
-  textAlign: "center",
-  padding: theme.spacing(1),
-  color: theme.palette.text.secondary,
-  backgroundColor: COLOR.MAIN_BACKGROUND,
-  borderRadius: 2,
+export const ListWrapper = styled("div")(({ theme }) => ({
+  width: "100%",
+  height: "100%",
+  maxWidth: 360,
+  marginBottom: theme.spacing(1),
+  backgroundColor: COLOR.MAIN_WHITE,
+  overflowX: "hidden",
+  overflowY: "auto",
+}));
+
+export const ListText = styled(ListItemText)(({ theme }) => ({
+  fontSize: "10rem"
 }));
