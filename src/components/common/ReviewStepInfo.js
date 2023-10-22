@@ -10,7 +10,7 @@ import { templateMode } from "../../recoil/templateState";
 import StepData from "../../data/StepData.json";
 
 //StepInfo: Component for description of each step (located on the left side of the screen)
-const ReviewStepInfo = (props) => {
+const ReviewStepInfo = () => {
   //using recoil for matching step information and step
   const activeStep = useRecoilValue(activeState);
   const [templateMod, setTemplateMod] = useRecoilState(templateMode);
