@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import {
   Box,
   Button,
@@ -10,21 +13,17 @@ import {
 import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+import axios from "axios";
 import {
   communityItem,
   securityItem,
   templateItem,
 } from "../../data/ReviewItemData";
-import { useState } from "react";
-import axios from "axios";
-import { useRecoilState, useRecoilValue } from "recoil";
 import {
   reivewAlertListState,
   reivewReportState,
   reviewRepoDataState,
 } from "../../recoil/reviewState";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const SecondContents = () => {
   const navigate = new useNavigate();
@@ -346,14 +345,14 @@ const ItemIconBox = styled(Box)`
   justify-content: center;
   position: relative;
   top: 0;
-  margin: 0.1rem;
   width: 5rem;
   height: 5rem;
+  margin: 0.1rem;
 `;
 
 const IconBox = styled(SvgIcon)`
-  color: ${(props) => props.iconcolor};
   position: absolute;
+  color: ${(props) => props.iconcolor};
   font-size: 3.6rem;
 `;
 
