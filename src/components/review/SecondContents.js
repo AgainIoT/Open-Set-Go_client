@@ -20,6 +20,7 @@ import axios from "axios";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   reivewAlertListState,
+  reivewReportState,
   reviewRepoDataState,
 } from "../../recoil/reviewState";
 import { useEffect } from "react";
@@ -61,6 +62,10 @@ export const SecondContents = () => {
   );
   const [page, setPage] = useRecoilState(reviewRepoDataState("page"));
   const [alertList, setAlertList] = useRecoilState(reivewAlertListState);
+  const [checkList, setCheckList] = useRecoilState(
+    reivewReportState("checked"),
+  );
+  const [noneList, setNoneList] = useRecoilState(reivewReportState("none"));
 
   const [isLoadingTemplate, setIsLoadingTemplate] = useState(true);
   const [isLoadingSecurity, setIsLoadingSecurity] = useState(true);
@@ -178,7 +183,16 @@ export const SecondContents = () => {
 
       console.log("initReview: %o", initReviewData);
       //setOwner(response.data.id);
+
+      const checkValue = Object.keys(response.data).filter(
+        (key) => response.data[key] === true,
+      );
+      const noneCheckValue = Object.keys(response.data).filter(
+        (key) => response.data[key] === false,
+      );
       setReviewCommunityData(initReviewData);
+      setCheckList([checkList, checkValue]);
+      setNoneList([noneList, noneCheckValue]);
       setIsLoadingCommunity(false);
     } catch (e) {
       console.error(e);

@@ -3,6 +3,8 @@ import { COLOR } from "../../styles/color";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 import { Doughnut } from "react-chartjs-2";
+import { useRecoilValue } from "recoil";
+import { reivewReportState } from "../../recoil/reviewState";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const data = {
@@ -27,6 +29,8 @@ export const data = {
 };
 
 export const ReviewChart = () => {
+  const checkList = useRecoilValue(reivewReportState("checked"));
+  console.log("checked:", checkList);
   const options = {
     plugins: {
       title: {
