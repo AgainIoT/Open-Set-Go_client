@@ -10,6 +10,7 @@ import CreateRepo from "../pages/CreateRepoPage";
 import LicensePage from "../pages/LicensePage";
 import ReadmeTemplatePage from "../pages/ReadmeTemplatePage";
 import ContributingTemplatePage from "../pages/ContributingTemplatePage";
+import ReviewContributingTemplatePage from "../pages/ReviewContributingTemplatePage";
 import IssueTemplatePage from "../pages/IssueTemplatePage";
 import ReviewIssueTemplatePage from "../pages/ReviewIssueTemplatePage";
 import ErrorPage from "../pages/ErrorPage";

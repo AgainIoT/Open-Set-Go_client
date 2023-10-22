@@ -6,7 +6,7 @@ import { BaseModal } from "../components/common/modal/BaseModal";
 import { TemplateModal } from "../components/common/modal/TemplateModal";
 import MarkdownPreview from "../components/common/MarkdownPreview";
 
-function ReviewContributingPage(props) {
+function ReviewContributingTemplatePage(props) {
   const [stepComplete, setStepComplted] = useRecoilState(eachStepState("5"));
   const [activeStep, setActiveStep] = useRecoilState(activeState);
 
@@ -32,4 +32,4 @@ const StReviewContributingPage = styled.div`
   min-height: 40rem;
 `;
 
-export default ReviewContributingPage;
+export default ReviewContributingTemplatePage;
