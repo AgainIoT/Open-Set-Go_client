@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { templateMode } from "../../recoil/templateState";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { Typography } from "@mui/material";
 import {
   modalState,
   activeState,
@@ -29,6 +30,9 @@ const ReviewStepInfo = (props) => {
             <div key={it.step}>
               <Box>
                 <StStepInfo>
+                  <TitleH1>
+                    {it.title}
+                  </TitleH1>
                   <ContentP>{it.content}</ContentP>
                   <ButtonWrapper
                     size="large"
@@ -67,6 +71,12 @@ const StStepInfo = styled.div`
   justify-content: space-evenly;
   align-items: center;
   gap: 2rem;
+`;
+
+const TitleH1 = styled(Typography)`
+  font-size: 2.3rem;
+  font-weight: bolder;
+  text-align: center;
 `;
 
 const ContentP = styled.p`
