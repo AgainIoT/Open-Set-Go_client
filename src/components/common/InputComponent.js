@@ -102,9 +102,9 @@ export const TextInputContainer = (props) => {
         ) : (
           <InputField
             id="inputField"
-            multiline
+            // multiline
             fullWidth
-            rows={props.fieldType}
+            // rows={props.fieldType}
             fieldsize={100}
             onInput={(e) => handleOnChange(e)}
             value={inputValue}
