@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import React, { useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { BaseModal3 } from "../components/common/modal/BaseModal3";
 import { eachStepState, modalState, activeState } from "../recoil/commonState";
 import IssueList from "../components/common/IssueList";
 import IssueModal from "../components/common/modal/IssueModal";
 function ReviewIssueTemplatePage() {
-  const [modalValue, setModalValue] = useRecoilState(modalState("issue"));
   const [stepComplete, setStepComplted] = useRecoilState(eachStepState("4"));
   const [activeStep, setActiveStep] = useRecoilState(activeState);
 
