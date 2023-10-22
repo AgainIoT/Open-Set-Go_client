@@ -1,40 +1,35 @@
 import { styled } from "styled-components";
 import React, { useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { templateContent } from "../recoil/templateState";
-import { eachStepState, modalState } from "../recoil/commonState";
+import { useRecoilState } from "recoil";
+import { eachStepState, activeState } from "../recoil/commonState";
 import { BaseModal } from "../components/common/modal/BaseModal";
 import { TemplateModal } from "../components/common/modal/TemplateModal";
 import MarkdownPreview from "../components/common/MarkdownPreview";
 
-function ContributingTemplatePage(props) {
-  const [modalValue, setModalValue] = useRecoilState(
-    modalState("contributing"),
-  );
-  const [content, setContent] = useRecoilState(templateContent("contributing"));
+function ReviewContributingTemplatePage() {
   const [stepComplete, setStepComplted] = useRecoilState(eachStepState("5"));
+  const [activeStep, setActiveStep] = useRecoilState(activeState);
 
   useEffect(() => {
     setStepComplted(true);
+    setActiveStep(5);
   }, []);
 
-  const handleOpen = () => setModalValue(true);
-
   return (
-    <StReadmeTemplatePage>
+    <StReviewContributingPage>
       <BaseModal type={"contributing"}>
         <TemplateModal type={"contributing"} />
       </BaseModal>
       <MarkdownPreview type={"contributing"} />
-    </StReadmeTemplatePage>
+    </StReviewContributingPage>
   );
 }
 
-const StReadmeTemplatePage = styled.div`
+const StReviewContributingPage = styled.div`
   width: 100%;
   height: 100%;
   min-width: 60rem;
   min-height: 40rem;
 `;
 
-export default ContributingTemplatePage;
+export default ReviewContributingTemplatePage;
