@@ -5,9 +5,7 @@ import { useRecoilState } from "recoil";
 import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import { reviewRepoDataState } from "../../recoil/reviewState";
-import { SelectAuto } from "../common/SelectAuto";
 import { SelectAuto2 } from "./SelectAuto2";
-import { CardSlider } from "./CardSlider";
 import { SelectRepoName } from "./SelectRepoName";
 
 export const FirstContents = () => {
@@ -38,7 +36,6 @@ export const FirstContents = () => {
           withCredentials: true,
         },
       );
-      console.log("init: %o", response.data);
 
       const initUserData = response.data.map((it) => {
         return {
@@ -47,8 +44,6 @@ export const FirstContents = () => {
           repoName: it.repoName,
         };
       });
-      console.log("init2: %o", initUserData);
-      //setOwner(response.data.id);
       setUserRepoData(initUserData);
     } catch (e) {
       console.error(e);
@@ -59,16 +54,13 @@ export const FirstContents = () => {
     getUserRepoData();
   }, []);
 
-  //Apply options based on the language of choice
+  //Apply options based on the owner of choice
   useEffect(() => {
     if (isSelectOwner) {
       const selectedRepoData = userRepoData.find(
         (it) => it.owner === selectOwner,
       );
       const repoNameData = selectedRepoData.repoName || [];
-      //   const repoNameDataOption = repoNameData.map(
-      //     (frameworkItem) => frameworkItem.framework,
-      //   );
 
       setRepoNameOptions(repoNameData);
     } else {
@@ -86,14 +78,6 @@ export const FirstContents = () => {
         dataState={reviewRepoDataState}
         setIsSelectOwner={setIsSelectOwner}
       />
-      {/* <SelectAuto2
-        labelText={"Repository Name"}
-        type={"repoName"}
-        data={userRepoData}
-        setIsSelectOwner={setIsSelectOwner}
-
-        dataState={reviewRepoDataState}
-      /> */}
       <SelectRepoName
         labelText={"Repository Name"}
         type={"repoName"}
@@ -124,4 +108,4 @@ const Title = styled(Typography)`
   font-weight: bold;
   color: ${COLOR.MAIN_NAVY};
 `;
-const SubTitle = styled(Typography)``;
+// const SubTitle = styled(Typography)``;
