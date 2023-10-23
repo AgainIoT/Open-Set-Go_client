@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import Slider from "react-slick";
 import icons from "./ItemIcons";
-import { fontSize, style } from "@mui/system";
 
 export const CardSlider = () => {
   const settings = {
