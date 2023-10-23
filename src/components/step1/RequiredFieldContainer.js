@@ -142,7 +142,12 @@ export const RequiredFieldContainer = () => {
         }}
       >
         <Grid item xs={12} sm={5}>
-          <SelectAuto labelText={"Owner*"} type={"owner"} data={userRepoData} />
+          <SelectAuto
+            labelText={"Owner*"}
+            type={"owner"}
+            data={userRepoData}
+            dataState={repoDataAtomFamily}
+          />
         </Grid>
         <Grid item xs={12} sm={8}>
           <TextInputContainer
