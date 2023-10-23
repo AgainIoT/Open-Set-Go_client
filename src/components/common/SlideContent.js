@@ -86,7 +86,7 @@ export const SlideContent = (props) => {
             <BtnDiv className="BtnDiv">
               <SelectedBtn
                 className="SubmitBtn"
-                variant="contained"
+                variant="outlined"
                 onClick={handleCancel}
               >
                 Cancel
