@@ -278,6 +278,12 @@ export const Header = (props) => {
     </React.Fragment>
   );
 };
+
+Header.defaultProps = {
+  burger: false,
+  logout: true,
+};
+
 const LogoWrapper = styled.a`
   display: flex;
   flex-direction: row;
