@@ -1,9 +1,9 @@
 import { styled, keyframes } from "styled-components";
 import { COLOR } from "../../styles/color.js";
-import { useRef } from "react";
+import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { isLogin } from "../../recoil/authorize";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
 import propTypes from "prop-types";
@@ -15,7 +15,23 @@ const githubURL = `https://github.com/login/oauth/authorize?client_id=${CLIENT_I
 const handleLogin = () => {
   window.location.href = githubURL;
 };
-export const Welcome = (ref) => {
+export const Welcome = () => {
+  const location = useLocation();
+
+  const preventGoBack = (event) => {
+    history.pushState(null, "", location.href);
+  };
+
+  useEffect(() => {
+    history.pushState(null, "", location.href);
+    (() => {
+      window.addEventListener("popstate", preventGoBack);
+    })();
+
+    return () => {
+      window.removeEventListener("popstate", preventGoBack);
+    };
+  }, []);
   const animatedItem = useScrollFadeIn();
   const Logined = useRecoilValue(isLogin);
   const navigate = new useNavigate();

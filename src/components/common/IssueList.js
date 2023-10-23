@@ -173,8 +173,8 @@ export default IssueList;
 const StIssueList = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
+  width: 70vw;
+  height: 60vh;
 `;
 
 const ChipWrapper = styled.div`
@@ -182,7 +182,7 @@ const ChipWrapper = styled.div`
   justify-content: left;
   flex-direction: column;
   width: 100%;
-  height: 20%;
+  height: 10rem;
   border-bottom: 0.2rem solid ${COLOR.MAIN_BORDER};
 `;
 
@@ -222,7 +222,7 @@ const TitleWrapper = styled.div`
   justify-content: center;
   align-items: left;
   width: 100%;
-  height: 20%;
+  height: 10rem;
   margin-top: 0.5rem;
   border-bottom: 0.1rem solid ${COLOR.MAIN_BORDER};
 `;

@@ -117,8 +117,8 @@ export function TemplateList(props) {
   async function getGenerateData() {
     if (props.type === "contributing" || props.type === "readme") {
       const reulst = await axios.post(url + "/generate", {
-        owner,
-        repoName,
+        owner: owner ? owner : "owner",
+        repoName: repoName ? repoName : "owner",
         description,
         license,
       });
