@@ -10,9 +10,9 @@ export const CardSlider = () => {
     dots: false,
     infinite: true,
     slidesToShow: 3,
-    slidesToScroll: 6,
+    slidesToScroll: 3,
     autoplay: true,
-    speed: 5000,
+    speed: 3000,
     autoplaySpeed: 1000,
     cssEase: "linear",
   };
