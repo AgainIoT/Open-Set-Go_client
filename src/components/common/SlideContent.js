@@ -258,25 +258,28 @@ const SharedBtn = `
 
 const SelectedBtn = styled(Button)`
   ${SharedBtn}
-  background-color: ${COLOR.MAIN_PURPLE};
+  background-color: ${COLOR.MAIN_GREEN};
+  color: ${COLOR.MAIN_WHITE};
   &:hover {
-    background-color: purple;
+    background-color: green;
     box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
   }
   &:active {
-    background-color: purple;
+    background-color: green;
   }
 `;
 
 const SubmitBtn = styled(Button)`
   ${SharedBtn}
-  background-color: green;
+  background-color: ${COLOR.MAIN_WHITE};
+  border: 0.1rem outset ${COLOR.MAIN_GREEN};
+  color: ${COLOR.MAIN_GREEN};
   &:hover {
-    background-color: ${COLOR.MAIN_GREEN};
+    background-color: white;
     box-shadow: 0.2rem 0.2rem 0.3rem #dedede;
   }
   &:active {
-    background-color: ${COLOR.MAIN_GREEN};
+    background-color: white;
   }
 `;
 
