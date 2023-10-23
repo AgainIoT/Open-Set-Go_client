@@ -1,11 +1,23 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color.js";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useResetRecoilState } from "recoil";
 import { Button } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import { useNavigate } from "react-router-dom";
+import { reviewRepoDataState } from "../../recoil/reviewState.js";
 
 export const SelectType = () => {
   const navigate = new useNavigate();
+  const resetReviewPage = useResetRecoilState(reviewRepoDataState("page"));
+  const resetReviewOwner = useResetRecoilState(reviewRepoDataState("owner"));
+  const resetReviewRepo = useResetRecoilState(reviewRepoDataState("repoName"));
+
+  useEffect(() => {
+    resetReviewPage();
+    resetReviewOwner();
+    resetReviewRepo();
+  }, []);
 
   return (
     <StSelectType>
