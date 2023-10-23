@@ -141,7 +141,7 @@ export const ReviewDialog = (props) => {
     }
     setDialogValue(false);
     setActiveStep(1);
-    navigate("/review");
+    navigate("/review", { replace: true });
   };
 
   const handleClose = () => {
