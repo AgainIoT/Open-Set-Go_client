@@ -18,7 +18,7 @@ export const FirstInfo = () => {
         </SubTitle>
       </TextContainer>
       <SliderSection>
-        <CardSlider />
+        <CardSlider/>
       </SliderSection>
     </StFirstInfo>
   );

@@ -56,19 +56,35 @@ export const SelectRepoName = (props) => {
   );
 };
 
-const StSelectRepoName = styled.div``;
+const StSelectRepoName = styled.div`
+  width: 100%;
+  height: 20%;
+  border: 1px solid pink;
+`;
 
-const SelectFormControl = styled(FormControl)``;
-const SelectInputLabel = styled(InputLabel)``;
-const SelectAuto = styled(Select)``;
+const SelectFormControl = styled(FormControl)`
+  width: 50%;
+  height: 80%;
+  border: 1px solid blue;
+`;
+const SelectInputLabel = styled(InputLabel)`
+  font-size: 1.8rem;
+`;
+
+const SelectAuto = styled(Select)`
+  font-size: 2rem;
+  padding-top: 0.5rem;
+`;
 
 const Placeholder = styled(Typography)`
+  font-size: 2rem;
   color: ${COLOR.FONT_GRAY};
 `;
 
 const SelectMenuItem = styled(MenuItem)``;
 
 const SelectFormHelperText = styled(FormHelperText)`
+  font-size: 1.1rem;
   color: ${COLOR.MAIN_BLACK};
   ${SelectFormControl}:active & {
     color: ${COLOR.MAIN_RED};
