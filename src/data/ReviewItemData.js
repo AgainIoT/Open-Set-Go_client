@@ -1,4 +1,3 @@
-import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
