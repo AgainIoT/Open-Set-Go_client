@@ -125,31 +125,23 @@ export const ReviewDialog = (props) => {
   }
 
   const handlePost = async () => {
-    const isUnique = await checkDuplication();
-
-    if (isUnique) {
-      setLoading(true);
-      switch (activeStep) {
-        case 3:
-          await postPRData();
-          break;
-        case 4:
-          await postIssueData();
-          break;
-        case 5:
-          await postContributingData();
-          break;
-        case 6:
-          await postReadmeData();
-      }
-      setDialogValue(false);
-      setActiveStep(1);
-      navigate("/");
-    } else {
-      alert(
-        `Your repository '${owner}/${repoName}' is already exists!\nPlease delete repository and try again!`,
-      );
+    setLoading(true);
+    switch (activeStep) {
+      case 3:
+        await postPRData();
+        break;
+      case 4:
+        await postIssueData();
+        break;
+      case 5:
+        await postContributingData();
+        break;
+      case 6:
+        await postReadmeData();
     }
+    setDialogValue(false);
+    setActiveStep(1);
+    navigate("/");
   };
 
   const handleClose = () => {
