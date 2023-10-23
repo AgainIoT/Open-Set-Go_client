@@ -44,7 +44,7 @@ ElevationScroll.propTypes = {
   window: PropTypes.func,
 };
 
-async function checkTokenValid() {
+export async function checkTokenValid() {
   const isTokenValid = await axios.get(
     `${process.env.REACT_APP_SERVER_URL}/auth/checkToken`,
     {
