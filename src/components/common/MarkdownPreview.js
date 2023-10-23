@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MDEditor from "@uiw/react-md-editor";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { templateContent, templateState } from "../../recoil/templateState";
+import { useRecoilState } from "recoil";
+import { templateContent } from "../../recoil/templateState";
 
 // props -> type(pr, readme, contributing)
 const MarkdownPreview = (props) => {
@@ -22,7 +22,7 @@ const MarkdownPreview = (props) => {
 };
 
 const StMarkdownPreview = styled.div`
-  height: 100%;
+  height: 60vh;
 `;
 
 export default MarkdownPreview;
