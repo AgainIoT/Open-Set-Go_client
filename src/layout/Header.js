@@ -17,7 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import LOGO from "../../src/assets/images/Logo.svg";
 import axios from "axios";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { avatar, id, name, isLogin } from "../recoil/authorize";
 import styled from "styled-components";
 
@@ -185,11 +185,11 @@ export const Header = (props) => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {props.pages.map((page) => (
+                {/* {props.pages.map((page) => (
                   <MenuItem key={page} onClick={onMenuClick}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
-                ))}
+                ))} */}
                 <MenuItem
                   key={"Docs"}
                   onClick={() =>
@@ -235,11 +235,11 @@ export const Header = (props) => {
                 justifyContent: "end",
               }}
             >
-              {props.pages.map((page) => (
+              {/* {props.pages.map((page) => (
                 <MenuItemWrapper key={page} onClick={onMenuClick}>
                   {page}
                 </MenuItemWrapper>
-              ))}
+              ))} */}
               <MenuItemWrapper
                 key="docs"
                 onClick={() => handleOpenNewTab("https://docs.open-set-go.com")}
