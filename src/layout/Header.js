@@ -17,9 +17,8 @@ import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
-import LOGO from "../../src/assets/images/Logo.svg";
+import LOGO from "../../src/assets/images/title.svg";
 import axios from "axios";
-
 
 const ElevationScroll = (props) => {
   const { children, window } = props;
@@ -136,23 +135,6 @@ export const Header = (props) => {
               <LogoWrapper href="/">
                 <LogoImg src={LOGO} />
               </LogoWrapper>
-              <Typography
-                variant="h5"
-                href="/"
-                component="a"
-                gutterBottom
-                color={COLOR.MAIN_BLACK}
-                mt={2}
-                sx={{
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                OpenSetGo
-              </Typography>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               {props.burger ? (
@@ -301,7 +283,6 @@ const LogoWrapper = styled.a`
   margin: 1rem;
 `;
 const LogoImg = styled.img`
-  width: 3rem;
   height: 3rem;
 `;
 const AvatarDiv = styled.div`
