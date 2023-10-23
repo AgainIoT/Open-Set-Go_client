@@ -298,14 +298,14 @@ export const SecondContents = () => {
         </TitleContainer>
         <ItemListContainer data={communityItem} category={"communityItem"} />
       </div>
-      <Button
+      <CloseBtn
         variant="outlined"
         onClick={() => {
           handleFinish();
         }}
       >
-        Primary
-      </Button>
+        Close
+      </CloseBtn>
     </StSecondContents>
   );
 };
@@ -434,4 +434,8 @@ const StItemListContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+`;
+
+const CloseBtn = styled(Button)`
+  font-size: 2rem;
 `;
