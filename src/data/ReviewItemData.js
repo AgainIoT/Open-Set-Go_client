@@ -1,36 +1,48 @@
 import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
-
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 import DescriptionIcon from "@mui/icons-material/Description";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import GavelIcon from "@mui/icons-material/Gavel";
 import GroupsIcon from "@mui/icons-material/Groups";
 
+import { styled } from "styled-components";
+import { COLOR } from "../styles/color.js";
+import Pr from "../assets/icons/pullrequest.svg";
+
+const PRIcon = styled.img`
+  width: 3rem;
+  height: 3rem;
+  color: ${COLOR.MAIN_NAVY};
+`;
+
 export const templateItem = [
   {
     item: "issue",
     title: "ISSUE TEMPLATE",
-    icon: ChecklistRoundedIcon,
+    icon: WarningAmberIcon,
     desc: "Customize the templates that are available for contributors to use when they open new issues in your repository.",
     path: "/reviewIssue",
   },
   {
     item: "pr",
     title: "PR TEMPLATE",
-    icon: ChecklistRoundedIcon,
+    icon: <img src={Pr} alt="PRIcon" />,
     desc: "Using Pull-Request Template, project contributors will automatically see the template's contents in the pull request body.",
     path: "/reviewPR",
   },
   {
     item: "readme",
     title: "README.md",
-    icon: ChecklistRoundedIcon,
+    icon: InfoOutlinedIcon,
     desc: "README file tell other people why your project is useful, what they can do with your project, and how they can use it.",
     path: "/reviewReadme",
   },
   {
     item: "contributing",
     title: "CONTRIBUTING.md",
-    icon: ChecklistRoundedIcon,
+    icon: HandshakeOutlinedIcon,
     desc: "Guidelines to communicate how people should contribute to your project.",
     path: "/reviewContributing",
   },
