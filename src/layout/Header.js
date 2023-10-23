@@ -233,7 +233,9 @@ export const Header = (props) => {
               <AvatarDiv>
                 <Tooltip title="Open settings">
                   <IconButton
-                    onClick={loggedIn ? handleOpenUserMenu : null}
+                    onClick={
+                      loggedIn && props.logout ? handleOpenUserMenu : null
+                    }
                     sx={{ p: 0 }}
                   >
                     <Avatar alt={userName ? userName : userId} src={src} />
