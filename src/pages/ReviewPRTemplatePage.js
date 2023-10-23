@@ -7,6 +7,7 @@ import { TemplateModal } from "../components/common/modal/TemplateModal";
 import { styled } from "styled-components";
 import { reviewRepoDataState } from "../recoil/reviewState";
 import { useNavigate } from "react-router-dom";
+import { checkTokenValid } from "../layout/Header";
 
 function ReviewPRTemplatePage() {
   const [stepComplete, setStepComplted] = useRecoilState(eachStepState("3"));
@@ -22,6 +23,10 @@ function ReviewPRTemplatePage() {
     if (!(owner && repoName)) {
       navigate("/");
     }
+    checkTokenValid().then((result) => {
+      console.log(result);
+      if (!result) navigate("/");
+    });
   }, []);
 
   return (

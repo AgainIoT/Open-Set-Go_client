@@ -7,6 +7,7 @@ import IssueList from "../components/common/IssueList";
 import IssueModal from "../components/common/modal/IssueModal";
 import { reviewRepoDataState } from "../recoil/reviewState";
 import { useNavigate } from "react-router-dom";
+import { checkTokenValid } from "../layout/Header";
 
 function ReviewIssueTemplatePage() {
   const [stepComplete, setStepComplted] = useRecoilState(eachStepState("4"));
@@ -22,6 +23,10 @@ function ReviewIssueTemplatePage() {
     if (!(owner && repoName)) {
       navigate("/");
     }
+    checkTokenValid().then((result) => {
+      console.log(result);
+      if (!result) navigate("/");
+    });
   }, []);
 
   return (
