@@ -6,7 +6,7 @@ import { activeState, eachStepState, modalState } from "../recoil/commonState";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Button from "@mui/material/Button";
 import { LinearStepper } from "./Stepper";
-import { Header } from "./Header";
+import { Header, checkTokenValid } from "./Header";
 import StepInfo from "../components/common/StepInfo";
 import { FinishDialog } from "../components/common/modal/FinishDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
@@ -39,9 +39,15 @@ export const Layout = () => {
     preventGoBack();
 
     // check if user logined
-    if (!localStorage.getItem("id")) {
-      navigate("/");
-    }
+    checkTokenValid()
+      .then((result) => {
+        console.log(result);
+        if (!result) navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        navigate("/");
+      });
 
     console.log(parseInt(window.location.href.match(/\/step(\d+)/)[1], 10));
     console.log(repoName);

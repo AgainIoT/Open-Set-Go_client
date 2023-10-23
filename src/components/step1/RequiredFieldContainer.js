@@ -8,6 +8,7 @@ import { SelectAuto } from "../common/SelectAuto";
 import { repoDataAtomFamily } from "../../recoil/repoData";
 import gifRepoName from "../../assets/images/repoName.gif";
 import gifDescription from "../../assets/images/description.gif";
+import { useNavigate } from "react-router-dom";
 
 // for Owner, RepoName, Description
 export const RequiredFieldContainer = () => {
@@ -16,6 +17,8 @@ export const RequiredFieldContainer = () => {
   const [repoName, setRepoName] = useRecoilState(
     repoDataAtomFamily("repoName"),
   );
+
+  const navigate = useNavigate();
 
   const [userRepoData, setUserRepoData] = useState([
     {
@@ -109,7 +112,7 @@ export const RequiredFieldContainer = () => {
       return response.data;
     } catch (e) {
       console.error(e);
-      alert("postCheckDuplication failed");
+      navigate("/");
     }
   }
 
