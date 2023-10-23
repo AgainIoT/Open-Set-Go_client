@@ -1,5 +1,10 @@
 import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
 
+import DescriptionIcon from "@mui/icons-material/Description";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import GavelIcon from "@mui/icons-material/Gavel";
+import GroupsIcon from "@mui/icons-material/Groups";
+
 export const templateItem = [
   {
     item: "issue",
@@ -35,25 +40,25 @@ export const communityItem = [
   {
     item: "description",
     title: "Description",
-    icon: ChecklistRoundedIcon,
+    icon: DescriptionIcon,
     desc: "This is a explanation used in Repository, which is the first item that is visible to the user, and is a concise description that best describes the topic.",
   },
   {
     item: "license",
     title: "License",
-    icon: ChecklistRoundedIcon,
+    icon: LockOutlinedIcon,
     desc: "Open source licenses are licenses that comply with the Open Source Definition – in brief, they allow software to be freely used, modified, and shared.",
   },
   {
     item: "conduct",
     title: "Code of Conduct",
-    icon: ChecklistRoundedIcon,
+    icon: GavelIcon,
     desc: "A code of conduct is a document that establishes expectations for behavior for your project’s participants.",
   },
   {
     item: "discussion",
     title: "Discussion",
-    icon: ChecklistRoundedIcon,
+    icon: GroupsIcon,
     desc: "Collaborative communication forum for the community around an open source or internal project.",
   },
 ];
