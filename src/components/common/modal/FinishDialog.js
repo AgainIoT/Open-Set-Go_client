@@ -123,6 +123,7 @@ export const FinishDialog = (props) => {
       await postCreatRepo();
       await postRepoData();
       await postEmail();
+      localStorage.removeItem("recoil-persist");
       setDialogValue(false);
     } else {
       alert(

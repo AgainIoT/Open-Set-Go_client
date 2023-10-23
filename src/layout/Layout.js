@@ -1,29 +1,70 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
+import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { activeState, eachStepState, modalState } from "../recoil/commonState";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Button from "@mui/material/Button";
 import { LinearStepper } from "./Stepper";
 import { Header } from "./Header";
 import StepInfo from "../components/common/StepInfo";
 import { FinishDialog } from "../components/common/modal/FinishDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
-import { activeState, eachStepState, modalState } from "../recoil/commonState";
+import { repoDataAtomFamily } from "../recoil/repoData";
+import { isLogin } from "../recoil/authorize";
 
 export const Layout = () => {
-  const [activeStep, setActiveState] = useRecoilState(activeState);
+  const [activeStep, setActiveStep] = useRecoilState(activeState);
   const [stepCompleted, setStepComplted] = useRecoilState(
     eachStepState(`${activeStep}`),
   );
+  const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
   const navigate = useNavigate();
+
+  const preventGoBack = (event) => {
+    const currentURL = window.location.href;
+    const match = currentURL.match(/\/step(\d+)/);
+
+    if (match) {
+      const number = parseInt(match[1], 10);
+      setActiveStep(number);
+    }
+  };
+
+  useEffect(() => {
+    (() => {
+      window.addEventListener("popstate", preventGoBack);
+    })();
+
+    preventGoBack();
+
+    // check if user logined
+    if (!localStorage.getItem("id")) {
+      navigate("/");
+    }
+
+    console.log(parseInt(window.location.href.match(/\/step(\d+)/)[1], 10));
+    console.log(repoName);
+
+    if (
+      parseInt(window.location.href.match(/\/step(\d+)/)[1], 10) !== 1 &&
+      (!repoName || repoName === "")
+    ) {
+      navigate("/");
+    }
+
+    return () => {
+      window.removeEventListener("popstate", preventGoBack);
+    };
+  }, []);
 
   const handleNext = () => {
     navigate(`/step${activeStep + 1}`);
-    setActiveState(activeStep + 1);
+    setActiveStep(activeStep + 1);
   };
   const handlePre = () => {
     navigate(`/step${activeStep - 1}`);
-    setActiveState(activeStep - 1);
+    setActiveStep(activeStep - 1);
   };
   const [modalValue, setModalValue] = useRecoilState(modalState("finishModal"));
   const handleOpen = () => setModalValue(true);
@@ -42,7 +83,7 @@ export const Layout = () => {
               <Outlet />
             </StepContentsWrapper>
             <BottomContainer>
-              {activeStep > 0 ? (
+              {activeStep > 1 ? (
                 <ButtonWrapper
                   variant="contained"
                   disableElevation
