@@ -59,13 +59,13 @@ export const SelectRepoName = (props) => {
 const StSelectRepoName = styled.div`
   width: 100%;
   height: 20%;
-  border: 1px solid pink;
+  /* border: 1px solid blue; */
 `;
 
 const SelectFormControl = styled(FormControl)`
   width: 50%;
   height: 80%;
-  border: 1px solid blue;
+
 `;
 const SelectInputLabel = styled(InputLabel)`
   font-size: 1.8rem;

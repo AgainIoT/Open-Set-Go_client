@@ -26,22 +26,20 @@ export const SelectAuto2 = (props) => {
   return (
     <StSelectAuto2>
       <SelectInputFormControl>
-        {/* <SelectLabelWrapper
+        <SelectLabelWrapper
+          shrink
           variant="standard"
           htmlFor={props.labelText}
           id={props.labelText}
         >
           {props.labelText}
-        </SelectLabelWrapper> */}
+        </SelectLabelWrapper>
         <SelectContainer
           labelId={props.labelText}
           id={props.labelText}
           value={selectValue}
           onChange={handleChange}
           renderValue={(selected) => {
-            if (selected.length === 0){
-              return <em>Placeholder</em>;
-            }
             return (
               <RenderOptionItem>
                 <ItmeAvatar
@@ -74,7 +72,7 @@ export const SelectAuto2 = (props) => {
 const StSelectAuto2 = styled.div`
   display: flex;
   width: 100%;
-  height: 15%;
+  height: 18%;
   /* border: 1px solid green; */
 `;
 
@@ -89,16 +87,22 @@ const SelectInputFormControl = styled(FormControl)`
 `;
 
 const SelectLabelWrapper = styled(InputLabel)`
-  /* transform-origin: top left; */
   display: flex;
-  color: ${COLOR.FONT_GRAY};
-  font-size: 2rem;
-  padding: 1.4rem 0rem 0rem 7rem;
+  align-items: center;
+  transform-origin: center left;
+  position: static;
+  height: 100%;
+  gap: 0.5rem;
+  color: ${COLOR.MAIN_BLACK};
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-align: center;
+
   & .MuiFormLabel-root {
-    /* justify-content: center;
-    align-items: center; */
-    /* transform-origin: top left;
-    text-align: center; */
+    justify-content: center;
+    align-items: center;
+    transform-origin: center left;
+    text-align: center;
   }
 `;
 
