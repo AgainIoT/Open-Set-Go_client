@@ -1,17 +1,27 @@
 import styled from "styled-components";
 import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { BaseModal3 } from "../components/common/modal/BaseModal3";
 import { eachStepState, modalState, activeState } from "../recoil/commonState";
 import IssueList from "../components/common/IssueList";
 import IssueModal from "../components/common/modal/IssueModal";
+import { reviewRepoDataState } from "../recoil/reviewState";
+import { useNavigate } from "react-router-dom";
+
 function ReviewIssueTemplatePage() {
   const [stepComplete, setStepComplted] = useRecoilState(eachStepState("4"));
   const [activeStep, setActiveStep] = useRecoilState(activeState);
+  const owner = useRecoilValue(reviewRepoDataState("owner"));
+  const repoName = useRecoilValue(reviewRepoDataState("repoName"));
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setStepComplted(true);
     setActiveStep(4);
+    if (!(owner && repoName)) {
+      navigate("/");
+    }
   }, []);
 
   return (

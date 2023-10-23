@@ -1,18 +1,27 @@
-import React, {  useEffect } from "react";
-import { useRecoilState } from "recoil";
+import React, { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { BaseModal } from "../components/common/modal/BaseModal";
 import { activeState, eachStepState, modalState } from "../recoil/commonState";
 import MarkdownPreview from "../components/common/MarkdownPreview";
 import { TemplateModal } from "../components/common/modal/TemplateModal";
 import { styled } from "styled-components";
+import { reviewRepoDataState } from "../recoil/reviewState";
+import { useNavigate } from "react-router-dom";
 
 function ReviewPRTemplatePage() {
   const [stepComplete, setStepComplted] = useRecoilState(eachStepState("3"));
   const [activeStep, setActiveStep] = useRecoilState(activeState);
+  const owner = useRecoilValue(reviewRepoDataState("owner"));
+  const repoName = useRecoilValue(reviewRepoDataState("repoName"));
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setStepComplted(true);
     setActiveStep(3);
+    if (!(owner && repoName)) {
+      navigate("/");
+    }
   }, []);
 
   return (
