@@ -19,16 +19,18 @@ export const CancelDialog = (props) => {
     <StCancelDialog>
       <Icon />
       <DialogTitleText>Are you sure?</DialogTitleText>
-      <DialogContentText>If you cancel, all the content you are creating will disappear.</DialogContentText>
+      <DialogContentText>
+        If you cancel, all the content you are creating will disappear.
+      </DialogContentText>
       <DialogBtnContainer>
         <DialogBtn
           variant="contained"
-          onClick={() => navigate("")}
+          onClick={() => navigate("/review")}
           autoFocus
           disableElevation
           bhcolor={COLOR.MAIN_BLUE}
         >
-          Go Main Page!
+          Back to Review Report
         </DialogBtn>
         <DialogBtn
           variant="outlined"
