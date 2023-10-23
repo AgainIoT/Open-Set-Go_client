@@ -63,7 +63,7 @@ export const Header = (props) => {
   const [src, setSrc] = useRecoilState(avatar);
   const [userId, setUserId] = useRecoilState(id);
   const [userName, setUserName] = useRecoilState(name);
-  const setIsLogin = useSetRecoilState(isLogin);
+  const [loggedIn, setLoggedIn] = useRecoilState(isLogin);
 
   const checkIsLogin = async () => {
     const loggedIn = await checkTokenValid();
@@ -76,7 +76,7 @@ export const Header = (props) => {
       localStorage.removeItem("name");
       localStorage.removeItem("avatar");
     }
-    setIsLogin(loggedIn);
+    setLoggedIn(loggedIn);
   };
 
   React.useEffect(() => {
@@ -98,21 +98,26 @@ export const Header = (props) => {
   const moveToPage = (page) => {
     document.querySelector("." + page).scrollIntoView({ behavior: "smooth" });
   };
-  const handleCloseUserMenu = async () => {
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const logout = async () => {
     const res = await axios.post(
       process.env.REACT_APP_SERVER_URL + "/auth/github-logout",
       "",
       { withCredentials: true },
     );
-    setIsLogin(false);
+    setLoggedIn(false);
     localStorage.setItem("id", "guest");
     localStorage.setItem("name", "guest");
     localStorage.setItem("avatar", "");
     setUserId(localStorage.getItem("id"));
     setUserName(localStorage.getItem("name"));
     setSrc(localStorage.getItem("avatar"));
-    setAnchorElUser(null);
+    handleCloseUserMenu();
   };
+
   const handleOpenNewTab = (url) => {
     window.open(url, "_blank", "noopener, noreferrer");
   };
@@ -237,9 +242,7 @@ export const Header = (props) => {
               ))}
               <MenuItemWrapper
                 key="docs"
-                onClick={() =>
-                  handleOpenNewTab("https://docs.open-set-go.com")
-                }
+                onClick={() => handleOpenNewTab("https://docs.open-set-go.com")}
               >
                 Docs
               </MenuItemWrapper>
@@ -247,7 +250,10 @@ export const Header = (props) => {
             <Box sx={{ flexGrow: 0 }}>
               <AvatarDiv>
                 <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <IconButton
+                    onClick={loggedIn ? handleOpenUserMenu : null}
+                    sx={{ p: 0 }}
+                  >
                     <Avatar alt={userName ? userName : userId} src={src} />
                   </IconButton>
                 </Tooltip>
@@ -276,11 +282,9 @@ export const Header = (props) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {props.settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem key={"logout"} onClick={logout}>
+                  <Typography textAlign="center">logout</Typography>
+                </MenuItem>
               </Menu>
             </Box>
           </Toolbar>
