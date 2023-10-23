@@ -244,7 +244,7 @@ export const Header = (props) => {
                 key="docs"
                 onClick={() => handleOpenNewTab("https://docs.open-set-go.com")}
               >
-                Docs
+                <Typography variant="h6">Docs</Typography>
               </MenuItemWrapper>
             </Box>
             <Box sx={{ flexGrow: 0 }}>
@@ -257,14 +257,14 @@ export const Header = (props) => {
                     <Avatar alt={userName ? userName : userId} src={src} />
                   </IconButton>
                 </Tooltip>
-                <Typography
+                {/* <Typography
                   variant="p"
                   component="div"
                   color={COLOR.MAIN_BLACK}
                   textAlign="center"
                 >
                   {userId}
-                </Typography>
+                </Typography> */}
               </AvatarDiv>
               <Menu
                 sx={{ mt: "45px" }}
