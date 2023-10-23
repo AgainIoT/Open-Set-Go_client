@@ -6,6 +6,10 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import GavelIcon from "@mui/icons-material/Gavel";
 import GroupsIcon from "@mui/icons-material/Groups";
+import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import SecurityIcon from "@mui/icons-material/Security";
+import SmartToyIcon from "@mui/icons-material/SmartToy";
 
 import { styled } from "styled-components";
 import { COLOR } from "../styles/color.js";
@@ -79,25 +83,25 @@ export const securityItem = [
   {
     item: "codeql",
     title: "CodeQL",
-    icon: ChecklistRoundedIcon,
+    icon: DocumentScannerIcon,
     desc: "Automatically detect common vulnerability and coding errors",
   },
   {
     item: "secretScan",
     title: "Secret scanning",
-    icon: ChecklistRoundedIcon,
+    icon: NotificationsActiveIcon,
     desc: "Get notified when a secret is pushed to this repository",
   },
   {
     item: "securityPolicy",
     title: "Security Policy",
-    icon: ChecklistRoundedIcon,
+    icon: SecurityIcon,
     desc: "View how to securely report security vulnerabilities for this repository",
   },
   {
     item: "dependabot",
     title: "Dependabot alerts",
-    icon: ChecklistRoundedIcon,
+    icon: SmartToyIcon,
     desc: "Get notified when one of your dependencies has a vulnerability",
   },
 ];
