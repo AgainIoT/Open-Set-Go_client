@@ -25,7 +25,7 @@ export const CancelDialog = (props) => {
       <DialogBtnContainer>
         <DialogBtn
           variant="contained"
-          onClick={() => navigate("/review")}
+          onClick={() => navigate("/review", { replace: true })}
           autoFocus
           disableElevation
           bhcolor={COLOR.MAIN_BLUE}
