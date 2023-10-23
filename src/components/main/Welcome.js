@@ -119,6 +119,7 @@ export const SubTitle = styled.h3`
 
 const LearnmoreBtn = styled(Button)({
   backgroundColor: `${COLOR.MAIN_PURPLE}`,
+  fontSize: "15px",
   "&:hover": {
     backgroundColor: `${COLOR.MAIN_PURPLE}`,
   },
@@ -126,6 +127,7 @@ const LearnmoreBtn = styled(Button)({
 
 const LoginBtn = styled(Button)({
   backgroundColor: "black",
+  fontSize: "15px",
   "&:hover": {
     backgroundColor: "black",
   },
