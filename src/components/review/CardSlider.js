@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import Slider from "react-slick";
+import icons from "./ItemIcons";
 
 export const CardSlider = () => {
   const settings = {
@@ -8,21 +9,19 @@ export const CardSlider = () => {
     dots: false,
     infinite: true,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
     autoplay: true,
-    speed: 2000,
-    autoplaySpeed: 2000,
+    speed: 3000,
+    autoplaySpeed: 1000,
     cssEase: "linear",
   };
+
   return (
     <StCardSlider>
       <SliderContainer {...settings}>
-        <Item>1</Item>
-        <Item>2</Item>
-        <Item>3</Item>
-        <Item>4</Item>
-        <Item>5</Item>
-        <Item>6</Item>
+        {icons.map((it) => (
+          <CardItem key={it}>{it}</CardItem>
+        ))}
       </SliderContainer>
     </StCardSlider>
   );
@@ -31,6 +30,7 @@ export const CardSlider = () => {
 const StCardSlider = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   /* overflow: hidden; */
 `;
 const SliderContainer = styled(Slider)`
@@ -38,11 +38,16 @@ const SliderContainer = styled(Slider)`
   width: 100%;
   height: 100%;
   .slick-slide {
+    display: flex;
+    //slide content
     position: relative;
     /* display: inline-block; */
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 100%;
+    border-radius: 1.2rem;
+    background-color: ${COLOR.MAIN_HOVER};
   }
   .slick-list {
     //slide screen
@@ -60,10 +65,11 @@ const SliderContainer = styled(Slider)`
     gap: 2rem;
   }
 `;
-const Item = styled.div`
+
+const CardItem = styled.div`
   width: 10rem;
-  height: 10rem;
-  /* border: 0.1rem solid red; */
-  border-radius: 2rem;
-  background-color: ${COLOR.MAIN_HOVER};
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

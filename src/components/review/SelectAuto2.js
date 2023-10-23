@@ -10,6 +10,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export const SelectAuto2 = (props) => {
   const [selectValue, setSelectValue] = useRecoilState(
@@ -25,6 +26,7 @@ export const SelectAuto2 = (props) => {
     <StSelectAuto2>
       <SelectInputFormControl>
         <SelectLabelWrapper
+          shrink
           variant="standard"
           htmlFor={props.labelText}
           id={props.labelText}
@@ -36,7 +38,6 @@ export const SelectAuto2 = (props) => {
           id={props.labelText}
           value={selectValue}
           onChange={handleChange}
-          // autoWidth
           renderValue={(selected) => {
             return (
               <RenderOptionItem>
@@ -70,24 +71,28 @@ export const SelectAuto2 = (props) => {
 const StSelectAuto2 = styled.div`
   display: flex;
   width: 100%;
+  height: 18%;
+  /* border: 1px solid green; */
 `;
 
 const SelectInputFormControl = styled(FormControl)`
-  min-width: 8rem;
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  height: 100%;
+  min-width: 30rem;
   margin: 0.1rem;
+  /* border: 1px solid black; */
 `;
 
 const SelectLabelWrapper = styled(InputLabel)`
   display: flex;
-  justify-content: center;
-
   align-items: center;
-  transform-origin: top left;
-  /* transform-origin: center left; */
-  position: absolute;
-  /* height: 100%; */
-  /* gap: 0.5rem; */
-  color: ${COLOR.FONT_GRAY};
+  transform-origin: center left;
+  position: static;
+  height: 100%;
+  gap: 0.5rem;
+  color: ${COLOR.MAIN_BLACK};
   font-size: 1.8rem;
   font-weight: 500;
   text-align: center;
@@ -95,7 +100,7 @@ const SelectLabelWrapper = styled(InputLabel)`
   & .MuiFormLabel-root {
     justify-content: center;
     align-items: center;
-    transform-origin: top left;
+    transform-origin: center left;
     text-align: center;
   }
 `;
@@ -103,7 +108,7 @@ const SelectLabelWrapper = styled(InputLabel)`
 const SelectContainer = styled(Select)`
   display: flex;
   position: relative;
-
+  /* border: 1px solid red; */
   & .MuiSelect-select {
     width: 100%;
     height: 4rem;
@@ -167,4 +172,9 @@ const OPtionItemText = styled(ListItemText)`
   & .MuiTypography-root {
     font-size: 1.3rem;
   }
+`;
+
+const AccountIcon = styled(AccountCircleIcon)`
+  font-size: 3.3rem;
+  margin-right: 2rem;
 `;

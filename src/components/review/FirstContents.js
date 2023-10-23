@@ -70,7 +70,7 @@ export const FirstContents = () => {
 
   return (
     <StFirstContents>
-      <Title variant="h3">Select your Repository</Title>
+      <Title variant="h2">Select your Repository</Title>
       <SelectAuto2
         labelText={"Owner"}
         type={"owner"}
@@ -85,14 +85,27 @@ export const FirstContents = () => {
         dataState={reviewRepoDataState}
         isSelectOwner={isSelectOwner}
       />
-      <Button
-        variant="outlined"
-        onClick={() => {
-          setPage(1);
-        }}
-      >
-        Primary
-      </Button>
+      {isSelectOwner && selectRepoName !== ""? (
+        <BtnWrapper>
+          <StartButton
+            variant="contained"
+            onClick={() => {
+              setPage(1);
+            }}
+          >
+            Start review
+          </StartButton>
+        </BtnWrapper>
+      ) : (
+        <BtnWrapper>
+          <StartButton
+            disabled
+            variant="contained"
+          >
+            Start review
+          </StartButton>
+        </BtnWrapper>
+      )}
     </StFirstContents>
   );
 };
@@ -101,10 +114,25 @@ const StFirstContents = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 7rem;
-  gap: 5rem;
+  height: 100%;
+  padding: 12rem 7rem 7rem 7rem;
+  gap: 4rem;
+  /* border: 1px solid black; */
 `;
+
 const Title = styled(Typography)`
   font-weight: bold;
   color: ${COLOR.MAIN_NAVY};
+  /* border: 1px solid red; */
+`;
+
+const BtnWrapper = styled.div`
+  width: 50%;
+  height: 20%;
+  /* border: 1px solid purple; */
+`;
+const StartButton = styled(Button)`
+  width: 50%;
+  height: 50%;
+  font-size: 2rem;
 `;
