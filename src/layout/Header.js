@@ -19,6 +19,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import LOGO from "../../src/assets/images/title.svg";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ElevationScroll = (props) => {
   const { children, window } = props;
@@ -63,6 +64,8 @@ export const Header = (props) => {
   const [userId, setUserId] = useRecoilState(id);
   const [userName, setUserName] = useRecoilState(name);
   const [loggedIn, setLoggedIn] = useRecoilState(isLogin);
+
+  const navigate = useNavigate();
 
   const checkIsLogin = async () => {
     const loggedIn = await checkTokenValid();
@@ -115,6 +118,7 @@ export const Header = (props) => {
     setUserName(localStorage.getItem("name"));
     setSrc(localStorage.getItem("avatar"));
     handleCloseUserMenu();
+    navigate("/");
   };
 
   const handleOpenNewTab = (url) => {
