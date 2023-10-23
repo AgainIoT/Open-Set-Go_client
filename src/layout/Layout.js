@@ -71,7 +71,7 @@ export const Layout = () => {
 
   return (
     <StLayout>
-      <Header burger={true} pages={[]} settings={[]} />
+      <Header burger={true} logout={false}/>
       <ContentsContainer>
         <LinearStepper />
         <StepContainer>

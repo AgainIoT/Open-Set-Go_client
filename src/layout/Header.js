@@ -17,8 +17,9 @@ import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
-import LOGO from "../../src/assets/images/Logo.svg";
+import LOGO from "../../src/assets/images/title.svg";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ElevationScroll = (props) => {
   const { children, window } = props;
@@ -62,7 +63,9 @@ export const Header = (props) => {
   const [src, setSrc] = useRecoilState(avatar);
   const [userId, setUserId] = useRecoilState(id);
   const [userName, setUserName] = useRecoilState(name);
-  const setIsLogin = useSetRecoilState(isLogin);
+  const [loggedIn, setLoggedIn] = useRecoilState(isLogin);
+
+  const navigate = useNavigate();
 
   const checkIsLogin = async () => {
     const loggedIn = await checkTokenValid();
@@ -75,7 +78,7 @@ export const Header = (props) => {
       localStorage.removeItem("name");
       localStorage.removeItem("avatar");
     }
-    setIsLogin(loggedIn);
+    setLoggedIn(loggedIn);
   };
 
   React.useEffect(() => {
@@ -97,21 +100,27 @@ export const Header = (props) => {
   const moveToPage = (page) => {
     document.querySelector("." + page).scrollIntoView({ behavior: "smooth" });
   };
-  const handleCloseUserMenu = async () => {
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const logout = async () => {
     const res = await axios.post(
       process.env.REACT_APP_SERVER_URL + "/auth/github-logout",
       "",
       { withCredentials: true },
     );
-    setIsLogin(false);
+    setLoggedIn(false);
     localStorage.setItem("id", "guest");
     localStorage.setItem("name", "guest");
     localStorage.setItem("avatar", "");
     setUserId(localStorage.getItem("id"));
     setUserName(localStorage.getItem("name"));
     setSrc(localStorage.getItem("avatar"));
-    setAnchorElUser(null);
+    handleCloseUserMenu();
+    navigate("/");
   };
+
   const handleOpenNewTab = (url) => {
     window.open(url, "_blank", "noopener, noreferrer");
   };
@@ -130,23 +139,6 @@ export const Header = (props) => {
               <LogoWrapper href="/">
                 <LogoImg src={LOGO} />
               </LogoWrapper>
-              <Typography
-                variant="h5"
-                href="/"
-                component="a"
-                gutterBottom
-                color={COLOR.MAIN_BLACK}
-                mt={2}
-                sx={{
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                OpenSetGo
-              </Typography>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               {props.burger ? (
@@ -179,11 +171,11 @@ export const Header = (props) => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {props.pages.map((page) => (
+                {/* {props.pages.map((page) => (
                   <MenuItem key={page} onClick={onMenuClick}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
-                ))}
+                ))} */}
                 <MenuItem
                   key={"Docs"}
                   onClick={() =>
@@ -229,33 +221,38 @@ export const Header = (props) => {
                 justifyContent: "end",
               }}
             >
-              {props.pages.map((page) => (
+              {/* {props.pages.map((page) => (
                 <MenuItemWrapper key={page} onClick={onMenuClick}>
                   {page}
                 </MenuItemWrapper>
-              ))}
+              ))} */}
               <MenuItemWrapper
                 key="docs"
                 onClick={() => handleOpenNewTab("https://docs.open-set-go.com")}
               >
-                Docs
+                <Typography variant="h6">Docs</Typography>
               </MenuItemWrapper>
             </Box>
             <Box sx={{ flexGrow: 0 }}>
               <AvatarDiv>
                 <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <IconButton
+                    onClick={
+                      loggedIn && props.logout ? handleOpenUserMenu : null
+                    }
+                    sx={{ p: 0 }}
+                  >
                     <Avatar alt={userName ? userName : userId} src={src} />
                   </IconButton>
                 </Tooltip>
-                <Typography
+                {/* <Typography
                   variant="p"
                   component="div"
                   color={COLOR.MAIN_BLACK}
                   textAlign="center"
                 >
                   {userId}
-                </Typography>
+                </Typography> */}
               </AvatarDiv>
               <Menu
                 sx={{ mt: "45px" }}
@@ -273,11 +270,9 @@ export const Header = (props) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {props.settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem key={"logout"} onClick={logout}>
+                  <Typography textAlign="center">logout</Typography>
+                </MenuItem>
               </Menu>
             </Box>
           </Toolbar>
@@ -287,6 +282,12 @@ export const Header = (props) => {
     </React.Fragment>
   );
 };
+
+Header.defaultProps = {
+  burger: false,
+  logout: true,
+};
+
 const LogoWrapper = styled.a`
   display: flex;
   flex-direction: row;
@@ -294,7 +295,6 @@ const LogoWrapper = styled.a`
   margin: 1rem;
 `;
 const LogoImg = styled.img`
-  width: 3rem;
   height: 3rem;
 `;
 const AvatarDiv = styled.div`
