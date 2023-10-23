@@ -1,12 +1,8 @@
 import styled from "styled-components";
 import { templateMode } from "../../recoil/templateState";
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  eachStepState,
-  modalState,
-  activeState,
-} from "../../recoil/commonState";
-import { Box, Typography } from "@mui/material";
+import { modalState, activeState } from "../../recoil/commonState";
+import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import StepData from "../../data/StepData.json";
 
@@ -18,7 +14,7 @@ const StepInfo = () => {
 
   return (
     <div>
-      {StepData.StepData.filter((eachStep) => eachStep.id === activeStep).map(
+      {StepData.StepData.filter((eachStep) => eachStep.step === activeStep).map(
         (it) => {
           const [modalValue, setModalValue] = useRecoilState(
             modalState(it.type),
@@ -35,7 +31,7 @@ const StepInfo = () => {
                     STEP{it.step}. {it.title}
                   </TitleH1>
                   <ContentP>{it.content}</ContentP>
-                  {activeStep > 1 ? (
+                  {activeStep === 3 || activeStep === 5 || activeStep === 6 ? (
                     <ButtonWrapper
                       size="large"
                       variant="text"
@@ -47,7 +43,7 @@ const StepInfo = () => {
                   ) : (
                     <div></div>
                   )}
-                  {activeStep > 2 ? (
+                  {activeStep > 4 ? (
                     <ButtonWrapper
                       size="large"
                       variant="text"

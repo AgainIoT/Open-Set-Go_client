@@ -1,7 +1,9 @@
-import * as React from "react";
-import { useState } from "react";
+import styled from "styled-components";
 import { COLOR } from "../styles/color";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { avatar, id, name, isLogin } from "../recoil/authorize";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -17,9 +19,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import LOGO from "../../src/assets/images/Logo.svg";
 import axios from "axios";
-import { useRecoilState } from "recoil";
-import { avatar, id, name, isLogin } from "../recoil/authorize";
-import styled from "styled-components";
+
 
 const ElevationScroll = (props) => {
   const { children, window } = props;

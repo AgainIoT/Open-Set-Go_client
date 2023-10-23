@@ -11,9 +11,9 @@ export const LinearStepper = () => {
 
   return (
     <StStepperContainer>
-      <StepperWraper activeStep={activeStep} alternativeLabel>
+      <StepperWraper activeStep={activeStep - 1} alternativeLabel>
         {StepData.StepData.map((label) => (
-          <Step key={label.step}>
+          <Step key={label.step - 1}>
             <StepLabelWrapper>{label.title}</StepLabelWrapper>
           </Step>
         ))}
@@ -25,7 +25,7 @@ export const LinearStepper = () => {
 const StStepperContainer = styled.div`
   display: flex;
   width: 100%;
-  padding: 0rem 0 0rem 0;
+  padding: 0 0 2rem 0;
 `;
 
 const StepperWraper = styled(Stepper)`

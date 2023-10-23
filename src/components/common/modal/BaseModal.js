@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
 import { useRecoilState } from "recoil";
 import { modalState } from "../../../recoil/commonState";
+import CloseIcon from "@mui/icons-material/Close";
 import Modal from "@mui/material/Modal";
+import { IconButton } from "@mui/material";
 
 export const BaseModal = (props) => {
   const handleClose = () => setModalValue(false);
@@ -17,7 +19,22 @@ export const BaseModal = (props) => {
       aria-labelledby="keep-mounted-modal-title"
       aria-describedby="keep-mounted-modal-description"
     >
-      <ModalContainer>{props.children}</ModalContainer>
+      <ModalContainer>
+        <IconButton
+          onClick={handleClose}
+          sx={{
+            position: "absolute",
+            top: "1rem",
+            right: "1rem",
+            background: "none",
+            fontSize: "10rem",
+            cursor: "pointer",
+          }}
+        >
+          <CloseIcon fontSize="large" />
+        </IconButton>
+        {props.children}
+      </ModalContainer>
     </StBaseModal>
   );
 };

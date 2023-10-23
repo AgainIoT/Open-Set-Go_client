@@ -84,7 +84,7 @@ export const TextInputContainer = (props) => {
             {props.labelText}
             {props.option && <OptionLabel>{props.option}</OptionLabel>}
           </InputLabelWrapper>
-          <TooltipContainer title="test" arrow placement="top">
+          <TooltipContainer title={<img src={props.gif} width='288rem' height='162rem' alt="gif"/>} arrow placement="top">
             <TooltipBtn>
               <HelpIcon />
             </TooltipBtn>
@@ -102,9 +102,9 @@ export const TextInputContainer = (props) => {
         ) : (
           <InputField
             id="inputField"
-            multiline
+            // multiline
             fullWidth
-            rows={props.fieldType}
+            // rows={props.fieldType}
             fieldsize={100}
             onInput={(e) => handleOnChange(e)}
             value={inputValue}
@@ -163,8 +163,9 @@ const OptionLabel = styled.p`
 `;
 
 const TooltipContainer = styled(Tooltip)`
-  & .MuiTooltip-popper {
-    transform-origin: center bottom;
+
+  & .MuiTooltip-tooltip {
+    transform-origin: center bottom; 
     margin-bottom: 0rem;
   }
 `;

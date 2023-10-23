@@ -1,15 +1,20 @@
 import { atom, atomFamily, selector } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 // lang, framework, repoName, desc
 export const repoDataAtomFamily = atomFamily({
   key: "repoDataAtomFamily",
   default: "",
+  effects_UNSTABLE: [persistAtom],
 });
 
 // at gitignore modal
 export const selectGitignoreData = atom({
   key: "selectGitignoreData",
   default: [],
+  effects_UNSTABLE: [persistAtom],
 });
 
 // for show selected value about gitignore (lang, framework, other... )
@@ -30,4 +35,5 @@ export const showAllGitignoreState = selector({
     }, []);
     return flattenedData;
   },
+  effects_UNSTABLE: [persistAtom],
 });

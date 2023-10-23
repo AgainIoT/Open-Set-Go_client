@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Welcome } from "../components/main/Welcome";
 import Footer from "../components/main/Footer";
 import Steps from "../components/main/Steps";
