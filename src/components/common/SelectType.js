@@ -6,17 +6,63 @@ import { useResetRecoilState } from "recoil";
 import { Button } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { reviewRepoDataState } from "../../recoil/reviewState.js";
+import { issueSelectedState, selectedState } from "../../recoil/issueState.js";
+import {
+  templateContent,
+  templatePreviewState,
+} from "../../recoil/templateState.js";
 
 export const SelectType = () => {
   const navigate = new useNavigate();
   const resetReviewPage = useResetRecoilState(reviewRepoDataState("page"));
   const resetReviewOwner = useResetRecoilState(reviewRepoDataState("owner"));
   const resetReviewRepo = useResetRecoilState(reviewRepoDataState("repoName"));
+  //State key needs to be changed later
+  // const resetReviewIssue1 = useResetRecoilState(selectedState("body"));
+  // const resetReviewIssue2 = useResetRecoilState(selectedState("type"));
+  // const resetReviewIssue3 = useResetRecoilState(selectedState("title"));
+
+  // const resetReviewIssueChip1 = useResetRecoilState(
+  //   issueSelectedState("issue"),
+  // );
+  // const resetReviewIssueChip2 = useResetRecoilState(issueSelectedState("type"));
+  // const resetReviewIssueChip3 = useResetRecoilState(
+  //   issueSelectedState("typeAndTitle"),
+  // );
+  // const resetReviewIssueChip4 = useResetRecoilState(
+  //   issueSelectedState("uname"),
+  // );
+
+  // const resetReviewReadme = useResetRecoilState(templateContent("readme"));
+  // const resetReviewContributing = useResetRecoilState(
+  //   templateContent("contributing"),
+  // );
+  // const resetReviewPr = useResetRecoilState(templateContent("pr"));
+  // const resetReviewReadmePreview = useResetRecoilState(
+  //   templatePreviewState("readme"),
+  // );
+  // const resetReviewContributingPreview = useResetRecoilState(
+  //   templatePreviewState("contributing"),
+  // );
+  // const resetReviewPrPreview = useResetRecoilState(templatePreviewState("pr"));
 
   useEffect(() => {
     resetReviewPage();
     resetReviewOwner();
     resetReviewRepo();
+    // resetReviewIssue1();
+    // resetReviewIssue2();
+    // resetReviewIssue3();
+    // resetReviewIssueChip1();
+    // resetReviewIssueChip2();
+    // resetReviewIssueChip3();
+    // resetReviewIssueChip4();
+    // resetReviewReadme();
+    // resetReviewContributing();
+    // resetReviewPr();
+    // resetReviewReadmePreview();
+    // resetReviewContributingPreview();
+    // resetReviewPrPreview();
   }, []);
 
   return (

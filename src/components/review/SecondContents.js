@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import {
   Box,
   Button,
@@ -25,6 +25,11 @@ import {
   reviewRepoDataState,
 } from "../../recoil/reviewState";
 import { ReactComponent as Arrow } from "../../assets/icons/arrowLongRight.svg";
+import { issueSelectedState, selectedState } from "../../recoil/issueState";
+import {
+  templateContent,
+  templatePreviewState,
+} from "../../recoil/templateState";
 
 export const SecondContents = () => {
   const navigate = new useNavigate();
@@ -45,6 +50,34 @@ export const SecondContents = () => {
   const [isLoadingTemplate, setIsLoadingTemplate] = useState(true);
   const [isLoadingSecurity, setIsLoadingSecurity] = useState(true);
   const [isLoadingCommunity, setIsLoadingCommunity] = useState(true);
+  //State key needs to be changed later
+  const resetReviewIssue1 = useResetRecoilState(selectedState("body"));
+  const resetReviewIssue2 = useResetRecoilState(selectedState("type"));
+  const resetReviewIssue3 = useResetRecoilState(selectedState("title"));
+
+  const resetReviewIssueChip1 = useResetRecoilState(
+    issueSelectedState("issue"),
+  );
+  const resetReviewIssueChip2 = useResetRecoilState(issueSelectedState("type"));
+  const resetReviewIssueChip3 = useResetRecoilState(
+    issueSelectedState("typeAndTitle"),
+  );
+  const resetReviewIssueChip4 = useResetRecoilState(
+    issueSelectedState("uname"),
+  );
+
+  const resetReviewReadme = useResetRecoilState(templateContent("readme"));
+  const resetReviewContributing = useResetRecoilState(
+    templateContent("contributing"),
+  );
+  const resetReviewPr = useResetRecoilState(templateContent("pr"));
+  const resetReviewReadmePreview = useResetRecoilState(
+    templatePreviewState("readme"),
+  );
+  const resetReviewContributingPreview = useResetRecoilState(
+    templatePreviewState("contributing"),
+  );
+  const resetReviewPrPreview = useResetRecoilState(templatePreviewState("pr"));
 
   const [reviewTemplateData, setReviewTemplateData] = useState({
     pr: false,
@@ -151,6 +184,22 @@ export const SecondContents = () => {
     getTemplateReviewData();
     getSecurityReviewData();
     getCommunityReviewData();
+  }, []);
+
+  useEffect(() => {
+    resetReviewIssue1();
+    resetReviewIssue2();
+    resetReviewIssue3();
+    resetReviewIssueChip1();
+    resetReviewIssueChip2();
+    resetReviewIssueChip3();
+    resetReviewIssueChip4();
+    resetReviewReadme();
+    resetReviewContributing();
+    resetReviewPr();
+    resetReviewReadmePreview();
+    resetReviewContributingPreview();
+    resetReviewPrPreview();
   }, []);
 
   useEffect(() => {
