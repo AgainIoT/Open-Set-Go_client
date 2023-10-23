@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import { Typography } from "@mui/material";
 import { CardSlider } from "./CardSlider";
-
 export const FirstInfo = () => {
   return (
     <StFirstInfo>
@@ -18,7 +17,7 @@ export const FirstInfo = () => {
         </SubTitle>
       </TextContainer>
       <SliderSection>
-        <CardSlider/>
+        <CardSlider />
       </SliderSection>
     </StFirstInfo>
   );
@@ -26,11 +25,12 @@ export const FirstInfo = () => {
 
 const StFirstInfo = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  /* background-color: ${COLOR.MAIN_WHITE}; */
+  gap: 5rem;
 `;
 
 const TextContainer = styled.div`
@@ -47,6 +47,8 @@ const Title = styled(Typography)`
 const SubTitle = styled(Typography)`
   color: ${COLOR.FONT_GRAY};
 `;
+
 const SliderSection = styled.div`
   width: 100%;
+  height: 20%;
 `;
