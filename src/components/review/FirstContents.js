@@ -85,16 +85,27 @@ export const FirstContents = () => {
         dataState={reviewRepoDataState}
         isSelectOwner={isSelectOwner}
       />
-      <BtnWrapper>
-        <StartButton
-          variant="outlined"
-          onClick={() => {
-            setPage(1);
-          }}
-        >
-          Start review
-        </StartButton>
-      </BtnWrapper>
+      {isSelectOwner && selectRepoName !== ""? (
+        <BtnWrapper>
+          <StartButton
+            variant="contained"
+            onClick={() => {
+              setPage(1);
+            }}
+          >
+            Start review
+          </StartButton>
+        </BtnWrapper>
+      ) : (
+        <BtnWrapper>
+          <StartButton
+            disabled
+            variant="contained"
+          >
+            Start review
+          </StartButton>
+        </BtnWrapper>
+      )}
     </StFirstContents>
   );
 };
@@ -121,7 +132,7 @@ const BtnWrapper = styled.div`
   /* border: 1px solid purple; */
 `;
 const StartButton = styled(Button)`
-  width: 100%;
+  width: 50%;
   height: 50%;
   font-size: 2rem;
 `;
