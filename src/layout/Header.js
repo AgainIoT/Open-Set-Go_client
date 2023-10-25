@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { COLOR } from "../styles/color";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { avatar, id, name, isLogin } from "../recoil/authorize";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -62,7 +62,7 @@ export const Header = (props) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [src, setSrc] = useRecoilState(avatar);
   const [userId, setUserId] = useRecoilState(id);
-  const [userName, setUserName] = useRecoilState(name);
+  const setUserName = useSetRecoilState(name);
   const [loggedIn, setLoggedIn] = useRecoilState(isLogin);
 
   const navigate = useNavigate();
@@ -188,25 +188,6 @@ export const Header = (props) => {
               <LogoWrapper href="/">
                 <LogoImg src={LOGO} />
               </LogoWrapper>
-              <Typography
-                variant="h5"
-                noWrap
-                color={COLOR.MAIN_BLACK}
-                component="a"
-                href="/"
-                mt={2}
-                sx={{
-                  display: { xs: "flex", md: "none" },
-                  flexGrow: 1,
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                OpenSetGo
-              </Typography>
             </Box>
             <Box
               sx={{
@@ -237,7 +218,7 @@ export const Header = (props) => {
                     }
                     sx={{ p: 0 }}
                   >
-                    <Avatar alt={userId ? userId : "guest"} src={src} />
+                    <Avatar alt={userId} src={src} />
                   </IconButton>
                 </Tooltip>
               </AvatarDiv>
