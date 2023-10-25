@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { COLOR } from "../styles/color";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { avatar, id, name, isLogin } from "../recoil/authorize";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -61,7 +61,7 @@ export const Header = (props) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [src, setSrc] = useRecoilState(avatar);
-  const setUserId = useSetRecoilState(id);
+  const [userId, setUserId] = useRecoilState(id);
   const [userName, setUserName] = useRecoilState(name);
   const [loggedIn, setLoggedIn] = useRecoilState(isLogin);
 
@@ -237,11 +237,7 @@ export const Header = (props) => {
                     }
                     sx={{ p: 0 }}
                   >
-                    {loggedIn ? (
-                      <Avatar alt={userName} src={src} />
-                    ) : (
-                      <Avatar alt={"guest"} src={null} />
-                    )}
+                    <Avatar alt={userId ? userId : "guest"} src={src} />
                   </IconButton>
                 </Tooltip>
               </AvatarDiv>
