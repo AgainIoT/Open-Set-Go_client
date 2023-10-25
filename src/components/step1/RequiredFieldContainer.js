@@ -125,7 +125,7 @@ export const RequiredFieldContainer = () => {
       }
     }, 300);
     return () => clearTimeout(debounce);
-  }, [repoName]);
+  }, [owner,repoName]);
 
   const [helperText, setHelperText] = useState(" ");
 
