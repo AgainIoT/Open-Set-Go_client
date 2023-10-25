@@ -62,21 +62,17 @@ export const Header = (props) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [src, setSrc] = useRecoilState(avatar);
   const [userId, setUserId] = useRecoilState(id);
-  const [userName, setUserName] = useRecoilState(name);
+  const setUserName = useSetRecoilState(name);
   const [loggedIn, setLoggedIn] = useRecoilState(isLogin);
 
   const navigate = useNavigate();
 
   const checkIsLogin = async () => {
     const loggedIn = await checkTokenValid();
-    if (loggedIn) {
-      setSrc(localStorage.avatar);
-      setUserId(localStorage.id);
-      setUserName(localStorage.name);
-    } else {
-      localStorage.removeItem("id");
-      localStorage.removeItem("name");
-      localStorage.removeItem("avatar");
+    if (!loggedIn) {
+      setUserId(null);
+      setUserName(null);
+      setSrc(null);
     }
     setLoggedIn(loggedIn);
   };
@@ -110,13 +106,12 @@ export const Header = (props) => {
       "",
       { withCredentials: true },
     );
+    // delete user login data
+    setUserId(null);
+    setUserName(null);
+    setSrc(null);
     setLoggedIn(false);
-    localStorage.setItem("id", "guest");
-    localStorage.setItem("name", "guest");
-    localStorage.setItem("avatar", "");
-    setUserId(localStorage.getItem("id"));
-    setUserName(localStorage.getItem("name"));
-    setSrc(localStorage.getItem("avatar"));
+
     handleCloseUserMenu();
     navigate("/");
   };
@@ -193,25 +188,6 @@ export const Header = (props) => {
               <LogoWrapper href="/">
                 <LogoImg src={LOGO} />
               </LogoWrapper>
-              <Typography
-                variant="h5"
-                noWrap
-                color={COLOR.MAIN_BLACK}
-                component="a"
-                href="/"
-                mt={2}
-                sx={{
-                  display: { xs: "flex", md: "none" },
-                  flexGrow: 1,
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                OpenSetGo
-              </Typography>
             </Box>
             <Box
               sx={{
@@ -242,17 +218,9 @@ export const Header = (props) => {
                     }
                     sx={{ p: 0 }}
                   >
-                    <Avatar alt={userName ? userName : userId} src={src} />
+                    <Avatar alt={userId} src={src} />
                   </IconButton>
                 </Tooltip>
-                {/* <Typography
-                  variant="p"
-                  component="div"
-                  color={COLOR.MAIN_BLACK}
-                  textAlign="center"
-                >
-                  {userId}
-                </Typography> */}
               </AvatarDiv>
               <Menu
                 sx={{ mt: "45px" }}
