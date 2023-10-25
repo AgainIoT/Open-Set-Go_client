@@ -409,7 +409,7 @@ const ItemIconBox = styled(Box)`
 const IconBox = styled(SvgIcon)`
   position: absolute;
   color: ${(props) => props.iconcolor};
-  font-size: 3.6rem;
+  font-size: 2.7rem;
 `;
 
 const TextContainer = styled.div`
