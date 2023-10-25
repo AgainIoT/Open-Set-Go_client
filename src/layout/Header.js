@@ -61,7 +61,7 @@ export const Header = (props) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [src, setSrc] = useRecoilState(avatar);
-  const [userId, setUserId] = useRecoilState(id);
+  const setUserId = useSetRecoilState(id);
   const [userName, setUserName] = useRecoilState(name);
   const [loggedIn, setLoggedIn] = useRecoilState(isLogin);
 
@@ -69,14 +69,10 @@ export const Header = (props) => {
 
   const checkIsLogin = async () => {
     const loggedIn = await checkTokenValid();
-    if (loggedIn) {
-      setSrc(localStorage.avatar);
-      setUserId(localStorage.id);
-      setUserName(localStorage.name);
-    } else {
-      localStorage.removeItem("id");
-      localStorage.removeItem("name");
-      localStorage.removeItem("avatar");
+    if (!loggedIn) {
+      setUserId(null);
+      setUserName(null);
+      setSrc(null);
     }
     setLoggedIn(loggedIn);
   };
@@ -110,13 +106,12 @@ export const Header = (props) => {
       "",
       { withCredentials: true },
     );
+    // delete user login data
+    setUserId(null);
+    setUserName(null);
+    setSrc(null);
     setLoggedIn(false);
-    localStorage.setItem("id", "guest");
-    localStorage.setItem("name", "guest");
-    localStorage.setItem("avatar", "");
-    setUserId(localStorage.getItem("id"));
-    setUserName(localStorage.getItem("name"));
-    setSrc(localStorage.getItem("avatar"));
+
     handleCloseUserMenu();
     navigate("/");
   };
@@ -242,17 +237,13 @@ export const Header = (props) => {
                     }
                     sx={{ p: 0 }}
                   >
-                    <Avatar alt={userName ? userName : userId} src={src} />
+                    {loggedIn ? (
+                      <Avatar alt={userName} src={src} />
+                    ) : (
+                      <Avatar alt={"guest"} src={null} />
+                    )}
                   </IconButton>
                 </Tooltip>
-                {/* <Typography
-                  variant="p"
-                  component="div"
-                  color={COLOR.MAIN_BLACK}
-                  textAlign="center"
-                >
-                  {userId}
-                </Typography> */}
               </AvatarDiv>
               <Menu
                 sx={{ mt: "45px" }}
