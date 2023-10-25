@@ -12,9 +12,6 @@ import SmartToyIcon from "@mui/icons-material/SmartToy";
 
 import SvgIcon from "@mui/material/SvgIcon";
 
-import styled from "styled-components";
-const PRIcon = styled(SvgIcon)``;
-
 const prIcon = (props) => (
   <SvgIcon {...props}>
     <svg
