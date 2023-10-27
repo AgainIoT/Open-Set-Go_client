@@ -93,7 +93,7 @@ export const FirstContents = () => {
         dataState={reviewRepoDataState}
         isSelectOwner={isSelectOwner}
       />
-      {isSelectOwner && selectRepoName !== ""? (
+      {isSelectOwner && selectRepoName !== "" ? (
         <BtnWrapper>
           <StartButton
             variant="contained"
@@ -106,10 +106,7 @@ export const FirstContents = () => {
         </BtnWrapper>
       ) : (
         <BtnWrapper>
-          <StartButton
-            disabled
-            variant="contained"
-          >
+          <StartButton disabled variant="contained">
             Start review
           </StartButton>
         </BtnWrapper>
