@@ -4,7 +4,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import {
   templatePreviewState,
   templateSelectState,
-  templateMode,
+  templateListType,
+  layoutType,
 } from "../../../recoil/templateState";
 import { repoDataAtomFamily } from "../../../recoil/repoData";
 import { Pagination } from "@mui/material";
@@ -17,19 +18,28 @@ import {
 } from "../../../data/ListItemData";
 import { Item, ListWrapper } from "./StyledTemplate";
 import { ListHeader, BasicList, DraggableList } from "./LIstUtils";
+import { activeState } from "../../../recoil/commonState";
+import { reviewRepoDataState } from "../../../recoil/reviewState";
 
 const DATAPERPAGE = 20;
 
 // props -> type(pr, readme, contributing)
 export function TemplateList(props) {
-  const owner = useRecoilValue(repoDataAtomFamily("owner"));
-  const repoName = useRecoilValue(repoDataAtomFamily("repoName"));
-  const description = useRecoilValue(repoDataAtomFamily("desc"));
-  const license = useRecoilValue(repoDataAtomFamily("licenseName"));
+  const stepsOwner = useRecoilValue(repoDataAtomFamily("owner"));
+  const stepsRepoName = useRecoilValue(repoDataAtomFamily("repoName"));
+  const stepsDescription = useRecoilValue(repoDataAtomFamily("desc"));
+  const stepsLicense = useRecoilValue(repoDataAtomFamily("licenseName"));
+
+  const reviewOwner = useRecoilValue(reviewRepoDataState("owner"));
+  const reviewRepoName = useRecoilValue(reviewRepoDataState("repoName"));
+  const reviewDescription = useRecoilValue(reviewRepoDataState("desc"));
+  const reviewLicense = useRecoilValue(reviewRepoDataState("licenseName"));
 
   const [templateData, setTemplateData] = useState([]);
   const [generateData, setGenerateData] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
+  const activeStep = useRecoilValue(activeState);
+
   const [pageRange, setPageRange] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   let url = process.env.REACT_APP_SERVER_URL + "/file/" + props.type;
@@ -38,7 +48,8 @@ export function TemplateList(props) {
   const [showValue, setShowValue] = useRecoilState(
     templatePreviewState(props.type),
   );
-  const templateMod = useRecoilValue(templateMode);
+  const listType = useRecoilValue(templateListType);
+  const layoutType_ = useRecoilValue(layoutType);
 
   const handlePageSelect = async (event, page) => {
     setCurrentPage(page);
@@ -46,7 +57,7 @@ export function TemplateList(props) {
   };
 
   const handleSelect = async (selected) => {
-    if (templateMod) {
+    if (listType) {
       const dataList = [...selectedData, selected];
       setSelectedData(dataList);
       const filteredData = generateData.filter(
@@ -112,12 +123,26 @@ export function TemplateList(props) {
   }
 
   async function getGenerateData() {
+    let owner, repoName, description, license;
+    if (layoutType_ === "steps") {
+      owner = stepsOwner;
+      repoName = stepsRepoName;
+      description = stepsDescription;
+      license = stepsLicense;
+    } else {
+      owner = reviewOwner;
+      repoName = reviewRepoName;
+      description = reviewDescription;
+      license = reviewLicense;
+    }
+    console.log(license);
+    console.log(description);
     if (props.type === "contributing" || props.type === "readme") {
       const reulst = await axios.post(url + "/generate", {
-        owner,
-        repoName,
-        description,
-        license,
+        owner: owner ? owner : "owner",
+        repoName: repoName ? repoName : "owner",
+        description: description,
+        license: license,
       });
       setGenerateData(refineGenerateData(reulst.data));
     }
@@ -147,7 +172,7 @@ export function TemplateList(props) {
       completed = true;
       setSelectedData([]);
     };
-  }, [templateMod]);
+  }, [listType]);
 
   const starIcon = <StarIcon m={2} />;
   const deleteIcon = <DeleteIcon fontSize="inherit" />;
@@ -156,7 +181,7 @@ export function TemplateList(props) {
     <Item>
       <ListHeader type={props.type} />
       <ListWrapper>
-        {templateMod ? (
+        {listType ? (
           <DraggableList
             data={selectedData}
             handleDrop={handleDrop}
@@ -165,13 +190,13 @@ export function TemplateList(props) {
           />
         ) : null}
         <BasicList
-          data={templateMod ? generateData : templateData}
+          data={listType ? generateData : templateData}
           subData={"star"}
           handleSelect={handleSelect}
-          icon={templateMod ? null : starIcon}
+          icon={listType ? null : starIcon}
         />
       </ListWrapper>
-      {templateMod ? null : (
+      {listType ? null : (
         <Pagination
           count={pageRange}
           defaultPage={1}

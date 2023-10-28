@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Welcome } from "../components/main/Welcome";
 import Footer from "../components/main/Footer";
 import Steps from "../components/main/Steps";
@@ -7,7 +8,7 @@ import { Header } from "../layout/Header";
 function MainPage() {
   return (
     <>
-      <Header burger={true} pages={["Steps"]} settings={["Logout"]} />
+      <Header burger={true} />
       <Welcome />
       <Steps />
       <Footer />

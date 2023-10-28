@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { templateContent, templateState } from "../recoil/templateState";
+import { templateContent } from "../recoil/templateState";
 import { eachStepState, modalState } from "../recoil/commonState";
 import { BaseModal } from "../components/common/modal/BaseModal";
 import { TemplateModal } from "../components/common/modal/TemplateModal";
@@ -12,7 +12,7 @@ function ContributingTemplatePage(props) {
     modalState("contributing"),
   );
   const [content, setContent] = useRecoilState(templateContent("contributing"));
-  const [stepComplete, setStepComplted] = useRecoilState(eachStepState("4"));
+  const [stepComplete, setStepComplted] = useRecoilState(eachStepState("5"));
 
   useEffect(() => {
     setStepComplted(true);
@@ -22,10 +22,10 @@ function ContributingTemplatePage(props) {
 
   return (
     <StReadmeTemplatePage>
-      <BaseModal type={"contributing"}>
-        <TemplateModal type={"contributing"} />
+      <BaseModal type={"contributing"} mode={"steps"}>
+        <TemplateModal type={"contributing"} mode={"steps"} />
       </BaseModal>
-      <MarkdownPreview type={"contributing"} />
+      <MarkdownPreview type={"contributing"} mode={"steps"} />
     </StReadmeTemplatePage>
   );
 }

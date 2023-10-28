@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { styled } from "styled-components";
+import React, { useEffect } from "react";
+import { useRecoilState } from "recoil";
 import { templateContent } from "../recoil/templateState";
 import { BaseModal } from "../components/common/modal/BaseModal";
 import { eachStepState, modalState } from "../recoil/commonState";
 import MarkdownPreview from "../components/common/MarkdownPreview";
 import { TemplateModal } from "../components/common/modal/TemplateModal";
-import { styled } from "styled-components";
 
 function PRTemplatePage() {
   const [modalValue, setModalValue] = useRecoilState(modalState("pr"));
@@ -20,16 +20,16 @@ function PRTemplatePage() {
   const handleOpen = () => setModalValue(true);
 
   return (
-    <StReadmeTemplatePage>
+    <StPRTemplatePage>
       <BaseModal type={"pr"}>
         <TemplateModal type={"pr"} />
       </BaseModal>
       <MarkdownPreview type={"pr"} />
-    </StReadmeTemplatePage>
+    </StPRTemplatePage>
   );
 }
 
-const StReadmeTemplatePage = styled.div`
+const StPRTemplatePage = styled.div`
   width: 100%;
   height: 100%;
   min-width: 60rem;

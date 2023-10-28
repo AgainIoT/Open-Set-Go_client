@@ -26,7 +26,6 @@ export const GitignoreModal = () => {
       `${process.env.REACT_APP_SERVER_URL}/file/gitignore`,
     );
     const data = result.data[0];
-    console.log(data);
     setOsOptions(await bindData(data.OS));
     setIdeOptions(await bindData(data.IDE));
     setEtcOptions(await bindData(data.ETC));
