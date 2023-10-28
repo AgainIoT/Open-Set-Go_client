@@ -8,7 +8,6 @@ import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
 import propTypes from "prop-types";
 import useZoomIn from "../../hooks/useZoomIn";
-// import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 import MAIN from "../../assets/images/mainImg.svg";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
