@@ -4,7 +4,7 @@ import {
   templateContent,
   templatePreviewState,
   templateSelectState,
-  templateMode,
+  templateListType,
 } from "../../../recoil/templateState";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -19,10 +19,10 @@ export default function TemplateTitle(props) {
   const showValue = useRecoilValue(templatePreviewState(props.type));
   const [content, setContent] = useRecoilState(templateContent(props.type));
   const [modalValue, setModalValue] = useRecoilState(modalState(props.type));
-  const [templateMod, setTemplateMod] = useRecoilState(templateMode);
+  const [listType, setListType] = useRecoilState(templateListType);
 
   const handleSelect = () => {
-    if (templateMod) {
+    if (listType) {
       // setSelectValue(selectValue.concat({ _id: showValue._id }));
       setContent(showValue.map((obj) => obj["content"]).join("\n"));
     } else {

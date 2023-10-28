@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   Alert,
   AlertTitle,
@@ -23,6 +23,7 @@ import { ReviewChart } from "./ReviewChart";
 export const SecondInfo = () => {
   const selectedOwner = useRecoilValue(reviewRepoDataState("owner"));
   const selectedRepo = useRecoilValue(reviewRepoDataState("repoName"));
+  const setDesc = useSetRecoilState(reviewRepoDataState("desc"));
   const alertList = useRecoilValue(reivewAlertListState);
 
   const [selectedRepoData, setSelectedRepoData] = useState({
@@ -54,6 +55,7 @@ export const SecondInfo = () => {
         fork: response.data.fork,
       };
 
+      setDesc(initUserData.description);
       setSelectedRepoData(initUserData);
     } catch (e) {
       console.error(e);

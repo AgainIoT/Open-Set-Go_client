@@ -2,7 +2,12 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import {
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+  useSetRecoilState,
+} from "recoil";
 import {
   Box,
   Button,
@@ -39,6 +44,9 @@ export const SecondContents = () => {
   );
   const [selectedRepo, setSelectedRepo] = useRecoilState(
     reviewRepoDataState("repoName"),
+  );
+  const setReviewLicense = useSetRecoilState(
+    reviewRepoDataState("licenseName"),
   );
   const [page, setPage] = useRecoilState(reviewRepoDataState("page"));
   const [alertList, setAlertList] = useRecoilState(reivewAlertListState);
@@ -175,6 +183,7 @@ export const SecondContents = () => {
 
       setReviewCommunityData(initReviewData);
       setIsLoadingCommunity(false);
+      setReviewLicense(response.data.license.name);
     } catch (e) {
       console.error(e);
     }

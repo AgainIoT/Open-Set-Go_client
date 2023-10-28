@@ -5,16 +5,19 @@ import { useRecoilState } from "recoil";
 import Button from "@mui/material/Button";
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
-import ReviewStepInfo from "../components/common/ReviewStepInfo";
+import StepInfo from "../components/common/StepInfo";
 import { ReviewDialog } from "../components/common/modal/ReviewDialog";
 import { CancelDialog } from "../components/common/modal/CancelDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
 import { modalState } from "../recoil/commonState";
 
 export const ReviewLayout = () => {
-
-  const [reviewModalValue, setReviewModalValue] = useRecoilState(modalState("reviewModal"));
-  const [cancelModalValue, setCancelModalValue] = useRecoilState(modalState("cancelModal"));
+  const [reviewModalValue, setReviewModalValue] = useRecoilState(
+    modalState("reviewModal"),
+  );
+  const [cancelModalValue, setCancelModalValue] = useRecoilState(
+    modalState("cancelModal"),
+  );
 
   const handleReviewOpen = () => {
     setReviewModalValue(true);
@@ -31,11 +34,11 @@ export const ReviewLayout = () => {
 
   return (
     <StLayout>
-      <Header burger={true} pages={[]} settings={[]} />
+      <Header burger={true} />
       <ContentsContainer>
         <StepContainer>
           <ExplainWrapper>
-            <ReviewStepInfo />
+            <StepInfo type={"review"} />
           </ExplainWrapper>
           <StepContentsContainer>
             <StepContentsWrapper>
@@ -62,9 +65,11 @@ export const ReviewLayout = () => {
         </StepContainer>
       </ContentsContainer>
       <BaseDialog type={tmp}>
-        {
-          tmp === "cancelModal" ? <CancelDialog type={"cancelModal"}/> : <ReviewDialog type={"reviewModal"} />
-        }
+        {tmp === "cancelModal" ? (
+          <CancelDialog type={"cancelModal"} />
+        ) : (
+          <ReviewDialog type={"reviewModal"} />
+        )}
       </BaseDialog>
     </StLayout>
   );
