@@ -3,7 +3,7 @@ import { COLOR } from "../styles/color";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { activeState, eachStepState, modalState } from "../recoil/commonState";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import Button from "@mui/material/Button";
 import { LinearStepper } from "./Stepper";
 import { Header, checkTokenValid } from "./Header";
@@ -11,7 +11,7 @@ import StepInfo from "../components/common/StepInfo";
 import { FinishDialog } from "../components/common/modal/FinishDialog";
 import { BaseDialog } from "../components/common/modal/BaseDialog";
 import { repoDataAtomFamily } from "../recoil/repoData";
-import { isLogin } from "../recoil/authorize";
+import { layoutType } from "../recoil/templateState";
 
 export const Layout = () => {
   const [activeStep, setActiveStep] = useRecoilState(activeState);
@@ -77,12 +77,12 @@ export const Layout = () => {
 
   return (
     <StLayout>
-      <Header burger={true} logout={false}/>
+      <Header burger={true} logout={false} />
       <ContentsContainer>
         <LinearStepper />
         <StepContainer>
           <ExplainWrapper>
-            <StepInfo />
+            <StepInfo type={"steps"} />
           </ExplainWrapper>
           <StepContentsContainer>
             <StepContentsWrapper>

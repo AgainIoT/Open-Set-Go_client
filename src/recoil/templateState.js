@@ -30,8 +30,15 @@ export const templateContent = atomFamily({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const templateMode = atom({
-  key: "reorderable",
+// TemplateList type (basic list or draggable)
+export const templateListType = atom({
+  key: "listType",
   default: false,
   effects_UNSTABLE: [persistAtom],
+});
+
+// layout type (review or steps)
+export const layoutType = atom({
+  key: "layoutType",
+  default: "",
 });
