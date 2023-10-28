@@ -63,16 +63,21 @@ export const Welcome = () => {
           <LearnmoreBtn
             variant="contained"
             onClick={() => {
-              document
-                .querySelector(".STEPS")
-                .scrollIntoView({ behavior: "smooth" });
+              const offset = document.querySelector(".header").clientHeight;
+              window.scrollTo({
+                behavior: "smooth",
+                top:
+                  document.querySelector(".STEPS").getBoundingClientRect().top -
+                  document.body.getBoundingClientRect().top -
+                  offset,
+              });
             }}
           >
             learn more
           </LearnmoreBtn>
         </Stack>
       </InfoDiv>
-      <ImgDiv {... zoominItem}>
+      <ImgDiv {...zoominItem}>
         <MainImg src={MAIN} />
       </ImgDiv>
     </StWelcome>
