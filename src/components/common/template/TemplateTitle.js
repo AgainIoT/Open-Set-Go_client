@@ -55,29 +55,27 @@ export default function TemplateTitle(props) {
           alignItems: "center",
         }}
       >
-        <LinkDiv
-          onClick={() => {
-            window.open(showValue[0].repoUrl);
-          }}
-        >
-          <GithubImg src={GITHUB} />
-          <Typography
-            id="PR-desc"
-            variant="h5"
-            gutterBottom
-            color="textSecondary"
-            m={1}
-          >
-            {showValue.length ? showValue[0].subtitle : ""}
-            {showValue.length && showValue[0].repoUrl ? (
-              <LinkIcon
-              // onClick={() => {
-              //   window.open(showValue[0].repoUrl);
-              // }}
-              ></LinkIcon>
-            ) : null}
-          </Typography>
-        </LinkDiv>
+        <LinkEntireDiv>
+          {showValue.length && showValue[0].repoUrl ? (
+            <LinkDiv
+              onClick={() => {
+                window.open(showValue[0].repoUrl);
+              }}
+            >
+              <GithubImg src={GITHUB} />
+              <Typography
+                id="PR-desc"
+                variant="h5"
+                gutterBottom
+                color="textSecondary"
+                m={1}
+              >
+                {showValue[0].subtitle}&nbsp;
+                <LinkIcon />
+              </Typography>
+            </LinkDiv>
+          ) : null}
+        </LinkEntireDiv>
         {showValue.length && showValue[0].id ? (
           <Button
             variant="contained"
@@ -97,6 +95,11 @@ export default function TemplateTitle(props) {
 const GithubImg = styled.img`
   width: 2.3rem;
   height: 2.3rem;
+`;
+
+const LinkEntireDiv = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 const LinkDiv = styled.div`
