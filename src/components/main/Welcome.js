@@ -118,6 +118,7 @@ const updown = keyframes`
     transform: translateY(-1rem);
   }
 `;
+
 const InfoDiv = styled.div`
   display: flex;
   justify-content: center;
@@ -143,14 +144,12 @@ const MainImg = styled.img`
   height: 90%;
   margin-right: 23rem;
   animation: ${updown} 2s ease-in-out infinite alternate-reverse;
-  /* border: 1px solid green; */
 `;
 export const Title = styled.h1`
   text-align: left;
   line-height: 100%;
   font-size: 6.5rem;
   font-weight: 700;
-  /* border: 1px solid black; */
 `;
 
 export const SubTitle = styled.h3`
@@ -159,7 +158,6 @@ export const SubTitle = styled.h3`
   text-align: left;
   font-size: 3rem;
   font-weight: 00;
-  /* border: 1px solid green; */
 `;
 
 const LearnmoreBtn = styled(Button)({
