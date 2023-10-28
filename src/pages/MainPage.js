@@ -8,7 +8,7 @@ import { Header } from "../layout/Header";
 function MainPage() {
   return (
     <>
-      <Header burger={true} pages={["Steps"]} settings={["Logout"]} />
+      <Header burger={true} />
       <Welcome />
       <Steps />
       <Footer />

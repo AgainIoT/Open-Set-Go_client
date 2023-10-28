@@ -27,9 +27,6 @@ function LoginPage() {
       setId(id);
       setName(name);
       setAvatar(avatar);
-      localStorage.setItem("id", id);
-      localStorage.setItem("name", name);
-      localStorage.setItem("avatar", avatar);
     }
   };
 

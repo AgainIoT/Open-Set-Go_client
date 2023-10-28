@@ -7,6 +7,8 @@ import axios from "axios";
 import { reviewRepoDataState } from "../../recoil/reviewState";
 import { SelectAuto2 } from "./SelectAuto2";
 import { SelectRepoName } from "./SelectRepoName";
+import { checkTokenValid } from "../../layout/Header";
+import { useNavigate } from "react-router-dom";
 
 export const FirstContents = () => {
   // GET - user repo info
@@ -50,8 +52,14 @@ export const FirstContents = () => {
     }
   }
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     getUserRepoData();
+    checkTokenValid().then((result) => {
+      console.log(result);
+      if (!result) navigate("/");
+    });
   }, []);
 
   //Apply options based on the owner of choice
