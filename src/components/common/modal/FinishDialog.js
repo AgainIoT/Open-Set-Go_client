@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Box, Button, DialogContent, DialogTitle } from "@mui/material";
 import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
@@ -11,7 +12,7 @@ import {
 } from "../../../recoil/repoData";
 import { templateContent } from "../../../recoil/templateState";
 import { issueSelectedState } from "../../../recoil/issueState";
-import { modalState } from "../../../recoil/commonState";
+import { activeState, modalState } from "../../../recoil/commonState";
 import { LoadingCompleted } from "../LoadingCompleted";
 
 export const FinishDialog = (props) => {
@@ -29,7 +30,10 @@ export const FinishDialog = (props) => {
   const readme = useRecoilValue(templateContent("readme"));
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
+  const [activeStep, setActiveStep] = useRecoilState(activeState);
   const [clickDisabled, setClickDisabled] = useState(false);
+
+  const navigate = useNavigate();
 
   async function checkDuplication() {
     try {
@@ -117,8 +121,8 @@ export const FinishDialog = (props) => {
   }
 
   const handlePost = async () => {
-    setClickDisabled(true);
-    if (clickDisabled) {
+    if (!clickDisabled) {
+      setClickDisabled(true);
       setLoading(true);
       const isUnique = await checkDuplication();
       if (isUnique) {
@@ -127,10 +131,15 @@ export const FinishDialog = (props) => {
         await postEmail();
         localStorage.removeItem("recoil-persist");
         setDialogValue(false);
+        setLoading(false);
       } else {
         alert(
-          `Your repository '${owner}/${repoName}' is already exists!\nPlease delete repository and try again!`,
+          `Your repository '${owner}/${repoName}' already exists!\nPlease delete repository and try again!`,
         );
+        setDialogValue(false);
+        setLoading(false);
+        setActiveStep(1);
+        navigate("/step1");
       }
     }
   };
