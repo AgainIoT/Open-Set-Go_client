@@ -135,8 +135,6 @@ export function TemplateList(props) {
       description = reviewDescription;
       license = reviewLicense;
     }
-    console.log(license);
-    console.log(description);
     if (props.type === "contributing" || props.type === "readme") {
       const reulst = await axios.post(url + "/generate", {
         owner: owner ? owner : "owner",
