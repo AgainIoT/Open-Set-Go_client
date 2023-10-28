@@ -37,7 +37,7 @@ const StFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  height: 17rem;
+  height: 15vh;
   background-color: ${COLOR.MAIN_BACKGROUND};
 `;
 

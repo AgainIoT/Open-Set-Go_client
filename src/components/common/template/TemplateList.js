@@ -135,12 +135,14 @@ export function TemplateList(props) {
       description = reviewDescription;
       license = reviewLicense;
     }
+    console.log(license);
+    console.log(description);
     if (props.type === "contributing" || props.type === "readme") {
       const reulst = await axios.post(url + "/generate", {
         owner: owner ? owner : "owner",
         repoName: repoName ? repoName : "owner",
-        description,
-        license,
+        description: description,
+        license: license,
       });
       setGenerateData(refineGenerateData(reulst.data));
     }
