@@ -29,6 +29,7 @@ export const FinishDialog = (props) => {
   const readme = useRecoilValue(templateContent("readme"));
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
+  const [clickDisabled, setClickDisabled] = useState(false);
 
   async function checkDuplication() {
     try {
@@ -116,19 +117,21 @@ export const FinishDialog = (props) => {
   }
 
   const handlePost = async () => {
-    const isUnique = await checkDuplication();
-
-    if (isUnique) {
+    setClickDisabled(true);
+    if (clickDisabled) {
       setLoading(true);
-      await postCreatRepo();
-      await postRepoData();
-      await postEmail();
-      localStorage.removeItem("recoil-persist");
-      setDialogValue(false);
-    } else {
-      alert(
-        `Your repository '${owner}/${repoName}' is already exists!\nPlease delete repository and try again!`,
-      );
+      const isUnique = await checkDuplication();
+      if (isUnique) {
+        await postCreatRepo();
+        await postRepoData();
+        await postEmail();
+        localStorage.removeItem("recoil-persist");
+        setDialogValue(false);
+      } else {
+        alert(
+          `Your repository '${owner}/${repoName}' is already exists!\nPlease delete repository and try again!`,
+        );
+      }
     }
   };
 
