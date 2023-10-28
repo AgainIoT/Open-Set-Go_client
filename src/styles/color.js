@@ -13,4 +13,5 @@ export const COLOR = {
   FONT_GRAY: "#9A9A9A",
   MAIN_SKYBLUE: "#BAD7E9",
   MAIN_ROSE: "#EB455F",
+  MAIN_ORANGE: "#FB8C00",
 };
