@@ -65,15 +65,13 @@ export const FirstContents = () => {
 
   //Apply options based on the owner of choice
   useEffect(() => {
+    setSelectRepoName("");
     if (isSelectOwner) {
       const selectedRepoData = userRepoData.find(
         (it) => it.owner === selectOwner,
       );
       const repoNameData = selectedRepoData.repoName || [];
       setRepoNameOptions(repoNameData);
-      setSelectRepoName("");
-    } else {
-      setSelectRepoName("");
     }
   }, [selectOwner]);
 
