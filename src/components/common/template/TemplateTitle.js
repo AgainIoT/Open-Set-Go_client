@@ -1,5 +1,7 @@
+import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { modalState } from "../../../recoil/commonState";
+import GITHUB from "../../../assets/icons/github.svg";
 import {
   templateContent,
   templatePreviewState,
@@ -10,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import LinkIcon from "@mui/icons-material/Link";
+import { blue } from "@mui/material/colors";
 
 // props -> type(pr, readme, contributing)
 export default function TemplateTitle(props) {
@@ -52,22 +55,29 @@ export default function TemplateTitle(props) {
           alignItems: "center",
         }}
       >
-        <Typography
-          id="PR-desc"
-          variant="h5"
-          gutterBottom
-          color="textSecondary"
-          m={2}
+        <LinkDiv
+          onClick={() => {
+            window.open(showValue[0].repoUrl);
+          }}
         >
-          {showValue.length ? showValue[0].subtitle : ""}
-          {showValue.length && showValue[0].repoUrl ? (
-            <LinkIcon
-              onClick={() => {
-                window.open(showValue[0].repoUrl);
-              }}
-            ></LinkIcon>
-          ) : null}
-        </Typography>
+          <GithubImg src={GITHUB} />
+          <Typography
+            id="PR-desc"
+            variant="h5"
+            gutterBottom
+            color="textSecondary"
+            m={1}
+          >
+            {showValue.length ? showValue[0].subtitle : ""}
+            {showValue.length && showValue[0].repoUrl ? (
+              <LinkIcon
+              // onClick={() => {
+              //   window.open(showValue[0].repoUrl);
+              // }}
+              ></LinkIcon>
+            ) : null}
+          </Typography>
+        </LinkDiv>
         {showValue.length && showValue[0].id ? (
           <Button
             variant="contained"
@@ -83,3 +93,15 @@ export default function TemplateTitle(props) {
     </Box>
   );
 }
+
+const GithubImg = styled.img`
+  width: 2.3rem;
+  height: 2.3rem;
+`;
+
+const LinkDiv = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-left: 1.8rem;
+`;
