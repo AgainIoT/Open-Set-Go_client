@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
+import { repoDataAtomFamily } from "../../recoil/repoData";
+import { eachStepState } from "../../recoil/commonState";
 import { Box, Grid } from "@mui/material";
 import axios from "axios";
 import { TextInputContainer } from "../common/InputComponent";
 import { SelectAuto } from "../common/SelectAuto";
-import { repoDataAtomFamily } from "../../recoil/repoData";
 import gifRepoName from "../../assets/images/repoName.gif";
 import gifDescription from "../../assets/images/description.gif";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,7 @@ export const RequiredFieldContainer = () => {
   const [repoName, setRepoName] = useRecoilState(
     repoDataAtomFamily("repoName"),
   );
+  const [stepComplete, setStepComplted] = useRecoilState(eachStepState("1"));
 
   const navigate = useNavigate();
 
@@ -35,26 +37,41 @@ export const RequiredFieldContainer = () => {
           withCredentials: true,
         },
       );
-
-      const initUserData = [
-        {
-          id: response.data.id,
-          avatar: response.data.avatar,
-        },
-      ];
-      response.data.org.forEach((it) => {
-        initUserData.push({ id: it.id, avatar: it.avatar });
-      });
-
-      setOwner(response.data.id);
-      setUserRepoData(initUserData);
+      return response.data;
     } catch (e) {
       console.error(e);
     }
   }
 
+  function refineData(rawData) {
+    const data = [
+      {
+        id: rawData.id,
+        avatar: rawData.avatar,
+      },
+    ];
+    rawData.org.forEach((it) => {
+      data.push({ id: it.id, avatar: it.avatar });
+    });
+    return data;
+  }
+
+  async function initUserData() {
+    const refinedData = refineData(await getUserRepoData());
+    setUserRepoData(refinedData);
+    return refinedData;
+  }
+
+  async function initOwner() {
+    const refinedData = await initUserData();
+    setOwner(refinedData[0].id);
+  }
+
   useEffect(() => {
-    getUserRepoData();
+    initUserData();
+    if (!stepComplete) {
+      initOwner();
+    }
   }, []);
 
   async function checkRepoName() {
@@ -125,7 +142,7 @@ export const RequiredFieldContainer = () => {
       }
     }, 300);
     return () => clearTimeout(debounce);
-  }, [owner,repoName]);
+  }, [owner, repoName]);
 
   const [helperText, setHelperText] = useState(" ");
 
