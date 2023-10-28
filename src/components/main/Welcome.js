@@ -7,7 +7,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
 import propTypes from "prop-types";
-import useScrollFadeIn from "../../hooks/useScrollFadeIn";
+import useZoomIn from "../../hooks/useZoomIn";
+// import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 import MAIN from "../../assets/images/mainImg.svg";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
@@ -17,6 +18,7 @@ const handleLogin = () => {
   window.location.href = githubURL;
 };
 export const Welcome = () => {
+  const zoominItem = useZoomIn(1.2, 0);
   const location = useLocation();
 
   const preventGoBack = (event) => {
@@ -33,7 +35,6 @@ export const Welcome = () => {
       window.removeEventListener("popstate", preventGoBack);
     };
   }, []);
-  const animatedItem = useScrollFadeIn();
   const Logined = useRecoilValue(isLogin);
   const navigate = new useNavigate();
   return (
@@ -72,8 +73,8 @@ export const Welcome = () => {
           </LearnmoreBtn>
         </Stack>
       </InfoDiv>
-      <ImgDiv>
-        <MainImg {... useScrollFadeIn("left", 1.7, 0)} src={MAIN} />
+      <ImgDiv {... zoominItem}>
+        <MainImg src={MAIN} />
       </ImgDiv>
     </StWelcome>
   );
@@ -91,18 +92,30 @@ const StWelcome = styled.div`
   flex-direction: row;
   width: 100%;
   height: 80vh;
-  background: ${COLOR.MAIN_WHITE};
+  background: linear-gradient(
+    to bottom,
+    ${COLOR.MAIN_HOVER},
+    ${COLOR.MAIN_BACKGROUND}
+  );
   text-align: center;
-  border-bottom: 0.5px solid ${COLOR.MAIN_HOVER};
 `;
 
 const fadeIn = keyframes`
   0% {
     opacity: 0;
-    transform: translate3d(0, 10%, 0);
+    transform: translate3d(0, 15%, 0);
   } to {
     opacity: 1;
     transform: translateZ(0);
+  }
+`;
+
+const updown = keyframes`
+  0% {
+    transform: translateY(1rem);
+  }
+  100% {
+    transform: translateY(-1rem);
   }
 `;
 const InfoDiv = styled.div`
@@ -112,24 +125,24 @@ const InfoDiv = styled.div`
   flex-direction: column;
   width: 50%;
   height: 80vh;
-  padding-left: 30rem;
+  padding-left: 20rem;
   text-align: center;
-  animation: ${fadeIn} 1.7s;
-  /* border: 1px solid pink; */
+  animation: ${fadeIn} 1.5s;
 `;
 
 const ImgDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
-  height: 100%;
+  width: 40%;
+  height: 90%;
 `;
 
 const MainImg = styled.img`
-  width: 80%;
-  height: 80%;
-  margin-right: 15rem;
+  width: 90%;
+  height: 90%;
+  margin-right: 23rem;
+  animation: ${updown} 2s ease-in-out infinite alternate-reverse;
   /* border: 1px solid green; */
 `;
 export const Title = styled.h1`
