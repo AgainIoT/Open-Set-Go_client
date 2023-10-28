@@ -55,6 +55,7 @@ export const FirstContents = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setSelectOwner("");
     getUserRepoData();
     checkTokenValid().then((result) => {
       console.log(result);
@@ -69,8 +70,8 @@ export const FirstContents = () => {
         (it) => it.owner === selectOwner,
       );
       const repoNameData = selectedRepoData.repoName || [];
-
       setRepoNameOptions(repoNameData);
+      setSelectRepoName("");
     } else {
       setSelectRepoName("");
     }
