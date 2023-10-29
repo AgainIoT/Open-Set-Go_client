@@ -17,6 +17,7 @@ const IssueChip = () => {
   const handleDelete = (typeToDelete, unameToDelete) => () => {
     const delIssue = selectedInfo.filter((it)=> it.type !== typeToDelete);
     setSelectedInfo(delIssue);
+    console.log(selectedInfo);
     const newTmp = selectedInfo22.filter((it) => it.type !== typeToDelete);
     setSelectedInfo22(newTmp);
     const tmp = selectedInfo33.filter((it) => it !== unameToDelete);
