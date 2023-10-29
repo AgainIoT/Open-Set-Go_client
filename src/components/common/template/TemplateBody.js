@@ -26,10 +26,11 @@ export default function TemplateBody(props) {
 }
 
 const BodyBox = styled.div`
-  display: flex,
-  justify-content: center,
-  align-items: center,
-  height: 100%,
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
 `;
+
