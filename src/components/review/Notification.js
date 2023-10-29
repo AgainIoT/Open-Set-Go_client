@@ -7,53 +7,56 @@ import {
 } from "../../recoil/reviewState";
 import { Alert, AlertTitle } from "@mui/material";
 
+const AlertNotificationItem = (props) => {
+  return (
+    <StNotificationItem>
+      <NotificationItemWrapper severity="warning">
+        <NotificationItemTitle>
+          Unable to confirm about <strong>{props.item}</strong>
+        </NotificationItemTitle>
+        Authority above the owner are required for accurately evaluated.
+      </NotificationItemWrapper>
+    </StNotificationItem>
+  );
+};
+
+const NoneNotificationItem = (props) => {
+  return (
+    <StNotificationItem>
+      <NotificationItemWrapper severity="error">
+        <NotificationItemTitle>Fail </NotificationItemTitle>
+        Your repository failed to verify — <strong>{props.item}</strong>
+      </NotificationItemWrapper>
+    </StNotificationItem>
+  );
+};
+
+// props => data, type
+const NotificationList = (props) => {
+  return (
+    <StNotificationList>
+      {props.type === "alert" ? (
+        <>
+          {props.data.map((it, index) => {
+            return <AlertNotificationItem key={it} item={it} />;
+          })}
+        </>
+      ) : (
+        <>
+          {props.data.map((it, index) => {
+            return <NoneNotificationItem key={it} item={it} />;
+          })}
+        </>
+      )}
+    </StNotificationList>
+  );
+};
+
 export const Notification = () => {
   const hasNotified = useRecoilValue(reivewReportState("hasNotified"));
   const alertList = useRecoilValue(reivewAlertListState);
   const noneList = useRecoilValue(reivewReportState("none"));
 
-  const AlertNotificationItem = (props) => {
-    return (
-      <StNotificationItem>
-        <NotificationItemWrapper severity="warning">
-          <NotificationItemTitle>
-            Unable to confirm about <strong>{props.item}</strong>
-          </NotificationItemTitle>
-          Authority above the owner are required for accurately evaluated.
-        </NotificationItemWrapper>
-      </StNotificationItem>
-    );
-  };
-  const NoneNotificationItem = (props) => {
-    return (
-      <StNotificationItem>
-        <NotificationItemWrapper severity="error">
-          <NotificationItemTitle>Fail </NotificationItemTitle>
-          Your repository failed to verify — <strong>{props.item}</strong>
-        </NotificationItemWrapper>
-      </StNotificationItem>
-    );
-  };
-  // props => data, type
-  const NotificationList = (props) => {
-    return (
-      <StNotificationList>
-        {props.type === "alert" ? (
-          <>
-            {props.data.map((it, index) => {
-              return <AlertNotificationItem key={it} item={it} />;
-            })}
-          </>
-        ) : (
-          <>
-            {props.data.map((it, index) => {
-              return <NoneNotificationItem key={it} item={it} />;
-            })}
-          </>
-        )}
-      </StNotificationList>
-    );
-  };
   return (
     <StNotification>
       {hasNotified ? (
@@ -66,7 +69,7 @@ export const Notification = () => {
           )}
         </>
       ) : (
-        <p>Perfact!</p>
+        <p>😄</p>
       )}
     </StNotification>
   );
