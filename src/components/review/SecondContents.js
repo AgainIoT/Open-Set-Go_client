@@ -30,7 +30,7 @@ import {
   templateContent,
   templatePreviewState,
 } from "../../recoil/templateState";
-import { ReviewTemplateItems } from "./ReviewItems";
+import { ReviewTemplateItems, ReviewTemplateList } from "./ReviewItems";
 
 export const SecondContents = () => {
   const navigate = new useNavigate();
@@ -371,7 +371,12 @@ export const SecondContents = () => {
         <TitleContainer>
           <Title variant="h4">about Template</Title>
         </TitleContainer>
-        <ItemListContainer data={templateItem} category={"templateItem"} />
+        {/* <ItemListContainer data={templateItem} category={"templateItem"} /> */}
+        <ReviewTemplateList
+          data={templateItem}
+          isLoadingTemplate={isLoadingTemplate}
+          reviewData={reviewTemplateData}
+        />
       </div>
       <div>
         <TitleContainer>
