@@ -68,7 +68,6 @@ export const ReviewTemplateList = (props) => {
   return (
     <StReviewList>
       {props.data.map((it) => {
-        console.log("listre", it);
         return (
           <ReviewTemplateItem
             key={it.item}

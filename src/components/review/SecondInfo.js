@@ -55,7 +55,6 @@ export const SecondInfo = () => {
   }, []);
 
   const handleOpenRepo = () => {
-    console.log("link:", selectedRepoData.repoURL);
     window.open(selectedRepoData.repoURL, "_blank");
   };
 
