@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 //import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
-import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
+import WarningAmberOutlinedIcon from "@mui/icons-material/WarningAmberOutlined";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import axios from "axios";
 import {
@@ -30,6 +30,7 @@ import {
   templateContent,
   templatePreviewState,
 } from "../../recoil/templateState";
+import { ReviewTemplateItems } from "./ReviewItems";
 
 export const SecondContents = () => {
   const navigate = new useNavigate();
@@ -46,6 +47,9 @@ export const SecondContents = () => {
     reivewReportState("checked"),
   );
   const [noneList, setNoneList] = useRecoilState(reivewReportState("none"));
+  const [hasNotified, setHasNotified] = useRecoilState(
+    reivewReportState("hasNotified"),
+  );
 
   const [isLoadingTemplate, setIsLoadingTemplate] = useState(true);
   const [isLoadingSecurity, setIsLoadingSecurity] = useState(true);
@@ -181,6 +185,7 @@ export const SecondContents = () => {
   }
 
   useEffect(() => {
+    setHasNotified(false);
     getTemplateReviewData();
     getSecurityReviewData();
     getCommunityReviewData();
@@ -216,6 +221,10 @@ export const SecondContents = () => {
       );
       setCheckList(checkValue);
       setNoneList(noneCheckValue);
+
+      if (alertList.length > 0 || noneCheckValue.length > 0) {
+        setHasNotified(true);
+      }
     }
   }, [isLoadingTemplate, isLoadingSecurity, isLoadingCommunity]);
 
@@ -245,12 +254,12 @@ export const SecondContents = () => {
         />
       ),
       false: (
-        <TemplateIconBox component={props.icon} iconcolor={COLOR.MAIN_NAVY} />
+        <TemplateIconBox component={props.icon} iconcolor={COLOR.MAIN_ROSE} />
       ),
       null: (
         <TemplateIconBox
-          component={WarningRoundedIcon}
-          iconcolor={COLOR.MAIN_NAVY}
+          component={WarningAmberOutlinedIcon}
+          iconcolor={COLOR.MAIN_ORANGE}
         />
       ),
     };
@@ -258,7 +267,14 @@ export const SecondContents = () => {
     return (
       <ItemBox>
         <ItemIconBox>
-          {ItemIcon[reviewData[props.item]]}
+          {isLoading ? (
+            <TemplateIconBox
+              component={props.icon}
+              iconcolor={COLOR.MAIN_NAVY}
+            />
+          ) : (
+            ItemIcon[reviewData[props.item]]
+          )}
           {isLoading ? (
             <ItemProgress />
           ) : (
@@ -285,10 +301,17 @@ export const SecondContents = () => {
         }}
       >
         <TemplateItemIconBox>
-          <TemplateIconBox
-            component={status ? CheckRoundedIcon : props.icon}
-            iconcolor={COLOR.MAIN_NAVY}
-          />
+          {isLoadingTemplate ? (
+            <TemplateIconBox
+              component={props.icon}
+              iconcolor={COLOR.MAIN_NAVY}
+            />
+          ) : (
+            <TemplateIconBox
+              component={status ? CheckRoundedIcon : props.icon}
+              iconcolor={COLOR.MAIN_NAVY}
+            />
+          )}
           {isLoadingTemplate ? (
             <ItemProgress />
           ) : (
@@ -309,13 +332,23 @@ export const SecondContents = () => {
       <StItemListContainer>
         {props.data.map((it) => {
           return props.data === templateItem ? (
-            <TemplateItemContainer
+            // <TemplateItemContainer
+            //   key={it.item}
+            //   item={it.item}
+            //   title={it.title}
+            //   icon={it.icon}
+            //   desc={it.desc}
+            //   path={it.path}
+            // />
+            <ReviewTemplateItems
               key={it.item}
               item={it.item}
               title={it.title}
               icon={it.icon}
               desc={it.desc}
               path={it.path}
+              isLoadingTemplate={isLoadingTemplate}
+              reviewData={reviewTemplateData}
             />
           ) : (
             <ItemContainer
