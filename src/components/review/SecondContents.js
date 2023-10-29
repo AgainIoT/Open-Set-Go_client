@@ -30,7 +30,8 @@ import {
   templateContent,
   templatePreviewState,
 } from "../../recoil/templateState";
-import { ReviewTemplateItems, ReviewTemplateList } from "./ReviewItems";
+import { ReviewTemplateList } from "./ReviewItems";
+import { ReviewList } from "./reviewItem/OtherItem";
 
 export const SecondContents = () => {
   const navigate = new useNavigate();
@@ -340,7 +341,7 @@ export const SecondContents = () => {
             //   desc={it.desc}
             //   path={it.path}
             // />
-            <ReviewTemplateItems
+            <ReviewTemplateList
               key={it.item}
               item={it.item}
               title={it.title}
@@ -382,13 +383,23 @@ export const SecondContents = () => {
         <TitleContainer>
           <Title variant="h4">about Security</Title>
         </TitleContainer>
-        <ItemListContainer data={securityItem} category={"securityItem"} />
+        {/* <ItemListContainer data={securityItem} category={"securityItem"} /> */}
+        <ReviewList
+          data={securityItem}
+          isLoading={isLoadingSecurity}
+          reviewData={reviewSecurityData}
+        />
       </div>
       <div>
         <TitleContainer>
           <Title variant="h4">about Community</Title>
         </TitleContainer>
-        <ItemListContainer data={communityItem} category={"communityItem"} />
+        {/* <ItemListContainer data={communityItem} category={"communityItem"} /> */}
+        <ReviewList
+          data={communityItem}
+          isLoading={isLoadingCommunity}
+          reviewData={reviewCommunityData}
+        />
       </div>
       <CloseBtn
         variant="outlined"
