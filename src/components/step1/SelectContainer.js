@@ -17,7 +17,7 @@ export const SelectContainer = () => {
   );
   const [frameworkOpions, setFrameworkOptions] = useState([]);
   const [isSelectLang, setIsSelectLang] = useState(false);
-  const [disableValue, setDisableValue] = useState(true);
+  const [disableValue, setDisableValue] = useState(false);
 
   // GET - Lang/Framework
   const [baseOption, setBaseOption] = useState([
@@ -31,36 +31,48 @@ export const SelectContainer = () => {
       );
 
       setBaseOption(response.data);
+      return response.data;
     } catch (e) {
       console.error(e);
     }
   }
 
+  async function getFrameworkOptionData() {
+    const data = await getBaseOptionData();
+    const selectedLanguageOption = data.find(
+      (it) => it.language === selectLang,
+    );
+    const selectedFrameworks = selectedLanguageOption.frameworks || [];
+    const selectedFrameworkNames = selectedFrameworks.map(
+      (frameworkItem) => frameworkItem.framework,
+    );
+    setFrameworkOptions(selectedFrameworkNames);
+  }
+
   useEffect(() => {
-    getBaseOptionData();
+    // isSelectLang = 0, disableValue = 0
+    if (selectLang) {
+      getFrameworkOptionData();
+    } else {
+      getBaseOptionData();
+    }
   }, []);
-  const langs = baseOption.map((it) => it.language);
 
   //Apply options based on the language of choice
   useEffect(() => {
+    // isSelectLang = 1, disableValue = 0
     if (isSelectLang) {
-      const selectedLanguageOption = baseOption.find(
-        (it) => it.language === selectLang,
-      );
-      const selectedFrameworks = selectedLanguageOption.frameworks || [];
-      const selectedFrameworkNames = selectedFrameworks.map(
-        (frameworkItem) => frameworkItem.framework,
-      );
-
-      setFrameworkOptions(selectedFrameworkNames);
-    } else {
+      getFrameworkOptionData();
       setSelectFramework("");
     }
   }, [selectLang]);
 
   useEffect(() => {
-    setSelectFramework("");
-  }, [selectLang]);
+    // isSelectLang = 0, disableValue = 1
+    if (disableValue) {
+      setSelectFramework("");
+    }
+  }, [disableValue]);
 
   return (
     <StSelectContainer container>
@@ -70,7 +82,7 @@ export const SelectContainer = () => {
       <Grid item xs={12} sm={5}>
         <AutocompleteInput
           type={"lang"}
-          options={langs}
+          options={baseOption.map((it) => it.language)}
           setIsSelectLang={setIsSelectLang}
           setDisableValue={setDisableValue}
           disableValue={false}

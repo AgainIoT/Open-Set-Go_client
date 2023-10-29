@@ -60,7 +60,7 @@ export const AutocompleteInput = (props) => {
             <AutocompleteTextField
               {...params}
               variant="standard"
-              helperText={props.disableValue ? "First select Language" : " "}
+              helperText={props.disableValue ? "Select Language First" : " "}
             />
           </InputFieldContainer>
         )}
