@@ -3,6 +3,7 @@ import { COLOR } from "../../../styles/color";
 import { Box, CircularProgress, SvgIcon, Typography } from "@mui/material";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import WarningAmberOutlinedIcon from "@mui/icons-material/WarningAmberOutlined";
+import propTypes from "prop-types";
 
 const ReviewItem = (props) => {
   const data = props.data;
@@ -63,6 +64,13 @@ const ReviewItem = (props) => {
     </StItemBox>
   );
 };
+
+ReviewItem.propTypes = {
+  data: propTypes.object,
+  isLoading: propTypes.bool,
+  reviewData: propTypes.object,
+};
+
 export const ReviewList = (props) => {
   return (
     <StReviewList>
@@ -78,6 +86,12 @@ export const ReviewList = (props) => {
       })}
     </StReviewList>
   );
+};
+
+ReviewList.propTypes = {
+  data: propTypes.array,
+  isLoading: propTypes.bool,
+  reviewData: propTypes.object,
 };
 
 const StReviewList = styled.div`

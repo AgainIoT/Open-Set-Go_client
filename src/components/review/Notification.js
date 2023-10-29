@@ -6,6 +6,7 @@ import {
   reivewReportState,
 } from "../../recoil/reviewState";
 import { Alert, AlertTitle } from "@mui/material";
+import { PropTypes } from "prop-types";
 
 const AlertNotificationItem = (props) => {
   return (
@@ -19,6 +20,9 @@ const AlertNotificationItem = (props) => {
     </StNotificationItem>
   );
 };
+AlertNotificationItem.propTypes = {
+  item: PropTypes.string.isRequired,
+};
 
 const NoneNotificationItem = (props) => {
   return (
@@ -29,6 +33,10 @@ const NoneNotificationItem = (props) => {
       </NotificationItemWrapper>
     </StNotificationItem>
   );
+};
+
+NoneNotificationItem.propTypes = {
+  item: PropTypes.string.isRequired,
 };
 
 // props => data, type
@@ -50,6 +58,10 @@ const NotificationList = (props) => {
       )}
     </StNotificationList>
   );
+};
+NotificationList.propTypes = {
+  data: PropTypes.array.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export const Notification = () => {
@@ -73,6 +85,11 @@ export const Notification = () => {
       )}
     </StNotification>
   );
+};
+
+Notification.propTypes = {
+  data: PropTypes.array,
+  type: PropTypes.string,
 };
 
 const StNotification = styled.div`
