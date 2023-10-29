@@ -87,11 +87,6 @@ export const Notification = () => {
   );
 };
 
-Notification.propTypes = {
-  data: PropTypes.array,
-  type: PropTypes.string,
-};
-
 const StNotification = styled.div`
   display: flex;
   flex-direction: column;
