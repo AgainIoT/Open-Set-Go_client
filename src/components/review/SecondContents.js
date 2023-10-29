@@ -1,23 +1,8 @@
 import styled from "styled-components";
-import { COLOR } from "../../styles/color";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  useRecoilState,
-  useRecoilValue,
-  useResetRecoilState,
-  useSetRecoilState,
-} from "recoil";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  SvgIcon,
-  Typography,
-} from "@mui/material";
-//import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
-import WarningAmberOutlinedIcon from "@mui/icons-material/WarningAmberOutlined";
-import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
+import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import {
   communityItem,
@@ -29,7 +14,6 @@ import {
   reivewReportState,
   reviewRepoDataState,
 } from "../../recoil/reviewState";
-import { ReactComponent as Arrow } from "../../assets/icons/arrowLongRight.svg";
 import { issueSelectedState, selectedState } from "../../recoil/issueState";
 import {
   templateContent,
@@ -50,15 +34,11 @@ export const SecondContents = () => {
   const setReviewLicense = useSetRecoilState(
     reviewRepoDataState("licenseName"),
   );
-  const [page, setPage] = useRecoilState(reviewRepoDataState("page"));
+  const setPage = useSetRecoilState(reviewRepoDataState("page"));
   const [alertList, setAlertList] = useRecoilState(reivewAlertListState);
-  const [checkList, setCheckList] = useRecoilState(
-    reivewReportState("checked"),
-  );
-  const [noneList, setNoneList] = useRecoilState(reivewReportState("none"));
-  const [hasNotified, setHasNotified] = useRecoilState(
-    reivewReportState("hasNotified"),
-  );
+  const setCheckList = useSetRecoilState(reivewReportState("checked"));
+  const setNoneList = useSetRecoilState(reivewReportState("none"));
+  const setHasNotified = useSetRecoilState(reivewReportState("hasNotified"));
 
   const [isLoadingTemplate, setIsLoadingTemplate] = useState(true);
   const [isLoadingSecurity, setIsLoadingSecurity] = useState(true);
