@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import{ styled, keyframes} from "styled-components";
 import { COLOR } from "../../styles/color.js";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,64 +11,25 @@ import {
   templateContent,
   templatePreviewState,
 } from "../../recoil/templateState.js";
+import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 
 export const SelectType = () => {
   const navigate = new useNavigate();
   const resetReviewPage = useResetRecoilState(reviewRepoDataState("page"));
   const resetReviewOwner = useResetRecoilState(reviewRepoDataState("owner"));
   const resetReviewRepo = useResetRecoilState(reviewRepoDataState("repoName"));
-  //State key needs to be changed later
-  // const resetReviewIssue1 = useResetRecoilState(selectedState("body"));
-  // const resetReviewIssue2 = useResetRecoilState(selectedState("type"));
-  // const resetReviewIssue3 = useResetRecoilState(selectedState("title"));
 
-  // const resetReviewIssueChip1 = useResetRecoilState(
-  //   issueSelectedState("issue"),
-  // );
-  // const resetReviewIssueChip2 = useResetRecoilState(issueSelectedState("type"));
-  // const resetReviewIssueChip3 = useResetRecoilState(
-  //   issueSelectedState("typeAndTitle"),
-  // );
-  // const resetReviewIssueChip4 = useResetRecoilState(
-  //   issueSelectedState("uname"),
-  // );
-
-  // const resetReviewReadme = useResetRecoilState(templateContent("readme"));
-  // const resetReviewContributing = useResetRecoilState(
-  //   templateContent("contributing"),
-  // );
-  // const resetReviewPr = useResetRecoilState(templateContent("pr"));
-  // const resetReviewReadmePreview = useResetRecoilState(
-  //   templatePreviewState("readme"),
-  // );
-  // const resetReviewContributingPreview = useResetRecoilState(
-  //   templatePreviewState("contributing"),
-  // );
-  // const resetReviewPrPreview = useResetRecoilState(templatePreviewState("pr"));
 
   useEffect(() => {
     resetReviewPage();
     resetReviewOwner();
     resetReviewRepo();
-    // resetReviewIssue1();
-    // resetReviewIssue2();
-    // resetReviewIssue3();
-    // resetReviewIssueChip1();
-    // resetReviewIssueChip2();
-    // resetReviewIssueChip3();
-    // resetReviewIssueChip4();
-    // resetReviewReadme();
-    // resetReviewContributing();
-    // resetReviewPr();
-    // resetReviewReadmePreview();
-    // resetReviewContributingPreview();
-    // resetReviewPrPreview();
   }, []);
 
   return (
     <StSelectType>
       <Stack spacing={20} direction="row">
-        <CreateBox>
+        <CreateBox {...useScrollFadeIn("up", 1.0, 0.2)}>
           <Stack spacing={2} direction="column">
             <Stack spacing={1} direction="column">
               <Title>Create New</Title>
@@ -87,7 +48,7 @@ export const SelectType = () => {
             </CreateBtn>
           </Stack>
         </CreateBox>
-        <CheckBox>
+        <CheckBox {...useScrollFadeIn("up", 1.0, 0.4)}>
           <Stack spacing={2} direction="column">
             <Stack spacing={1} direction="column">
               <Title>Check existing</Title>
@@ -123,6 +84,16 @@ const StSelectType = styled.div`
     ${COLOR.MAIN_BACKGROUND}
   );
   text-align: center;
+`;
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 15%, 0);
+  } to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
 `;
 
 const CreateBox = styled.div`

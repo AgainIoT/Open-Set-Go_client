@@ -56,19 +56,19 @@ export const SlideContent = (props) => {
         <ConditionBox className="ConditionBox">
           <div>
             <Condition>
-              <h2>Permission</h2>
+              <ContentH2>Permission</ContentH2>
             </Condition>
             <ul>{pmsList}</ul>
           </div>
           <div>
             <Condition>
-              <h2>Limitations</h2>
+              <ContentH2>Limitations</ContentH2>
             </Condition>
             <ul>{limList}</ul>
           </div>
           <div>
             <Condition>
-              <h2>Conditions</h2>
+              <ContentH2>Conditions</ContentH2>
             </Condition>
             <ul>{conList}</ul>
           </div>
@@ -76,10 +76,7 @@ export const SlideContent = (props) => {
         <LinkBox className="LinkBox">
           <LinkDiv>
             <LinkText>
-              This is not legal advice.&nbsp;
-              <LinkA href={props.data.license}>
-                Learn more about repository licenses.
-              </LinkA>
+              ※ This is not legal advice.
             </LinkText>
           </LinkDiv>
           {pickLi === props.data.license ? (
@@ -148,12 +145,15 @@ const InformationBox = styled.div`
 
 const Title = styled.h1`
   padding: 1rem 1rem 1rem 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
 `;
 
+const ContentH2 = styled.h1`
+  margin-bottom: 0.8rem;
+`;
 const Content = styled.p`
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-align: justify;
   line-height: 1.7rem;
 `;

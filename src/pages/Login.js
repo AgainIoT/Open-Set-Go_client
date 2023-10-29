@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLOR } from "../styles/color";
 import axios from "axios";
 import { Title } from "../components/main/Welcome";
 import { useNavigate } from "react-router-dom";
@@ -66,7 +67,7 @@ function LoginPage() {
 
   return (
     <StLogin>
-      <Title>logging in</Title>
+      {/* <Title>logging in</Title> */}
     </StLogin>
   );
 }
@@ -85,19 +86,9 @@ const StLogin = styled.div`
   text-align: center;
   justify-content: center;
   height: 100vh;
-  background-image: linear-gradient(
-    45deg,
-    #d16ba5,
-    #c777b9,
-    #ba83ca,
-    #aa8fd8,
-    #9a9ae1,
-    #8aa7ec,
-    #79b3f4,
-    #69bff8,
-    #52cffe,
-    #41dfff,
-    #46eefa,
-    #5ffbf1
+  background: linear-gradient(
+    to bottom,
+    ${COLOR.MAIN_HOVER},
+    ${COLOR.MAIN_BACKGROUND}
   );
 `;
