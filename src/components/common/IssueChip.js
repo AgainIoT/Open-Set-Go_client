@@ -31,7 +31,7 @@ const IssueChip = () => {
         return (
           <li key={data.type}>
             <SelectedChip
-              label={data.type}
+              label={data.title}
               onDelete={handleDelete(data.type, data.uname)}
             />
           </li>

@@ -104,6 +104,7 @@ assignees: []\n
       ...selectedInfo22,
       {
         type: temType,
+        title: temTitle,
         uname: userInput.uname,
       }
     ]);
