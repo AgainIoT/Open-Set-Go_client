@@ -80,61 +80,11 @@ export const ReviewTemplateList = (props) => {
   );
 };
 
-export const ReviewSecurityItems = (props) => {
-  return <StReviewItems></StReviewItems>;
-};
-
-export const ReviewCommunityItems = (props) => {
-  const ItemIcon = {
-    default: (
-      <>
-        <IconWrapper />
-        <ItemProgress progresscolor={COLOR.MAIN_SKYBLUE} />
-      </>
-    ),
-    true: (
-      <>
-        <IconWrapper component={CheckRoundedIcon} iconcolor={COLOR.MAIN_NAVY} />
-        <ItemProgress
-          variant="determinate"
-          value={100}
-          progresscolor={COLOR.MAIN_SKYBLUE}
-        />
-      </>
-    ),
-    false: (
-      <>
-        <IconWrapper component={props.icon} iconcolor={COLOR.MAIN_NAVY} />
-        <ItemProgress
-          variant="determinate"
-          value={100}
-          progresscolor={COLOR.MAIN_ROSE}
-        />
-      </>
-    ),
-  };
-  return (
-    <StItemBox>
-      <ItemIconBox>
-        {props.isLoadingCommunity
-          ? ItemIcon["default"]
-          : ItemIcon[props.reviewData[props.item]]}
-      </ItemIconBox>
-      <TextContainer>
-        <ItemTitle variant="h4">{props.title}</ItemTitle>
-        <DecsText variant="subtitle1">{props.desc}</DecsText>
-      </TextContainer>
-    </StItemBox>
-  );
-};
-
 const StReviewList = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
 `;
-
-const StReviewItems = styled.div``;
 
 //default
 const StItemBox = styled.div`

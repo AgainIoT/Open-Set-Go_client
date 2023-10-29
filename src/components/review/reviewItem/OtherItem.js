@@ -86,8 +86,6 @@ const StReviewList = styled.div`
   flex-direction: row;
 `;
 
-const StReviewItems = styled.div``;
-
 //default
 const StItemBox = styled.div`
   display: flex;
