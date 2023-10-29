@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { IconButton, SvgIcon, Typography } from "@mui/material";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { ReactComponent as GitForkIcon } from "../../assets/icons/gitFork.svg";
@@ -14,7 +14,7 @@ import { Notification } from "./Notification";
 export const SecondInfo = () => {
   const selectedOwner = useRecoilValue(reviewRepoDataState("owner"));
   const selectedRepo = useRecoilValue(reviewRepoDataState("repoName"));
-
+  const setDesc = useSetRecoilState(reviewRepoDataState("desc"));
   const [selectedRepoData, setSelectedRepoData] = useState({
     repoURL: "",
     description: null,
