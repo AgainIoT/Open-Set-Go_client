@@ -2,30 +2,19 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import { useState, useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  Alert,
-  AlertTitle,
-  IconButton,
-  SvgIcon,
-  Typography,
-} from "@mui/material";
-// import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+import { IconButton, SvgIcon, Typography } from "@mui/material";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { ReactComponent as GitForkIcon } from "../../assets/icons/gitFork.svg";
 import { ReactComponent as GitHubIcon } from "../../assets/icons/github.svg";
-import {
-  reivewAlertListState,
-  reviewRepoDataState,
-} from "../../recoil/reviewState";
+import { reviewRepoDataState } from "../../recoil/reviewState";
 import axios from "axios";
 import { ReviewChart } from "./ReviewChart";
+import { Notification } from "./Notification";
 
 export const SecondInfo = () => {
   const selectedOwner = useRecoilValue(reviewRepoDataState("owner"));
   const selectedRepo = useRecoilValue(reviewRepoDataState("repoName"));
   const setDesc = useSetRecoilState(reviewRepoDataState("desc"));
-  const alertList = useRecoilValue(reivewAlertListState);
-
   const [selectedRepoData, setSelectedRepoData] = useState({
     repoURL: "",
     description: null,
@@ -67,35 +56,7 @@ export const SecondInfo = () => {
   }, []);
 
   const handleOpenRepo = () => {
-    console.log("link:", selectedRepoData.repoURL);
     window.open(selectedRepoData.repoURL, "_blank");
-  };
-
-  const NotificationItem = (props) => {
-    console.log("item::", props.item);
-    return (
-      <StNotificationItem>
-        <NotificationItemWrapper severity="warning">
-          <NotificationItemTitle>
-            Unable to confirm about {props.item}
-          </NotificationItemTitle>
-          Authority above the owner are required for accurately evaluated.
-        </NotificationItemWrapper>
-      </StNotificationItem>
-    );
-  };
-
-  const NotificationList = () => {
-    console.log("alertList", alertList);
-
-    return (
-      <StNotificationList>
-        {alertList.map((it, index) => {
-          console.log("list Item:", it);
-          return <NotificationItem key={it} item={it} />;
-        })}
-      </StNotificationList>
-    );
   };
 
   return (
@@ -124,14 +85,13 @@ export const SecondInfo = () => {
         </IconButton>
       </DetailRepoDataContainer>
       <ReportContainer>
-        {" "}
         <SummarySection>
           <ItemText>Summary</ItemText>
           <ReviewChart />
         </SummarySection>
         <NotificationSection>
           <ItemText>Notification</ItemText>
-          <NotificationList />
+          <Notification />
         </NotificationSection>
       </ReportContainer>
     </StFirstInfo>
@@ -216,27 +176,6 @@ const NotificationSection = styled.div`
   padding: 2rem 1rem;
   gap: 2rem;
   background-color: ${COLOR.MAIN_WHITE};
-
   border-radius: 1.5rem;
-`;
-
-const StNotificationItem = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
-const NotificationItemWrapper = styled(Alert)`
-  display: flex;
-  width: 100%;
-  background-color: ${COLOR.MAIN_WHITE};
-  font-size: 1.2rem;
-`;
-const NotificationItemTitle = styled(AlertTitle)`
-  font-size: 1.5rem;
-`;
-const StNotificationList = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 1rem;
+  overflow-y: hidden;
 `;

@@ -1,23 +1,8 @@
 import styled from "styled-components";
-import { COLOR } from "../../styles/color";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  useRecoilState,
-  useRecoilValue,
-  useResetRecoilState,
-  useSetRecoilState,
-} from "recoil";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  SvgIcon,
-  Typography,
-} from "@mui/material";
-//import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
-import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
-import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
+import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import {
   communityItem,
@@ -29,12 +14,13 @@ import {
   reivewReportState,
   reviewRepoDataState,
 } from "../../recoil/reviewState";
-import { ReactComponent as Arrow } from "../../assets/icons/arrowLongRight.svg";
 import { issueSelectedState, selectedState } from "../../recoil/issueState";
 import {
   templateContent,
   templatePreviewState,
 } from "../../recoil/templateState";
+import { ReviewTemplateList } from "./ReviewItems";
+import { ReviewList } from "./reviewItem/OtherItem";
 
 export const SecondContents = () => {
   const navigate = new useNavigate();
@@ -48,12 +34,11 @@ export const SecondContents = () => {
   const setReviewLicense = useSetRecoilState(
     reviewRepoDataState("licenseName"),
   );
-  const [page, setPage] = useRecoilState(reviewRepoDataState("page"));
+  const setPage = useSetRecoilState(reviewRepoDataState("page"));
   const [alertList, setAlertList] = useRecoilState(reivewAlertListState);
-  const [checkList, setCheckList] = useRecoilState(
-    reivewReportState("checked"),
-  );
-  const [noneList, setNoneList] = useRecoilState(reivewReportState("none"));
+  const setCheckList = useSetRecoilState(reivewReportState("checked"));
+  const setNoneList = useSetRecoilState(reivewReportState("none"));
+  const setHasNotified = useSetRecoilState(reivewReportState("hasNotified"));
 
   const [isLoadingTemplate, setIsLoadingTemplate] = useState(true);
   const [isLoadingSecurity, setIsLoadingSecurity] = useState(true);
@@ -190,6 +175,7 @@ export const SecondContents = () => {
   }
 
   useEffect(() => {
+    setHasNotified(false);
     getTemplateReviewData();
     getSecurityReviewData();
     getCommunityReviewData();
@@ -225,6 +211,10 @@ export const SecondContents = () => {
       );
       setCheckList(checkValue);
       setNoneList(noneCheckValue);
+
+      if (alertList.length > 0 || noneCheckValue.length > 0) {
+        setHasNotified(true);
+      }
     }
   }, [isLoadingTemplate, isLoadingSecurity, isLoadingCommunity]);
 
@@ -235,140 +225,46 @@ export const SecondContents = () => {
     navigate("/");
   };
 
-  const ItemContainer = (props) => {
-    console.log("category", props.category);
-    const isLoading =
-      props.category === "securityItem"
-        ? isLoadingSecurity
-        : isLoadingCommunity;
-    const reviewData =
-      props.category === "securityItem"
-        ? reviewSecurityData
-        : reviewCommunityData;
-
-    const ItemIcon = {
-      true: (
-        <TemplateIconBox
-          component={CheckRoundedIcon}
-          iconcolor={COLOR.MAIN_NAVY}
-        />
-      ),
-      false: (
-        <TemplateIconBox component={props.icon} iconcolor={COLOR.MAIN_NAVY} />
-      ),
-      null: (
-        <TemplateIconBox
-          component={WarningRoundedIcon}
-          iconcolor={COLOR.MAIN_NAVY}
-        />
-      ),
-    };
-
-    return (
-      <ItemBox>
-        <ItemIconBox>
-          {ItemIcon[reviewData[props.item]]}
-          {isLoading ? (
-            <ItemProgress />
-          ) : (
-            <ItemProgress variant="determinate" value={100} />
-          )}
-        </ItemIconBox>
-        <TextContainer>
-          <ItemTitle variant="h4">{props.title}</ItemTitle>
-          <DecsText variant="subtitle1">{props.desc}</DecsText>
-        </TextContainer>
-      </ItemBox>
-    );
-  };
-
-  const TemplateItemContainer = (props) => {
-    const item = props.item;
-    const status = !isLoadingTemplate && reviewTemplateData[item];
-    // const [ishover, setIsHover] = useState(false);
-
-    return (
-      <TemplateItemBox
-        onClick={() => {
-          navigate(props.path);
-        }}
-      >
-        <TemplateItemIconBox>
-          <TemplateIconBox
-            component={status ? CheckRoundedIcon : props.icon}
-            iconcolor={COLOR.MAIN_NAVY}
-          />
-          {isLoadingTemplate ? (
-            <ItemProgress />
-          ) : (
-            <ItemProgress variant="determinate" value={100} />
-          )}
-        </TemplateItemIconBox>
-        <TextContainer>
-          <TemplateItemTitle variant="h4">{props.title}</TemplateItemTitle>
-          <TemplateDecsText variant="subtitle1">{props.desc}</TemplateDecsText>
-        </TextContainer>
-        <ArrowIcon component={Arrow} inheritViewBox />
-      </TemplateItemBox>
-    );
-  };
-
-  const ItemListContainer = (props) => {
-    return (
-      <StItemListContainer>
-        {props.data.map((it) => {
-          return props.data === templateItem ? (
-            <TemplateItemContainer
-              key={it.item}
-              item={it.item}
-              title={it.title}
-              icon={it.icon}
-              desc={it.desc}
-              path={it.path}
-            />
-          ) : (
-            <ItemContainer
-              key={it.item}
-              item={it.item}
-              title={it.title}
-              icon={it.icon}
-              desc={it.desc}
-              category={props.category}
-            />
-          );
-        })}
-      </StItemListContainer>
-    );
-  };
-
   return (
     <StSecondContents>
       <div>
         <TitleContainer>
           <Title variant="h4">about Template</Title>
         </TitleContainer>
-        <ItemListContainer data={templateItem} category={"templateItem"} />
+        <ReviewTemplateList
+          data={templateItem}
+          isLoadingTemplate={isLoadingTemplate}
+          reviewData={reviewTemplateData}
+        />
       </div>
       <div>
         <TitleContainer>
           <Title variant="h4">about Security</Title>
         </TitleContainer>
-        <ItemListContainer data={securityItem} category={"securityItem"} />
+        <ReviewList
+          data={securityItem}
+          isLoading={isLoadingSecurity}
+          reviewData={reviewSecurityData}
+        />
       </div>
       <div>
         <TitleContainer>
           <Title variant="h4">about Community</Title>
         </TitleContainer>
-        <ItemListContainer data={communityItem} category={"communityItem"} />
+        <ReviewList
+          data={communityItem}
+          isLoading={isLoadingCommunity}
+          reviewData={reviewCommunityData}
+        />
       </div>
-      <Button
+      <CloseBtn
         variant="outlined"
         onClick={() => {
           handleFinish();
         }}
       >
-        Primary
-      </Button>
+        Close
+      </CloseBtn>
     </StSecondContents>
   );
 };
@@ -389,112 +285,6 @@ const Title = styled(Typography)`
   font-weight: bold;
 `;
 
-// for security, community item
-const ItemBox = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  width: 23rem;
-  height: 22rem;
-  padding: 1.5rem;
-  /* gap: 1rem; */
-  /* border: 0.1rem solid lightgrey; */
-  border-radius: 2rem;
-  background-color: ${COLOR.MAIN_WHITE};
-  box-shadow: 0rem 0.1rem 2rem lightgrey;
-`;
-
-const ItemIconBox = styled(Box)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  top: 0;
-  width: 5rem;
-  height: 5rem;
-  margin: 0.1rem;
-`;
-
-const IconBox = styled(SvgIcon)`
-  position: absolute;
-  color: ${(props) => props.iconcolor};
-  font-size: 2.7rem;
-`;
-
-const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const ItemTitle = styled(Typography)`
-  font-weight: bolder;
-  text-align: left;
-`;
-const DecsText = styled(Typography)`
-  color: ${COLOR.FONT_GRAY};
-  font-size: 1.2rem;
-  text-align: justify;
-`;
-
-// for template item
-const TemplateItemBox = styled(ItemBox)`
-  &:hover {
-    padding: 2rem 1.5rem;
-    background-color: ${COLOR.MAIN_PURPLE};
-    transition: all 0.3s ease-in;
-  }
-`;
-
-const TemplateItemIconBox = styled(ItemIconBox)`
-  transition: all 1s ease-in-out;
-  ${TemplateItemBox}:hover & {
-    display: none;
-    transition: all 0.5s ease-in-out;
-  }
-`;
-
-const TemplateIconBox = styled(IconBox)``;
-
-const TemplateItemTitle = styled(ItemTitle)`
-  ${TemplateItemBox}:hover & {
-    color: ${COLOR.MAIN_WHITE};
-    transition: all 0.2s ease-in-out;
-  }
-`;
-const TemplateDecsText = styled(DecsText)`
-  ${TemplateItemBox}:hover & {
-    color: ${COLOR.MAIN_WHITE};
-    transition: all 0.2s ease-in-out;
-  }
-`;
-
-const ArrowIcon = styled(SvgIcon)`
-  display: none;
-  color: ${COLOR.MAIN_WHITE};
-  font-size: 5rem;
-  ${TemplateItemBox}:hover & {
-    display: block;
-    color: ${COLOR.MAIN_WHITE};
-    transition: all 0.2s ease-in-out;
-  }
-`;
-
-const ItemProgress = styled(CircularProgress)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${COLOR.MAIN_SKYBLUE};
-
-  .MuiCircularProgress-svg {
-    width: 5rem;
-    height: 5rem;
-  }
-`;
-
-// for item list
-const StItemListContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+const CloseBtn = styled(Button)`
+  font-size: 2rem;
 `;

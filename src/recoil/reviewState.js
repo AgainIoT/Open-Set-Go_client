@@ -10,11 +10,13 @@ export const reviewRepoDataState = atomFamily({
   effects_UNSTABLE: [persistAtom],
 });
 
+// null value list
 export const reivewAlertListState = atom({
   key: "reviewAlertListState",
   default: [],
 });
 
+// report data about checked(true item), none(false item), etc.
 export const reivewReportState = atomFamily({
   key: "reivewReportState",
   default: [],
