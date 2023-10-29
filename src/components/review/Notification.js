@@ -81,7 +81,7 @@ export const Notification = () => {
           )}
         </>
       ) : (
-        <p>😄</p>
+        <></>
       )}
     </StNotification>
   );
