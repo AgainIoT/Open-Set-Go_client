@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { FirstInfo } from "../components/review/FirstInfo";
 import { FirstContents } from "../components/review/FirstContents";
 import { SecondContents } from "../components/review/SecondContents";
@@ -8,7 +8,7 @@ import { SecondInfo } from "../components/review/SecondInfo";
 import { reviewRepoDataState } from "../recoil/reviewState";
 
 function OperationalReviewPage() {
-  const [page, setPage] = useRecoilState(reviewRepoDataState("page"));
+  const page = useRecoilValue(reviewRepoDataState("page"));
 
   const InfoComponent = () => {
     switch (page) {
