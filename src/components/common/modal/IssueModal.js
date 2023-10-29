@@ -65,7 +65,6 @@ const IssueModal = () => {
   useEffect(() => {
     const hey = isDuplicated();
     setIsDu(hey);
-    console.log(`isDu: ${hey}`);
     if (
       !hey &&
       userInput.uname.length > 2 &&
@@ -75,10 +74,8 @@ const IssueModal = () => {
       !userInput.title.includes("\"")
     ) {
       setIsFinished(true);
-      console.log("isFinished: true");
     } else {
       setIsFinished(false);
-      console.log("isFInished: false");
     }
   }, [userInput.uname, userInput.desc, userInput.title]);
 
@@ -106,7 +103,8 @@ assignees: []\n
     setSelectedInfo22([
       ...selectedInfo22,
       {
-        type: temTitle,
+        type: temType,
+        title: temTitle,
         uname: userInput.uname,
       }
     ]);
@@ -114,7 +112,7 @@ assignees: []\n
     setSelectedInfo([
       ...selectedInfo,
       {
-        type: temTitle,
+        type: temType,
         content: rst,
       },
     ]);
