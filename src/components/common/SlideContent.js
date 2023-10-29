@@ -145,7 +145,7 @@ const InformationBox = styled.div`
 
 const Title = styled.h1`
   padding: 1rem 1rem 1rem 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
 `;
 
@@ -153,7 +153,7 @@ const ContentH2 = styled.h1`
   margin-bottom: 0.8rem;
 `;
 const Content = styled.p`
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-align: justify;
   line-height: 1.7rem;
 `;

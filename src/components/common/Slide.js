@@ -117,14 +117,16 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-next {
-    right: 0;
+    right: 1;
   }
 
   .slick-prev {
-    left: 0;
+    left: 1;
   }
 
-  .slick-next:before,
+  .slick-next:before{
+    color: #888;
+  }
   .slick-prev:before {
     color: #888;
   }
