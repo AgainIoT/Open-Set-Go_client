@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { avatar, id, name, isLogin } from "../recoil/authorize";
@@ -58,6 +58,7 @@ export async function checkTokenValid() {
 }
 
 export const Header = (props) => {
+  const headerRef = useRef();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [src, setSrc] = useRecoilState(avatar);
@@ -123,7 +124,7 @@ export const Header = (props) => {
     <React.Fragment>
       <CssBaseline />
       <ElevationScroll {...props}>
-        <AppBar style={{ background: COLOR.MAIN_WHITE }}>
+        <AppBar className="header" style={{ background: COLOR.MAIN_WHITE }}>
           <Toolbar>
             <Box
               sx={{
