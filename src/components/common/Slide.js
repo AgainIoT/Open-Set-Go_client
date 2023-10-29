@@ -3,10 +3,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Slider from "react-slick";
 import SlideContent from "./SlideContent";
+import { LoadingLicense } from "./LoadingLicense";
 
 //Slide: Component for Implementing the License Page using the React Slick
 const Slide = () => {
   //using recoil to add slide content in Slide component
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   useEffect(() => {
     let completed = false;
@@ -19,6 +21,7 @@ const Slide = () => {
       if (!completed) {
         setData(result.data);
       }
+      setLoading(true);
     }
     get();
     return () => {
@@ -38,25 +41,32 @@ const Slide = () => {
 
   return (
     <StSlide>
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-      />
-      <StyledSlider {...settings}>
-        {data.map((it) => {
-          return (
-            <div key={it.license}>
-              <SlideContent data={it} />
-            </div>
-          );
-        })}
-      </StyledSlider>
+      {loading ? (
+        <SlideDiv>
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+          />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+          />
+          <StyledSlider {...settings}>
+            {data.map((it) => {
+              return (
+                <div key={it.license}>
+                  <SlideContent data={it} />
+                </div>
+              );
+            })}
+          </StyledSlider>
+        </SlideDiv>
+      ) : (
+        <LoadingLicense />
+      )}
+      ;
     </StSlide>
   );
 };
@@ -64,6 +74,13 @@ const Slide = () => {
 export default Slide;
 
 const StSlide = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const SlideDiv = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
@@ -100,14 +117,16 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-next {
-    right: 0;
+    right: 1;
   }
 
   .slick-prev {
-    left: 0;
+    left: 1;
   }
 
-  .slick-next:before,
+  .slick-next:before{
+    color: #888;
+  }
   .slick-prev:before {
     color: #888;
   }

@@ -81,7 +81,7 @@ const StReviewChart = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 50%;
   min-width: 25rem;
   min-height: 25rem;
 `;

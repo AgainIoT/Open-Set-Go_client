@@ -55,6 +55,7 @@ export const FirstContents = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setSelectOwner("");
     getUserRepoData();
     checkTokenValid().then((result) => {
       console.log(result);
@@ -64,15 +65,13 @@ export const FirstContents = () => {
 
   //Apply options based on the owner of choice
   useEffect(() => {
+    setSelectRepoName("");
     if (isSelectOwner) {
       const selectedRepoData = userRepoData.find(
         (it) => it.owner === selectOwner,
       );
       const repoNameData = selectedRepoData.repoName || [];
-
       setRepoNameOptions(repoNameData);
-    } else {
-      setSelectRepoName("");
     }
   }, [selectOwner]);
 
@@ -93,7 +92,7 @@ export const FirstContents = () => {
         dataState={reviewRepoDataState}
         isSelectOwner={isSelectOwner}
       />
-      {isSelectOwner && selectRepoName !== ""? (
+      {isSelectOwner && selectRepoName !== "" ? (
         <BtnWrapper>
           <StartButton
             variant="contained"
@@ -106,10 +105,7 @@ export const FirstContents = () => {
         </BtnWrapper>
       ) : (
         <BtnWrapper>
-          <StartButton
-            disabled
-            variant="contained"
-          >
+          <StartButton disabled variant="contained">
             Start review
           </StartButton>
         </BtnWrapper>

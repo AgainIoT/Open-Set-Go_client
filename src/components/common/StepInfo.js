@@ -1,16 +1,17 @@
 import styled from "styled-components";
-import { templateMode } from "../../recoil/templateState";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { layoutType, templateListType } from "../../recoil/templateState";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { modalState, activeState } from "../../recoil/commonState";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import StepData from "../../data/StepData.json";
 
 //StepInfo: Component for description of each step (located on the left side of the screen)
-const StepInfo = () => {
+const StepInfo = (props) => {
   //using recoil for matching step information and step
   const activeStep = useRecoilValue(activeState);
-  const [templateMod, setTemplateMod] = useRecoilState(templateMode);
+  const [listType, setListType] = useRecoilState(templateListType);
+  const setLayoutType = useSetRecoilState(layoutType);
 
   return (
     <div>
@@ -21,14 +22,16 @@ const StepInfo = () => {
           );
           const handleOpen = (toggle) => {
             setModalValue(true);
-            setTemplateMod(toggle);
+            setLayoutType(props.type);
+            setListType(toggle);
           };
           return (
             <div key={it.step}>
               <Box_>
                 <StStepInfo>
                   <TitleH1>
-                    STEP{it.step}. {it.title}
+                    {props.type === "steps" ? `STEP.${it.step} ` : null}
+                    {it.title}
                   </TitleH1>
                   <ContentP>{it.content}</ContentP>
                   {activeStep === 3 || activeStep === 5 || activeStep === 6 ? (
@@ -52,9 +55,7 @@ const StepInfo = () => {
                     >
                       Generate on your own
                     </ButtonWrapper>
-                  ) : (
-                    <div></div>
-                  )}
+                  ) : null}
                 </StStepInfo>
               </Box_>
             </div>
@@ -96,11 +97,11 @@ const ButtonWrapper = styled(Button)`
 `;
 
 const Box_ = styled.div`
-  gap: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  gap: 2rem;
 `;
 
 export default StepInfo;

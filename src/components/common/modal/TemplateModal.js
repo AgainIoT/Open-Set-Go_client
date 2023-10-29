@@ -8,10 +8,10 @@ import TemplateBody from "../template/TemplateBody";
 export const TemplateModal = (props) => {
   return (
     <TemplateContainer>
-      <TemplateList type={props.type} />
+      <TemplateList type={props.type} mode={props.mode} />
       <TemplateContents>
-        <TemplateTitle type={props.type} />
-        <TemplateBody type={props.type} />
+        <TemplateTitle type={props.type} mode={props.mode} />
+        <TemplateBody type={props.type} mode={props.mode}/>
       </TemplateContents>
     </TemplateContainer>
   );

@@ -22,10 +22,10 @@ function ContributingTemplatePage(props) {
 
   return (
     <StReadmeTemplatePage>
-      <BaseModal type={"contributing"}>
-        <TemplateModal type={"contributing"} />
+      <BaseModal type={"contributing"} mode={"steps"}>
+        <TemplateModal type={"contributing"} mode={"steps"} />
       </BaseModal>
-      <MarkdownPreview type={"contributing"} />
+      <MarkdownPreview type={"contributing"} mode={"steps"} />
     </StReadmeTemplatePage>
   );
 }

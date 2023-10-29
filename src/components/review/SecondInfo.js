@@ -44,6 +44,7 @@ export const SecondInfo = () => {
         fork: response.data.fork,
       };
 
+      setDesc(initUserData.description);
       setSelectedRepoData(initUserData);
     } catch (e) {
       console.error(e);

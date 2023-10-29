@@ -7,7 +7,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
 import propTypes from "prop-types";
-import useScrollFadeIn from "../../hooks/useScrollFadeIn";
+import useZoomIn from "../../hooks/useZoomIn";
+import MAIN from "../../assets/images/mainImg.svg";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
@@ -16,6 +17,7 @@ const handleLogin = () => {
   window.location.href = githubURL;
 };
 export const Welcome = () => {
+  const zoominItem = useZoomIn(1.2, 0);
   const location = useLocation();
 
   const preventGoBack = (event) => {
@@ -32,37 +34,52 @@ export const Welcome = () => {
       window.removeEventListener("popstate", preventGoBack);
     };
   }, []);
-  const animatedItem = useScrollFadeIn();
   const Logined = useRecoilValue(isLogin);
   const navigate = new useNavigate();
   return (
     <StWelcome>
       <InfoDiv>
-        <Title>Open, Set, Go</Title>
-        <SubTitle>start a project easily, quickly and conveniently</SubTitle>
+        <Title>
+          The best way to
+          <br />
+          manage project
+        </Title>
+        <SubTitle>
+          We help you manage open-source project
+          <br />
+          easier and better
+        </SubTitle>
 
         <Stack spacing={2} direction="row">
-          <LearnmoreBtn
-            variant="contained"
-            onClick={() => {
-              document
-                .querySelector(".STEPS")
-                .scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            learn more
-          </LearnmoreBtn>
           {Logined === true ? (
             <LoginBtn variant="contained" onClick={() => navigate("/select")}>
-              get started
+              {"get started >"}
             </LoginBtn>
           ) : (
             <LoginBtn variant="contained" onClick={handleLogin}>
               login
             </LoginBtn>
           )}
+          <LearnmoreBtn
+            variant="contained"
+            onClick={() => {
+              const offset = document.querySelector(".header").clientHeight;
+              window.scrollTo({
+                behavior: "smooth",
+                top:
+                  document.querySelector(".STEPS").getBoundingClientRect().top -
+                  document.body.getBoundingClientRect().top -
+                  offset,
+              });
+            }}
+          >
+            learn more
+          </LearnmoreBtn>
         </Stack>
       </InfoDiv>
+      <ImgDiv {...zoominItem}>
+        <MainImg src={MAIN} />
+      </ImgDiv>
     </StWelcome>
   );
 };
@@ -76,7 +93,8 @@ const StWelcome = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  width: 100%;
   height: 80vh;
   background: linear-gradient(
     to bottom,
@@ -89,46 +107,79 @@ const StWelcome = styled.div`
 const fadeIn = keyframes`
   0% {
     opacity: 0;
-    transform: translate3d(0, 10%, 0);
+    transform: translate3d(0, 15%, 0);
   } to {
     opacity: 1;
     transform: translateZ(0);
   }
 `;
+
+const updown = keyframes`
+  0% {
+    transform: translateY(1rem);
+  }
+  100% {
+    transform: translateY(-1rem);
+  }
+`;
+
 const InfoDiv = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   flex-direction: column;
+  width: 50%;
   height: 80vh;
+  padding-left: 20rem;
   text-align: center;
-  animation: ${fadeIn} 1.7s;
+  animation: ${fadeIn} 1.5s;
+`;
+
+const ImgDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 90%;
+`;
+
+const MainImg = styled.img`
+  width: 90%;
+  height: 90%;
+  margin-right: 23rem;
+  animation: ${updown} 2s ease-in-out infinite alternate-reverse;
 `;
 export const Title = styled.h1`
+  text-align: left;
+  line-height: 100%;
   font-size: 6.5rem;
-  font-family: "Inter", sans-serif;
   font-weight: 700;
-  margin-bottom: 1.5rem;
 `;
 
 export const SubTitle = styled.h3`
-  padding-bottom: 2rem;
+  margin: 1rem 0rem 1rem 0rem;
+  line-height: 120%;
+  text-align: left;
   font-size: 3rem;
   font-weight: 00;
 `;
 
 const LearnmoreBtn = styled(Button)({
-  backgroundColor: `${COLOR.MAIN_PURPLE}`,
+  backgroundColor: "black",
+  height: "5rem",
+  width: "17rem",
   fontSize: "15px",
   "&:hover": {
-    backgroundColor: `${COLOR.MAIN_PURPLE}`,
+    backgroundColor: "black",
   },
 });
 
 const LoginBtn = styled(Button)({
-  backgroundColor: "black",
+  height: "5rem",
+  width: "17rem",
+  backgroundColor: `${COLOR.MAIN_PURPLE}`,
   fontSize: "15px",
   "&:hover": {
-    backgroundColor: "black",
+    backgroundColor: `${COLOR.MAIN_PURPLE}`,
   },
 });
