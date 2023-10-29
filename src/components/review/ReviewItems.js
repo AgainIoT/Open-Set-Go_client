@@ -228,12 +228,6 @@ const ArrowIcon = styled(SvgIcon)`
   }
 `;
 
-// for security
-
-// for community
-
-//
-
 const ItemProgress = styled(CircularProgress)`
   display: flex;
   justify-content: center;
