@@ -56,11 +56,11 @@ const IssueList = () => {
       `${process.env.REACT_APP_SERVER_URL}/file/issue/${temId}`,
     );
     setBody(rst.data.content);
-    console.log(rst.data.content);
     setTemTitle(temTitle);
     setTemType(temType);
     setContent(rst.data.image);
     setClickNow(true);
+    console.log(`temtitle: ${temType}`);
   };
 
   const handleOpen = () => {

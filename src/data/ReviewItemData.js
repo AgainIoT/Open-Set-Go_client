@@ -138,7 +138,7 @@ export const communityItem = [
 export const securityItem = [
   {
     item: "codeql",
-    title: "CodeQL",
+    title: "Code scanning",
     icon: DocumentScannerIcon,
     desc: "Automatically detect common vulnerability and coding errors",
   },
