@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Box, CircularProgress, SvgIcon, Typography } from "@mui/material";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import { ReactComponent as Arrow } from "../../assets/icons/arrowLongRight.svg";
+import propTypes from "prop-types";
+
 const ReviewTemplateItem = (props) => {
   const data = props.data;
   const navigate = new useNavigate();
@@ -63,6 +65,12 @@ const ReviewTemplateItem = (props) => {
   );
 };
 
+ReviewTemplateItem.propTypes = {
+  data: propTypes.object,
+  isLoadingTemplate: propTypes.bool,
+  reviewData: propTypes.object,
+};
+
 export const ReviewTemplateList = (props) => {
   return (
     <StReviewList>
@@ -78,6 +86,12 @@ export const ReviewTemplateList = (props) => {
       })}
     </StReviewList>
   );
+};
+
+ReviewTemplateList.propTypes = {
+  data: propTypes.array,
+  isLoadingTemplate: propTypes.bool,
+  reviewData: propTypes.object,
 };
 
 const StReviewList = styled.div`
