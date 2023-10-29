@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { COLOR } from "../../../styles/color";
-import { useNavigate } from "react-router-dom";
 import { Box, CircularProgress, SvgIcon, Typography } from "@mui/material";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import WarningAmberOutlinedIcon from "@mui/icons-material/WarningAmberOutlined";
