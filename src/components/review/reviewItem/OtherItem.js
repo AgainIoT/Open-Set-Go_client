@@ -4,70 +4,66 @@ import { Box, CircularProgress, SvgIcon, Typography } from "@mui/material";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import WarningAmberOutlinedIcon from "@mui/icons-material/WarningAmberOutlined";
 
-export const ReviewList = (props) => {
-  const ReviewItem = (props) => {
-    const data = props.data;
+const ReviewItem = (props) => {
+  const data = props.data;
 
-    const ItemIcon = {
-      default: (
-        <>
-          <IconWrapper />
-          <ItemProgress progresscolor={COLOR.MAIN_SKYBLUE} />
-        </>
-      ),
-      true: (
-        <>
-          <IconWrapper
-            component={CheckRoundedIcon}
-            iconcolor={COLOR.MAIN_NAVY}
-          />
-          <ItemProgress
-            variant="determinate"
-            value={100}
-            progresscolor={COLOR.MAIN_SKYBLUE}
-          />
-        </>
-      ),
-      false: (
-        <>
-          <IconWrapper component={data.icon} iconcolor={COLOR.MAIN_NAVY} />
-          <ItemProgress
-            variant="determinate"
-            value={100}
-            progresscolor={COLOR.MAIN_ROSE}
-          />
-        </>
-      ),
-      null: (
-        <>
-          <IconWrapper
-            component={WarningAmberOutlinedIcon}
-            iconcolor={COLOR.MAIN_ORANGE}
-          />
-          <ItemProgress
-            variant="determinate"
-            value={100}
-            progresscolor={COLOR.MAIN_ORANGE}
-          />
-        </>
-      ),
-    };
-
-    return (
-      <StItemBox>
-        <ItemIconBox>
-          {props.isLoading
-            ? ItemIcon["default"]
-            : ItemIcon[props.reviewData[data.item]]}
-        </ItemIconBox>
-        <TextContainer>
-          <ItemTitle variant="h4">{data.title}</ItemTitle>
-          <DecsText variant="subtitle1">{data.desc}</DecsText>
-        </TextContainer>
-      </StItemBox>
-    );
+  const ItemIcon = {
+    default: (
+      <>
+        <IconWrapper />
+        <ItemProgress progresscolor={COLOR.MAIN_SKYBLUE} />
+      </>
+    ),
+    true: (
+      <>
+        <IconWrapper component={CheckRoundedIcon} iconcolor={COLOR.MAIN_NAVY} />
+        <ItemProgress
+          variant="determinate"
+          value={100}
+          progresscolor={COLOR.MAIN_SKYBLUE}
+        />
+      </>
+    ),
+    false: (
+      <>
+        <IconWrapper component={data.icon} iconcolor={COLOR.MAIN_NAVY} />
+        <ItemProgress
+          variant="determinate"
+          value={100}
+          progresscolor={COLOR.MAIN_ROSE}
+        />
+      </>
+    ),
+    null: (
+      <>
+        <IconWrapper
+          component={WarningAmberOutlinedIcon}
+          iconcolor={COLOR.MAIN_ORANGE}
+        />
+        <ItemProgress
+          variant="determinate"
+          value={100}
+          progresscolor={COLOR.MAIN_ORANGE}
+        />
+      </>
+    ),
   };
 
+  return (
+    <StItemBox>
+      <ItemIconBox>
+        {props.isLoading
+          ? ItemIcon["default"]
+          : ItemIcon[props.reviewData[data.item]]}
+      </ItemIconBox>
+      <TextContainer>
+        <ItemTitle variant="h4">{data.title}</ItemTitle>
+        <DecsText variant="subtitle1">{data.desc}</DecsText>
+      </TextContainer>
+    </StItemBox>
+  );
+};
+export const ReviewList = (props) => {
   return (
     <StReviewList>
       {props.data.map((it) => {

@@ -4,67 +4,66 @@ import { useNavigate } from "react-router-dom";
 import { Box, CircularProgress, SvgIcon, Typography } from "@mui/material";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import { ReactComponent as Arrow } from "../../assets/icons/arrowLongRight.svg";
+const ReviewTemplateItem = (props) => {
+  const data = props.data;
+  const navigate = new useNavigate();
 
-export const ReviewTemplateList = (props) => {
-  const ReviewTemplateItem = (props) => {
-    const data = props.data;
-    const navigate = new useNavigate();
-
-    const ItemIcon = {
-      default: (
-        <>
-          <TemplateIconWrapper />
-          <ItemProgress progresscolor={COLOR.MAIN_SKYBLUE} />
-        </>
-      ),
-      true: (
-        <>
-          <TemplateIconWrapper
-            component={CheckRoundedIcon}
-            iconcolor={COLOR.MAIN_NAVY}
-          />
-          <ItemProgress
-            variant="determinate"
-            value={100}
-            progresscolor={COLOR.MAIN_SKYBLUE}
-          />
-        </>
-      ),
-      false: (
-        <>
-          <TemplateIconWrapper
-            component={data.icon}
-            iconcolor={COLOR.MAIN_NAVY}
-          />
-          <ItemProgress
-            variant="determinate"
-            value={100}
-            progresscolor={COLOR.MAIN_ROSE}
-          />
-        </>
-      ),
-    };
-
-    return (
-      <StTemplateItemBox
-        onClick={() => {
-          navigate(data.path);
-        }}
-      >
-        <TemplateItemIconBox>
-          {props.isLoadingTemplate
-            ? ItemIcon["default"]
-            : ItemIcon[props.reviewData[data.item]]}
-        </TemplateItemIconBox>
-        <TextContainer>
-          <TemplateItemTitle variant="h4">{data.title}</TemplateItemTitle>
-          <TemplateDecsText variant="subtitle1">{data.desc}</TemplateDecsText>
-        </TextContainer>
-        <ArrowIcon component={Arrow} inheritViewBox />
-      </StTemplateItemBox>
-    );
+  const ItemIcon = {
+    default: (
+      <>
+        <TemplateIconWrapper />
+        <ItemProgress progresscolor={COLOR.MAIN_SKYBLUE} />
+      </>
+    ),
+    true: (
+      <>
+        <TemplateIconWrapper
+          component={CheckRoundedIcon}
+          iconcolor={COLOR.MAIN_NAVY}
+        />
+        <ItemProgress
+          variant="determinate"
+          value={100}
+          progresscolor={COLOR.MAIN_SKYBLUE}
+        />
+      </>
+    ),
+    false: (
+      <>
+        <TemplateIconWrapper
+          component={data.icon}
+          iconcolor={COLOR.MAIN_NAVY}
+        />
+        <ItemProgress
+          variant="determinate"
+          value={100}
+          progresscolor={COLOR.MAIN_ROSE}
+        />
+      </>
+    ),
   };
 
+  return (
+    <StTemplateItemBox
+      onClick={() => {
+        navigate(data.path);
+      }}
+    >
+      <TemplateItemIconBox>
+        {props.isLoadingTemplate
+          ? ItemIcon["default"]
+          : ItemIcon[props.reviewData[data.item]]}
+      </TemplateItemIconBox>
+      <TextContainer>
+        <TemplateItemTitle variant="h4">{data.title}</TemplateItemTitle>
+        <TemplateDecsText variant="subtitle1">{data.desc}</TemplateDecsText>
+      </TextContainer>
+      <ArrowIcon component={Arrow} inheritViewBox />
+    </StTemplateItemBox>
+  );
+};
+
+export const ReviewTemplateList = (props) => {
   return (
     <StReviewList>
       {props.data.map((it) => {
