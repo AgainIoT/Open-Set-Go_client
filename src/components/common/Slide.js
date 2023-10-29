@@ -42,7 +42,7 @@ const Slide = () => {
   return (
     <StSlide>
       {loading ? (
-        <div>
+        <SlideDiv>
           <link
             rel="stylesheet"
             type="text/css"
@@ -62,9 +62,9 @@ const Slide = () => {
               );
             })}
           </StyledSlider>
-        </div>
+        </SlideDiv>
       ) : (
-        <LoadingLicense/>
+        <LoadingLicense />
       )}
       ;
     </StSlide>
@@ -74,6 +74,13 @@ const Slide = () => {
 export default Slide;
 
 const StSlide = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const SlideDiv = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
