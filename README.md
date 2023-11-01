@@ -40,7 +40,7 @@ This repository is not about the direction and theme of Open-Set-Go, but about w
 | Supported Environment | Version      | Description                                   |
 | --------------------- | ------------ | --------------------------------------------- |
 | Ubuntu OS             | Ubuntu 22.04 | Open-Set-Go_client was developed by Ubuntu OS |
-| Node.js               | >= 18.x      | @ocotokit/rest >= node v18.x                  |
+| Node.js               | >= 18.x      | styled-reset >= node v18.x                  |
 | yarn                  | 1.22.19      | Open-Set-Go client manage package with yarn   |
 
 ### Install with script
