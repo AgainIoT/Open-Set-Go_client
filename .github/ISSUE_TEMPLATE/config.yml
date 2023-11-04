@@ -1,6 +1,14 @@
 ---
-blank_issues_enabled: false
+blank_issues_enabled: true
 contact_links:
-  - name: 💬 General Question
+  - name: Feature Suggestion
+    url: https://github.com/AgainIoT/Open-Set-Go/discussions/categories/feature-suggestion-share-ideas
+    about: If you have any features or good ideas you'd like to add, please post them on Discussion!
+
+  - name: Overall Feature Suggestions (Client & Server)
+    url: https://github.com/AgainIoT/Open-Set-Go/issues
+    about: Please create a feature proposal issue related to both Client and Server in Open-Set-Go!
+
+  - name: Question
     url: https://github.com/AgainIoT/Open-Set-Go/discussions/categories/q-a
     about: Please ask and answer questions as a discussion thread

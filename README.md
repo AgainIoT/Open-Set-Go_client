@@ -1,125 +1,89 @@
 # Open-Set-Go_client
 
 <p align="center">
-<a href="https://docs.open-set-go.com/" target="blank"><img src="https://github.com/AgainIoT/Open-Set-Go/raw/main/.github/images/Open-Set-Go.png" width="200" alt="Open-Set-Go Logo" /></a>
+<a href="https://www.open-set-go.com/" target="_blank"><img src="https://github.com/AgainIoT/Open-Set-Go/raw/main/.github/images/Open-Set-Go.png" width="200" alt="Open-Set-Go Logo" /></a>
 </p>
 
 <p align="center">
-  Start Open-Source Projects easily, quickly and conveniently with <a href="https://docs.open-set-go.com/" target="blank">Open-Set-Go</a>!
+  This is <a href="https://www.open-set-go.com" target="_blank">Open-Set-Go</a>'s React Client Server Repository! More details at <a href="https://github.com/AgainIoT/Open-Set-Go">Open-Set-Go Repository</a>!
 </p>
 
 <p align="center">
-  <a href="https://github/AgainIoT/Open-Set-Go_client"><img src="https://img.shields.io/node/v-lts/%40octokit%2Frest" alt="node Version" /></a>
-  <a href="/LICENSE"><img src="https://img.shields.io/github/license/AgainIoT/Open-Set-Go_client" alt="License" /></a>
+  <a href="https://github/AgainIoT/Open-Set-Go"><img src="https://img.shields.io/node/v-lts/styled-reset?logo=node.js&label=node" alt="node Version" /></a>
   <a href="https://sonarcloud.io/summary/new_code?id=AgainIoT_Open-Set-Go_client" target="_blank"><img src="https://sonarcloud.io/api/project_badges/measure?project=AgainIoT_Open-Set-Go_client&metric=alert_status" alt="Sonar Cloud Scan" /></a>
-  <a href="https://sonarcloud.io/summary/new_code?id=AgainIoT_Open-Set-Go_client"><img src="https://sonarcloud.io/api/project_badges/measure?project=AgainIoT_Open-Set-Go_client&metric=sqale_rating"></a>
-  <a href="https://sonarcloud.io/summary/new_code?id=AgainIoT_Open-Set-Go_client"><img src="https://sonarcloud.io/api/project_badges/measure?project=AgainIoT_Open-Set-Go_client&metric=reliability_rating"></a>
+  <a href="https://github.com/AgainIoT/Open-Set-Go_client/actions/workflows/github-code-scanning/codeql"><img src="https://github.com/AgainIoT/Open-Set-Go_client/actions/workflows/github-code-scanning/codeql/badge.svg"></a>
   <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FAgainIoT%2FOpen-Set-Go_client?ref=badge_shield" target="_blank"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FAgainIoT%2FOpen-Set-Go_client.svg?type=shield&issueType=license" alt="Fossa License Scan" /></a>
-  <a href="https://join.slack.com/t/open-set-go/shared_invite/zt-21jwlzs9g-qrajfUblcCtmCqAy0Xxj8w" target="_blank"><img src="https://img.shields.io/badge/Slack-online-brightgreen.svg" alt="Slack"/></a>
-  <a href="https://github.com/AgainIoT/Open-Set-Go_client/graphs/contributors" target="_blank"><img src="https://img.shields.io/github/contributors-anon/AgainIoT/Open-Set-Go_client" alt="contributors" /></a>
-  <a href="https://github/AgainIoT/Open-Set-Go_client"><img src="https://img.shields.io/github/last-commit/AgainIoT/Open-Set-Go_client" alt="Open-Set-Go_client stars" /></a>
-  <a href="https://github/AgainIoT/Open-Set-Go_client"><img src="https://img.shields.io/github/stars/AgainIoT/Open-Set-Go_client" alt="Open-Set-Go_client stars" /></a>
-  
+  <a href="https://www.open-set-go.com"><img src="https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fwww.open-set-go.com&logo=w3c&label=validation" alt="w3c validation check" /></a>
+  <a href="https://www.open-set-go.com"><img src="https://img.shields.io/netlify/8a6fd2e8-3678-439f-9ba4-8aec0cb2f9ad?logo=netlify" alt="Netlify status" /></a>
+  <a href="https://join.slack.com/t/open-set-go/shared_invite/zt-21jwlzs9g-qrajfUblcCtmCqAy0Xxj8w" target="_blank"><img src="https://img.shields.io/badge/slack-online-brightgreen.svg?logo=slack" alt="Slack"/></a>
+  <a href="https://github.com/AgainIoT/Open-Set-Go_client"><img src="https://img.shields.io/github/v/release/AgainIoT/Open-Set-Go_client?logo=github" alt="github release" /></a>
+  <a href="https://github.com/AgainIoT/Open-Set-Go_client"><img src="https://img.shields.io/github/release-date/AgainIoT/Open-Set-Go_client?color=blue&logo=github" alt="github last release date" /></a>
+  <a href="https://github.com/AgainIoT/Open-Set-Go_client"><img src="https://img.shields.io/github/last-commit/AgainIoT/Open-Set-Go_client?logo=github&color=blue" alt="github commits" /></a>
+  <a href="/LICENSE"><img src="https://img.shields.io/github/license/AgainIoT/Open-Set-Go_client?logo=github&color=blue" alt="github License" /></a>
+  <a href="https://github.com/AgainIoT/Open-Set-Go_client/graphs/contributors" target="_blank"><img src="https://img.shields.io/github/contributors-anon/AgainIoT/Open-Set-Go_client?logo=github&color=blue" alt="github contributors" /></a>
+  <a href="https://github.com/AgainIoT/Open-Set-Go_client"><img src="https://img.shields.io/github/stars/AgainIoT/Open-Set-Go_client?logo=github" alt="github stars" /></a>
+  <a href="https://github.com/AgainIoT/Open-Set-Go_client/pulls?q=is%3Apr+is%3Aclosed"><img alt="GitHub closed pull requests" src="https://img.shields.io/github/issues-pr-closed/AgainIoT/Open-Set-Go_client?logo=github&color=blue"></a>
+  <a href="https://github.com/AgainIoT/Open-Set-Go_client/issues?q=is%3Aissue+is%3Aclosed"><img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/AgainIoT/Open-Set-Go_client?logo=github&color=blue"></a>
 </p>
 
-<br>
+## Description
 
-## What is the **Open-Set-Go**?
+**Open-Set-Go_client** repository is source code of Open-Set-Go's **React** Server!<br>
+You can see more information of our topic on [**Open-Set-Go**](https://github.com/AgainIoT/Open-Set-Go) Repository.
 
-**Open-Set-Go** is the `Open-Source Project Starting toolkit` for Open-Source Developers.
+This repository is not about the direction and theme of Open-Set-Go, but about where we're going to go and what improvements we're going to make to our react servers!
 
-0. Log in with your GitHub ID(GitHub OAuth2)! <br>
-   This project is subordinate to GitHub and is being developed on the basis of launching an Open-Source project on GitHub. Therefore, you can log-in to Open-Set-Go with your GitHub ID.
-
-1. Create Repository <br>
-   Create a repository to start a new open-source project. You can choose the environment(_e.g., programming language, framework, gitignore, etc._) for your project. Then, your project's environment will be set!
-
-2. Add License <br>
-   Allows you to determine and select a license based on the information provided about it.
-
-3. Add Pull-Request Template <br>
-   Provides PR templates of several famous open-source projects so that users can create meaningful PR templates.
-
-4. Add Issue Templates <br>
-   Provides Issue Template references for several well-known open-source projects for different situations, making it easy for users to create an Issue Template.
-
-5. Create CONTRIBUTING.md <br>
-   Provides references to Contributing.md for several well-known open-source projects, while also making it easy to create CONTRIBUTING.md through markdown previewer.
-
-6. Create README.md <br>
-   Provides references to README.md for several well-known open-source projects, while also making it easy to create README.md through markdown previewer.
-
-## Why **Open-Set-Go**?
-
-It is not just to create a Source-Open Project, but to create a contribution-friendly environment and create an environment where communication between developers and contributors is smooth to create sustainable open source projects. <br>
-In addition, **Open-Set-Go** makes it easy, fast, and simple to build a contribution-friendly environment at the start of an open-source project.
-
-## Vision of **Open-Set-Go**
-
-Can see our vision for the foreseeable future at our project's milestone. <br>
-
-- <a href="https://github.com/AgainIoT/Open-Set-Go/milestones">Open-Set-Go</a>
-- <a href="https://github.com/AgainIoT/Open-Set-Go_client/milestones">Open-Set-Go client</a>
-- <a href="https://github.com/AgainIoT/Open-Set-Go_server/milestones">Open-Set-Go server</a>
-
-### Final Vision of Open-Set-Go
-
-Open-Set-Go makes it easy, fast and simple to start an Open-Source project, while also sharing your own contribution environment and becoming a community driving the Open-Source trend. _Like GitHub._
+> If you want to discuss the topic, please use [Discussions from **Open-Set-Go**](https://github.com/AgainIoT/Open-Set-Go/discussions)!
 
 ## Installation & Development Environment
 
-| Supported Environment | Version          | Description                                          |
-| --------------------- | ---------------- | ---------------------------------------------------- |
-| Windows             | Windows 11 | Open-Set-Go_client was developed by Windows 11        |
-| Node.js               | >= 18.x          | styled-reset require >= node v18.x  |
-| yarn                  | 1.22.19          | Open-Set-Go server & client manage package with yarn |
+| Supported Environment | Version      | Description                                   |
+| --------------------- | ------------ | --------------------------------------------- |
+| Ubuntu OS             | Ubuntu 22.04 | Open-Set-Go_client was developed by Ubuntu OS |
+| Node.js               | >= 18.x      | styled-reset >= node v18.x                  |
+| yarn                  | 1.22.19      | Open-Set-Go client manage package with yarn   |
 
+### Install with script
+
+You can also easily install it through [install.sh](https://github.com/AgainIoT/Open-Set-Go#installation--development-environment)!
+
+### Install Manually
 
 1. Clone our Repository!
-    ```bash
-    git clone https://github.com/AgainIoT/Open-Set-Go_client.git
 
-    ######################################
-    # Open-Set-Go Repository Dependencies
-    #
-    # Open-Set-Go_client
-    #
-    ######################################
-    ```
+   ```bash
+   git clone https://github.com/AgainIoT/Open-Set-Go_client.git
+   ```
 
 2. Install the Development Environment
 
 3. Install Node Dependencies
-    ```bash
-    yarn install
-    ```
-4. Create your own github-oauth app
+   ```bash
+   yarn install
+   ```
+4. Create `.env` file at root to use secret environment
 
-    Follow the [GitHub Docs](https://docs.github.com/ko/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app) to get Client ID & Client Secret.<br>
-    If your Authorization URL should be `localhost:3000` !
+   > See more details at [EnvironmentVariable.md](https://github.com/AgainIoT/Open-Set-Go/blob/main/EnvironmentVariable.md)
 
-5. Create `.env` file at root to use secret environment
-    ```bash
-    touch .env
-    ```
+5. Start Open-Set-Go Server
 
-6. Fill in the `.env` file as follows.
-    ```bash
-    REACT_APP_CLIENT_ID="<Your-GitHub-OAuth-Client_ID>"
-    REACT_APP_REDIRECT_URL="http://localhost:3000/login"
-    REACT_APP_SERVER_URL="http://localhost:8080"
-    ```
+   ```bash
+     # for development
+     yarn start
+     yarn start:linux # start HTTPS for linux
+     yarn start:wins # start HTTPS for windows
 
-7. Start Open-Set-Go Server
-    ```bash
-      yarn start
-    ```
+     # for production
+     yarn build
+     yarn global add serve
+     serve -s build
+   ```
 
 ## Documentation
 
 We are conducting documentation at Open-Set-Go.io. Please refer to the following. _You can see our technical blog & showcase on Open-Set-Go.io_
 
-- <a href="https://docs.open-set-go.com/">Open-Set-Go.io</a>
+- <a href="https://docs.open-set-go.com">Open-Set-Go.io</a>
 
 ## Contributing
 
@@ -129,9 +93,6 @@ Also, we are recruiting collaborators, so if you are interested, please join our
 ## Contributors
 
 Thank you to everyone who contributed to our project.
-
-
-### Open-Set-Go_client
 
 <a href="https://github.com/AgainIoT/Open-Set-Go_client/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=AgainIoT/Open-Set-Go_client"/>
