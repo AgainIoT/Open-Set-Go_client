@@ -19,7 +19,7 @@ export const ReviewDialog = (props) => {
   const repoName = useRecoilValue(reviewRepoDataState("repoName"));
   const pr = useRecoilValue(templateContent("pr"));
   const contributing = useRecoilValue(templateContent("contributing"));
-  const issue = useRecoilValue(issueSelectedState("issue"));
+  const issues = useRecoilValue(issueSelectedState("issue"));
   const readme = useRecoilValue(templateContent("readme"));
 
   const [dialogValue, setDialogValue] = useRecoilState(modalState(props.type));
@@ -72,7 +72,12 @@ export const ReviewDialog = (props) => {
         {
           owner: owner,
           repoName: repoName,
-          issues: issue,
+          issues: issues.map((issue) => {
+            return {
+              category: issue.type,
+              content: issue.content,
+            };
+          }),
         },
         {
           withCredentials: true,
