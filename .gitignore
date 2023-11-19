@@ -44,6 +44,7 @@ next-env.d.ts
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.yarn
 
 # Created by https://www.toptal.com/developers/gitignore/api/yarn,visualstudiocode,intellij+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=yarn,visualstudiocode,intellij+all
@@ -143,6 +144,7 @@ fabric.properties
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+.vscode/
 
 # Local History for Visual Studio Code
 .history/
