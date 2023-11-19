@@ -26,3 +26,7 @@ packages/react-devtools-timeline/dist
 packages/react-devtools-timeline/static
 
 # code referenced by https://github.com/facebook/react/blob/main/.eslintignore
+
+src/registerServiceWorker.js
+src/**/__tests__/**
+src/libs/**
