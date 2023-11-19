@@ -1,88 +1,29 @@
 {
   "name": "open-set-go",
-  "version": "1.0.0",
-  "description": "Open Source Project Toolkit",
-  "main": "app.js",
-  "repository": "https://github.com/AgainIoT/Open-Set-Go.git",
-  "author": "AgainIoT",
-  "license": "Apache-2.0",
+  "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@material-ui/data-grid": "^4.0.0-alpha.37",
-    "@mui/icons-material": "^5.14.8",
-    "@mui/material": "^5.14.8",
-    "@mui/styled-engine-sc": "^5.14.8",
-    "@mui/x-data-grid": "^6.12.0",
-    "@testing-library/jest-dom": "^6.1.3",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@uiw/react-markdown-preview": "^4.1.15",
-    "@uiw/react-md-editor": "^3.23.5",
-    "axios": "^1.6.0",
-    "chart.js": "^4.4.0",
-    "env-cmd": "^10.1.0",
-    "github-formschema-converter": "^0.0.2",
-    "interweave": "^13.1.0",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-beautiful-dnd": "^13.1.1",
-    "react-chartjs-2": "^5.2.0",
-    "react-dom": "^18.2.0",
-    "react-modal": "^3.16.1",
-    "react-query": "^3.39.3",
-    "react-router-dom": "^6.14.2",
-    "react-scripts": "5.0.1",
-    "react-slick": "^0.29.0",
-    "react-window": "^1.8.9",
-    "recoil": "^0.7.7",
-    "recoil-persist": "^5.1.0",
-    "slick-carousel": "^1.8.1",
-    "styled-components": "^6.0.6",
-    "styled-reset": "^4.5.1",
-    "web-vitals": "^2.1.4"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "start:win": "set HTTPS=true&&react-scripts start",
-    "start:linux": "HTTPS=true react-scripts start",
-    "start:dev": "env-cmd -f .env.development.local react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "CI": "yarn eslint ."
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "next": "14.0.3",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "eslint": "^7.32.0 || ^8.2.0",
-    "eslint-config-prettier": "^8.10.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.33.1",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "prettier": "3.0.1"
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.3",
+    "postcss": "^8.4.31",
+    "postcss-syntax": "^0.36.2",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.2.2"
   },
-  "resolutions": {
-    "nth-check": "^2.1.1",
-    "postcss": "^8.4.31"
-  }
+  "packageManager": "yarn@4.0.2"
 }
