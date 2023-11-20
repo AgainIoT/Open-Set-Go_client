@@ -1,5 +1,5 @@
+import { Registry as StyledComponentRegistry } from '@/styles/registry';
 import type { Metadata } from 'next';
-import { authors } from '@/constants/metadata/authors';
 import { getMetadata } from '@/constants/metadata/metadata';
 
 export const metadata: Metadata = getMetadata({
@@ -20,7 +20,9 @@ export const metadata: Metadata = getMetadata({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body>
+        <StyledComponentRegistry>{children}</StyledComponentRegistry>
+      </body>
     </html>
   );
 }
